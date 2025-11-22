@@ -4,36 +4,86 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>بيانات التحويل البنكي</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary: #1d3557;
+      --secondary: #457b9d;
+      --accent: #e63946;
+      --light: #f1faee;
+      --dark: #1d3557;
+      --success: #2a9d8f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      background: #eef2f7;
+      background: linear-gradient(135deg, #eef2f7 0%, #d9e2ec 100%);
       font-family: "Tahoma", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .container {
-      max-width: 480px;
-      margin: 40px auto;
+      width: 95%;
+      max-width: 550px;
+      margin: 20px auto;
       background: #fff;
-      padding: 25px;
+      padding: 30px;
       border-radius: 20px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
     }
 
     h2 {
       text-align: center;
       margin-bottom: 25px;
-      color: #1d3557;
-      font-size: 22px;
+      color: var(--primary);
+      font-size: 24px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
     }
 
     .account-title {
       font-size: 18px;
       font-weight: bold;
-      color: #003f88;
-      margin-bottom: 10px;
+      color: var(--primary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .info-box {
@@ -42,26 +92,57 @@
       padding: 20px;
       border-radius: 15px;
       margin-bottom: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .info-box:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transform: translateY(-2px);
     }
 
     .info-row {
       margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
     }
 
     .label {
       font-weight: bold;
       color: #555;
       font-size: 14px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .value {
       font-size: 17px;
       color: #000;
-      margin-top: 5px;
       background: #fff;
-      padding: 8px 10px;
+      padding: 10px 12px;
       border-radius: 8px;
       border: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .value:hover {
+      border-color: var(--secondary);
+    }
+
+    .copy-icon {
+      color: var(--secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .copy-icon:hover {
+      color: var(--primary);
+      transform: scale(1.1);
     }
 
     .copy-btn {
@@ -69,104 +150,286 @@
       padding: 12px;
       border: none;
       border-radius: 12px;
-      background: linear-gradient(135deg, #0078ff, #005fd1);
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
       color: #fff;
       font-size: 16px;
       cursor: pointer;
       margin-top: 10px;
       transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .copy-btn:hover {
-      background: linear-gradient(135deg, #005fd1, #003f9e);
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     .footer-note {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 25px;
       color: #555;
       font-size: 14px;
       line-height: 1.8;
+      padding: 15px;
+      background: #f8fafc;
+      border-radius: 10px;
     }
 
     .contact-number {
       font-size: 18px;
       font-weight: bold;
-      color: #1d3557;
+      color: var(--primary);
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .steps-container {
+      display: flex;
+      justify-content: space-between;
+      margin: 25px 0;
+      position: relative;
+    }
+
+    .steps-container::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background: #ddd;
+      z-index: 1;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #777;
+      transition: all 0.3s ease;
+    }
+
+    .step.active .step-circle {
+      background: var(--success);
+      border-color: var(--success);
+      color: white;
+    }
+
+    .step-text {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+    }
+
+    .step.active .step-text {
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .success-message {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--success);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: none;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      animation: fadeInOut 3s ease;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(-20px); }
+      20% { opacity: 1; transform: translateY(0); }
+      80% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+
+    .bank-logo {
+      width: 30px;
+      height: 30px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+        width: 95%;
+      }
+      
+      h2 {
+        font-size: 20px;
+      }
+      
+      .value {
+        font-size: 15px;
+        padding: 8px 10px;
+      }
+      
+      .steps-container {
+        margin: 20px 0;
+      }
+      
+      .step-circle {
+        width: 35px;
+        height: 35px;
+      }
+      
+      .step-text {
+        font-size: 10px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <div class="success-message" id="successMessage">
+    <i class="fas fa-check-circle"></i>
+    <span>تم نسخ النص بنجاح!</span>
+  </div>
+
   <div class="container">
 
     <h2>بيانات التحويل البنكي</h2>
 
+    <div class="steps-container">
+      <div class="step active">
+        <div class="step-circle">1</div>
+        <div class="step-text">اختر الحساب</div>
+      </div>
+      <div class="step">
+        <div class="step-circle">2</div>
+        <div class="step-text">انسخ البيانات</div>
+      </div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <div class="step-text">أرسل الإيصال</div>
+      </div>
+    </div>
+
     <!-- الحساب الأول -->
-    <div class="account-title">💳 الحساب البنكي الأول</div>
+    <div class="account-title">
+      <div class="bank-logo">A</div>
+      <span>الحساب البنكي الأول</span>
+    </div>
     <div class="info-box">
 
       <div class="info-row">
-        <div class="label">اسم المستفيد:</div>
-        <div class="value" id="name1">YOUR NAME 1</div>
+        <div class="label"><i class="fas fa-user"></i> اسم المستفيد:</div>
+        <div class="value">
+          <span id="name1">YOUR NAME 1</span>
+          <i class="fas fa-copy copy-icon" onclick="copyText('name1')"></i>
+        </div>
       </div>
 
       <div class="info-row">
-        <div class="label">رقم الحساب:</div>
-        <div class="value" id="account1">1111 2222 3333 4444</div>
+        <div class="label"><i class="fas fa-credit-card"></i> رقم الحساب:</div>
+        <div class="value">
+          <span id="account1">1111 2222 3333 4444</span>
+          <i class="fas fa-copy copy-icon" onclick="copyText('account1')"></i>
+        </div>
       </div>
 
       <div class="info-row">
-        <div class="label">رقم IBAN:</div>
-        <div class="value" id="iban1">AE11 2222 3333 4444 5555 666</div>
+        <div class="label"><i class="fas fa-file-invoice"></i> رقم IBAN:</div>
+        <div class="value">
+          <span id="iban1">AE11 2222 3333 4444 5555 666</span>
+          <i class="fas fa-copy copy-icon" onclick="copyText('iban1')"></i>
+        </div>
       </div>
 
       <div class="info-row">
-        <div class="label">البنك:</div>
-        <div class="value">بنك أبوظبي الإسلامي (ADIB)</div>
+        <div class="label"><i class="fas fa-university"></i> البنك:</div>
+        <div class="value">
+          <span>بنك أبوظبي الإسلامي (ADIB)</span>
+        </div>
       </div>
 
     </div>
 
-    <button class="copy-btn" onclick="copyText('name1')">نسخ اسم الحساب الأول</button>
-    <button class="copy-btn" onclick="copyText('account1')">نسخ رقم الحساب الأول</button>
-    <button class="copy-btn" onclick="copyText('iban1')">نسخ IBAN الأول</button>
-
+    <button class="copy-btn" onclick="copyAll('account1')">
+      <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب الأول
+    </button>
 
     <!-- الحساب الثاني -->
-    <div class="account-title" style="margin-top:30px;">💳 الحساب البنكي الثاني</div>
+    <div class="account-title" style="margin-top:30px;">
+      <div class="bank-logo">B</div>
+      <span>الحساب البنكي الثاني</span>
+    </div>
     <div class="info-box">
 
       <div class="info-row">
-        <div class="label">اسم المستفيد:</div>
-        <div class="value" id="name2">YOUR NAME 2</div>
+        <div class="label"><i class="fas fa-user"></i> اسم المستفيد:</div>
+        <div class="value">
+          <span id="name2">YOUR NAME 2</span>
+          <i class="fas fa-copy copy-icon" onclick="copyText('name2')"></i>
+        </div>
       </div>
 
       <div class="info-row">
-        <div class="label">رقم الحساب:</div>
-        <div class="value" id="account2">5555 6666 7777 8888</div>
+        <div class="label"><i class="fas fa-credit-card"></i> رقم الحساب:</div>
+        <div class="value">
+          <span id="account2">5555 6666 7777 8888</span>
+          <i class="fas fa-copy copy-icon" onclick="copyText('account2')"></i>
+        </div>
       </div>
 
       <div class="info-row">
-        <div class="label">رقم IBAN:</div>
-        <div class="value" id="iban2">AE55 6666 7777 8888 9999 000</div>
+        <div class="label"><i class="fas fa-file-invoice"></i> رقم IBAN:</div>
+        <div class="value">
+          <span id="iban2">AE55 6666 7777 8888 9999 000</span>
+          <i class="fas fa-copy copy-icon" onclick="copyText('iban2')"></i>
+        </div>
       </div>
 
       <div class="info-row">
-        <div class="label">البنك:</div>
-        <div class="value">بنك أبوظبي التجاري (ADCB)</div>
+        <div class="label"><i class="fas fa-university"></i> البنك:</div>
+        <div class="value">
+          <span>بنك أبوظبي التجاري (ADCB)</span>
+        </div>
       </div>
 
     </div>
 
-    <button class="copy-btn" onclick="copyText('name2')">نسخ اسم الحساب الثاني</button>
-    <button class="copy-btn" onclick="copyText('account2')">نسخ رقم الحساب الثاني</button>
-    <button class="copy-btn" onclick="copyText('iban2')">نسخ IBAN الثاني</button>
+    <button class="copy-btn" onclick="copyAll('account2')">
+      <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب الثاني
+    </button>
 
     <p class="footer-note">
-      يرجى إرسال إيصال التحويل بعد الدفع على الرقم التالي:<br>
+      <i class="fas fa-info-circle"></i> يرجى إرسال إيصال التحويل بعد الدفع على الرقم التالي:<br>
       <span class="contact-number">+971 XX XXX XXXX</span>
+      <br><br>
+      <i class="fas fa-clock"></i> سيتم تفعيل طلبك خلال 24 ساعة من استلام الإيصال
     </p>
 
   </div>
@@ -175,8 +438,38 @@
     function copyText(id) {
       const text = document.getElementById(id).innerText;
       navigator.clipboard.writeText(text);
-      alert("تم النسخ: " + text);
+      showSuccessMessage();
     }
+
+    function copyAll(accountPrefix) {
+      const accountNum = accountPrefix.replace('account', '');
+      const name = document.getElementById(`name${accountNum}`).innerText;
+      const account = document.getElementById(`account${accountNum}`).innerText;
+      const iban = document.getElementById(`iban${accountNum}`).innerText;
+      const bank = document.querySelector(`#${accountPrefix}`).closest('.info-box').querySelector('.value span').innerText;
+      
+      const allData = `اسم المستفيد: ${name}\nرقم الحساب: ${account}\nرقم IBAN: ${iban}\nالبنك: ${bank}`;
+      
+      navigator.clipboard.writeText(allData);
+      showSuccessMessage();
+    }
+
+    function showSuccessMessage() {
+      const message = document.getElementById('successMessage');
+      message.style.display = 'flex';
+      
+      setTimeout(() => {
+        message.style.display = 'none';
+      }, 3000);
+    }
+
+    // إضافة تأثيرات تفاعلية للخطوات
+    document.querySelectorAll('.copy-btn, .copy-icon').forEach(element => {
+      element.addEventListener('click', function() {
+        // تفعيل الخطوة الثانية
+        document.querySelectorAll('.step')[1].classList.add('active');
+      });
+    });
   </script>
 
 </body>
