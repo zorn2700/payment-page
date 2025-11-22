@@ -7,15 +7,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #1a3a5f;
-      --secondary: #2c5aa0;
-      --accent: #e74c3c;
-      --light: #f8fafc;
-      --dark: #1a2b3c;
+      --primary: #2c3e50;
+      --secondary: #7f8c8d;
+      --accent: #c0392b;
+      --light: #f5f7fa;
+      --dark: #2c3e50;
       --success: #27ae60;
-      --gold: #f39c12;
-      --marble: #e8e8e8;
+      --gold: #d4af37;
+      --marble: #e8e6e1;
       --telegram: #0088cc;
+      --whatsapp: #25D366;
+      --stone: #95a5a6;
     }
 
     * {
@@ -27,7 +29,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #eef2f7 0%, #d9e2ec 100%);
+      background: linear-gradient(135deg, #ecf0f1 0%, #dfe6e9 100%);
       font-family: "Tahoma", "Segoe UI", sans-serif;
       min-height: 100vh;
       display: flex;
@@ -43,42 +45,66 @@
       margin: 20px auto;
       background: #fff;
       padding: 0;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       position: relative;
       overflow: hidden;
+      border: 1px solid #e0e0e0;
     }
 
     .header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
       padding: 25px;
       text-align: center;
       color: white;
       position: relative;
-      border-radius: 20px 20px 0 0;
+      border-radius: 15px 15px 0 0;
     }
 
     .logo-container {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       margin-bottom: 15px;
     }
 
+    .logo-text {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .logo-main {
+      font-size: 32px;
+      font-weight: bold;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .logo-sub {
+      font-size: 18px;
+      color: var(--marble);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
     .logo {
-      width: 70px;
-      height: 70px;
-      background: white;
+      width: 80px;
+      height: 80px;
+      background: var(--gold);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-left: 15px;
+      margin-bottom: 15px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 3px solid var(--marble);
     }
 
     .logo i {
-      font-size: 32px;
+      font-size: 36px;
       color: var(--primary);
     }
 
@@ -153,6 +179,7 @@
       background: white;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       color: var(--primary);
+      border: 1px solid var(--stone);
     }
 
     .account-content {
@@ -183,7 +210,7 @@
       background: var(--light);
       border: 1px solid #e1e8f0;
       padding: 20px;
-      border-radius: 15px;
+      border-radius: 12px;
       margin-bottom: 20px;
       transition: all 0.3s ease;
       position: relative;
@@ -225,11 +252,11 @@
     }
 
     .value:hover {
-      border-color: var(--secondary);
+      border-color: var(--stone);
     }
 
     .copy-icon {
-      color: var(--secondary);
+      color: var(--stone);
       cursor: pointer;
       transition: all 0.3s ease;
     }
@@ -243,8 +270,8 @@
       width: 100%;
       padding: 14px;
       border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--stone), var(--primary));
       color: #fff;
       font-size: 16px;
       cursor: pointer;
@@ -263,12 +290,44 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
+    .message-buttons {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .message-btn {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .message-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .whatsapp-btn {
+      background: linear-gradient(135deg, var(--whatsapp), #128C7E);
+    }
+
+    .whatsapp-btn:hover {
+      background: linear-gradient(135deg, #128C7E, #075E54);
+    }
+
     .telegram-btn {
       background: linear-gradient(135deg, var(--telegram), #006699);
-      margin-top: 15px;
-      text-decoration: none;
-      display: inline-block;
-      width: 100%;
     }
 
     .telegram-btn:hover {
@@ -404,12 +463,12 @@
       gap: 5px;
     }
 
-    .telegram-section {
+    .message-section {
       text-align: center;
       margin: 20px 0;
     }
 
-    .telegram-title {
+    .message-title {
       font-size: 16px;
       color: var(--primary);
       margin-bottom: 10px;
@@ -465,6 +524,18 @@
       .logo i {
         font-size: 28px;
       }
+      
+      .message-buttons {
+        flex-direction: column;
+      }
+      
+      .logo-main {
+        font-size: 26px;
+      }
+      
+      .logo-sub {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
@@ -483,9 +554,9 @@
         <div class="logo">
           <i class="fas fa-gem"></i>
         </div>
-        <div>
-          <div class="company-name">VALENCIA MARBLE</div>
-          <div class="company-slogan">& NATURAL STONES TRADING LLC</div>
+        <div class="logo-text">
+          <div class="logo-main">Valencia</div>
+          <div class="logo-sub">Marble & Natural Stones<br>Trading L.L.C</div>
         </div>
       </div>
     </div>
@@ -605,18 +676,23 @@
         </button>
       </div>
 
-      <!-- قسم التليجرام -->
-      <div class="telegram-section">
-        <div class="telegram-title">
-          <i class="fab fa-telegram"></i> إرسال إيصال التحويل
+      <!-- قسم إرسال الإيصال -->
+      <div class="message-section">
+        <div class="message-title">
+          <i class="fas fa-paper-plane"></i> إرسال إيصال التحويل
         </div>
-        <a href="https://https://t.me/+snuDCs5jr6E4Nzk0" target="_blank" class="copy-btn telegram-btn">
-          <i class="fab fa-telegram"></i> انضم إلى مجموعة التليجرام لإرسال الإيصال
-        </a>
+        <div class="message-buttons">
+          <a href="https://wa.me/971501234567?text=مرحباً، أود إرسال إيصال التحويل" target="_blank" class="message-btn whatsapp-btn">
+            <i class="fab fa-whatsapp"></i> إرسال عبر واتساب
+          </a>
+          <a href="https://t.me/valencia_marble" target="_blank" class="message-btn telegram-btn">
+            <i class="fab fa-telegram"></i> إرسال عبر تليجرام
+          </a>
+        </div>
       </div>
 
       <p class="footer-note">
-        <i class="fas fa-info-circle"></i> بعد إتمام عملية التحويل، يرجى الانضمام إلى مجموعة التليجرام وإرسال صورة الإيصال<br><br>
+        <i class="fas fa-info-circle"></i> بعد إتمام عملية التحويل، يرجى إرسال صورة الإيصال عبر أحد التطبيقات أعلاه<br><br>
         <i class="fas fa-clock"></i> سيتم تفعيل طلبك خلال 24 ساعة من استلام الإيصال
       </p>
 
@@ -698,12 +774,13 @@
     // تفعيل الخطوة الأولى افتراضياً
     document.querySelectorAll('.step')[0].classList.add('active');
     
-    // عند النقر على زر التليجرام، تفعيل الخطوة الثالثة
-    document.querySelector('.telegram-btn').addEventListener('click', function() {
-      document.querySelectorAll('.step')[2].classList.add('active');
+    // عند النقر على أزرار المراسلة، تفعيل الخطوة الثالثة
+    document.querySelectorAll('.message-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.step')[2].classList.add('active');
+      });
     });
   </script>
 
 </body>
 </html>
-
