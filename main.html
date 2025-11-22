@@ -69,13 +69,24 @@
       margin-bottom: 15px;
     }
 
+    .logo-img {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 15px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--gold);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      background: white;
+      padding: 10px;
+    }
+
     .logo-text {
       text-align: center;
-      margin-bottom: 15px;
     }
 
     .logo-main {
-      font-size: 32px;
+      font-size: 28px;
       font-weight: bold;
       color: var(--gold);
       letter-spacing: 1px;
@@ -84,39 +95,10 @@
     }
 
     .logo-sub {
-      font-size: 18px;
+      font-size: 16px;
       color: var(--marble);
       line-height: 1.4;
       font-weight: 500;
-    }
-
-    .logo {
-      width: 80px;
-      height: 80px;
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      border: 3px solid var(--marble);
-    }
-
-    .logo i {
-      font-size: 36px;
-      color: var(--primary);
-    }
-
-    .company-name {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .company-slogan {
-      font-size: 14px;
-      opacity: 0.9;
-      margin-top: 5px;
     }
 
     .header::after {
@@ -516,13 +498,9 @@
         padding: 20px;
       }
       
-      .logo {
-        width: 60px;
-        height: 60px;
-      }
-      
-      .logo i {
-        font-size: 28px;
+      .logo-img {
+        width: 100px;
+        height: 100px;
       }
       
       .message-buttons {
@@ -530,11 +508,11 @@
       }
       
       .logo-main {
-        font-size: 26px;
+        font-size: 24px;
       }
       
       .logo-sub {
-        font-size: 15px;
+        font-size: 14px;
       }
     }
   </style>
@@ -551,10 +529,19 @@
 
     <div class="header">
       <div class="logo-container">
-        <div class="logo">
-          <i class="fas fa-gem"></i>
+        <!-- هنا مكان الشعار - اختر الطريقة التي تفضلها -->
+        
+        <!-- الطريقة 1: صورة الشعار -->
+        <img src="logo.png" alt="Valencia Marble Logo" class="logo-img" onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';">
+        
+        <!-- الطريقة 2: الشعار النصي (يظهر إذا فشل تحميل الصورة) -->
+        <div id="text-logo" class="logo-text" style="display: none;">
+          <div class="logo-main">Valencia</div>
+          <div class="logo-sub">Marble & Natural Stones<br>Trading L.L.C</div>
         </div>
-        <div class="logo-text">
+        
+        <!-- الطريقة 3: أيقونة بديلة (تظهر إذا لم يكن هناك شعار) -->
+        <div id="icon-logo" class="logo-text" style="display: block;">
           <div class="logo-main">Valencia</div>
           <div class="logo-sub">Marble & Natural Stones<br>Trading L.L.C</div>
         </div>
@@ -779,6 +766,16 @@
       btn.addEventListener('click', function() {
         document.querySelectorAll('.step')[2].classList.add('active');
       });
+    });
+
+    // التحقق من وجود الشعار
+    window.addEventListener('load', function() {
+      const logoImg = document.querySelector('.logo-img');
+      if (logoImg && logoImg.naturalWidth === 0) {
+        // إذا فشل تحميل الصورة، إظهار الشعار النصي
+        document.getElementById('text-logo').style.display = 'block';
+        document.getElementById('icon-logo').style.display = 'none';
+      }
     });
   </script>
 
