@@ -9,35 +9,36 @@
     body {
       margin: 0;
       padding: 0;
-      background: #f4f5f7;
+      background: #eef2f7;
       font-family: "Tahoma", sans-serif;
     }
 
     .container {
-      max-width: 450px;
+      max-width: 480px;
       margin: 40px auto;
       background: #fff;
-      padding: 25px;
+      padding: 30px;
       border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
     }
 
     h2 {
       text-align: center;
       margin-bottom: 25px;
-      color: #333;
+      color: #1d3557;
+      font-size: 22px;
     }
 
     .info-box {
-      background: #f7f9fc;
-      border: 2px solid #ddd;
-      padding: 15px;
+      background: #f8fafc;
+      border: 1px solid #dce3eb;
+      padding: 20px;
       border-radius: 15px;
       margin-bottom: 20px;
     }
 
     .info-row {
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .label {
@@ -50,29 +51,41 @@
       font-size: 17px;
       color: #000;
       margin-top: 5px;
+      background: #fff;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
     }
 
-    button.copy {
+    .copy-btn {
       width: 100%;
       padding: 12px;
       border: none;
       border-radius: 12px;
-      background: #0078ff;
+      background: linear-gradient(135deg, #0078ff, #005fd1);
       color: #fff;
       font-size: 16px;
       cursor: pointer;
       margin-top: 10px;
+      transition: 0.3s;
     }
 
-    button.copy:hover {
-      background: #005fd1;
+    .copy-btn:hover {
+      background: linear-gradient(135deg, #005fd1, #003f9e);
     }
 
     .footer-note {
       text-align: center;
       margin-top: 20px;
-      color: #777;
+      color: #555;
       font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .contact-number {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1d3557;
     }
   </style>
 </head>
@@ -102,52 +115,19 @@
 
       <div class="info-row">
         <div class="label">البنك:</div>
-        <div class="value">بنك أبوظبي الاسلامي (ADCB)</div>
-      </div>
-
-    </div>
-	
-	<button class="copy" onclick="copyText('name')">نسخ الاسم</button>
-	<button class="copy" onclick="copyText('account')">نسخ رقم الحساب</button>
-    <button class="copy" onclick="copyText('iban')">نسخ رقم IBAN</button>
-
-    <p class="footer-note">يرجى إرسال صورة التحويل بعد العملية على هذا الرقم</p>
-
-  </div>
-	
-	<div class="container">
-
-    <h2>بيانات التحويل البنكي</h2>
-
-    <div class="info-box">
-
-      <div class="info-row">
-        <div class="label">اسم المستفيد:</div>
-        <div class="value" id="name">YOUR NAME HERE</div>
-      </div>
-
-      <div class="info-row">
-        <div class="label">رقم الحساب:</div>
-        <div class="value" id="account">0000 1234 5678 9999</div>
-      </div>
-
-      <div class="info-row">
-        <div class="label">رقم IBAN:</div>
-        <div class="value" id="iban">AE12 3456 7890 1234 5678 901</div>
-      </div>
-
-      <div class="info-row">
-        <div class="label">البنك:</div>
-        <div class="value">بنك أبوظبي التجاري (ADCB)</div>
+        <div class="value">بنك أبوظبي الإسلامي (ADIB)</div>
       </div>
 
     </div>
 
-    <button class="copy" onclick="copyText('name')">نسخ الاسم</button>
-	<button class="copy" onclick="copyText('account')">نسخ رقم الحساب</button>
-    <button class="copy" onclick="copyText('iban')">نسخ رقم IBAN</button>
+    <button class="copy-btn" onclick="copyText('name')">نسخ اسم المستفيد</button>
+    <button class="copy-btn" onclick="copyText('account')">نسخ رقم الحساب</button>
+    <button class="copy-btn" onclick="copyText('iban')">نسخ رقم IBAN</button>
 
-    <p class="footer-note">يرجى إرسال صورة التحويل بعد العملية على هذا الرقم</p>
+    <p class="footer-note">
+      يرجى إرسال إيصال التحويل بعد الدفع على الرقم التالي:<br>
+      <span class="contact-number">+971 XX XXX XXXX</span>
+    </p>
 
   </div>
 
@@ -161,7 +141,3 @@
 
 </body>
 </html>
-
-
-
-
