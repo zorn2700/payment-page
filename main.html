@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>بيانات التحويل البنكي - شركة النخبة</title>
+  <title>بيانات التحويل البنكي - VALENCIA MARBLE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -14,6 +14,7 @@
       --dark: #1a2b3c;
       --success: #27ae60;
       --gold: #f39c12;
+      --marble: #e8e8e8;
     }
 
     * {
@@ -81,7 +82,7 @@
     }
 
     .company-name {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
     }
 
@@ -219,6 +220,7 @@
       justify-content: space-between;
       align-items: center;
       transition: all 0.3s ease;
+      font-family: monospace;
     }
 
     .value:hover {
@@ -393,6 +395,34 @@
       gap: 5px;
     }
 
+    .search-box {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px 45px 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.2);
+      outline: none;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+
     @media (max-width: 480px) {
       .container {
         padding: 0;
@@ -458,11 +488,11 @@
     <div class="header">
       <div class="logo-container">
         <div class="logo">
-          <i class="fas fa-university"></i>
+          <i class="fas fa-gem"></i>
         </div>
         <div>
-          <div class="company-name">شركة النخبة</div>
-          <div class="company-slogan">للاستشارات المالية والاستثمار</div>
+          <div class="company-name">VALENCIA MARBLE</div>
+          <div class="company-slogan">& NATURAL STONES TRADING LLC</div>
         </div>
       </div>
     </div>
@@ -486,22 +516,22 @@
       </div>
 
       <div class="account-selector">
-        <div class="account-tab active" data-account="1">الحساب الأول</div>
-        <div class="account-tab" data-account="2">الحساب الثاني</div>
+        <div class="account-tab active" data-account="1">مصرف الشارقة الإسلامي</div>
+        <div class="account-tab" data-account="2">بنك أبوظبي التجاري</div>
       </div>
 
       <!-- الحساب الأول -->
       <div class="account-content active" id="account1-content">
         <div class="account-title">
-          <div class="bank-logo">A</div>
-          <span>بنك أبوظبي الإسلامي (ADIB)</span>
+          <div class="bank-logo">S</div>
+          <span>مصرف الشارقة الإسلامي (Sharjah Islamic Bank)</span>
         </div>
         <div class="info-box">
 
           <div class="info-row">
             <div class="label"><i class="fas fa-user"></i> اسم المستفيد:</div>
             <div class="value">
-              <span id="name1">شركة النخبة للاستثمار</span>
+              <span id="name1">VALENCIA MARBLE&NAT.STONES TRD LLC</span>
               <i class="fas fa-copy copy-icon" onclick="copyText('name1')"></i>
             </div>
           </div>
@@ -509,7 +539,7 @@
           <div class="info-row">
             <div class="label"><i class="fas fa-credit-card"></i> رقم الحساب:</div>
             <div class="value">
-              <span id="account1">1234 5678 9012 3456</span>
+              <span id="account1">001 2084818 001</span>
               <i class="fas fa-copy copy-icon" onclick="copyText('account1')"></i>
             </div>
           </div>
@@ -517,7 +547,7 @@
           <div class="info-row">
             <div class="label"><i class="fas fa-file-invoice"></i> رقم IBAN:</div>
             <div class="value">
-              <span id="iban1">AE12 3456 7890 1234 5678 901</span>
+              <span id="iban1">AE210410000012084818001</span>
               <i class="fas fa-copy copy-icon" onclick="copyText('iban1')"></i>
             </div>
           </div>
@@ -525,21 +555,21 @@
           <div class="info-row">
             <div class="label"><i class="fas fa-university"></i> البنك:</div>
             <div class="value">
-              <span>بنك أبوظبي الإسلامي (ADIB)</span>
+              <span>مصرف الشارقة الاسلامي (Sharjah Islamic Bank)</span>
             </div>
           </div>
 
         </div>
 
         <button class="copy-btn" onclick="copyAll('account1')">
-          <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب الأول
+          <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب
         </button>
       </div>
 
       <!-- الحساب الثاني -->
       <div class="account-content" id="account2-content">
         <div class="account-title">
-          <div class="bank-logo">B</div>
+          <div class="bank-logo">A</div>
           <span>بنك أبوظبي التجاري (ADCB)</span>
         </div>
         <div class="info-box">
@@ -547,7 +577,7 @@
           <div class="info-row">
             <div class="label"><i class="fas fa-user"></i> اسم المستفيد:</div>
             <div class="value">
-              <span id="name2">شركة النخبة للاستثمار</span>
+              <span id="name2">VALENCIA MARBLE AND NATURAL STONES</span>
               <i class="fas fa-copy copy-icon" onclick="copyText('name2')"></i>
             </div>
           </div>
@@ -555,7 +585,7 @@
           <div class="info-row">
             <div class="label"><i class="fas fa-credit-card"></i> رقم الحساب:</div>
             <div class="value">
-              <span id="account2">9876 5432 1098 7654</span>
+              <span id="account2">14211280920001</span>
               <i class="fas fa-copy copy-icon" onclick="copyText('account2')"></i>
             </div>
           </div>
@@ -563,7 +593,7 @@
           <div class="info-row">
             <div class="label"><i class="fas fa-file-invoice"></i> رقم IBAN:</div>
             <div class="value">
-              <span id="iban2">AE98 7654 3210 9876 5432 109</span>
+              <span id="iban2">AE060030014211280920001</span>
               <i class="fas fa-copy copy-icon" onclick="copyText('iban2')"></i>
             </div>
           </div>
@@ -578,7 +608,7 @@
         </div>
 
         <button class="copy-btn" onclick="copyAll('account2')">
-          <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب الثاني
+          <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب
         </button>
       </div>
 
@@ -596,11 +626,11 @@
         </div>
         <div class="info-item">
           <i class="fas fa-envelope"></i>
-          <span>info@alnakhila.com</span>
+          <span>info@valenciamarble.com</span>
         </div>
         <div class="info-item">
           <i class="fas fa-globe"></i>
-          <span>www.alnakhila.com</span>
+          <span>www.valenciamarble.com</span>
         </div>
       </div>
     </div>
