@@ -15,6 +15,7 @@
       --success: #27ae60;
       --gold: #f39c12;
       --marble: #e8e8e8;
+      --telegram: #0088cc;
     }
 
     * {
@@ -262,8 +263,16 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
-    .copy-all-btn {
-      background: linear-gradient(135deg, var(--success), #219653);
+    .telegram-btn {
+      background: linear-gradient(135deg, var(--telegram), #006699);
+      margin-top: 15px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .telegram-btn:hover {
+      background: linear-gradient(135deg, #006699, #004466);
     }
 
     .footer-note {
@@ -395,32 +404,16 @@
       gap: 5px;
     }
 
-    .search-box {
-      margin-bottom: 20px;
-      position: relative;
+    .telegram-section {
+      text-align: center;
+      margin: 20px 0;
     }
 
-    .search-box input {
-      width: 100%;
-      padding: 12px 45px 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
+    .telegram-title {
       font-size: 16px;
-      transition: all 0.3s ease;
-    }
-
-    .search-box input:focus {
-      border-color: var(--secondary);
-      box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.2);
-      outline: none;
-    }
-
-    .search-box i {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #777;
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-weight: bold;
     }
 
     @media (max-width: 480px) {
@@ -612,10 +605,18 @@
         </button>
       </div>
 
+      <!-- قسم التليجرام -->
+      <div class="telegram-section">
+        <div class="telegram-title">
+          <i class="fab fa-telegram"></i> إرسال إيصال التحويل
+        </div>
+        <a href="https://t.me/your_telegram_group" target="_blank" class="copy-btn telegram-btn">
+          <i class="fab fa-telegram"></i> انضم إلى مجموعة التليجرام لإرسال الإيصال
+        </a>
+      </div>
+
       <p class="footer-note">
-        <i class="fas fa-info-circle"></i> يرجى إرسال إيصال التحويل بعد الدفع على الرقم التالي:<br>
-        <span class="contact-number">+971 50 123 4567</span>
-        <br><br>
+        <i class="fas fa-info-circle"></i> بعد إتمام عملية التحويل، يرجى الانضمام إلى مجموعة التليجرام وإرسال صورة الإيصال<br><br>
         <i class="fas fa-clock"></i> سيتم تفعيل طلبك خلال 24 ساعة من استلام الإيصال
       </p>
 
@@ -696,6 +697,11 @@
 
     // تفعيل الخطوة الأولى افتراضياً
     document.querySelectorAll('.step')[0].classList.add('active');
+    
+    // عند النقر على زر التليجرام، تفعيل الخطوة الثالثة
+    document.querySelector('.telegram-btn').addEventListener('click', function() {
+      document.querySelectorAll('.step')[2].classList.add('active');
+    });
   </script>
 
 </body>
