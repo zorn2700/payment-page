@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>بيانات التحويل البنكي</title>
+  <title>بيانات التحويل البنكي - شركة النخبة</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #1d3557;
-      --secondary: #457b9d;
-      --accent: #e63946;
-      --light: #f1faee;
-      --dark: #1d3557;
-      --success: #2a9d8f;
+      --primary: #1a3a5f;
+      --secondary: #2c5aa0;
+      --accent: #e74c3c;
+      --light: #f8fafc;
+      --dark: #1a2b3c;
+      --success: #27ae60;
+      --gold: #f39c12;
     }
 
     * {
@@ -25,34 +26,84 @@
       margin: 0;
       padding: 0;
       background: linear-gradient(135deg, #eef2f7 0%, #d9e2ec 100%);
-      font-family: "Tahoma", sans-serif;
+      font-family: "Tahoma", "Segoe UI", sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 20px;
     }
 
     .container {
       width: 95%;
-      max-width: 550px;
+      max-width: 600px;
       margin: 20px auto;
       background: #fff;
-      padding: 30px;
+      padding: 0;
       border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       position: relative;
       overflow: hidden;
     }
 
-    .container::before {
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 25px;
+      text-align: center;
+      color: white;
+      position: relative;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .logo i {
+      font-size: 32px;
+      color: var(--primary);
+    }
+
+    .company-name {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .company-slogan {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-top: 5px;
+    }
+
+    .header::after {
       content: "";
       position: absolute;
-      top: 0;
+      bottom: -10px;
       right: 0;
       width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      height: 20px;
+      background: var(--light);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .content {
+      padding: 30px;
     }
 
     h2 {
@@ -76,6 +127,46 @@
       border-radius: 3px;
     }
 
+    .account-selector {
+      display: flex;
+      background: var(--light);
+      border-radius: 12px;
+      padding: 5px;
+      margin-bottom: 25px;
+      border: 1px solid #e1e8f0;
+    }
+
+    .account-tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      color: var(--dark);
+    }
+
+    .account-tab.active {
+      background: white;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      color: var(--primary);
+    }
+
+    .account-content {
+      display: none;
+    }
+
+    .account-content.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .account-title {
       font-size: 18px;
       font-weight: bold;
@@ -87,8 +178,8 @@
     }
 
     .info-box {
-      background: #f8fafc;
-      border: 1px solid #dce3eb;
+      background: var(--light);
+      border: 1px solid #e1e8f0;
       padding: 20px;
       border-radius: 15px;
       margin-bottom: 20px;
@@ -147,7 +238,7 @@
 
     .copy-btn {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       border: none;
       border-radius: 12px;
       background: linear-gradient(135deg, var(--secondary), var(--primary));
@@ -160,12 +251,17 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      font-weight: bold;
     }
 
     .copy-btn:hover {
       background: linear-gradient(135deg, var(--primary), var(--dark));
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .copy-all-btn {
+      background: linear-gradient(135deg, var(--success), #219653);
     }
 
     .footer-note {
@@ -175,8 +271,9 @@
       font-size: 14px;
       line-height: 1.8;
       padding: 15px;
-      background: #f8fafc;
+      background: var(--light);
       border-radius: 10px;
+      border-right: 4px solid var(--accent);
     }
 
     .contact-number {
@@ -280,10 +377,30 @@
       font-size: 14px;
     }
 
+    .company-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed #ddd;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
     @media (max-width: 480px) {
       .container {
+        padding: 0;
+        width: 100%;
+      }
+      
+      .content {
         padding: 20px;
-        width: 95%;
       }
       
       h2 {
@@ -307,6 +424,24 @@
       .step-text {
         font-size: 10px;
       }
+      
+      .company-info {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .header {
+        padding: 20px;
+      }
+      
+      .logo {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .logo i {
+        font-size: 28px;
+      }
     }
   </style>
 </head>
@@ -320,117 +455,155 @@
 
   <div class="container">
 
-    <h2>بيانات التحويل البنكي</h2>
-
-    <div class="steps-container">
-      <div class="step active">
-        <div class="step-circle">1</div>
-        <div class="step-text">اختر الحساب</div>
-      </div>
-      <div class="step">
-        <div class="step-circle">2</div>
-        <div class="step-text">انسخ البيانات</div>
-      </div>
-      <div class="step">
-        <div class="step-circle">3</div>
-        <div class="step-text">أرسل الإيصال</div>
+    <div class="header">
+      <div class="logo-container">
+        <div class="logo">
+          <i class="fas fa-university"></i>
+        </div>
+        <div>
+          <div class="company-name">شركة النخبة</div>
+          <div class="company-slogan">للاستشارات المالية والاستثمار</div>
+        </div>
       </div>
     </div>
 
-    <!-- الحساب الأول -->
-    <div class="account-title">
-      <div class="bank-logo">A</div>
-      <span>الحساب البنكي الأول</span>
-    </div>
-    <div class="info-box">
+    <div class="content">
+      <h2>بيانات التحويل البنكي</h2>
 
-      <div class="info-row">
-        <div class="label"><i class="fas fa-user"></i> اسم المستفيد:</div>
-        <div class="value">
-          <span id="name1">VALENCIA MARBLE&NAT.STONES TRD LLC</span>
-          <i class="fas fa-copy copy-icon" onclick="copyText('name1')"></i>
+      <div class="steps-container">
+        <div class="step active">
+          <div class="step-circle">1</div>
+          <div class="step-text">اختر الحساب</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">2</div>
+          <div class="step-text">انسخ البيانات</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-text">أرسل الإيصال</div>
         </div>
       </div>
 
-      <div class="info-row">
-        <div class="label"><i class="fas fa-credit-card"></i> رقم الحساب:</div>
-        <div class="value">
-          <span id="account1">001 2084818 001</span>
-          <i class="fas fa-copy copy-icon" onclick="copyText('account1')"></i>
-        </div>
+      <div class="account-selector">
+        <div class="account-tab active" data-account="1">الحساب الأول</div>
+        <div class="account-tab" data-account="2">الحساب الثاني</div>
       </div>
 
-      <div class="info-row">
-        <div class="label"><i class="fas fa-file-invoice"></i> رقم IBAN:</div>
-        <div class="value">
-          <span id="iban1">AE210410000012084818001</span>
-          <i class="fas fa-copy copy-icon" onclick="copyText('iban1')"></i>
+      <!-- الحساب الأول -->
+      <div class="account-content active" id="account1-content">
+        <div class="account-title">
+          <div class="bank-logo">A</div>
+          <span>بنك أبوظبي الإسلامي (ADIB)</span>
         </div>
+        <div class="info-box">
+
+          <div class="info-row">
+            <div class="label"><i class="fas fa-user"></i> اسم المستفيد:</div>
+            <div class="value">
+              <span id="name1">شركة النخبة للاستثمار</span>
+              <i class="fas fa-copy copy-icon" onclick="copyText('name1')"></i>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="label"><i class="fas fa-credit-card"></i> رقم الحساب:</div>
+            <div class="value">
+              <span id="account1">1234 5678 9012 3456</span>
+              <i class="fas fa-copy copy-icon" onclick="copyText('account1')"></i>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="label"><i class="fas fa-file-invoice"></i> رقم IBAN:</div>
+            <div class="value">
+              <span id="iban1">AE12 3456 7890 1234 5678 901</span>
+              <i class="fas fa-copy copy-icon" onclick="copyText('iban1')"></i>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="label"><i class="fas fa-university"></i> البنك:</div>
+            <div class="value">
+              <span>بنك أبوظبي الإسلامي (ADIB)</span>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="copy-btn" onclick="copyAll('account1')">
+          <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب الأول
+        </button>
       </div>
 
-      <div class="info-row">
-        <div class="label"><i class="fas fa-university"></i> البنك:</div>
-        <div class="value">
-          <span>مصرف الشارقة الاسلامي (Sharjah Islamic Bank)</span>
-        </div>
-      </div>
-
-    </div>
-
-    <button class="copy-btn" onclick="copyAll('account1')">
-      <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب الأول
-    </button>
-
-    <!-- الحساب الثاني -->
-    <div class="account-title" style="margin-top:30px;">
-      <div class="bank-logo">B</div>
-      <span>الحساب البنكي الثاني</span>
-    </div>
-    <div class="info-box">
-
-      <div class="info-row">
-        <div class="label"><i class="fas fa-user"></i> اسم المستفيد:</div>
-        <div class="value">
-          <span id="name2">VALENCIA MARBLE AND NATURAL STONES</span>
-          <i class="fas fa-copy copy-icon" onclick="copyText('name2')"></i>
-        </div>
-      </div>
-
-      <div class="info-row">
-        <div class="label"><i class="fas fa-credit-card"></i> رقم الحساب:</div>
-        <div class="value">
-          <span id="account2">14211280920001</span>
-          <i class="fas fa-copy copy-icon" onclick="copyText('account2')"></i>
-        </div>
-      </div>
-
-      <div class="info-row">
-        <div class="label"><i class="fas fa-file-invoice"></i> رقم IBAN:</div>
-        <div class="value">
-          <span id="iban2">AE060030014211280920001</span>
-          <i class="fas fa-copy copy-icon" onclick="copyText('iban2')"></i>
-        </div>
-      </div>
-
-      <div class="info-row">
-        <div class="label"><i class="fas fa-university"></i> البنك:</div>
-        <div class="value">
+      <!-- الحساب الثاني -->
+      <div class="account-content" id="account2-content">
+        <div class="account-title">
+          <div class="bank-logo">B</div>
           <span>بنك أبوظبي التجاري (ADCB)</span>
         </div>
+        <div class="info-box">
+
+          <div class="info-row">
+            <div class="label"><i class="fas fa-user"></i> اسم المستفيد:</div>
+            <div class="value">
+              <span id="name2">شركة النخبة للاستثمار</span>
+              <i class="fas fa-copy copy-icon" onclick="copyText('name2')"></i>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="label"><i class="fas fa-credit-card"></i> رقم الحساب:</div>
+            <div class="value">
+              <span id="account2">9876 5432 1098 7654</span>
+              <i class="fas fa-copy copy-icon" onclick="copyText('account2')"></i>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="label"><i class="fas fa-file-invoice"></i> رقم IBAN:</div>
+            <div class="value">
+              <span id="iban2">AE98 7654 3210 9876 5432 109</span>
+              <i class="fas fa-copy copy-icon" onclick="copyText('iban2')"></i>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="label"><i class="fas fa-university"></i> البنك:</div>
+            <div class="value">
+              <span>بنك أبوظبي التجاري (ADCB)</span>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="copy-btn" onclick="copyAll('account2')">
+          <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب الثاني
+        </button>
       </div>
 
+      <p class="footer-note">
+        <i class="fas fa-info-circle"></i> يرجى إرسال إيصال التحويل بعد الدفع على الرقم التالي:<br>
+        <span class="contact-number">+971 50 123 4567</span>
+        <br><br>
+        <i class="fas fa-clock"></i> سيتم تفعيل طلبك خلال 24 ساعة من استلام الإيصال
+      </p>
+
+      <div class="company-info">
+        <div class="info-item">
+          <i class="fas fa-phone"></i>
+          <span>+971 4 123 4567</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <span>info@alnakhila.com</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-globe"></i>
+          <span>www.alnakhila.com</span>
+        </div>
+      </div>
     </div>
-
-    <button class="copy-btn" onclick="copyAll('account2')">
-      <i class="fas fa-copy"></i> نسخ جميع بيانات الحساب الثاني
-    </button>
-
-    <p class="footer-note">
-      <i class="fas fa-info-circle"></i> يرجى إرسال إيصال التحويل بعد الدفع على الرقم التالي:<br>
-      <span class="contact-number">+971 XX XXX XXXX</span>
-      <br><br>
-      <i class="fas fa-clock"></i> سيتم تفعيل طلبك خلال 24 ساعة من استلام الإيصال
-    </p>
 
   </div>
 
@@ -439,6 +612,9 @@
       const text = document.getElementById(id).innerText;
       navigator.clipboard.writeText(text);
       showSuccessMessage();
+      
+      // تفعيل الخطوة الثانية
+      document.querySelectorAll('.step')[1].classList.add('active');
     }
 
     function copyAll(accountPrefix) {
@@ -452,6 +628,9 @@
       
       navigator.clipboard.writeText(allData);
       showSuccessMessage();
+      
+      // تفعيل الخطوة الثانية
+      document.querySelectorAll('.step')[1].classList.add('active');
     }
 
     function showSuccessMessage() {
@@ -463,15 +642,31 @@
       }, 3000);
     }
 
-    // إضافة تأثيرات تفاعلية للخطوات
-    document.querySelectorAll('.copy-btn, .copy-icon').forEach(element => {
-      element.addEventListener('click', function() {
-        // تفعيل الخطوة الثانية
-        document.querySelectorAll('.step')[1].classList.add('active');
+    // تبديل بين الحسابات
+    document.querySelectorAll('.account-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        // إزالة النشاط من جميع الألسنة
+        document.querySelectorAll('.account-tab').forEach(t => {
+          t.classList.remove('active');
+        });
+        
+        // إضافة النشاط للسان المحدد
+        this.classList.add('active');
+        
+        // إخفاء جميع محتويات الحسابات
+        document.querySelectorAll('.account-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // إظهار محتوى الحساب المحدد
+        const accountId = this.getAttribute('data-account');
+        document.getElementById(`account${accountId}-content`).classList.add('active');
       });
     });
+
+    // تفعيل الخطوة الأولى افتراضياً
+    document.querySelectorAll('.step')[0].classList.add('active');
   </script>
 
 </body>
 </html>
-
