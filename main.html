@@ -17,7 +17,7 @@
       max-width: 480px;
       margin: 40px auto;
       background: #fff;
-      padding: 30px;
+      padding: 25px;
       border-radius: 20px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.1);
     }
@@ -29,6 +29,13 @@
       font-size: 22px;
     }
 
+    .account-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #003f88;
+      margin-bottom: 10px;
+    }
+
     .info-box {
       background: #f8fafc;
       border: 1px solid #dce3eb;
@@ -38,13 +45,13 @@
     }
 
     .info-row {
-      margin-bottom: 18px;
+      margin-bottom: 15px;
     }
 
     .label {
       font-weight: bold;
       color: #555;
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .value {
@@ -96,21 +103,23 @@
 
     <h2>بيانات التحويل البنكي</h2>
 
+    <!-- الحساب الأول -->
+    <div class="account-title">💳 الحساب البنكي الأول</div>
     <div class="info-box">
 
       <div class="info-row">
         <div class="label">اسم المستفيد:</div>
-        <div class="value" id="name">YOUR NAME HERE</div>
+        <div class="value" id="name1">YOUR NAME 1</div>
       </div>
 
       <div class="info-row">
         <div class="label">رقم الحساب:</div>
-        <div class="value" id="account">0000 1234 5678 9999</div>
+        <div class="value" id="account1">1111 2222 3333 4444</div>
       </div>
 
       <div class="info-row">
         <div class="label">رقم IBAN:</div>
-        <div class="value" id="iban">AE12 3456 7890 1234 5678 901</div>
+        <div class="value" id="iban1">AE11 2222 3333 4444 5555 666</div>
       </div>
 
       <div class="info-row">
@@ -120,9 +129,40 @@
 
     </div>
 
-    <button class="copy-btn" onclick="copyText('name')">نسخ اسم المستفيد</button>
-    <button class="copy-btn" onclick="copyText('account')">نسخ رقم الحساب</button>
-    <button class="copy-btn" onclick="copyText('iban')">نسخ رقم IBAN</button>
+    <button class="copy-btn" onclick="copyText('name1')">نسخ اسم الحساب الأول</button>
+    <button class="copy-btn" onclick="copyText('account1')">نسخ رقم الحساب الأول</button>
+    <button class="copy-btn" onclick="copyText('iban1')">نسخ IBAN الأول</button>
+
+
+    <!-- الحساب الثاني -->
+    <div class="account-title" style="margin-top:30px;">💳 الحساب البنكي الثاني</div>
+    <div class="info-box">
+
+      <div class="info-row">
+        <div class="label">اسم المستفيد:</div>
+        <div class="value" id="name2">YOUR NAME 2</div>
+      </div>
+
+      <div class="info-row">
+        <div class="label">رقم الحساب:</div>
+        <div class="value" id="account2">5555 6666 7777 8888</div>
+      </div>
+
+      <div class="info-row">
+        <div class="label">رقم IBAN:</div>
+        <div class="value" id="iban2">AE55 6666 7777 8888 9999 000</div>
+      </div>
+
+      <div class="info-row">
+        <div class="label">البنك:</div>
+        <div class="value">بنك أبوظبي التجاري (ADCB)</div>
+      </div>
+
+    </div>
+
+    <button class="copy-btn" onclick="copyText('name2')">نسخ اسم الحساب الثاني</button>
+    <button class="copy-btn" onclick="copyText('account2')">نسخ رقم الحساب الثاني</button>
+    <button class="copy-btn" onclick="copyText('iban2')">نسخ IBAN الثاني</button>
 
     <p class="footer-note">
       يرجى إرسال إيصال التحويل بعد الدفع على الرقم التالي:<br>
