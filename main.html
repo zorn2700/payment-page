@@ -529,12 +529,7 @@
 
     <div class="header">
       <div class="logo-container">
-        <!-- هنا مكان الشعار - اختر الطريقة التي تفضلها -->
-        
-        <!-- الطريقة 1: صورة الشعار -->
         <img src="logo.png" alt="Valencia Marble Logo" class="logo-img" onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';">
-        
-        <!-- الطريقة 2: الشعار النصي (يظهر إذا فشل تحميل الصورة) -->
         <div id="text-logo" class="logo-text" style="display: none;">
           <div class="logo-main">Valencia</div>
           <div class="logo-sub">Marble & Natural Stones<br>Trading L.L.C</div>
@@ -663,7 +658,7 @@
           <i class="fas fa-paper-plane"></i> إرسال إيصال التحويل
         </div>
         <div class="message-buttons">
-          <a href="https://wa.me/+971588061220" target="_blank" class="message-btn whatsapp-btn">
+          <a href="https://wa.me/+971588061220?text=مرحباً، أود إرسال إيصال التحويل" target="_blank" class="message-btn whatsapp-btn">
             <i class="fab fa-whatsapp"></i> إرسال عبر واتساب
           </a>
           <a href="https://t.me/mourssi2700" target="_blank" class="message-btn telegram-btn">
@@ -680,11 +675,11 @@
       <div class="company-info">
         <div class="info-item">
           <i class="fas fa-phone"></i>
-          <span>566 300 200</span>
+          <span>+971 58 806 1220</span>
         </div>
         <div class="info-item">
           <i class="fas fa-envelope"></i>
-          <span>info@valenciallc.net</span>
+          <span>info@valenciamarble.com</span>
         </div>
         <div class="info-item">
           <i class="fas fa-globe"></i>
@@ -701,7 +696,6 @@
       navigator.clipboard.writeText(text);
       showSuccessMessage();
       
-      // تفعيل الخطوة الثانية
       document.querySelectorAll('.step')[1].classList.add('active');
     }
 
@@ -717,7 +711,6 @@
       navigator.clipboard.writeText(allData);
       showSuccessMessage();
       
-      // تفعيل الخطوة الثانية
       document.querySelectorAll('.step')[1].classList.add('active');
     }
 
@@ -730,43 +723,34 @@
       }, 3000);
     }
 
-    // تبديل بين الحسابات
     document.querySelectorAll('.account-tab').forEach(tab => {
       tab.addEventListener('click', function() {
-        // إزالة النشاط من جميع الألسنة
         document.querySelectorAll('.account-tab').forEach(t => {
           t.classList.remove('active');
         });
         
-        // إضافة النشاط للسان المحدد
         this.classList.add('active');
         
-        // إخفاء جميع محتويات الحسابات
         document.querySelectorAll('.account-content').forEach(content => {
           content.classList.remove('active');
         });
         
-        // إظهار محتوى الحساب المحدد
         const accountId = this.getAttribute('data-account');
         document.getElementById(`account${accountId}-content`).classList.add('active');
       });
     });
 
-    // تفعيل الخطوة الأولى افتراضياً
     document.querySelectorAll('.step')[0].classList.add('active');
     
-    // عند النقر على أزرار المراسلة، تفعيل الخطوة الثالثة
     document.querySelectorAll('.message-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         document.querySelectorAll('.step')[2].classList.add('active');
       });
     });
 
-    // التحقق من وجود الشعار
     window.addEventListener('load', function() {
       const logoImg = document.querySelector('.logo-img');
       if (logoImg && logoImg.naturalWidth === 0) {
-        // إذا فشل تحميل الصورة، إظهار الشعار النصي
         document.getElementById('text-logo').style.display = 'block';
       }
     });
@@ -774,6 +758,3 @@
 
 </body>
 </html>
-
-
-
