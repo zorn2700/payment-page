@@ -18,6 +18,7 @@
       --telegram: #0088cc;
       --whatsapp: #25D366;
       --stone: #95a5a6;
+      --rating: #ffc107;
     }
 
     * {
@@ -457,6 +458,86 @@
       font-weight: bold;
     }
 
+    /* أنماط نظام التقييم الجديدة */
+    .rating-section {
+      text-align: center;
+      margin: 25px 0;
+      padding: 20px;
+      background: var(--light);
+      border-radius: 12px;
+      border: 1px solid #e1e8f0;
+    }
+
+    .rating-title {
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .rating-stars {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      direction: ltr;
+    }
+
+    .star {
+      font-size: 28px;
+      color: #ddd;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .star:hover,
+    .star.active {
+      color: var(--rating);
+      transform: scale(1.2);
+    }
+
+    .rating-text {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+      min-height: 20px;
+    }
+
+    .rating-count {
+      font-size: 12px;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    .rating-stats {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .thank-you-message {
+      background: var(--success);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
     @media (max-width: 480px) {
       .container {
         padding: 0;
@@ -513,6 +594,19 @@
       
       .logo-sub {
         font-size: 14px;
+      }
+      
+      .rating-stars {
+        gap: 5px;
+      }
+      
+      .star {
+        font-size: 24px;
+      }
+      
+      .rating-stats {
+        flex-direction: column;
+        gap: 10px;
       }
     }
   </style>
@@ -667,6 +761,42 @@
         </div>
       </div>
 
+      <!-- قسم التقييم الجديد -->
+      <div class="rating-section">
+        <div class="rating-title">
+          <i class="fas fa-star"></i>
+          <span>كيف كانت تجربتك معنا؟</span>
+        </div>
+        
+        <div class="rating-stars" id="ratingStars">
+          <i class="fas fa-star star" data-rating="1"></i>
+          <i class="fas fa-star star" data-rating="2"></i>
+          <i class="fas fa-star star" data-rating="3"></i>
+          <i class="fas fa-star star" data-rating="4"></i>
+          <i class="fas fa-star star" data-rating="5"></i>
+        </div>
+        
+        <div class="rating-text" id="ratingText">
+          قيم تجربتك من خلال النقر على النجوم
+        </div>
+        
+        <div class="thank-you-message" id="thankYouMessage">
+          <i class="fas fa-heart"></i>
+          شكراً لك على تقييمك! نحن نقدر رأيك
+        </div>
+        
+        <div class="rating-stats">
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>تم التقييم <strong id="totalRatings">127</strong> مرة</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-star"></i>
+            <span>متوسط التقييم: <strong id="averageRating">4.8</strong>/5</span>
+          </div>
+        </div>
+      </div>
+
       <p class="footer-note">
         <i class="fas fa-info-circle"></i> بعد إتمام عملية التحويل، يرجى إرسال صورة الإيصال عبر أحد التطبيقات أعلاه<br><br>
         <i class="fas fa-clock"></i> سيتم تفعيل طلبك خلال 24 ساعة من استلام الإيصال
@@ -723,6 +853,7 @@
       }, 3000);
     }
 
+    // تبديل بين الحسابات
     document.querySelectorAll('.account-tab').forEach(tab => {
       tab.addEventListener('click', function() {
         document.querySelectorAll('.account-tab').forEach(t => {
@@ -740,19 +871,103 @@
       });
     });
 
+    // تفعيل الخطوة الأولى افتراضياً
     document.querySelectorAll('.step')[0].classList.add('active');
     
+    // عند النقر على أزرار المراسلة، تفعيل الخطوة الثالثة
     document.querySelectorAll('.message-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         document.querySelectorAll('.step')[2].classList.add('active');
       });
     });
 
+    // التحقق من وجود الشعار
     window.addEventListener('load', function() {
       const logoImg = document.querySelector('.logo-img');
       if (logoImg && logoImg.naturalWidth === 0) {
         document.getElementById('text-logo').style.display = 'block';
       }
+    });
+
+    // نظام التقييم
+    const stars = document.querySelectorAll('.star');
+    const ratingText = document.getElementById('ratingText');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+    const totalRatings = document.getElementById('totalRatings');
+    const averageRating = document.getElementById('averageRating');
+
+    const ratingMessages = {
+      1: "نأسف للتجربة السيئة، سنعمل على تحسين خدماتنا",
+      2: "شكراً على رأيك، سنحاول تحسين تجربتك",
+      3: "شكراً على تقييمك، نسعى دائماً للأفضل",
+      4: "شكراً على التقييم الرائع!",
+      5: "شكراً على التقييم الممتاز! نحن سعداء بخدمتك"
+    };
+
+    let currentRating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener('click', function() {
+        const rating = parseInt(this.getAttribute('data-rating'));
+        currentRating = rating;
+        
+        // تحديث النجوم
+        stars.forEach((s, index) => {
+          if (index < rating) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+        
+        // عرض رسالة التقييم
+        ratingText.textContent = ratingMessages[rating];
+        ratingText.style.color = '#2c3e50';
+        ratingText.style.fontWeight = 'bold';
+        
+        // عرض رسالة الشكر
+        thankYouMessage.style.display = 'block';
+        
+        // محاكاة زيادة عدد التقييمات (في تطبيق حقيقي، هذا سيتم تخزينه في قاعدة بيانات)
+        setTimeout(() => {
+          const currentTotal = parseInt(totalRatings.textContent);
+          totalRatings.textContent = currentTotal + 1;
+          
+          // محاكاة تحديث متوسط التقييم
+          const currentAvg = parseFloat(averageRating.textContent);
+          const newAvg = ((currentAvg * currentTotal) + rating) / (currentTotal + 1);
+          averageRating.textContent = newAvg.toFixed(1);
+        }, 1000);
+      });
+      
+      // تأثير التمرير على النجوم
+      star.addEventListener('mouseover', function() {
+        const rating = parseInt(this.getAttribute('data-rating'));
+        
+        stars.forEach((s, index) => {
+          if (index < rating) {
+            s.style.color = '#ffc107';
+          } else {
+            s.style.color = '#ddd';
+          }
+        });
+      });
+      
+      star.addEventListener('mouseout', function() {
+        if (currentRating === 0) {
+          stars.forEach(s => {
+            s.style.color = '#ddd';
+          });
+        } else {
+          stars.forEach((s, index) => {
+            if (index < currentRating) {
+              s.style.color = '#ffc107';
+            } else {
+              s.style.color = '#ddd';
+            }
+          });
+        }
+      });
     });
   </script>
 
