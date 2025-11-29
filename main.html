@@ -788,23 +788,35 @@ tabs.forEach((tab) => {
 });
 
 // نظام التقييم
+// الحصول على العناصر
 const stars = document.querySelectorAll(".star");
 const ratingText = document.getElementById("ratingText");
 const thankYouMessage = document.getElementById("thankYouMessage");
 const totalRatingsElement = document.getElementById("totalRatings");
 const averageRatingElement = document.getElementById("averageRating");
 
-let totalRatings = 127;
-let totalScore = averageRatingElement.innerText * totalRatings;
+// تحميل البيانات من التخزين المحلي أو تعيين قيم افتراضية
+let totalRatings = parseInt(localStorage.getItem("totalRatings")) || 127;
+let totalScore = parseFloat(localStorage.getItem("totalScore")) || (4.5 * totalRatings);
+
+// تحديث واجهة المستخدم بالقيم المحفوظة
+totalRatingsElement.innerText = totalRatings;
+averageRatingElement.innerText = (totalScore / totalRatings).toFixed(1);
 
 stars.forEach((star) => {
   star.addEventListener("click", () => {
     const ratingValue = parseInt(star.dataset.rating);
 
+    // تحديث القيم
     totalRatings++;
     totalScore += ratingValue;
-    const newAverage = (totalScore / totalRatings).toFixed(1);
 
+    // حفظ القيم في التخزين المحلي
+    localStorage.setItem("totalRatings", totalRatings);
+    localStorage.setItem("totalScore", totalScore);
+
+    // تحديث واجهة المستخدم
+    const newAverage = (totalScore / totalRatings).toFixed(1);
     totalRatingsElement.innerText = totalRatings;
     averageRatingElement.innerText = newAverage;
 
@@ -825,3 +837,4 @@ stars.forEach((star) => {
 
 </body>
 </html>
+
