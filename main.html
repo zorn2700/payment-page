@@ -2571,299 +2571,281 @@
     });
 
     // ========== Rating System ==========
-    const stars = document.querySelectorAll(".star");
-    const ratingFeedback = document.getElementById("ratingFeedback");
-    const googleReviewLink = "https://search.google.com/local/writereview?placeid=ChIJMY9NQcdfXz4RL0OZPxbw-zM";
+const ratingStars = document.querySelectorAll('.star');
+const ratingFeedback = document.getElementById('ratingFeedback');
+const totalRatingsElement = document.getElementById('totalRatings');
+const averageRatingElement = document.getElementById('averageRating');
+const googleReviewLink = "https://search.google.com/local/writereview?placeid=ChIJMY9NQcdfXz4RL0OZPxbw-zM";
+
+// Rating feedback messages
+const ratingMessages = {
+  1: 'نأسف للتجربة غير المرضية. سنعمل بجد لتحسين خدماتنا.',
+  2: 'شكراً على ملاحظاتك القيمة. سنحاول التطوير.',
+  3: 'شكراً لتقييمك. نسعى دائماً للأفضل.',
+  4: 'شكراً للتقييم الرائع! نحن سعداء بخدمتك.',
+  5: 'شكراً للتقييم الممتاز! هذا يشرفنا ويحفزنا للأفضل.'
+};
+
+let currentRating = 0;
+let totalRatings = 1247;
+let averageRating = 4.8;
+let hasRated = false;
+
+// Load previous rating if exists
+window.addEventListener('load', function() {
+  const savedRating = localStorage.getItem('userRating');
+  const savedHasRated = localStorage.getItem('hasRated');
+  
+  if (savedHasRated === 'true' && savedRating) {
+    hasRated = true;
+    const rating = parseInt(savedRating);
+    currentRating = rating;
     
-    const ratingMessages = {
-      1: "نأسف للتجربة غير المرضية. سنعمل بجد لتحسين خدماتنا.",
-      2: "شكراً على ملاحظاتك القيمة. سنحاول التطوير.",
-      3: "شكراً لتقييمك. نسعى دائماً للأفضل.",
-      4: "شكراً للتقييم الرائع! نحن سعداء بخدمتك.",
-      5: "شكراً للتقييم الممتاز! هذا يشرفنا ويحفزنا للأفضل."
-    };
-
-    let currentRating = 0;
-    let hasRated = false;
-
-    stars.forEach(star => {
-      star.addEventListener("click", () => {
-        if (hasRated) return;
-        
-        const rating = parseInt(star.getAttribute('data-rating'));
-        currentRating = rating;
-        hasRated = true;
-        
-        stars.forEach((s, index) => {
-          if (index < rating) {
-            s.classList.add('active');
-          } else {
-            s.classList.remove('active');
-          }
-        });
-        
-        ratingFeedback.textContent = ratingMessages[rating];
-        ratingFeedback.style.color = '#ffd700';
-        
-        showNotification('شكراً لتقييمك!', 'يتم فتح صفحة التقييم على Google Maps...', 'success');
-        updateProgress(3);
-        playSound('success');
-        
-        const totalRatings = document.getElementById('totalRatings');
-        const averageRating = document.getElementById('averageRating');
-        
-        const currentTotal = parseInt(totalRatings.textContent.replace(',', ''));
-        totalRatings.textContent = (currentTotal + 1).toLocaleString();
-        
-        const currentAvg = parseFloat(averageRating.textContent);
-        const newAvg = ((currentAvg * currentTotal) + rating) / (currentTotal + 1);
-        averageRating.textContent = newAvg.toFixed(1);
-        
-        setTimeout(() => {
-          window.open(googleReviewLink, "_blank");
-        }, 1000);
-        
-        if ('vibrate' in navigator) {
-          navigator.vibrate([100, 50, 100]);
-        }
-      });
-      
-      star.addEventListener("mouseover", function() {
-        if (hasRated) return;
-        
-        const rating = parseInt(this.getAttribute('data-rating'));
-        
-        stars.forEach((s, index) => {
-          if (index < rating) {
-            s.style.color = 'rgba(212, 175, 55, 0.7)';
-            s.style.transform = 'scale(1.1)';
-          } else {
-            s.style.color = 'rgba(255, 255, 255, 0.1)';
-            s.style.transform = 'scale(1)';
-          }
-        });
-        
-        ratingFeedback.textContent = `تقييم ${rating} نجوم`;
-        ratingFeedback.style.color = 'rgba(212, 175, 55, 0.8)';
-      });
-      
-      star.addEventListener("mouseout", function() {
-        if (hasRated) return;
-        
-        stars.forEach(s => {
-          s.style.color = 'rgba(255, 255, 255, 0.1)';
-          s.style.transform = 'scale(1)';
-        });
-        
-        ratingFeedback.textContent = 'اضغط على النجوم لتقييمنا';
-        ratingFeedback.style.color = 'rgba(255, 255, 255, 0.7)';
-      });
+    // Update stars display
+    ratingStars.forEach((star, index) => {
+      if (index < rating) {
+        star.classList.add('active');
+        star.classList.remove('fas', 'far');
+        star.classList.add('fas');
+      } else {
+        star.classList.remove('active');
+        star.classList.remove('fas', 'far');
+        star.classList.add('far');
+      }
     });
-
-    // ========== Functions متفرقة ==========
-    function bankLogoClick(bank) {
-      playSound('click');
-      showNotification('بنك ' + bank, 'تم تحديد البنك بنجاح', 'success');
-    }
-
-    function viewStoneDetail(stoneName) {
-      playSound('stone');
-      showNotification('تفاصيل ' + stoneName, 
-        'جاري تحميل التفاصيل والصور...', 
-        'info');
-      
-      // هنا يمكن فتح نافذة منبثقة أو توجيه لصفحة التفاصيل
-      setTimeout(() => {
-        window.open(`#${stoneName.replace(/\s+/g, '-')}`, '_blank');
-      }, 500);
-    }
-
-    function contactClick(type) {
-      playSound('click');
-      const messages = {
-        phone: '📞 يمكنك الاتصال بنا مباشرة على الرقم',
-        email: '📧 أرسل لنا بريداً إلكترونياً',
-        website: '🌐 قم بزيارة موقعنا الإلكتروني'
-      };
-      showNotification('اتصال', messages[type], 'info');
-    }
-
-    function playStoneGame() {
-      if (gameAttempts >= maxAttempts) {
-        showNotification('انتهت المحاولات', 
-          'لقد استخدمت جميع محاولاتك اليومية، عد غداً!', 
-          'warning');
-        return;
+    
+    ratingFeedback.textContent = ratingMessages[rating];
+    ratingFeedback.style.color = '#ffd700';
+  }
+  
+  // Initialize progress
+  updateProgress(1);
+  
+  // Add smooth scroll animations
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
       }
-      playSound('click');
-    }
-
-    // ========== التهيئة ==========
-    document.addEventListener('DOMContentLoaded', () => {
-      createStoneParticles();
-      createGemstones();
-      initLaserPointer();
-      initOfferTimer();
-      updateProgress(1);
-      
-      // تأثيرات دخول الصفحة
-      anime({
-        targets: '.container',
-        translateY: [40, 0],
-        opacity: [0, 1],
-        duration: 1000,
-        easing: 'easeOutCubic'
-      });
-      
-      // تعامل مع اللمس على الهواتف
-      if ('ontouchstart' in window) {
-        document.body.classList.add('touch-device');
-      }
-      
-      // إضافة تأثير اهتزاز خفيف عند التمرير
-      let lastScroll = 0;
-      window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        if (Math.abs(currentScroll - lastScroll) > 50) {
-          if ('vibrate' in navigator) {
-            navigator.vibrate(10);
-          }
-          lastScroll = currentScroll;
-        }
-      });
     });
+  }, observerOptions);
+  
+  // Observe elements for animation
+  document.querySelectorAll('.info-item, .customer-section, .payment-section, .rating-section, .contact-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+});
 
-    // تأثيرات CSS متقدمة باستخدام anime.js
-    if (typeof anime !== 'undefined') {
-      // تأثيرات للعناصر عند الظهور
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            anime({
-              targets: entry.target,
-              translateY: [30, 0],
-              opacity: [0, 1],
-              duration: 800,
-              easing: 'easeOutCubic'
-            });
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll('.account-card, .contact-card, .stat-card, .info-item, .stone-card').forEach(el => {
-        observer.observe(el);
-      });
+ratingStars.forEach(star => {
+  star.addEventListener('click', function() {
+    if (hasRated) {
+      showNotification('تم التقييم سابقاً', 'لقد قمت بالتقييم مسبقاً، شكراً لك!', 'info');
+      return;
     }
-
-    // تسجيل الاحصائيات
-    window.addEventListener('load', () => {
-      const visits = parseInt(localStorage.getItem('pageVisits') || '0');
-      localStorage.setItem('pageVisits', (visits + 1).toString());
-      
-      // تحديث عدد الزيارات في الواجهة
-      const visitCounter = document.createElement('div');
-      visitCounter.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background: rgba(13,27,42,0.8);
-        color: var(--accent-light);
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 12px;
-        border: 1px solid rgba(212,175,55,0.3);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-      `;
-      visitCounter.textContent = `👁️ ${visits + 1} زيارات`;
-      document.body.appendChild(visitCounter);
-      
-      setTimeout(() => {
-        visitCounter.style.opacity = '0';
-        visitCounter.style.transition = 'opacity 1s';
-        setTimeout(() => visitCounter.remove(), 1000);
-      }, 3000);
+    
+    const rating = parseInt(this.getAttribute('data-rating'));
+    currentRating = rating;
+    hasRated = true;
+    
+    // Update stars
+    ratingStars.forEach((s, index) => {
+      if (index < rating) {
+        s.classList.add('active');
+        s.classList.remove('fas', 'far');
+        s.classList.add('fas');
+      } else {
+        s.classList.remove('active');
+        s.classList.remove('fas', 'far');
+        s.classList.add('far');
+      }
     });
-
-    // تأثيرات الاستجابة للصوت
-    let audioContext;
-    let analyser;
-    let microphone;
-    let javascriptNode;
-
-    function initAudioVisualizer() {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-          .then(stream => {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            analyser = audioContext.createAnalyser();
-            microphone = audioContext.createMediaStreamSource(stream);
-            javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
-
-            analyser.smoothingTimeConstant = 0.8;
-            analyser.fftSize = 1024;
-
-            microphone.connect(analyser);
-            analyser.connect(javascriptNode);
-            javascriptNode.connect(audioContext.destination);
-
-            javascriptNode.onaudioprocess = () => {
-              const array = new Uint8Array(analyser.frequencyBinCount);
-              analyser.getByteFrequencyData(array);
-              const values = array.reduce((a, b) => a + b) / array.length;
-              
-              // تأثيرات بصرية حسب شدة الصوت
-              if (values > 50) {
-                createAudioParticle();
-              }
-            };
-          })
-          .catch(err => console.log('Microphone access denied'));
-      }
+    
+    // Show feedback message
+    ratingFeedback.textContent = ratingMessages[rating];
+    ratingFeedback.style.color = 'var(--accent-light)';
+    
+    // Update statistics
+    totalRatings++;
+    averageRating = ((averageRating * (totalRatings - 1)) + rating) / totalRatings;
+    averageRating = Math.round(averageRating * 10) / 10;
+    
+    totalRatingsElement.textContent = totalRatings.toLocaleString('ar-EG');
+    averageRatingElement.textContent = averageRating.toFixed(1);
+    
+    // Save to localStorage
+    localStorage.setItem('userRating', rating);
+    localStorage.setItem('hasRated', 'true');
+    
+    // Show notification
+    showNotification('شكراً لتقييمك!', 'يتم فتح صفحة التقييم على Google Maps...', 'success');
+    updateProgress(3);
+    
+    // Open Google Maps after delay
+    setTimeout(() => {
+      window.open(googleReviewLink, "_blank");
+    }, 1000);
+    
+    // Add vibration
+    if ('vibrate' in navigator) {
+      navigator.vibrate([100, 50, 100]);
     }
-
-    function createAudioParticle() {
-      if (Math.random() > 0.7) {
-        const particle = document.createElement('div');
-        particle.style.cssText = `
-          position: fixed;
-          width: 4px;
-          height: 4px;
-          background: var(--accent-light);
-          border-radius: 50%;
-          pointer-events: none;
-          z-index: 1000;
-          box-shadow: 0 0 10px var(--accent-light);
-        `;
-        
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        
-        document.body.appendChild(particle);
-        
-        anime({
-          targets: particle,
-          translateY: [-100, 100],
-          opacity: [1, 0],
-          duration: 2000,
-          easing: 'easeOutExpo',
-          complete: () => particle.remove()
-        });
+  });
+  
+  // Hover effects
+  star.addEventListener('mouseenter', function() {
+    if (hasRated) return;
+    
+    const rating = parseInt(this.getAttribute('data-rating'));
+    
+    ratingStars.forEach((s, index) => {
+      if (index < rating) {
+        s.style.color = 'rgba(212, 175, 55, 0.7)';
+        s.style.transform = 'scale(1.1)';
+      } else {
+        s.style.color = 'rgba(255, 255, 255, 0.1)';
+        s.style.transform = 'scale(1)';
       }
+    });
+    
+    ratingFeedback.textContent = `تقييم ${rating} نجوم`;
+    ratingFeedback.style.color = 'rgba(212, 175, 55, 0.8)';
+  });
+  
+  star.addEventListener('mouseleave', function() {
+    if (hasRated) return;
+    
+    ratingStars.forEach(s => {
+      s.style.color = '';
+      s.style.transform = '';
+    });
+    
+    ratingFeedback.textContent = 'اضغط على النجوم لتقييمنا';
+    ratingFeedback.style.color = 'rgba(255, 255, 255, 0.7)';
+  });
+});
+
+// Payment Links - Update Progress
+document.querySelectorAll('.btn-whatsapp, .btn-telegram').forEach(btn => {
+  btn.addEventListener('click', () => {
+    updateProgress(3);
+  });
+});
+
+// Add parallax effect to background
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const rate = scrolled * -0.5;
+  document.body.style.backgroundPosition = `0px ${rate}px`;
+});
+
+// Add loading animation for elements
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
     }
+  });
+}, observerOptions);
 
-    // بدء التأثيرات الصوتية عند التفاعل الأول
-    document.body.addEventListener('click', () => {
-      if (!audioContext) {
-        initAudioVisualizer();
-      }
-    }, { once: true });
+// Observe all interactive elements
+document.querySelectorAll('.account-card, .contact-card, .stat-card, .info-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
 
+// Add keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === '1' || e.key === '١') {
+    document.querySelector('[data-account="1"]').click();
+  } else if (e.key === '2' || e.key === '٢') {
+    document.querySelector('[data-account="2"]').click();
+  }
+});
+
+// Initialize tooltips
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('mouseenter', function() {
+    const rect = this.getBoundingClientRect();
+    const tooltip = document.createElement('div');
+    tooltip.textContent = 'انقر للنسخ';
+    tooltip.style.cssText = `
+      position: fixed;
+      background: rgba(13, 27, 42, 0.95);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      pointer-events: none;
+      z-index: 1000;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transform: translate(-50%, -100%);
+      top: ${rect.top}px;
+      left: ${rect.left + rect.width / 2}px;
+    `;
+    document.body.appendChild(tooltip);
+    this._tooltip = tooltip;
+  });
+  
+  btn.addEventListener('mouseleave', function() {
+    if (this._tooltip) {
+      this._tooltip.remove();
+    }
+  });
+});
+
+// Add some interactive effects
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('mouseenter', function() {
+    this.style.transform = 'scale(1.05)';
+  });
+  
+  btn.addEventListener('mouseleave', function() {
+    this.style.transform = 'scale(1)';
+  });
+});
+
+// Touch feedback for mobile
+document.querySelectorAll('.action-btn, .account-tab').forEach(btn => {
+  btn.addEventListener('touchstart', function() {
+    this.style.transform = 'scale(0.98)';
+  });
+  
+  btn.addEventListener('touchend', function() {
+    this.style.transform = 'scale(1)';
+  });
+});
+
+// Auto-update time in footer
+function updateFooterDate() {
+  const footer = document.querySelector('.footer p');
+  const originalText = footer.textContent;
+  const currentYear = new Date().getFullYear();
+  
+  if (originalText.includes('2024')) {
+    footer.innerHTML = originalText.replace('2024', currentYear);
+  }
+}
+
+updateFooterDate();
   </script>
 
   <!-- مكتبة anime.js للحركات -->
@@ -2871,3 +2853,4 @@
 
 </body>
 </html>
+
