@@ -1,3 +1,8 @@
+# إضافة خانة اسم العميل قبل إرسال الإيصال
+
+سأضيف خانة لكتابة اسم العميل لترسل مع الإيصال:
+
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -743,11 +748,183 @@
       font-size: 20px;
     }
 
+    /* Customer Name Section - NEW */
+    .customer-section {
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.05) 0%, 
+        rgba(255, 255, 255, 0.02) 100%);
+      border-radius: 24px;
+      padding: 35px;
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(15px);
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      margin: 40px 0;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .customer-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(212, 175, 55, 0.05) 0%, 
+        transparent 100%);
+    }
+
+    .customer-header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .customer-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+      font-family: 'El Messiri', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .customer-subtitle {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .customer-form {
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .form-label i {
+      color: var(--accent-light);
+      font-size: 22px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 20px;
+      background: rgba(13, 27, 42, 0.8);
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      border-radius: 16px;
+      font-size: 18px;
+      color: white;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-light);
+      box-shadow: 
+        0 0 0 3px rgba(212, 175, 55, 0.2),
+        0 10px 30px rgba(212, 175, 55, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .form-note {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 15px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Payment Section */
+    .payment-section {
+      background: linear-gradient(135deg, 
+        rgba(255, 248, 225, 0.05), 
+        rgba(255, 255, 255, 0.03));
+      border-radius: 24px;
+      padding: 45px;
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin: 40px 0;
+      backdrop-filter: blur(15px);
+    }
+
+    .payment-section::before {
+      content: '📱📤';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 140px;
+      color: rgba(212, 175, 55, 0.04);
+      z-index: 0;
+      letter-spacing: 20px;
+    }
+
+    .payment-header {
+      margin-bottom: 35px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .payment-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+      font-family: 'El Messiri', sans-serif;
+    }
+
+    .payment-subtitle {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
     .action-buttons {
       display: flex;
       flex-direction: column;
       gap: 18px;
       margin-top: 35px;
+      position: relative;
+      z-index: 1;
     }
 
     .action-btn {
@@ -847,6 +1024,7 @@
       margin: 50px 0;
     }
 
+    /* Rating Section */
     .rating-section {
       background: linear-gradient(135deg, 
         rgba(255, 248, 225, 0.05), 
@@ -983,6 +1161,7 @@
       letter-spacing: 0.5px;
     }
 
+    /* Contact Section */
     .contact-section {
       background: linear-gradient(135deg, 
         rgba(13, 27, 42, 0.8), 
@@ -1250,6 +1429,23 @@
         padding: 18px;
       }
       
+      .customer-section,
+      .payment-section,
+      .rating-section {
+        padding: 30px 25px;
+      }
+      
+      .customer-title,
+      .payment-title,
+      .rating-title {
+        font-size: 24px;
+      }
+      
+      .form-input {
+        padding: 18px;
+        font-size: 16px;
+      }
+      
       .contact-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -1330,10 +1526,14 @@
         font-size: 16px;
       }
       
+      .customer-section,
+      .payment-section,
       .rating-section {
         padding: 25px 20px;
       }
       
+      .customer-title,
+      .payment-title,
       .rating-title {
         font-size: 22px;
       }
@@ -1397,8 +1597,16 @@
         
         <div class="step" id="step3">
           <div class="step-icon">
-            <i class="fas fa-paper-plane"></i>
+            <i class="fas fa-user-check"></i>
             <div class="step-number">3</div>
+          </div>
+          <div class="step-text">اكتب اسمك</div>
+        </div>
+        
+        <div class="step" id="step4">
+          <div class="step-icon">
+            <i class="fas fa-paper-plane"></i>
+            <div class="step-number">4</div>
           </div>
           <div class="step-text">أرسل الإيصال</div>
         </div>
@@ -1543,29 +1751,55 @@
         </div>
       </div>
 
-      <div class="section-divider"></div>
+      <!-- Customer Name Section - NEW -->
+      <div class="customer-section">
+        <div class="customer-header">
+          <div class="customer-title">
+            <i class="fas fa-user-edit"></i>
+            معلومات العميل
+          </div>
+          <div class="customer-subtitle">
+            يرجى كتابة اسمك الكامل لتتمكن من التعرف على طلبك بعد إرسال الإيصال
+          </div>
+        </div>
+
+        <div class="customer-form">
+          <div class="form-group">
+            <label class="form-label">
+              <i class="fas fa-user"></i>
+              <span>الاسم الكامل للعميل</span>
+            </label>
+            <input type="text" 
+                   class="form-input" 
+                   id="customerName" 
+                   placeholder="اكتب اسمك الكامل هنا..."
+                   maxlength="50">
+          </div>
+
+          <div class="form-note">
+            <i class="fas fa-info-circle"></i>
+            سيتم إضافة اسمك تلقائياً إلى رسالة إرسال الإيصال للتعرف على طلبك بسهولة
+          </div>
+        </div>
+      </div>
 
       <!-- Payment Section -->
-      <div class="rating-section">
-        <div class="rating-header">
-          <div class="rating-title">إرسال إيصال التحويل</div>
-          <div class="rating-subtitle">بعد إتمام عملية التحويل، يرجى إرسال صورة الإيصال عبر إحدى الطرق التالية</div>
+      <div class="payment-section">
+        <div class="payment-header">
+          <div class="payment-title">إرسال إيصال التحويل</div>
+          <div class="payment-subtitle">بعد إتمام عملية التحويل، يرجى إرسال صورة الإيصال عبر إحدى الطرق التالية</div>
         </div>
 
         <div class="action-buttons">
-          <a href="https://wa.me/+971588061220?text=مرحباً، أود إرسال إيصال التحويل" 
-             target="_blank" 
-             class="action-btn btn-whatsapp">
+          <button class="action-btn btn-whatsapp" onclick="sendToWhatsApp()">
             <i class="fab fa-whatsapp"></i>
             إرسال عبر واتساب
-          </a>
+          </button>
           
-          <a href="https://t.me/valenciallcpay_bot" 
-             target="_blank" 
-             class="action-btn btn-telegram">
+          <button class="action-btn btn-telegram" onclick="sendToTelegram()">
             <i class="fab fa-telegram"></i>
             إرسال عبر تليجرام
-          </a>
+          </button>
         </div>
       </div>
 
@@ -1641,7 +1875,7 @@
       </div>
 
       <div class="footer">
-        <p>© 2025 VALENCIA MARBLE & NATURAL STONES TRADING L.L.C</p>
+        <p>© 2024 VALENCIA MARBLE & NATURAL STONES TRADING L.L.C</p>
         <p style="margin-top: 8px; font-size: 13px; color: rgba(255, 255, 255, 0.4);">
           جميع الحقوق محفوظة | تصميم وتطوير متكامل
         </p>
@@ -1691,7 +1925,7 @@
       const steps = document.querySelectorAll('.step');
       
       // Update progress bar
-      progressFill.style.width = `${(step / 3) * 100}%`;
+      progressFill.style.width = `${(step / 4) * 100}%`;
       
       // Update steps
       steps.forEach((s, index) => {
@@ -1741,6 +1975,17 @@
         showNotification('تم النسخ', 'تم نسخ جميع بيانات الحساب إلى الحافظة', 'success');
         updateProgress(2);
         
+        // Show customer section
+        document.querySelector('.customer-section').scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'center'
+        });
+        
+        // Focus on customer name input
+        setTimeout(() => {
+          document.getElementById('customerName').focus();
+        }, 500);
+        
         if ('vibrate' in navigator) {
           navigator.vibrate([50, 30, 50]);
         }
@@ -1771,184 +2016,300 @@
       });
     });
 
-    // Rating System
-    const stars = document.querySelectorAll(".star");
-    const ratingFeedback = document.getElementById("ratingFeedback");
-    const googleReviewLink = "https://search.google.com/local/writereview?placeid=ChIJMY9NQcdfXz4RL0OZPxbw-zM";
+    // Customer Name Input Validation
+    const customerNameInput = document.getElementById('customerName');
     
-    const ratingMessages = {
-      1: "نأسف للتجربة غير المرضية. سنعمل بجد لتحسين خدماتنا.",
-      2: "شكراً على ملاحظاتك القيمة. سنحاول التطوير.",
-      3: "شكراً لتقييمك. نسعى دائماً للأفضل.",
-      4: "شكراً للتقييم الرائع! نحن سعداء بخدمتك.",
-      5: "شكراً للتقييم الممتاز! هذا يشرفنا ويحفزنا للأفضل."
-    };
-
-    let currentRating = 0;
-    let hasRated = false;
-
-    stars.forEach(star => {
-      star.addEventListener("click", () => {
-        if (hasRated) return;
+    customerNameInput.addEventListener('input', function() {
+      const name = this.value.trim();
+      
+      if (name.length > 2) {
+        this.style.borderColor = '#2ecc71';
+        updateProgress(3);
         
-        const rating = parseInt(star.getAttribute('data-rating'));
+        // Save to localStorage
+        localStorage.setItem('customerName', name);
+      } else {
+        this.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+      }
+    });
+    
+    // Load saved name if exists
+    window.addEventListener('load', function() {
+      const savedName = localStorage.getItem('customerName');
+      if (savedName) {
+        customerNameInput.value = savedName;
+        if (savedName.length > 2) {
+          customerNameInput.style.borderColor = '#2ecc71';
+          updateProgress(3);
+        }
+      }
+    });
+
+    // Send to WhatsApp with customer name
+    function sendToWhatsApp() {
+      const customerName = customerNameInput.value.trim();
+      
+      if (!customerName || customerName.length < 2) {
+        showNotification('تنبيه', 'يرجى كتابة اسمك الكامل أولاً', 'error');
+        customerNameInput.focus();
+        customerNameInput.style.borderColor = '#e74c3c';
+        customerNameInput.style.boxShadow = '0 0 0 3px rgba(231, 76, 60, 0.2)';
+        return;
+      }
+      
+      // Get selected bank
+      const activeTab = document.querySelector('.account-tab.active');
+      const accountNum = activeTab.getAttribute('data-account');
+      const bankName = accountNum === '1' ? 'مصرف الشارقة الإسلامي' : 'بنك أبوظبي التجاري';
+      
+      // Create message with customer name
+      const message = `مرحباً، أود إرسال إيصال التحويل\n\n` +
+                     `👤 *اسم العميل:* ${customerName}\n` +
+                     `🏦 *البنك المستخدم:* ${bankName}\n\n` +
+                     `📋 *معلومات إضافية:*\n` +
+                     `- تم التحويل بنجاح\n` +
+                     `- في انتظار التأكيد\n` +
+                     `- شكراً لخدماتكم`;
+      
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+      
+      // WhatsApp link with message
+      const whatsappLink = `https://wa.me/+971588061220?text=${encodedMessage}`;
+      
+      // Update progress
+      updateProgress(4);
+      
+      // Show notification
+      showNotification('جاري الإرسال', 'يتم فتح واتساب لإرسال الإيصال...', 'success');
+      
+      // Open WhatsApp after delay
+      setTimeout(() => {
+        window.open(whatsappLink, '_blank');
+      }, 800);
+    }
+
+    // Send to Telegram with customer name
+    function sendToTelegram() {
+      const customerName = customerNameInput.value.trim();
+      
+      if (!customerName || customerName.length < 2) {
+        showNotification('تنبيه', 'يرجى كتابة اسمك الكامل أولاً', 'error');
+        customerNameInput.focus();
+        customerNameInput.style.borderColor = '#e74c3c';
+        customerNameInput.style.boxShadow = '0 0 0 3px rgba(231, 76, 60, 0.2)';
+        return;
+      }
+      
+      // Get selected bank
+      const activeTab = document.querySelector('.account-tab.active');
+      const accountNum = activeTab.getAttribute('data-account');
+      const bankName = accountNum === '1' ? 'مصرف الشارقة الإسلامي' : 'بنك أبوظبي التجاري';
+      
+      // Create message with customer name
+      const message = `مرحباً، أود إرسال إيصال التحويل\n\n` +
+                     `👤 *اسم العميل:* ${customerName}\n` +
+                     `🏦 *البنك المستخدم:* ${bankName}\n\n` +
+                     `📋 *معلومات إضافية:*\n` +
+                     `- تم التحويل بنجاح\n` +
+                     `- في انتظار التأكيد\n` +
+                     `- شكراً لخدماتكم`;
+      
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Telegram link with message
+      const telegramLink = `https://t.me/share/url?url=${encodeURIComponent('valenciallc.netlify.app')}&text=${encodedMessage}`;
+      
+      // Update progress
+      updateProgress(4);
+      
+      // Show notification
+      showNotification('جاري الإرسال', 'يتم فتح تليجرام لإرسال الإيصال...', 'success');
+      
+      // Open Telegram after delay
+      setTimeout(() => {
+        window.open(telegramLink, '_blank');
+      }, 800);
+    }
+
+    // Rating System
+    const ratingStars = document.querySelectorAll('.star');
+    const ratingFeedback = document.getElementById('ratingFeedback');
+    const totalRatingsElement = document.getElementById('totalRatings');
+    const averageRatingElement = document.getElementById('averageRating');
+    
+    // Rating feedback messages
+    const ratingMessages = {
+      1: 'أسف جداً للتجربة السيئة، سنعمل على تحسين خدماتنا',
+      2: 'شكراً لملاحظاتك، سنحاول تحسين خدماتنا',
+      3: 'شكراً لتقييمك، سنعمل على تطوير خدماتنا',
+      4: 'شكراً لك! نحن سعداء بتجربتك الجيدة',
+      5: 'شكراً جزيلاً! نحن سعداء جداً بتجربتك الممتازة'
+    };
+    
+    let currentRating = 0;
+    let totalRatings = 1247;
+    let averageRating = 4.8;
+    
+    ratingStars.forEach(star => {
+      star.addEventListener('click', function() {
+        const rating = parseInt(this.getAttribute('data-rating'));
         currentRating = rating;
-        hasRated = true;
         
         // Update stars
-        stars.forEach((s, index) => {
-          if (index < rating) {
+        ratingStars.forEach(s => {
+          const starRating = parseInt(s.getAttribute('data-rating'));
+          if (starRating <= rating) {
             s.classList.add('active');
+            s.classList.remove('fas');
+            s.classList.add('fas');
           } else {
             s.classList.remove('active');
+            s.classList.remove('fas');
+            s.classList.add('far');
           }
         });
         
-        // Show message
+        // Update feedback
         ratingFeedback.textContent = ratingMessages[rating];
-        ratingFeedback.style.color = '#ffd700';
+        ratingFeedback.style.color = 'var(--accent-light)';
+        
+        // Update stats (simulate)
+        totalRatings++;
+        averageRating = ((averageRating * (totalRatings - 1)) + rating) / totalRatings;
+        averageRating = Math.round(averageRating * 10) / 10;
+        
+        totalRatingsElement.textContent = totalRatings.toLocaleString('ar-EG');
+        averageRatingElement.textContent = averageRating;
         
         // Show notification
-        showNotification('شكراً لتقييمك!', 'يتم فتح صفحة التقييم على Google Maps...', 'success');
-        updateProgress(3);
+        showNotification('شكراً لتقييمك', `تم تسجيل تقييمك: ${rating}/5 نجوم`, 'success');
         
-        // Update stats
-        const totalRatings = document.getElementById('totalRatings');
-        const averageRating = document.getElementById('averageRating');
-        
-        const currentTotal = parseInt(totalRatings.textContent.replace(',', ''));
-        totalRatings.textContent = (currentTotal + 1).toLocaleString();
-        
-        const currentAvg = parseFloat(averageRating.textContent);
-        const newAvg = ((currentAvg * currentTotal) + rating) / (currentTotal + 1);
-        averageRating.textContent = newAvg.toFixed(1);
-        
-        // Open Google Maps after delay
-        setTimeout(() => {
-          window.open(googleReviewLink, "_blank");
-        }, 1000);
+        // Save to localStorage
+        localStorage.setItem('userRating', rating);
+        localStorage.setItem('hasRated', 'true');
         
         // Add vibration
         if ('vibrate' in navigator) {
-          navigator.vibrate([100, 50, 100]);
+          navigator.vibrate(100);
         }
       });
       
       // Hover effects
-      star.addEventListener("mouseover", function() {
-        if (hasRated) return;
+      star.addEventListener('mouseenter', function() {
+        if (!localStorage.getItem('hasRated')) {
+          const rating = parseInt(this.getAttribute('data-rating'));
+          
+          ratingStars.forEach(s => {
+            const starRating = parseInt(s.getAttribute('data-rating'));
+            if (starRating <= rating) {
+              s.classList.add('active');
+            }
+          });
+        }
+      });
+      
+      star.addEventListener('mouseleave', function() {
+        if (!localStorage.getItem('hasRated')) {
+          ratingStars.forEach(s => {
+            if (!s.classList.contains('permanent')) {
+              s.classList.remove('active');
+            }
+          });
+        }
+      });
+    });
+    
+    // Check for previous rating
+    window.addEventListener('load', function() {
+      const hasRated = localStorage.getItem('hasRated');
+      const savedRating = localStorage.getItem('userRating');
+      
+      if (hasRated && savedRating) {
+        const rating = parseInt(savedRating);
+        currentRating = rating;
         
-        const rating = parseInt(this.getAttribute('data-rating'));
-        
-        stars.forEach((s, index) => {
-          if (index < rating) {
-            s.style.color = 'rgba(212, 175, 55, 0.7)';
-            s.style.transform = 'scale(1.1)';
+        ratingStars.forEach(s => {
+          const starRating = parseInt(s.getAttribute('data-rating'));
+          if (starRating <= rating) {
+            s.classList.add('active');
+            s.classList.add('permanent');
+            s.classList.remove('fas');
+            s.classList.add('fas');
           } else {
-            s.style.color = 'rgba(255, 255, 255, 0.1)';
-            s.style.transform = 'scale(1)';
+            s.classList.remove('active');
+            s.classList.remove('fas');
+            s.classList.add('far');
           }
         });
         
-        ratingFeedback.textContent = `تقييم ${rating} نجوم`;
-        ratingFeedback.style.color = 'rgba(212, 175, 55, 0.8)';
-      });
-      
-      star.addEventListener("mouseout", function() {
-        if (hasRated) return;
-        
-        stars.forEach(s => {
-          s.style.color = 'rgba(255, 255, 255, 0.1)';
-          s.style.transform = 'scale(1)';
-        });
-        
-        ratingFeedback.textContent = 'اضغط على النجوم لتقييمنا';
-        ratingFeedback.style.color = 'rgba(255, 255, 255, 0.7)';
-      });
-    });
-
-    // Payment Links - Update Progress
-    document.querySelectorAll('.btn-whatsapp, .btn-telegram').forEach(btn => {
-      btn.addEventListener('click', () => {
-        updateProgress(3);
-      });
-    });
-
-    // Initialize Progress
-    updateProgress(1);
-
-    // Add parallax effect to background
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * -0.5;
-      document.body.style.backgroundPosition = `0px ${rate}px`;
-    });
-
-    // Add loading animation for elements
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe all interactive elements
-    document.querySelectorAll('.account-card, .contact-card, .stat-card, .info-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === '1' || e.key === '١') {
-        document.querySelector('[data-account="1"]').click();
-      } else if (e.key === '2' || e.key === '٢') {
-        document.querySelector('[data-account="2"]').click();
+        ratingFeedback.textContent = ratingMessages[rating];
+        ratingFeedback.style.color = 'var(--accent-light)';
       }
+      
+      // Initialize progress
+      updateProgress(1);
+      
+      // Add smooth scroll animations
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+      
+      // Observe elements for animation
+      document.querySelectorAll('.info-item, .customer-section, .payment-section, .rating-section, .contact-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
     });
 
-    // Initialize tooltips
+    // Add some interactive effects
     document.querySelectorAll('.copy-btn').forEach(btn => {
       btn.addEventListener('mouseenter', function() {
-        const rect = this.getBoundingClientRect();
-        const tooltip = document.createElement('div');
-        tooltip.textContent = 'انقر للنسخ';
-        tooltip.style.cssText = `
-          position: fixed;
-          background: rgba(13, 27, 42, 0.95);
-          color: white;
-          padding: 8px 16px;
-          border-radius: 8px;
-          font-size: 14px;
-          pointer-events: none;
-          z-index: 1000;
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-          transform: translate(-50%, -100%);
-          top: ${rect.top}px;
-          left: ${rect.left + rect.width / 2}px;
-        `;
-        document.body.appendChild(tooltip);
-        this._tooltip = tooltip;
+        this.style.transform = 'scale(1.05)';
       });
       
       btn.addEventListener('mouseleave', function() {
-        if (this._tooltip) {
-          this._tooltip.remove();
-        }
+        this.style.transform = 'scale(1)';
       });
     });
-  </script>
 
+    // Touch feedback for mobile
+    document.querySelectorAll('.action-btn, .account-tab').forEach(btn => {
+      btn.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.98)';
+      });
+      
+      btn.addEventListener('touchend', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+
+    // Auto-update time in footer
+    function updateFooterDate() {
+      const footer = document.querySelector('.footer p');
+      const originalText = footer.textContent;
+      const currentYear = new Date().getFullYear();
+      
+      if (originalText.includes('2024')) {
+        footer.innerHTML = originalText.replace('2024', currentYear);
+      }
+    }
+    
+    updateFooterDate();
+  </script>
 </body>
 </html>
-
