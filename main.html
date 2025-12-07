@@ -21,11 +21,15 @@
       --danger: #e74c3c;
       --marble: #e8e6e1;
       --stone: #95a5a6;
+      --granite: #5d5c61;
+      --quartz: #f7f9f2;
+      --onyx: #0a0a0a;
       --telegram: #0088cc;
       --whatsapp: #25D366;
       --gradient-primary: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
       --gradient-accent: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
       --gradient-success: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+      --gradient-marble: linear-gradient(135deg, #e8e6e1 0%, #f5f3ed 100%);
       --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
       --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.2);
       --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -42,11 +46,15 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, 
-        #0a1428 0%, 
-        #0d1b2a 30%, 
-        #1b263b 70%, 
-        #0a1428 100%);
+      background: 
+        linear-gradient(135deg, 
+          rgba(10, 20, 40, 0.95) 0%, 
+          rgba(13, 27, 42, 0.95) 30%, 
+          rgba(27, 38, 59, 0.95) 70%, 
+          rgba(10, 20, 40, 0.95) 100%),
+        /* خلفية أحجار طبيعية */
+        url('https://images.unsplash.com/photo-1545173168-9f1947eebb7f?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+      background-blend-mode: overlay;
       background-attachment: fixed;
       font-family: 'Tajawal', 'El Messiri', 'Segoe UI', sans-serif;
       min-height: 100vh;
@@ -72,8 +80,44 @@
         radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(26, 58, 95, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 40% 40%, rgba(46, 204, 113, 0.1) 0%, transparent 50%);
-      z-index: -1;
+      z-index: -2;
       animation: float 20s ease-in-out infinite;
+    }
+
+    /* جسيمات متحركة تمثل رقائق الرخام */
+    .stone-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .stone-particle {
+      position: absolute;
+      background: var(--gradient-marble);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat linear infinite;
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.2;
+      }
+      90% {
+        opacity: 0.2;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     @keyframes float {
@@ -84,9 +128,9 @@
 
     .container {
       width: 95%;
-      max-width: 750px;
+      max-width: 900px;
       margin: 20px auto;
-      background: rgba(13, 27, 42, 0.9);
+      background: rgba(13, 27, 42, 0.92);
       backdrop-filter: blur(20px) saturate(180%);
       padding: 0;
       border-radius: 32px;
@@ -127,7 +171,12 @@
     }
 
     .header {
-      background: var(--gradient-primary);
+      background: 
+        linear-gradient(135deg, 
+          rgba(13, 27, 42, 0.9) 0%, 
+          rgba(27, 38, 59, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop&crop=center') center/cover;
+      background-blend-mode: overlay;
       padding: 45px 35px;
       text-align: center;
       color: white;
@@ -187,6 +236,12 @@
       position: relative;
       overflow: hidden;
       animation: glow 3s ease-in-out infinite alternate;
+      cursor: pointer;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .logo-circle:hover {
+      transform: scale(1.05) rotate(5deg);
     }
 
     @keyframes glow {
@@ -215,6 +270,12 @@
       padding: 12px;
       border: 2px solid rgba(212, 175, 55, 0.4);
       box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.5s ease;
+    }
+
+    .logo-circle:hover .logo-img {
+      transform: scale(1.1);
+      border-color: var(--accent-light);
     }
 
     .logo-text {
@@ -235,6 +296,13 @@
       text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
       position: relative;
       display: inline-block;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .logo-main:hover {
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
     }
 
     .logo-main::after {
@@ -307,6 +375,264 @@
       box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
     }
 
+    /* أحجار كريمة متحركة */
+    .gemstones {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .gemstone {
+      position: absolute;
+      font-size: 24px;
+      opacity: 0.3;
+      animation: gemFloat 15s infinite linear;
+      filter: drop-shadow(0 0 10px currentColor);
+    }
+
+    @keyframes gemFloat {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(100px, 50px) rotate(90deg);
+      }
+      50% {
+        transform: translate(50px, 100px) rotate(180deg);
+      }
+      75% {
+        transform: translate(-50px, 50px) rotate(270deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+
+    /* قسم معلومات العميل */
+    .client-section {
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.05) 0%, 
+        rgba(255, 255, 255, 0.02) 100%);
+      border-radius: 24px;
+      padding: 35px;
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(15px);
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    .client-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+      filter: blur(40px);
+    }
+
+    .client-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 35px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+      position: relative;
+    }
+
+    .client-header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: 0;
+      width: 100px;
+      height: 2px;
+      background: var(--gradient-accent);
+      border-radius: 1px;
+    }
+
+    .client-title {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .client-icon {
+      width: 55px;
+      height: 55px;
+      background: var(--gradient-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0d1b2a;
+      font-weight: 900;
+      font-size: 18px;
+      box-shadow: 
+        0 10px 25px rgba(212, 175, 55, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .client-icon:hover {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .client-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        transparent 100%);
+    }
+
+    .client-name {
+      font-size: 24px;
+      font-weight: 800;
+      color: white;
+      font-family: 'El Messiri', sans-serif;
+    }
+
+    .client-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .client-info-item {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 18px;
+      padding: 25px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .client-info-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 
+        0 15px 40px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .client-info-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gradient-accent);
+      transition: width 0.3s ease;
+    }
+
+    .client-info-item:hover::before {
+      width: 8px;
+    }
+
+    .client-info-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .client-info-label i {
+      font-size: 22px;
+      color: var(--accent-light);
+      width: 45px;
+      height: 45px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .client-info-item:hover .client-info-label i {
+      transform: scale(1.1) rotate(10deg);
+      background: rgba(212, 175, 55, 0.2);
+    }
+
+    .client-info-label span {
+      font-size: 17px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.5px;
+    }
+
+    .client-info-value {
+      background: rgba(13, 27, 42, 0.8);
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 600;
+      font-size: 17px;
+      color: white;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      min-height: 60px;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .client-info-value:hover {
+      border-color: var(--accent-light);
+      box-shadow: 
+        0 8px 25px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .copy-btn {
+      width: 48px;
+      height: 48px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(212, 175, 55, 0.8);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .copy-btn:hover {
+      background: rgba(212, 175, 55, 0.2);
+      color: var(--accent-light);
+      transform: scale(1.1) rotate(8deg);
+      border-color: var(--accent-light);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .copy-btn i {
+      font-size: 20px;
+    }
+
     .progress-steps {
       display: flex;
       justify-content: space-between;
@@ -346,6 +672,7 @@
       position: relative;
       z-index: 2;
       flex: 1;
+      cursor: pointer;
     }
 
     .step-icon {
@@ -388,6 +715,12 @@
       box-shadow: 
         0 15px 40px rgba(212, 175, 55, 0.4),
         inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateY(-8px) scale(1.1); }
+      50% { transform: translateY(-8px) scale(1.15); }
     }
 
     .step-icon i {
@@ -400,6 +733,12 @@
 
     .step.active .step-icon i {
       color: white;
+      animation: iconBounce 0.5s ease;
+    }
+
+    @keyframes iconBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
     }
 
     .step-text {
@@ -441,6 +780,13 @@
     .step.active .step-number {
       opacity: 1;
       transform: scale(1);
+      animation: numberPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes numberPop {
+      0% { transform: scale(0) rotate(-180deg); }
+      70% { transform: scale(1.2) rotate(10deg); }
+      100% { transform: scale(1) rotate(0deg); }
     }
 
     .account-selector {
@@ -598,6 +944,12 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
       position: relative;
       overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .bank-logo:hover {
+      transform: rotate(15deg) scale(1.1);
     }
 
     .bank-logo::before {
@@ -630,6 +982,12 @@
       align-items: center;
       gap: 8px;
       box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+      animation: statusPulse 2s infinite;
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3); }
+      50% { box-shadow: 0 8px 30px rgba(46, 204, 113, 0.6); }
     }
 
     .info-grid {
@@ -647,6 +1005,7 @@
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .info-item:hover {
@@ -665,6 +1024,11 @@
       width: 4px;
       height: 100%;
       background: var(--gradient-accent);
+      transition: width 0.3s ease;
+    }
+
+    .info-item:hover::before {
+      width: 8px;
     }
 
     .info-label {
@@ -684,6 +1048,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .info-item:hover .info-label i {
+      transform: scale(1.1) rotate(10deg);
+      background: rgba(212, 175, 55, 0.2);
     }
 
     .info-label span {
@@ -715,32 +1085,6 @@
       box-shadow: 
         0 8px 25px rgba(212, 175, 55, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    }
-
-    .copy-btn {
-      width: 48px;
-      height: 48px;
-      background: rgba(212, 175, 55, 0.1);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(212, 175, 55, 0.8);
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-    }
-
-    .copy-btn:hover {
-      background: rgba(212, 175, 55, 0.2);
-      color: var(--accent-light);
-      transform: scale(1.1) rotate(8deg);
-      border-color: var(--accent-light);
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-    }
-
-    .copy-btn i {
-      font-size: 20px;
     }
 
     .action-buttons {
@@ -836,6 +1180,38 @@
 
     .btn-telegram:hover {
       border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* خلفيات الأحجار الطبيعية */
+    .stone-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      opacity: 0.2;
+      background: 
+        url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat,
+        url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+      background-blend-mode: overlay;
+      filter: grayscale(0.3) brightness(0.4);
+      animation: stoneBackground 30s infinite alternate;
+    }
+
+    @keyframes stoneBackground {
+      0% {
+        background-position: center, left center;
+        filter: grayscale(0.3) brightness(0.4);
+      }
+      50% {
+        background-position: center, right center;
+        filter: grayscale(0.5) brightness(0.5);
+      }
+      100% {
+        background-position: center, center;
+        filter: grayscale(0.3) brightness(0.6);
+      }
     }
 
     .section-divider {
@@ -1163,6 +1539,31 @@
       line-height: 1.5;
     }
 
+    /* تأثيرات صوتية */
+    .sound-toggle {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      background: rgba(13, 27, 42, 0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-light);
+      cursor: pointer;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .sound-toggle:hover {
+      transform: scale(1.1);
+      border-color: var(--accent-light);
+    }
+
     @media (max-width: 768px) {
       .container {
         width: 100%;
@@ -1199,6 +1600,15 @@
       
       .section-title h2 {
         font-size: 26px;
+      }
+      
+      .client-section {
+        padding: 25px;
+      }
+      
+      .client-info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
       
       .progress-steps {
@@ -1282,6 +1692,27 @@
       .notification {
         padding: 20px;
       }
+      
+      .timer-display {
+        flex-wrap: wrap;
+      }
+      
+      .timer-unit {
+        min-width: 60px;
+        padding: 15px;
+      }
+      
+      .timer-value {
+        font-size: 24px;
+      }
+      
+      .sound-toggle {
+        bottom: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1341,11 +1772,34 @@
       .star {
         font-size: 36px;
       }
+      
+      .client-info-item {
+        padding: 18px;
+      }
+      
+      .client-info-value {
+        padding: 15px;
+        font-size: 15px;
+      }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- خلفية الأحجار الطبيعية -->
+  <div class="stone-background"></div>
+
+  <!-- جسيمات الرخام -->
+  <div class="stone-particles" id="stoneParticles"></div>
+
+  <!-- أحجار كريمة متحركة -->
+  <div class="gemstones" id="gemstones"></div>
+
+  <!-- زر التحكم بالصوت -->
+  <div class="sound-toggle" id="soundToggle">
+    <i class="fas fa-volume-up"></i>
+  </div>
 
   <!-- Notification Container -->
   <div class="notification-container" id="notificationContainer"></div>
@@ -1354,7 +1808,7 @@
 
     <div class="header">
       <div class="logo-container">
-        <div class="logo-circle">
+        <div class="logo-circle" onclick="playStoneSound()">
           <img src="logo.png" alt="Valencia Marble Logo" class="logo-img" 
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div style="display: none; width: 110px; height: 110px; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d1b2a, #1b263b); border-radius: 50%;">
@@ -1362,13 +1816,91 @@
           </div>
         </div>
         <div class="logo-text">
-          <div class="logo-main">VALENCIA</div>
+          <div class="logo-main" onclick="sparkleEffect(this)">VALENCIA</div>
           <div class="logo-sub">MARBLE & NATURAL STONES TRADING L.L.C</div>
         </div>
       </div>
     </div>
 
     <div class="content">
+      
+      <!-- قسم معلومات العميل -->
+      <div class="client-section">
+        <div class="client-header">
+          <div class="client-title">
+            <div class="client-icon" onclick="clientIconClick()">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="client-name">معلومات العميل</div>
+          </div>
+          <div class="bank-status">
+            <i class="fas fa-user-check"></i>
+            <span>عميل مميز</span>
+          </div>
+        </div>
+
+        <div class="client-info-grid">
+          <div class="client-info-item" onclick="copyClientText('clientName', 'اسم العميل')">
+            <div class="client-info-label">
+              <i class="fas fa-user-tag"></i>
+              <span>اسم العميل</span>
+            </div>
+            <div class="client-info-value">
+              <span id="clientName">جون دو</span>
+              <div class="copy-btn">
+                <i class="fas fa-copy"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="client-info-item" onclick="copyClientText('clientEmail', 'البريد الإلكتروني')">
+            <div class="client-info-label">
+              <i class="fas fa-envelope"></i>
+              <span>البريد الإلكتروني</span>
+            </div>
+            <div class="client-info-value">
+              <span id="clientEmail">client@example.com</span>
+              <div class="copy-btn">
+                <i class="fas fa-copy"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="client-info-item" onclick="copyClientText('clientPhone', 'رقم الهاتف')">
+            <div class="client-info-label">
+              <i class="fas fa-phone"></i>
+              <span>رقم الهاتف</span>
+            </div>
+            <div class="client-info-value">
+              <span id="clientPhone">+971 50 123 4567</span>
+              <div class="copy-btn">
+                <i class="fas fa-copy"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="client-info-item" onclick="copyClientText('clientAddress', 'العنوان')">
+            <div class="client-info-label">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>العنوان</span>
+            </div>
+            <div class="client-info-value">
+              <span id="clientAddress">دبي، الإمارات العربية المتحدة</span>
+              <div class="copy-btn">
+                <i class="fas fa-copy"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-btn btn-primary" onclick="updateClientInfo()">
+            <i class="fas fa-edit"></i>
+            تحديث معلومات العميل
+          </button>
+        </div>
+      </div>
+
       <div class="section-title">
         <h2>بيانات التحويل البنكي</h2>
         <p>اختر البنك وقم بنسخ البيانات لإتمام عملية التحويل</p>
@@ -1420,7 +1952,7 @@
         <div class="account-card">
           <div class="account-header">
             <div class="account-title">
-              <div class="bank-logo">SIB</div>
+              <div class="bank-logo" onclick="bankLogoClick('SIB')">SIB</div>
               <div class="bank-name">مصرف الشارقة الإسلامي</div>
             </div>
             <div class="bank-status">
@@ -1430,40 +1962,40 @@
           </div>
 
           <div class="info-grid">
-            <div class="info-item">
+            <div class="info-item" onclick="copyText('name1', 'اسم المستفيد')">
               <div class="info-label">
                 <i class="fas fa-user-tie"></i>
                 <span>اسم المستفيد</span>
               </div>
               <div class="info-value">
                 <span id="name1">VALENCIA MARBLE&NAT.STONES TRD LLC</span>
-                <div class="copy-btn" onclick="copyText('name1', 'اسم المستفيد')">
+                <div class="copy-btn">
                   <i class="fas fa-copy"></i>
                 </div>
               </div>
             </div>
 
-            <div class="info-item">
+            <div class="info-item" onclick="copyText('account1', 'رقم الحساب')">
               <div class="info-label">
                 <i class="fas fa-credit-card"></i>
                 <span>رقم الحساب</span>
               </div>
               <div class="info-value">
                 <span id="account1">0012084818001</span>
-                <div class="copy-btn" onclick="copyText('account1', 'رقم الحساب')">
+                <div class="copy-btn">
                   <i class="fas fa-copy"></i>
                 </div>
               </div>
             </div>
 
-            <div class="info-item">
+            <div class="info-item" onclick="copyText('iban1', 'رقم IBAN')">
               <div class="info-label">
                 <i class="fas fa-file-invoice"></i>
                 <span>رقم IBAN</span>
               </div>
               <div class="info-value">
                 <span id="iban1">AE210410000012084818001</span>
-                <div class="copy-btn" onclick="copyText('iban1', 'رقم IBAN')">
+                <div class="copy-btn">
                   <i class="fas fa-copy"></i>
                 </div>
               </div>
@@ -1484,7 +2016,7 @@
         <div class="account-card">
           <div class="account-header">
             <div class="account-title">
-              <div class="bank-logo">ADCB</div>
+              <div class="bank-logo" onclick="bankLogoClick('ADCB')">ADCB</div>
               <div class="bank-name">بنك أبوظبي التجاري</div>
             </div>
             <div class="bank-status">
@@ -1494,40 +2026,40 @@
           </div>
 
           <div class="info-grid">
-            <div class="info-item">
+            <div class="info-item" onclick="copyText('name2', 'اسم المستفيد')">
               <div class="info-label">
                 <i class="fas fa-user-tie"></i>
                 <span>اسم المستفيد</span>
               </div>
               <div class="info-value">
                 <span id="name2">VALENCIA MARBLE AND NATURAL STONES</span>
-                <div class="copy-btn" onclick="copyText('name2', 'اسم المستفيد')">
+                <div class="copy-btn">
                   <i class="fas fa-copy"></i>
                 </div>
               </div>
             </div>
 
-            <div class="info-item">
+            <div class="info-item" onclick="copyText('account2', 'رقم الحساب')">
               <div class="info-label">
                 <i class="fas fa-credit-card"></i>
                 <span>رقم الحساب</span>
               </div>
               <div class="info-value">
                 <span id="account2">14211280920001</span>
-                <div class="copy-btn" onclick="copyText('account2', 'رقم الحساب')">
+                <div class="copy-btn">
                   <i class="fas fa-copy"></i>
                 </div>
               </div>
             </div>
 
-            <div class="info-item">
+            <div class="info-item" onclick="copyText('iban2', 'رقم IBAN')">
               <div class="info-label">
                 <i class="fas fa-file-invoice"></i>
                 <span>رقم IBAN</span>
               </div>
               <div class="info-value">
                 <span id="iban2">AE060030014211280920001</span>
-                <div class="copy-btn" onclick="copyText('iban2', 'رقم IBAN')">
+                <div class="copy-btn">
                   <i class="fas fa-copy"></i>
                 </div>
               </div>
@@ -1608,7 +2140,7 @@
         </div>
 
         <div class="contact-grid">
-          <div class="contact-card">
+          <div class="contact-card" onclick="contactClick('phone')">
             <div class="contact-icon">
               <i class="fas fa-phone-alt"></i>
             </div>
@@ -1618,7 +2150,7 @@
             </div>
           </div>
 
-          <div class="contact-card">
+          <div class="contact-card" onclick="contactClick('email')">
             <div class="contact-icon">
               <i class="fas fa-envelope"></i>
             </div>
@@ -1628,7 +2160,7 @@
             </div>
           </div>
 
-          <div class="contact-card">
+          <div class="contact-card" onclick="contactClick('website')">
             <div class="contact-icon">
               <i class="fas fa-globe"></i>
             </div>
@@ -1650,10 +2182,182 @@
   </div>
 
   <script>
-    // رابط تقييم Google Maps
-    const googleReviewLink = "https://search.google.com/local/writereview?placeid=ChIJMY9NQcdfXz4RL0OZPxbw-zM";
+    // ========== نظام الصوتيات ==========
+    let soundEnabled = true;
+    const soundToggle = document.getElementById('soundToggle');
 
-    // Notification System
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      soundToggle.innerHTML = soundEnabled ? 
+        '<i class="fas fa-volume-up"></i>' : 
+        '<i class="fas fa-volume-mute"></i>';
+      
+      if (soundEnabled) {
+        playSound('toggle');
+      }
+    }
+
+    soundToggle.addEventListener('click', toggleSound);
+
+    function playSound(type) {
+      if (!soundEnabled) return;
+      
+      try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        switch(type) {
+          case 'copy':
+            playCopySound(audioContext);
+            break;
+          case 'click':
+            playClickSound(audioContext);
+            break;
+          case 'success':
+            playSuccessSound(audioContext);
+            break;
+          case 'stone':
+            playStoneSound(audioContext);
+            break;
+          case 'toggle':
+            playToggleSound(audioContext);
+            break;
+        }
+      } catch (e) {
+        console.log('Audio not supported');
+      }
+    }
+
+    function playCopySound(audioContext) {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+      oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    }
+
+    function playClickSound(audioContext) {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.05);
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.1);
+    }
+
+    // ========== جسيمات الرخام ==========
+    function createStoneParticles() {
+      const container = document.getElementById('stoneParticles');
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'stone-particle';
+        
+        const size = Math.random() * 10 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.background = getRandomStoneColor();
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        container.appendChild(particle);
+      }
+    }
+
+    function getRandomStoneColor() {
+      const colors = [
+        'linear-gradient(135deg, #e8e6e1, #f5f3ed)',
+        'linear-gradient(135deg, #5d5c61, #8a898e)',
+        'linear-gradient(135deg, #f7f9f2, #e8eadb)',
+        'linear-gradient(135deg, #0a0a0a, #333333)',
+        'linear-gradient(135deg, #d4af37, #ffd700)'
+      ];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    // ========== أحجار كريمة متحركة ==========
+    function createGemstones() {
+      const container = document.getElementById('gemstones');
+      const gems = ['💎', '🔶', '🔷', '💠', '✨', '🌟'];
+      
+      for (let i = 0; i < 8; i++) {
+        const gem = document.createElement('div');
+        gem.className = 'gemstone';
+        gem.textContent = gems[Math.floor(Math.random() * gems.length)];
+        gem.style.color = getRandomGemColor();
+        gem.style.top = `${Math.random() * 100}%`;
+        gem.style.left = `${Math.random() * 100}%`;
+        gem.style.animationDelay = `${Math.random() * 5}s`;
+        gem.style.animationDuration = `${Math.random() * 10 + 10}s`;
+        container.appendChild(gem);
+      }
+    }
+
+    function getRandomGemColor() {
+      const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    // ========== تأثيرات بصرية ==========
+    function sparkleEffect(element) {
+      playSound('stone');
+      
+      const rect = element.getBoundingClientRect();
+      for (let i = 0; i < 10; i++) {
+        createSparkle(rect);
+      }
+    }
+
+    function createSparkle(rect) {
+      const sparkle = document.createElement('div');
+      sparkle.style.cssText = `
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: var(--accent-light);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1000;
+        box-shadow: 0 0 10px var(--accent-light);
+      `;
+      
+      const x = rect.left + Math.random() * rect.width;
+      const y = rect.top + Math.random() * rect.height;
+      
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+      
+      document.body.appendChild(sparkle);
+      
+      anime({
+        targets: sparkle,
+        translateX: () => Math.random() * 100 - 50,
+        translateY: () => Math.random() * 100 - 50,
+        scale: [0, 1.5, 0],
+        opacity: [0, 1, 0],
+        duration: 1000,
+        easing: 'easeOutExpo',
+        complete: () => sparkle.remove()
+      });
+    }
+
+    // ========== Notification System ==========
     function showNotification(title, message, type = 'success') {
       const container = document.getElementById('notificationContainer');
       const notification = document.createElement('div');
@@ -1686,17 +2390,17 @@
           }
         }, 600);
       }, 5000);
+      
+      playSound('success');
     }
 
-    // Progress System
+    // ========== Progress System ==========
     function updateProgress(step) {
       const progressFill = document.getElementById('progressFill');
       const steps = document.querySelectorAll('.step');
       
-      // Update progress bar
       progressFill.style.width = `${(step / 3) * 100}%`;
       
-      // Update steps
       steps.forEach((s, index) => {
         if (index < step) {
           s.classList.add('active');
@@ -1706,15 +2410,64 @@
       });
     }
 
-    // Copy Functions
+    // ========== وظائف قسم العميل ==========
+    function copyClientText(id, label) {
+      const text = document.getElementById(id).textContent;
+      
+      navigator.clipboard.writeText(text).then(() => {
+        showNotification('تم النسخ بنجاح', `تم نسخ ${label} إلى الحافظة`, 'success');
+        playSound('copy');
+        
+        if ('vibrate' in navigator) {
+          navigator.vibrate(50);
+        }
+      }).catch(err => {
+        showNotification('خطأ في النسخ', 'حدث خطأ أثناء نسخ النص', 'error');
+      });
+    }
+
+    function clientIconClick() {
+      playSound('click');
+      showNotification('معلومات العميل', 'يمكنك تعديل معلوماتك من خلال زر تحديث المعلومات', 'info');
+    }
+
+    function updateClientInfo() {
+      playSound('click');
+      
+      const newName = prompt('أدخل اسم العميل الجديد:', document.getElementById('clientName').textContent);
+      if (newName && newName.trim() !== '') {
+        document.getElementById('clientName').textContent = newName.trim();
+        showNotification('تم التحديث', 'تم تحديث اسم العميل بنجاح', 'success');
+      }
+      
+      const newEmail = prompt('أدخل البريد الإلكتروني الجديد:', document.getElementById('clientEmail').textContent);
+      if (newEmail && newEmail.trim() !== '') {
+        document.getElementById('clientEmail').textContent = newEmail.trim();
+        showNotification('تم التحديث', 'تم تحديث البريد الإلكتروني بنجاح', 'success');
+      }
+      
+      const newPhone = prompt('أدخل رقم الهاتف الجديد:', document.getElementById('clientPhone').textContent);
+      if (newPhone && newPhone.trim() !== '') {
+        document.getElementById('clientPhone').textContent = newPhone.trim();
+        showNotification('تم التحديث', 'تم تحديث رقم الهاتف بنجاح', 'success');
+      }
+      
+      const newAddress = prompt('أدخل العنوان الجديد:', document.getElementById('clientAddress').textContent);
+      if (newAddress && newAddress.trim() !== '') {
+        document.getElementById('clientAddress').textContent = newAddress.trim();
+        showNotification('تم التحديث', 'تم تحديث العنوان بنجاح', 'success');
+      }
+    }
+
+    // ========== Copy Functions ==========
     function copyText(id, label) {
       const text = document.getElementById(id).textContent;
       
       navigator.clipboard.writeText(text).then(() => {
         showNotification('تم النسخ بنجاح', `تم نسخ ${label} إلى الحافظة`, 'success');
         updateProgress(2);
+        playSound('copy');
         
-        // Add vibration effect if supported
         if ('vibrate' in navigator) {
           navigator.vibrate(50);
         }
@@ -1743,6 +2496,7 @@
       navigator.clipboard.writeText(allData).then(() => {
         showNotification('تم النسخ', 'تم نسخ جميع بيانات الحساب إلى الحافظة', 'success');
         updateProgress(2);
+        playSound('copy');
         
         if ('vibrate' in navigator) {
           navigator.vibrate([50, 30, 50]);
@@ -1752,31 +2506,30 @@
       });
     }
 
-    // Account Tabs
+    // ========== Account Tabs ==========
     document.querySelectorAll('.account-tab').forEach(tab => {
       tab.addEventListener('click', function() {
         const accountId = this.getAttribute('data-account');
         
-        // Update tabs
         document.querySelectorAll('.account-tab').forEach(t => {
           t.classList.remove('active');
         });
         this.classList.add('active');
         
-        // Update content
         document.querySelectorAll('.account-content').forEach(content => {
           content.classList.remove('active');
         });
         document.getElementById(`account${accountId}-content`).classList.add('active');
         
-        // Update progress
         updateProgress(1);
+        playSound('click');
       });
     });
 
-    // Rating System - Updated with direct Google Maps opening
+    // ========== Rating System ==========
     const stars = document.querySelectorAll(".star");
     const ratingFeedback = document.getElementById("ratingFeedback");
+    const googleReviewLink = "https://search.google.com/local/writereview?placeid=ChIJMY9NQcdfXz4RL0OZPxbw-zM";
     
     const ratingMessages = {
       1: "نأسف للتجربة غير المرضية. سنعمل بجد لتحسين خدماتنا.",
@@ -1789,18 +2542,14 @@
     let currentRating = 0;
     let hasRated = false;
 
-    // عند الضغط على أي نجمة → فتح Google Maps مباشرة
     stars.forEach(star => {
-      star.addEventListener("click", (e) => {
-        e.stopPropagation(); // منع أي أحداث أخرى
-        
+      star.addEventListener("click", () => {
         if (hasRated) return;
         
         const rating = parseInt(star.getAttribute('data-rating'));
         currentRating = rating;
         hasRated = true;
         
-        // Update stars visual feedback
         stars.forEach((s, index) => {
           if (index < rating) {
             s.classList.add('active');
@@ -1809,15 +2558,13 @@
           }
         });
         
-        // Show message
         ratingFeedback.textContent = ratingMessages[rating];
         ratingFeedback.style.color = '#ffd700';
         
-        // Show notification
         showNotification('شكراً لتقييمك!', 'يتم فتح صفحة التقييم على Google Maps...', 'success');
         updateProgress(3);
+        playSound('success');
         
-        // Update stats
         const totalRatings = document.getElementById('totalRatings');
         const averageRating = document.getElementById('averageRating');
         
@@ -1828,18 +2575,15 @@
         const newAvg = ((currentAvg * currentTotal) + rating) / (currentTotal + 1);
         averageRating.textContent = newAvg.toFixed(1);
         
-        // Open Google Maps immediately
         setTimeout(() => {
           window.open(googleReviewLink, "_blank");
-        }, 500);
+        }, 1000);
         
-        // Add vibration
         if ('vibrate' in navigator) {
           navigator.vibrate([100, 50, 100]);
         }
       });
       
-      // Hover effects remain the same
       star.addEventListener("mouseover", function() {
         if (hasRated) return;
         
@@ -1872,110 +2616,156 @@
       });
     });
 
-    // Payment Links - Update Progress
-    document.querySelectorAll('.btn-whatsapp, .btn-telegram').forEach(btn => {
-      btn.addEventListener('click', () => {
-        updateProgress(3);
-      });
-    });
+    // ========== Functions متفرقة ==========
+    function bankLogoClick(bank) {
+      playSound('click');
+      showNotification('بنك ' + bank, 'تم تحديد البنك بنجاح', 'success');
+    }
 
-    // Initialize Progress
-    updateProgress(1);
+    function contactClick(type) {
+      playSound('click');
+      const messages = {
+        phone: '📞 يمكنك الاتصال بنا مباشرة على الرقم',
+        email: '📧 أرسل لنا بريداً إلكترونياً',
+        website: '🌐 قم بزيارة موقعنا الإلكتروني'
+      };
+      showNotification('اتصال', messages[type], 'info');
+    }
 
-    // Add parallax effect to background
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * -0.5;
-      document.body.style.backgroundPosition = `0px ${rate}px`;
-    });
-
-    // Add loading animation for elements
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe all interactive elements
-    document.querySelectorAll('.account-card, .contact-card, .stat-card, .info-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === '1' || e.key === '١') {
-        document.querySelector('[data-account="1"]').click();
-      } else if (e.key === '2' || e.key === '٢') {
-        document.querySelector('[data-account="2"]').click();
-      } else if (e.key === 'r' || e.key === 'ر') {
-        // اختصار لتقييم Google
-        const randomStar = Math.floor(Math.random() * 5);
-        stars[randomStar].click();
-      }
-    });
-
-    // Initialize tooltips
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-      btn.addEventListener('mouseenter', function() {
-        const rect = this.getBoundingClientRect();
-        const tooltip = document.createElement('div');
-        tooltip.textContent = 'انقر للنسخ';
-        tooltip.style.cssText = `
-          position: fixed;
-          background: rgba(13, 27, 42, 0.95);
-          color: white;
-          padding: 8px 16px;
-          border-radius: 8px;
-          font-size: 14px;
-          pointer-events: none;
-          z-index: 1000;
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-          transform: translate(-50%, -100%);
-          top: ${rect.top}px;
-          left: ${rect.left + rect.width / 2}px;
-        `;
-        document.body.appendChild(tooltip);
-        this._tooltip = tooltip;
+    // ========== التهيئة ==========
+    document.addEventListener('DOMContentLoaded', () => {
+      createStoneParticles();
+      createGemstones();
+      updateProgress(1);
+      
+      // تحميل بيانات العميل من localStorage
+      loadClientData();
+      
+      // تأثيرات دخول الصفحة
+      anime({
+        targets: '.container',
+        translateY: [40, 0],
+        opacity: [0, 1],
+        duration: 1000,
+        easing: 'easeOutCubic'
       });
       
-      btn.addEventListener('mouseleave', function() {
-        if (this._tooltip) {
-          this._tooltip.remove();
+      // تعامل مع اللمس على الهواتف
+      if ('ontouchstart' in window) {
+        document.body.classList.add('touch-device');
+      }
+      
+      // إضافة تأثير اهتزاز خفيف عند التمرير
+      let lastScroll = 0;
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        if (Math.abs(currentScroll - lastScroll) > 50) {
+          if ('vibrate' in navigator) {
+            navigator.vibrate(10);
+          }
+          lastScroll = currentScroll;
         }
       });
     });
 
-    // إضافة ميزة التقييم السريع
-    document.addEventListener('DOMContentLoaded', function() {
-      // عند التمرير إلى قسم التقييم، تظهر رسالة تذكيرية
-      const ratingSection = document.querySelector('.rating-section');
-      const observer = new IntersectionObserver(function(entries) {
+    // ========== تحميل وحفظ بيانات العميل ==========
+    function loadClientData() {
+      const savedClientData = localStorage.getItem('valenciaClientData');
+      if (savedClientData) {
+        const clientData = JSON.parse(savedClientData);
+        document.getElementById('clientName').textContent = clientData.name || 'جون دو';
+        document.getElementById('clientEmail').textContent = clientData.email || 'client@example.com';
+        document.getElementById('clientPhone').textContent = clientData.phone || '+971 50 123 4567';
+        document.getElementById('clientAddress').textContent = clientData.address || 'دبي، الإمارات العربية المتحدة';
+      }
+    }
+
+    function saveClientData() {
+      const clientData = {
+        name: document.getElementById('clientName').textContent,
+        email: document.getElementById('clientEmail').textContent,
+        phone: document.getElementById('clientPhone').textContent,
+        address: document.getElementById('clientAddress').textContent,
+        lastUpdated: new Date().toISOString()
+      };
+      localStorage.setItem('valenciaClientData', JSON.stringify(clientData));
+    }
+
+    // تعديل دالة updateClientInfo لحفظ البيانات
+    const originalUpdateClientInfo = updateClientInfo;
+    updateClientInfo = function() {
+      originalUpdateClientInfo();
+      setTimeout(saveClientData, 100);
+    };
+
+    // تأثيرات CSS متقدمة باستخدام anime.js
+    if (typeof anime !== 'undefined') {
+      // تأثيرات للعناصر عند الظهور
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && !hasRated) {
-            setTimeout(() => {
-              showNotification('تقييم سريع', 'يمكنك تقييمنا على Google Maps بنقرة واحدة!', 'info');
-            }, 1000);
+          if (entry.isIntersecting) {
+            anime({
+              targets: entry.target,
+              translateY: [30, 0],
+              opacity: [0, 1],
+              duration: 800,
+              easing: 'easeOutCubic'
+            });
           }
         });
-      }, { threshold: 0.5 });
+      }, observerOptions);
 
-      if (ratingSection) {
-        observer.observe(ratingSection);
-      }
+      document.querySelectorAll('.account-card, .contact-card, .stat-card, .info-item, .client-info-item').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    // تسجيل الاحصائيات
+    window.addEventListener('load', () => {
+      const visits = parseInt(localStorage.getItem('pageVisits') || '0');
+      localStorage.setItem('pageVisits', (visits + 1).toString());
+      
+      // تحديث عدد الزيارات في الواجهة
+      const visitCounter = document.createElement('div');
+      visitCounter.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: rgba(13,27,42,0.8);
+        color: var(--accent-light);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        border: 1px solid rgba(212,175,55,0.3);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+      `;
+      visitCounter.textContent = `👁️ ${visits + 1} زيارات`;
+      document.body.appendChild(visitCounter);
+      
+      setTimeout(() => {
+        visitCounter.style.opacity = '0';
+        visitCounter.style.transition = 'opacity 1s';
+        setTimeout(() => visitCounter.remove(), 1000);
+      }, 3000);
     });
+
+    // بدء التأثيرات الصوتية عند التفاعل الأول
+    document.body.addEventListener('click', () => {
+      if (!window.audioContextInitialized) {
+        window.audioContextInitialized = true;
+      }
+    }, { once: true });
+
   </script>
+
+  <!-- مكتبة anime.js للحركات -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
 </body>
 </html>
