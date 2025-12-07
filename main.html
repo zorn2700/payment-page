@@ -1,840 +1,1412 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>حسابات البنك ونظام التقييم</title>
-<style>
-/* هنا ضع كود CSS بالكامل الذي أرسلته */
-:root {
-  --primary: #2c3e50;
-  --secondary: #7f8c8d;
-  --accent: #c0392b;
-  --light: #f5f7fa;
-  --dark: #2c3e50;
-  --success: #27ae60;
-  --gold: #d4af37;
-  --marble: #e8e6e1;
-  --telegram: #0088cc;
-  --whatsapp: #25D366;
-  --stone: #95a5a6;
-  --rating: #ffc107;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(135deg, #ecf0f1 0%, #dfe6e9 100%);
-  font-family: "Tahoma", "Segoe UI", sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.container {
-  width: 95%;
-  max-width: 600px;
-  margin: 20px auto;
-  background: #fff;
-  padding: 0;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #e0e0e0;
-}
-
-.header {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
-  padding: 25px;
-  text-align: center;
-  color: white;
-  position: relative;
-  border-radius: 15px 15px 0 0;
-}
-
-.logo-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
-}
-
-.logo-img {
-  width: 120px;
-  height: 120px;
-  margin-bottom: 15px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--gold);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  background: white;
-  padding: 10px;
-}
-
-.logo-text {
-  text-align: center;
-}
-
-.logo-main {
-  font-size: 28px;
-  font-weight: bold;
-  color: var(--gold);
-  letter-spacing: 1px;
-  margin-bottom: 5px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-}
-
-.logo-sub {
-  font-size: 16px;
-  color: var(--marble);
-  line-height: 1.4;
-  font-weight: 500;
-}
-
-.header::after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  right: 0;
-  width: 100%;
-  height: 20px;
-  background: var(--light);
-  border-radius: 20px 20px 0 0;
-}
-
-.content {
-  padding: 30px;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: var(--primary);
-  font-size: 24px;
-  position: relative;
-  padding-bottom: 15px;
-}
-
-h2::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 50%;
-  transform: translateX(50%);
-  width: 80px;
-  height: 3px;
-  background: var(--accent);
-  border-radius: 3px;
-}
-
-.account-selector {
-  display: flex;
-  background: var(--light);
-  border-radius: 12px;
-  padding: 5px;
-  margin-bottom: 25px;
-  border: 1px solid #e1e8f0;
-}
-
-.account-tab {
-  flex: 1;
-  text-align: center;
-  padding: 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  color: var(--dark);
-}
-
-.account-tab.active {
-  background: white;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-  color: var(--primary);
-  border: 1px solid var(--stone);
-}
-
-.account-content {
-  display: none;
-}
-
-.account-content.active {
-  display: block;
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.account-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--primary);
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.info-box {
-  background: var(--light);
-  border: 1px solid #e1e8f0;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.info-box:hover {
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  transform: translateY(-2px);
-}
-
-.info-row {
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-}
-
-.label {
-  font-weight: bold;
-  color: #555;
-  font-size: 14px;
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.value {
-  font-size: 17px;
-  color: #000;
-  background: #fff;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.3s ease;
-  font-family: monospace;
-}
-
-.value:hover {
-  border-color: var(--stone);
-}
-
-.copy-icon {
-  color: var(--stone);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.copy-icon:hover {
-  color: var(--primary);
-  transform: scale(1.1);
-}
-
-.copy-btn {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--stone), var(--primary));
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: bold;
-}
-
-.copy-btn:hover {
-  background: linear-gradient(135deg, var(--primary), var(--dark));
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.message-buttons {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.message-btn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.message-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.whatsapp-btn {
-  background: linear-gradient(135deg, var(--whatsapp), #128C7E);
-}
-
-.whatsapp-btn:hover {
-  background: linear-gradient(135deg, #128C7E, #075E54);
-}
-
-.telegram-btn {
-  background: linear-gradient(135deg, var(--telegram), #006699);
-}
-
-.telegram-btn:hover {
-  background: linear-gradient(135deg, #006699, #004466);
-}
-
-.footer-note {
-  text-align: center;
-  margin-top: 25px;
-  color: #555;
-  font-size: 14px;
-  line-height: 1.8;
-  padding: 15px;
-  background: var(--light);
-  border-radius: 10px;
-  border-right: 4px solid var(--accent);
-}
-
-.contact-number {
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--primary);
-  display: inline-block;
-  margin-top: 5px;
-}
-
-.steps-container {
-  display: flex;
-  justify-content: space-between;
-  margin: 25px 0;
-  position: relative;
-}
-
-.steps-container::before {
-  content: "";
-  position: absolute;
-  top: 20px;
-  right: 0;
-  width: 100%;
-  height: 2px;
-  background: #ddd;
-  z-index: 1;
-}
-
-.step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-}
-
-.step-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #777;
-  transition: all 0.3s ease;
-}
-
-.step.active .step-circle {
-  background: var(--success);
-  border-color: var(--success);
-  color: white;
-}
-
-.step-text {
-  font-size: 12px;
-  color: #777;
-  text-align: center;
-}
-
-.step.active .step-text {
-  color: var(--success);
-  font-weight: bold;
-}
-
-.success-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--success);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  display: none;
-  align-items: center;
-  gap: 10px;
-  z-index: 1000;
-  animation: fadeInOut 3s ease;
-}
-
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(-20px); }
-  20% { opacity: 1; transform: translateY(0); }
-  80% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-20px); }
-}
-
-.bank-logo {
-  width: 30px;
-  height: 30px;
-  background: var(--primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 14px;
-}
-
-.company-info {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px dashed #ddd;
-  font-size: 13px;
-  color: #666;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.message-section {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.message-title {
-  font-size: 16px;
-  color: var(--primary);
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-/* نظام التقييم */
-.rating-section {
-  text-align: center;
-  margin: 25px 0;
-  padding: 20px;
-  background: var(--light);
-  border-radius: 12px;
-  border: 1px solid #e1e8f0;
-}
-
-.rating-title {
-  font-size: 18px;
-  color: var(--primary);
-  margin-bottom: 15px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.rating-stars {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 15px;
-  direction: ltr;
-}
-
-.star {
-  font-size: 28px;
-  color: #ddd;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.star:hover,
-.star.active {
-  color: var(--rating);
-  transform: scale(1.2);
-}
-
-.rating-text {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 15px;
-  min-height: 20px;
-}
-
-.rating-count {
-  font-size: 12px;
-  color: #888;
-  margin-top: 10px;
-}
-
-.rating-stats {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 15px;
-  font-size: 13px;
-  color: #666;
-}
-
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.thank-you-message {
-  background: var(--success);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  margin-top: 15px;
-  display: none;
-  animation: fadeIn 0.5s ease;
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 0;
-    width: 100%;
-  }
-  
-  .content {
-    padding: 20px;
-  }
-  
-  h2 {
-    font-size: 20px;
-  }
-  
-  .value {
-    font-size: 15px;
-    padding: 8px 10px;
-  }
-  
-  .steps-container {
-    margin: 20px 0;
-  }
-  
-  .step-circle {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .step-text {
-    font-size: 10px;
-  }
-  
-  .company-info {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .header {
-    padding: 20px;
-  }
-  
-  .logo-img {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .message-buttons {
-    flex-direction: column;
-  }
-  
-  .logo-main {
-    font-size: 24px;
-  }
-  
-  .logo-sub {
-    font-size: 14px;
-  }
-  
-  .rating-stars {
-    gap: 5px;
-  }
-  
-  .star {
-    font-size: 24px;
-  }
-  
-  .rating-stats {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بيانات التحويل البنكي - VALENCIA MARBLE & NATURAL STONES</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a3a5f;
+      --secondary: #3a6ea5;
+      --accent: #d4af37;
+      --light: #f8f9fa;
+      --dark: #2c3e50;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --danger: #e74c3c;
+      --marble: #e8e6e1;
+      --stone: #95a5a6;
+      --telegram: #0088cc;
+      --whatsapp: #25D366;
+      --gold-gradient: linear-gradient(135deg, #d4af37, #b8941f);
+      --blue-gradient: linear-gradient(135deg, #1a3a5f, #2c5282);
+      --green-gradient: linear-gradient(135deg, #27ae60, #219653);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      font-family: 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 700px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 0;
+      border-radius: 25px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 
+                  0 0 0 1px rgba(255, 255, 255, 0.1),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      background: var(--blue-gradient);
+      padding: 35px 25px;
+      text-align: center;
+      color: white;
+      position: relative;
+      border-radius: 25px 25px 0 0;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+      background-size: cover;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      right: 0;
+      width: 100%;
+      height: 40px;
+      background: var(--light);
+      border-radius: 40px 40px 0 0;
+      box-shadow: 0 -10px 20px rgba(0,0,0,0.1);
+    }
+
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo-circle {
+      width: 140px;
+      height: 140px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      border: 3px solid rgba(212, 175, 55, 0.8);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3),
+                  inset 0 0 0 2px rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+      animation: pulse 4s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .logo-circle::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+      animation: rotate 3s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo-img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: relative;
+      z-index: 2;
+      background: white;
+      padding: 10px;
+    }
+
+    .logo-text {
+      text-align: center;
+    }
+
+    .logo-main {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #d4af37, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-sub {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.5;
+      font-weight: 500;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .content {
+      padding: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 35px;
+      color: var(--primary);
+      font-size: 28px;
+      position: relative;
+      padding-bottom: 20px;
+      font-weight: 700;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 120px;
+      height: 4px;
+      background: var(--gold-gradient);
+      border-radius: 2px;
+    }
+
+    .steps-container {
+      display: flex;
+      justify-content: space-between;
+      margin: 35px 0;
+      position: relative;
+    }
+
+    .steps-container::before {
+      content: "";
+      position: absolute;
+      top: 25px;
+      right: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--stone), transparent);
+      z-index: 1;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      flex: 1;
+    }
+
+    .step-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid var(--stone);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-weight: 700;
+      color: var(--stone);
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-circle::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--blue-gradient);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .step.active .step-circle::before {
+      opacity: 1;
+    }
+
+    .step.active .step-circle {
+      border-color: var(--primary);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(26, 58, 95, 0.3);
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: var(--stone);
+      text-align: center;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .step.active .step-text {
+      color: var(--primary);
+      font-weight: 700;
+      transform: translateY(-2px);
+    }
+
+    .account-selector {
+      display: flex;
+      background: rgba(248, 249, 250, 0.8);
+      border-radius: 15px;
+      padding: 8px;
+      margin: 30px 0;
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(5px);
+    }
+
+    .account-tab {
+      flex: 1;
+      text-align: center;
+      padding: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      color: var(--dark);
+      position: relative;
+      overflow: hidden;
+      font-size: 15px;
+    }
+
+    .account-tab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--blue-gradient);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .account-tab.active::before {
+      opacity: 1;
+    }
+
+    .account-tab.active {
+      color: white;
+      box-shadow: 0 10px 25px rgba(26, 58, 95, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .account-tab i {
+      margin-left: 8px;
+      font-size: 18px;
+    }
+
+    .account-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .account-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .account-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .account-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .bank-logo {
+      width: 40px;
+      height: 40px;
+      background: var(--blue-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: 0 5px 15px rgba(26, 58, 95, 0.2);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .info-card {
+      background: linear-gradient(135deg, rgba(248, 249, 250, 0.9), rgba(255, 255, 255, 0.9));
+      border-radius: 15px;
+      padding: 25px;
+      border: 2px solid rgba(212, 175, 55, 0.15);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gold-gradient);
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+
+    .info-row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .info-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 15px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .label i {
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .value {
+      font-size: 18px;
+      color: #000;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      font-family: 'Courier New', monospace;
+      font-weight: 600;
+      min-height: 55px;
+    }
+
+    .value:hover {
+      border-color: var(--accent);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .copy-icon {
+      color: var(--stone);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 20px;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgba(248, 249, 250, 0.8);
+    }
+
+    .copy-icon:hover {
+      color: var(--accent);
+      transform: scale(1.1) rotate(5deg);
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .action-btn {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .action-btn:hover::before {
+      left: 100%;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    .action-btn.primary {
+      background: var(--blue-gradient);
+    }
+
+    .action-btn.whatsapp {
+      background: linear-gradient(135deg, var(--whatsapp), #128C7E);
+    }
+
+    .action-btn.telegram {
+      background: linear-gradient(135deg, var(--telegram), #006699);
+    }
+
+    .action-btn.review {
+      background: linear-gradient(135deg, #FF9800, #F57C00);
+    }
+
+    .rating-section {
+      text-align: center;
+      margin: 40px 0;
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(255, 248, 225, 0.9), rgba(255, 255, 255, 0.9));
+      border-radius: 20px;
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rating-section::before {
+      content: '★★★★★';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 120px;
+      color: rgba(212, 175, 55, 0.05);
+      z-index: 0;
+    }
+
+    .rating-title {
+      font-size: 22px;
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .rating-stars {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin: 25px 0;
+      direction: ltr;
+      position: relative;
+      z-index: 1;
+    }
+
+    .star {
+      font-size: 42px;
+      color: #e0e0e0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 5px;
+    }
+
+    .star::before {
+      content: '★';
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      font-size: 42px;
+      color: rgba(212, 175, 55, 0.3);
+      z-index: -1;
+    }
+
+    .star:hover,
+    .star.active {
+      color: var(--accent);
+      transform: scale(1.2) rotate(5deg);
+      text-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+    }
+
+    .rating-text {
+      font-size: 16px;
+      color: var(--primary);
+      margin-bottom: 25px;
+      min-height: 24px;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 25px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid rgba(212, 175, 55, 0.15);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.3);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--stone);
+      font-weight: 600;
+    }
+
+    .footer-section {
+      text-align: center;
+      margin-top: 35px;
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(26, 58, 95, 0.05), rgba(212, 175, 55, 0.05));
+      border-radius: 20px;
+      border: 2px solid rgba(212, 175, 55, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-title {
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid rgba(212, 175, 55, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.3);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--blue-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 22px;
+    }
+
+    .contact-info {
+      text-align: center;
+    }
+
+    .contact-label {
+      font-size: 13px;
+      color: var(--stone);
+      margin-bottom: 5px;
+    }
+
+    .contact-value {
+      font-size: 15px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      color: var(--stone);
+      font-size: 13px;
+    }
+
+    .floating-notification {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      background: white;
+      padding: 20px 25px;
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      display: none;
+      align-items: center;
+      gap: 15px;
+      z-index: 10000;
+      animation: slideInRight 0.5s ease, fadeOut 0.5s ease 2.5s forwards;
+      border-right: 5px solid var(--success);
+      max-width: 350px;
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateX(100px); }
+    }
+
+    .notification-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .notification-content {
+      flex: 1;
+    }
+
+    .notification-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    .notification-text {
+      color: var(--stone);
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: 100%;
+        border-radius: 20px;
+      }
+      
+      .content {
+        padding: 25px;
+      }
+      
+      .logo-main {
+        font-size: 28px;
+      }
+      
+      .logo-sub {
+        font-size: 16px;
+      }
+      
+      .logo-circle {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .logo-img {
+        width: 90px;
+        height: 90px;
+      }
+      
+      .steps-container {
+        margin: 25px 0;
+      }
+      
+      .step-circle {
+        width: 45px;
+        height: 45px;
+      }
+      
+      .account-tab {
+        padding: 14px;
+        font-size: 14px;
+      }
+      
+      .info-grid {
+        gap: 15px;
+      }
+      
+      .info-card {
+        padding: 20px;
+      }
+      
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .rating-stars {
+        gap: 3px;
+      }
+      
+      .star {
+        font-size: 36px;
+      }
+      
+      .floating-notification {
+        top: 20px;
+        right: 20px;
+        left: 20px;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 25px 20px;
+      }
+      
+      h2 {
+        font-size: 24px;
+      }
+      
+      .logo-main {
+        font-size: 24px;
+      }
+      
+      .logo-sub {
+        font-size: 14px;
+      }
+      
+      .action-btn {
+        padding: 16px;
+        font-size: 16px;
+      }
+      
+      .value {
+        font-size: 16px;
+        padding: 12px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="container">
+  <!-- Floating Notification -->
+  <div class="floating-notification" id="notification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title" id="notificationTitle"></div>
+      <div class="notification-text" id="notificationText"></div>
+    </div>
+  </div>
 
-  <!-- الهيدر والشعار -->
-  <div class="header">
-    <div class="logo-container">
-      <img src="https://via.placeholder.com/120" alt="Logo" class="logo-img">
-      <div class="logo-text">
-        <div class="logo-main">VALENCIA MARBLE</div>
-        <div class="logo-sub">شركة أحجار طبيعية</div>
+  <div class="container">
+
+    <div class="header">
+      <div class="logo-container">
+        <div class="logo-circle">
+          <img src="logo.png" alt="Valencia Marble Logo" class="logo-img" onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';">
+        </div>
+        <div class="logo-text">
+          <div class="logo-main">VALENCIA</div>
+          <div class="logo-sub">MARBLE & NATURAL STONES TRADING L.L.C</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>بيانات التحويل البنكي</h2>
+
+      <div class="steps-container">
+        <div class="step active" id="step1">
+          <div class="step-circle">1</div>
+          <div class="step-text">اختر البنك</div>
+        </div>
+        <div class="step" id="step2">
+          <div class="step-circle">2</div>
+          <div class="step-text">انسخ البيانات</div>
+        </div>
+        <div class="step" id="step3">
+          <div class="step-circle">3</div>
+          <div class="step-text">أرسل الإيصال</div>
+        </div>
+      </div>
+
+      <div class="account-selector">
+        <div class="account-tab active" data-account="1">
+          <i class="fas fa-university"></i>
+          مصرف الشارقة الإسلامي
+        </div>
+        <div class="account-tab" data-account="2">
+          <i class="fas fa-landmark"></i>
+          بنك أبوظبي التجاري
+        </div>
+      </div>
+
+      <!-- Account 1 -->
+      <div class="account-content active" id="account1-content">
+        <div class="account-header">
+          <div class="account-title">
+            <div class="bank-logo">SIB</div>
+            <span>مصرف الشارقة الإسلامي</span>
+          </div>
+          <div class="bank-badge">
+            <span style="color: #27ae60; font-weight: 700;">✓ مفعل</span>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-row">
+              <div class="label">
+                <i class="fas fa-user-tie"></i>
+                اسم المستفيد
+              </div>
+              <div class="value">
+                <span id="name1">VALENCIA MARBLE&NAT.STONES TRD LLC</span>
+                <i class="fas fa-copy copy-icon" onclick="copyText('name1', 'اسم المستفيد')"></i>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="label">
+                <i class="fas fa-credit-card"></i>
+                رقم الحساب
+              </div>
+              <div class="value">
+                <span id="account1">0012084818001</span>
+                <i class="fas fa-copy copy-icon" onclick="copyText('account1', 'رقم الحساب')"></i>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="label">
+                <i class="fas fa-file-invoice"></i>
+                رقم IBAN
+              </div>
+              <div class="value">
+                <span id="iban1">AE210410000012084818001</span>
+                <i class="fas fa-copy copy-icon" onclick="copyText('iban1', 'رقم IBAN')"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-btn primary" onclick="copyAll('account1')">
+            <i class="fas fa-copy"></i>
+            نسخ جميع بيانات الحساب
+          </button>
+        </div>
+      </div>
+
+      <!-- Account 2 -->
+      <div class="account-content" id="account2-content">
+        <div class="account-header">
+          <div class="account-title">
+            <div class="bank-logo">ADCB</div>
+            <span>بنك أبوظبي التجاري</span>
+          </div>
+          <div class="bank-badge">
+            <span style="color: #27ae60; font-weight: 700;">✓ مفعل</span>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-row">
+              <div class="label">
+                <i class="fas fa-user-tie"></i>
+                اسم المستفيد
+              </div>
+              <div class="value">
+                <span id="name2">VALENCIA MARBLE AND NATURAL STONES</span>
+                <i class="fas fa-copy copy-icon" onclick="copyText('name2', 'اسم المستفيد')"></i>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="label">
+                <i class="fas fa-credit-card"></i>
+                رقم الحساب
+              </div>
+              <div class="value">
+                <span id="account2">14211280920001</span>
+                <i class="fas fa-copy copy-icon" onclick="copyText('account2', 'رقم الحساب')"></i>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="label">
+                <i class="fas fa-file-invoice"></i>
+                رقم IBAN
+              </div>
+              <div class="value">
+                <span id="iban2">AE060030014211280920001</span>
+                <i class="fas fa-copy copy-icon" onclick="copyText('iban2', 'رقم IBAN')"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="action-btn primary" onclick="copyAll('account2')">
+            <i class="fas fa-copy"></i>
+            نسخ جميع بيانات الحساب
+          </button>
+        </div>
+      </div>
+
+      <!-- Payment Receipt Section -->
+      <div class="rating-section" style="margin-top: 40px;">
+        <div class="rating-title">
+          <i class="fas fa-paper-plane"></i>
+          إرسال إيصال التحويل
+        </div>
+        
+        <div class="rating-text">
+          اختر طريقة لإرسال صورة الإيصال بعد التحويل
+        </div>
+
+        <div class="action-buttons">
+          <a href="https://wa.me/+971588061220?text=مرحباً، أود إرسال إيصال التحويل" 
+             target="_blank" 
+             class="action-btn whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            إرسال عبر واتساب
+          </a>
+          
+          <a href="https://t.me/mourssi2700" 
+             target="_blank" 
+             class="action-btn telegram">
+            <i class="fab fa-telegram"></i>
+            إرسال عبر تليجرام
+          </a>
+        </div>
+      </div>
+
+      <!-- Rating Section -->
+      <div class="rating-section">
+        <div class="rating-title">
+          <i class="fas fa-star"></i>
+          ساعدنا على التحسين
+        </div>
+        
+        <div class="rating-text" id="ratingText">
+          قيم تجربتك مع خدماتنا
+        </div>
+
+        <div class="rating-stars" id="ratingStars">
+          <i class="fas fa-star star" data-rating="1"></i>
+          <i class="fas fa-star star" data-rating="2"></i>
+          <i class="fas fa-star star" data-rating="3"></i>
+          <i class="fas fa-star star" data-rating="4"></i>
+          <i class="fas fa-star star" data-rating="5"></i>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="totalRatings">1,247</div>
+            <div class="stat-label">تقييم</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="averageRating">4.8</div>
+            <div class="stat-label">معدل التقييم</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="footer-section">
+        <div class="footer-title">
+          <i class="fas fa-headset"></i>
+          معلومات التواصل
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">الهاتف</div>
+              <div class="contact-value">+971 58 806 1220</div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">البريد الإلكتروني</div>
+              <div class="contact-value">info@valenciamarble.com</div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div class="contact-info">
+              <div class="contact-label">الموقع الإلكتروني</div>
+              <div class="contact-value">valenciallc.netlify.app</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © 2024 VALENCIA MARBLE & NATURAL STONES TRADING L.L.C. جميع الحقوق محفوظة
       </div>
     </div>
   </div>
 
-  <!-- المحتوى -->
-  <div class="content">
-
-    <!-- تبويبات الحساب -->
-    <div class="account-selector">
-      <div class="account-tab active" data-account="1">الحساب 1</div>
-      <div class="account-tab" data-account="2">الحساب 2</div>
-    </div>
-
-    <!-- حساب 1 -->
-    <div class="account-content active" id="account1-content">
-      <div class="account-title">تفاصيل الحساب 1</div>
-      <div class="info-box">
-        <div class="info-row">
-          <div class="label">اسم المستفيد</div>
-          <div class="value" id="beneficiary1">
-            VALENCIA MARBLE&NAT.STONES TRD LLC
-            <span class="copy-icon" onclick="copyText('beneficiary1')">📋</span>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="label">رقم الحساب</div>
-          <div class="value" id="accountNumber1">
-            0012084818001
-            <span class="copy-icon" onclick="copyText('accountNumber1')">📋</span>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="label">رقم IBAN</div>
-          <div class="value" id="iban1">
-            AE210410000012084818001
-            <span class="copy-icon" onclick="copyText('iban1')">📋</span>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="label">البنك</div>
-          <div class="value" id="bank1">
-            مصرف الشارقة الإسلامي (Sharjah Islamic Bank)
-            <span class="copy-icon" onclick="copyText('bank1')">📋</span>
-          </div>
-        </div>
-        <button class="copy-btn" onclick="copyAll('account1')">نسخ جميع البيانات</button>
-      </div>
-    </div>
-
-    <!-- حساب 2 -->
-    <div class="account-content" id="account2-content">
-      <div class="account-title">تفاصيل الحساب 2</div>
-      <div class="info-box">
-        <div class="info-row">
-          <div class="label">اسم المستفيد</div>
-          <div class="value" id="beneficiary2">
-            VALENCIA MARBLE AND NATURAL STONES
-            <span class="copy-icon" onclick="copyText('beneficiary2')">📋</span>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="label">رقم الحساب</div>
-          <div class="value" id="accountNumber2">
-            14211280920001
-            <span class="copy-icon" onclick="copyText('accountNumber2')">📋</span>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="label">رقم IBAN</div>
-          <div class="value" id="iban2">
-            AE060030014211280920001
-            <span class="copy-icon" onclick="copyText('iban2')">📋</span>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="label">البنك</div>
-          <div class="value" id="bank2">
-            بنك أبوظبي التجاري (ADCB)
-            <span class="copy-icon" onclick="copyText('bank2')">📋</span>
-          </div>
-        </div>
-        <button class="copy-btn" onclick="copyAll('account2')">نسخ جميع البيانات</button>
-      </div>
-    </div>
-
-    <!-- نظام التقييم -->
-    <div class="rating-section">
-      <div class="rating-title">قيم تجربتك معنا</div>
-      <div class="rating-stars">
-        <span class="star" data-rating="1">★</span>
-        <span class="star" data-rating="2">★</span>
-        <span class="star" data-rating="3">★</span>
-        <span class="star" data-rating="4">★</span>
-        <span class="star" data-rating="5">★</span>
-      </div>
-      <div id="ratingText" class="rating-text"></div>
-      <div class="rating-stats">
-        <div class="stat-item">المتوسط: <span id="averageRating">4.5</span></div>
-        <div class="stat-item">عدد التقييمات: <span id="totalRatings">127</span></div>
-      </div>
-      <div id="thankYouMessage" class="thank-you-message">شكراً لتقييمك!</div>
-    </div>
-
-  </div>
-</div>
-
-<!-- رسالة النسخ -->
-<div id="successMessage" class="success-message">تم النسخ بنجاح ✅</div>
-
-<script>
-// هنا ضع كود JavaScript بالكامل الذي أرسلته
-// إظهار رسالة النسخ بنجاح
-function showSuccessMessage() {
-  const msg = document.getElementById("successMessage");
-  msg.style.display = "flex";
-  setTimeout(() => {
-    msg.style.display = "none";
-  }, 2500);
-}
-
-// نسخ نص واحد
-function copyText(id) {
-  const text = document.getElementById(id).innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    showSuccessMessage();
-  });
-}
-
-// نسخ جميع بيانات الحساب
-function copyAll(accountNumber) {
-  let text = "";
-
-  if (accountNumber === "account1") {
-    text += "اسم المستفيد: VALENCIA MARBLE&NAT.STONES TRD LLC\n";
-    text += "رقم الحساب: 0012084818001\n";
-    text += "رقم IBAN: AE210410000012084818001\n";
-    text += "البنك: مصرف الشارقة الإسلامي (Sharjah Islamic Bank)";
-  } else if (accountNumber === "account2") {
-    text += "اسم المستفيد: VALENCIA MARBLE AND NATURAL STONES\n";
-    text += "رقم الحساب: 14211280920001\n";
-    text += "رقم IBAN: AE060030014211280920001\n";
-    text += "البنك: بنك أبوظبي التجاري (ADCB)";
-  }
-
-  navigator.clipboard.writeText(text).then(() => {
-    showSuccessMessage();
-  });
-}
-
-// التبديل بين الحسابات
-const tabs = document.querySelectorAll(".account-tab");
-const contents = document.querySelectorAll(".account-content");
-
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    tabs.forEach((t) => t.classList.remove("active"));
-    contents.forEach((c) => c.classList.remove("active"));
-
-    tab.classList.add("active");
-    const accountId = tab.dataset.account;
-    document.getElementById(`account${accountId}-content`).classList.add("active");
-  });
-});
-
-// نظام التقييم
-// الحصول على العناصر
-const stars = document.querySelectorAll(".star");
-const ratingText = document.getElementById("ratingText");
-const thankYouMessage = document.getElementById("thankYouMessage");
-const totalRatingsElement = document.getElementById("totalRatings");
-const averageRatingElement = document.getElementById("averageRating");
-
-// تحميل البيانات من التخزين المحلي أو تعيين قيم افتراضية
-let totalRatings = parseInt(localStorage.getItem("totalRatings")) || 127;
-let totalScore = parseFloat(localStorage.getItem("totalScore")) || (4.5 * totalRatings);
-
-// تحديث واجهة المستخدم بالقيم المحفوظة
-totalRatingsElement.innerText = totalRatings;
-averageRatingElement.innerText = (totalScore / totalRatings).toFixed(1);
-
-stars.forEach((star) => {
-  star.addEventListener("click", () => {
-    const ratingValue = parseInt(star.dataset.rating);
-
-    // تحديث القيم
-    totalRatings++;
-    totalScore += ratingValue;
-
-    // حفظ القيم في التخزين المحلي
-    localStorage.setItem("totalRatings", totalRatings);
-    localStorage.setItem("totalScore", totalScore);
-
-    // تحديث واجهة المستخدم
-    const newAverage = (totalScore / totalRatings).toFixed(1);
-    totalRatingsElement.innerText = totalRatings;
-    averageRatingElement.innerText = newAverage;
-
-    ratingText.innerText = `لقد قمت بتقييمنا بـ ${ratingValue} نجوم`;
-
-    thankYouMessage.style.display = "block";
-    setTimeout(() => {
-      thankYouMessage.style.display = "none";
-    }, 2500);
-
-    stars.forEach((s) => s.classList.remove("active"));
-    for (let i = 0; i < ratingValue; i++) {
-      stars[i].classList.add("active");
+  <script>
+    // Notification System
+    function showNotification(title, text) {
+      const notification = document.getElementById('notification');
+      const notificationTitle = document.getElementById('notificationTitle');
+      const notificationText = document.getElementById('notificationText');
+      
+      notificationTitle.textContent = title;
+      notificationText.textContent = text;
+      notification.style.display = 'flex';
+      
+      // Reset animation
+      notification.style.animation = 'none';
+      void notification.offsetWidth; // Trigger reflow
+      notification.style.animation = 'slideInRight 0.5s ease, fadeOut 0.5s ease 2.5s forwards';
     }
-  });
-});
-</script>
+
+    // Copy Functions
+    function copyText(id, label) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text);
+      
+      showNotification('تم النسخ بنجاح', `تم نسخ ${label} إلى الحافظة`);
+      
+      // Activate step 2
+      document.getElementById('step2').classList.add('active');
+      
+      // Track copy action
+      trackAction('copy', label);
+    }
+
+    function copyAll(accountPrefix) {
+      const accountNum = accountPrefix.replace('account', '');
+      const name = document.getElementById(`name${accountNum}`).textContent;
+      const account = document.getElementById(`account${accountNum}`).textContent;
+      const iban = document.getElementById(`iban${accountNum}`).textContent;
+      
+      const allData = `💳 *بيانات الحساب البنكي*\n\n` +
+                     `🏦 *البنك:* ${accountNum === '1' ? 'مصرف الشارقة الإسلامي' : 'بنك أبوظبي التجاري'}\n` +
+                     `👤 *اسم المستفيد:* ${name}\n` +
+                     `🔢 *رقم الحساب:* ${account}\n` +
+                     `🏛️ *رقم IBAN:* ${iban}\n\n` +
+                     `📱 *إرسال الإيصال:*\n` +
+                     `واتساب: wa.me/+971588061220\n` +
+                     `تليجرام: t.me/mourssi2700`;
+      
+      navigator.clipboard.writeText(allData);
+      
+      showNotification('تم النسخ', 'تم نسخ جميع بيانات الحساب إلى الحافظة');
+      
+      // Activate steps
+      document.getElementById('step2').classList.add('active');
+      
+      // Track action
+      trackAction('copy_all', accountPrefix);
+    }
+
+    // Account Tabs
+    document.querySelectorAll('.account-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        const accountId = this.getAttribute('data-account');
+        
+        // Update tabs
+        document.querySelectorAll('.account-tab').forEach(t => {
+          t.classList.remove('active');
+        });
+        this.classList.add('active');
+        
+        // Update content
+        document.querySelectorAll('.account-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(`account${accountId}-content`).classList.add('active');
+        
+        // Track tab switch
+        trackAction('switch_tab', accountId);
+      });
+    });
+
+    // Rating System
+    const stars = document.querySelectorAll(".star");
+    const ratingText = document.getElementById("ratingText");
+    const googleReviewLink = "https://search.google.com/local/writereview?placeid=ChIJMY9NQcdfXz4RL0OZPxbw-zM";
+    
+    const ratingMessages = {
+      1: "نأسف للتجربة غير المرضية. سنعمل على تحسين خدماتنا.",
+      2: "شكراً على ملاحظاتك القيمة. سنحاول التطوير.",
+      3: "شكراً لتقييمك. نسعى دائماً للأفضل.",
+      4: "شكراً للتقييم الرائع! نحن سعداء بخدمتك.",
+      5: "شكراً للتقييم الممتاز! هذا يشرفنا."
+    };
+
+    let currentRating = 0;
+    let hasRated = false;
+
+    stars.forEach(star => {
+      star.addEventListener("click", () => {
+        if (hasRated) return;
+        
+        const rating = parseInt(star.getAttribute('data-rating'));
+        currentRating = rating;
+        hasRated = true;
+        
+        // Update stars
+        stars.forEach((s, index) => {
+          if (index < rating) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+        
+        // Show message
+        ratingText.textContent = ratingMessages[rating];
+        ratingText.style.color = '#1a3a5f';
+        ratingText.style.fontWeight = '700';
+        
+        // Show notification
+        showNotification('شكراً لتقييمك!', 'يتم فتح صفحة التقييم على Google Maps...');
+        
+        // Update stats
+        const totalRatings = document.getElementById('totalRatings');
+        const averageRating = document.getElementById('averageRating');
+        
+        const currentTotal = parseInt(totalRatings.textContent.replace(',', ''));
+        totalRatings.textContent = (currentTotal + 1).toLocaleString();
+        
+        const currentAvg = parseFloat(averageRating.textContent);
+        const newAvg = ((currentAvg * currentTotal) + rating) / (currentTotal + 1);
+        averageRating.textContent = newAvg.toFixed(1);
+        
+        // Open Google Maps after delay
+        setTimeout(() => {
+          window.open(googleReviewLink, "_blank");
+        }, 800);
+        
+        // Track rating
+        trackAction('rate', rating);
+      });
+      
+      // Hover effects
+      star.addEventListener("mouseover", function() {
+        if (hasRated) return;
+        
+        const rating = parseInt(this.getAttribute('data-rating'));
+        
+        stars.forEach((s, index) => {
+          if (index < rating) {
+            s.style.color = '#d4af37';
+          } else {
+            s.style.color = '#e0e0e0';
+          }
+        });
+        
+        ratingText.textContent = `تقييم ${rating} نجوم`;
+        ratingText.style.color = '#1a3a5f';
+      });
+      
+      star.addEventListener("mouseout", function() {
+        if (hasRated) return;
+        
+        stars.forEach(s => {
+          s.style.color = '#e0e0e0';
+        });
+        
+        ratingText.textContent = 'قيم تجربتك مع خدماتنا';
+        ratingText.style.color = '#1a3a5f';
+      });
+    });
+
+    // Track actions (simulated)
+    function trackAction(action, data) {
+      console.log(`Action: ${action}, Data: ${data}`);
+      // In production, send to analytics service
+    }
+
+    // Auto-activate first step
+    document.getElementById('step1').classList.add('active');
+
+    // Logo fallback
+    window.addEventListener('load', function() {
+      const logoImg = document.querySelector('.logo-img');
+      if (logoImg && logoImg.naturalWidth === 0) {
+        const textLogo = document.createElement('div');
+        textLogo.id = 'text-logo';
+        textLogo.className = 'logo-text';
+        textLogo.innerHTML = `
+          <div class="logo-main" style="color: #d4af37; -webkit-text-fill-color: #d4af37;">VALENCIA</div>
+          <div class="logo-sub">MARBLE & NATURAL STONES<br>TRADING L.L.C</div>
+        `;
+        logoImg.parentNode.replaceChild(textLogo, logoImg);
+      }
+    });
+
+    // Add animation to action buttons when they come into view
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all interactive elements
+    document.querySelectorAll('.action-btn, .info-card, .stat-card, .contact-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
 
 </body>
 </html>
-
