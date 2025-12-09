@@ -864,160 +864,167 @@
       line-height: 1.6;
     }
 
-    /* Payment Section */
-    .payment-section {
-      background: linear-gradient(135deg, 
-        rgba(255, 248, 225, 0.05), 
-        rgba(255, 255, 255, 0.03));
-      border-radius: 24px;
-      padding: 45px;
-      border: 2px solid rgba(212, 175, 55, 0.2);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      margin: 40px 0;
-      backdrop-filter: blur(15px);
-    }
+/* Payment Section */
+.payment-section {
+  background: linear-gradient(135deg, 
+    rgba(255, 248, 225, 0.05), 
+    rgba(255, 255, 255, 0.03));
+  border-radius: 24px;
+  padding: 45px;
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin: 40px 0;
+  backdrop-filter: blur(15px);
+}
 
-    .payment-section::before {
-      content: '📱📤';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 140px;
-      color: rgba(212, 175, 55, 0.04);
-      z-index: 0;
-      letter-spacing: 20px;
-    }
+.payment-section::before {
+  content: '📱📤';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 140px;
+  color: rgba(212, 175, 55, 0.04);
+  z-index: 0;
+  letter-spacing: 20px;
+}
 
-    .payment-header {
-      margin-bottom: 35px;
-      position: relative;
-      z-index: 1;
-    }
+.payment-header {
+  margin-bottom: 35px;
+  position: relative;
+  z-index: 1;
+}
 
-    .payment-title {
-      font-size: 28px;
-      font-weight: 800;
-      color: white;
-      margin-bottom: 12px;
-      font-family: 'El Messiri', sans-serif;
-    }
+.payment-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 12px;
+  font-family: 'El Messiri', sans-serif;
+}
 
-    .payment-subtitle {
-      font-size: 17px;
-      color: rgba(255, 255, 255, 0.7);
-      max-width: 500px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
+.payment-subtitle {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
 
-    .action-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      margin-top: 35px;
-      position: relative;
-      z-index: 1;
-    }
+/* زر رئيسي */
+.action-btn {
+  width: 100%;
+  padding: 22px;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
 
-    .action-btn {
-      width: 100%;
-      padding: 22px;
-      border: none;
-      border-radius: 16px;
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-    }
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.7s;
+}
 
-    .action-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 255, 255, 0.2), 
-        transparent);
-      transition: left 0.7s;
-    }
+.action-btn:hover::before {
+  left: 100%;
+}
 
-    .action-btn:hover::before {
-      left: 100%;
-    }
+.action-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
 
-    .action-btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    }
+.action-btn i {
+  font-size: 22px;
+}
 
-    .action-btn i {
-      font-size: 22px;
-      position: relative;
-      z-index: 1;
-    }
+.btn-primary {
+  background: linear-gradient(135deg, 
+    rgba(13, 27, 42, 0.9), 
+    rgba(27, 38, 59, 0.9));
+  border: 2px solid rgba(212, 175, 55, 0.4);
+}
 
-    .btn-primary {
-      background: linear-gradient(135deg, 
-        rgba(13, 27, 42, 0.9), 
-        rgba(27, 38, 59, 0.9));
-      border: 2px solid rgba(212, 175, 55, 0.4);
-    }
+/* القائمة */
+.hidden {
+  display: none;
+}
 
-    .btn-primary:hover {
-      background: linear-gradient(135deg, 
-        rgba(27, 38, 59, 0.9), 
-        rgba(13, 27, 42, 0.9));
-      border-color: var(--accent-light);
-    }
+.seller-list {
+  margin-top: 25px;
+  background: rgba(255,255,255,0.06);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(212,175,55,0.3);
+  backdrop-filter: blur(10px);
+}
 
-    .btn-whatsapp {
-      background: linear-gradient(135deg, 
-        rgba(37, 211, 102, 0.9), 
-        rgba(18, 140, 126, 0.9));
-      border: 2px solid rgba(37, 211, 102, 0.4);
-    }
+.seller-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: white;
+}
 
-    .btn-whatsapp:hover {
-      border-color: rgba(255, 255, 255, 0.6);
-    }
+.seller-item:last-child {
+  border-bottom: none;
+}
 
-    .btn-telegram {
-      background: linear-gradient(135deg, 
-        rgba(0, 136, 204, 0.9), 
-        rgba(0, 102, 153, 0.9));
-      border: 2px solid rgba(0, 136, 204, 0.4);
-    }
+.seller-actions {
+  display: flex;
+  gap: 10px;
+}
 
-    .btn-telegram:hover {
-      border-color: rgba(255, 255, 255, 0.6);
-    }
+/* أزرار واتساب وتليجرام صغيرة */
+.action-btn.small {
+  padding: 10px 12px;
+  font-size: 16px;
+  width: auto;
+}
 
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, 
-        transparent, 
-        rgba(212, 175, 55, 0.3), 
-        transparent);
-      margin: 50px 0;
-    }
+.btn-whatsapp {
+  background: linear-gradient(135deg, 
+    rgba(37, 211, 102, 0.9), 
+    rgba(18, 140, 126, 0.9));
+  border: 2px solid rgba(37, 211, 102, 0.4);
+}
+
+.btn-telegram {
+  background: linear-gradient(135deg, 
+    rgba(0, 136, 204, 0.9), 
+    rgba(0, 102, 153, 0.9));
+  border: 2px solid rgba(0, 136, 204, 0.4);
+}
+
+
 
     /* Rating Section */
     .rating-section {
@@ -1778,25 +1785,90 @@
         </div>
       </div>
 
-      <!-- Payment Section -->
-      <div class="payment-section">
-        <div class="payment-header">
-          <div class="payment-title">إرسال إيصال التحويل</div>
-          <div class="payment-subtitle">بعد إتمام عملية التحويل، يرجى إرسال صورة الإيصال عبر إحدى الطرق التالية</div>
-        </div>
+<!-- Payment Section -->
+<div class="payment-section">
+  <div class="payment-header">
+    <div class="payment-title">إرسال إيصال التحويل</div>
+    <div class="payment-subtitle">اضغط على الزر لعرض قائمة البائعين</div>
+  </div>
 
-        <div class="action-buttons">
-          <button class="action-btn btn-whatsapp" onclick="sendToWhatsApp()">
-            <i class="fab fa-whatsapp"></i>
-            إرسال عبر واتساب
-          </button>
-          
-          <button class="action-btn btn-telegram" onclick="sendToTelegram()">
-            <i class="fab fa-telegram"></i>
-            إرسال عبر تليجرام
-          </button>
-        </div>
+  <!-- زر فتح القائمة -->
+  <button class="action-btn btn-primary" onclick="toggleSellerList()">
+    <i class="fas fa-users"></i>
+    عرض البائعين
+  </button>
+
+  <!-- قائمة البائعين -->
+  <div id="sellerList" class="seller-list hidden">
+
+    <!-- Seller 1 -->
+    <div class="seller-item">
+      <span>Omar عمر</span>
+      <div class="seller-actions">
+        <button class="action-btn btn-whatsapp small" onclick="sendToWhatsApp('966501111111')">
+          <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="action-btn btn-telegram small" onclick="sendToTelegram('Seller1Bot')">
+          <i class="fab fa-telegram"></i>
+        </button>
       </div>
+    </div>
+
+    <!-- Seller 2 -->
+    <div class="seller-item">
+      <span>Rakan ركان</span>
+      <div class="seller-actions">
+        <button class="action-btn btn-whatsapp small" onclick="sendToWhatsApp('966502222222')">
+          <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="action-btn btn-telegram small" onclick="sendToTelegram('Seller2Bot')">
+          <i class="fab fa-telegram"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Seller 3 -->
+    <div class="seller-item">
+      <span>Tanveer تنوير</span>
+      <div class="seller-actions">
+        <button class="action-btn btn-whatsapp small" onclick="sendToWhatsApp('966503333333')">
+          <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="action-btn btn-telegram small" onclick="sendToTelegram('Seller3Bot')">
+          <i class="fab fa-telegram"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Seller 4 -->
+    <div class="seller-item">
+      <span>Fadi فادي</span>
+      <div class="seller-actions">
+        <button class="action-btn btn-whatsapp small" onclick="sendToWhatsApp('966504444444')">
+          <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="action-btn btn-telegram small" onclick="sendToTelegram('Seller4Bot')">
+          <i class="fab fa-telegram"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Seller 5 -->
+    <div class="seller-item">
+      <span>البائع 5</span>
+      <div class="seller-actions">
+        <button class="action-btn btn-whatsapp small" onclick="sendToWhatsApp('966505555555')">
+          <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="action-btn btn-telegram small" onclick="sendToTelegram('Seller5Bot')">
+          <i class="fab fa-telegram"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
       <!-- Rating Section -->
       <div class="rating-section">
@@ -2040,94 +2112,72 @@
       }
     });
 
-    // Send to WhatsApp with customer name
-    function sendToWhatsApp() {
-      const customerName = customerNameInput.value.trim();
-      
-      if (!customerName || customerName.length < 2) {
-        showNotification('تنبيه', 'يرجى كتابة اسمك الكامل أولاً', 'error');
-        customerNameInput.focus();
-        customerNameInput.style.borderColor = '#e74c3c';
-        customerNameInput.style.boxShadow = '0 0 0 3px rgba(231, 76, 60, 0.2)';
-        return;
-      }
-      
-      // Get selected bank
-      const activeTab = document.querySelector('.account-tab.active');
-      const accountNum = activeTab.getAttribute('data-account');
-      const bankName = accountNum === '1' ? 'مصرف الشارقة الإسلامي' : 'بنك أبوظبي التجاري';
-      
-      // Create message with customer name
-      const message = `مرحباً، أود إرسال إيصال التحويل\n\n` +
-                     `👤 *اسم العميل:* ${customerName}\n` +
-                     `🏦 *البنك المستخدم:* ${bankName}\n\n` +
-                     `📋 *معلومات إضافية:*\n` +
-                     `- تم التحويل بنجاح\n` +
-                     `- في انتظار التأكيد\n` +
-                     `- شكراً لخدماتكم`;
-      
-      // Encode message for URL
-      const encodedMessage = encodeURIComponent(message);
-      
-      // WhatsApp link with message
-      const whatsappLink = `https://wa.me/+971588061220?text=${encodedMessage}`;
-      
-      // Update progress
-      updateProgress(4);
-      
-      // Show notification
-      showNotification('جاري الإرسال', 'يتم فتح واتساب لإرسال الإيصال...', 'success');
-      
-      // Open WhatsApp after delay
-      setTimeout(() => {
-        window.open(whatsappLink, '_blank');
-      }, 800);
-    }
+// إظهار أو إخفاء قائمة البائعين
+function toggleSellerList() {
+  document.getElementById("sellerList").classList.toggle("hidden");
+}
 
-    // Send to Telegram with customer name
-    function sendToTelegram() {
-      const customerName = customerNameInput.value.trim();
-      
-      if (!customerName || customerName.length < 2) {
-        showNotification('تنبيه', 'يرجى كتابة اسمك الكامل أولاً', 'error');
-        customerNameInput.focus();
-        customerNameInput.style.borderColor = '#e74c3c';
-        customerNameInput.style.boxShadow = '0 0 0 3px rgba(231, 76, 60, 0.2)';
+// إنشاء رسالة العميل
+function buildMessage() {
+  const customerName = customerNameInput.value.trim();
 
-        return;
-      }
-      
-      // Get selected bank
-      const activeTab = document.querySelector('.account-tab.active');
-      const accountNum = activeTab.getAttribute('data-account');
-      const bankName = accountNum === '1' ? 'مصرف الشارقة الإسلامي' : 'بنك أبوظبي التجاري';
-      
-      // Create message with customer name
-      const message = `مرحباً، أود إرسال إيصال التحويل\n\n` +
-                     `👤 *اسم العميل:* ${customerName}\n` +
-                     `🏦 *البنك المستخدم:* ${bankName}\n\n` +
-                     `📋 *معلومات إضافية:*\n` +
-                     `- تم التحويل بنجاح\n` +
-                     `- في انتظار التأكيد\n` +
-                     `- شكراً لخدماتكم`;
-      
-      // Encode message for URL
-      const encodedMessage = encodeURIComponent(message);
-      
-      // Telegram link with message
-      const telegramLink = `https://t.me/share/url?url=${encodeURIComponent('valenciallc.netlify.app')}&text=${encodedMessage}`;
-      
-      // Update progress
-      updateProgress(4);
-      
-      // Show notification
-      showNotification('جاري الإرسال', 'يتم فتح تليجرام لإرسال الإيصال...', 'success');
-      
-      // Open Telegram after delay
-      setTimeout(() => {
-        window.open(telegramLink, '_blank');
-      }, 800);
-    }
+  if (!customerName || customerName.length < 2) {
+    showNotification('تنبيه', 'يرجى كتابة اسمك الكامل أولاً', 'error');
+    customerNameInput.focus();
+    customerNameInput.style.borderColor = '#e74c3c';
+    customerNameInput.style.boxShadow = '0 0 0 3px rgba(231, 76, 60, 0.2)';
+    return null;
+  }
+
+  const activeTab = document.querySelector('.account-tab.active');
+  const accountNum = activeTab.getAttribute('data-account');
+  const bankName =
+    accountNum === '1'
+      ? 'مصرف الشارقة الإسلامي'
+      : 'بنك أبوظبي التجاري';
+
+  const message =
+    `مرحباً، أود إرسال إيصال التحويل\n\n` +
+    `👤 *اسم العميل:* ${customerName}\n` +
+    `🏦 *البنك المستخدم:* ${bankName}\n\n` +
+    `📋 *معلومات إضافية:*\n` +
+    `- تم التحويل بنجاح\n` +
+    `- في انتظار التأكيد\n` +
+    `- شكراً لخدماتكم`;
+
+  return encodeURIComponent(message);
+}
+
+// إرسال واتساب للبائع المختار
+function sendToSellerWhatsApp(number) {
+  const encodedMessage = buildMessage();
+  if (!encodedMessage) return;
+
+  const whatsappLink = `https://wa.me/${number}?text=${encodedMessage}`;
+
+  updateProgress(4);
+  showNotification('جاري الإرسال', 'يتم فتح واتساب...', 'success');
+
+  setTimeout(() => {
+    window.open(whatsappLink, "_blank");
+  }, 800);
+}
+
+// إرسال تليجرام للبائع المختار
+function sendToSellerTelegram(username) {
+  const encodedMessage = buildMessage();
+  if (!encodedMessage) return;
+
+  const telegramLink = `https://t.me/${username}?text=${encodedMessage}`;
+
+  updateProgress(4);
+  showNotification('جاري الإرسال', 'يتم فتح تليجرام...', 'success');
+
+  setTimeout(() => {
+    window.open(telegramLink, "_blank");
+  }, 800);
+}
+
 
 // Rating System with Google Maps Integration
 const ratingStars = document.querySelectorAll('.star');
