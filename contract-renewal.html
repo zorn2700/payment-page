@@ -577,8 +577,8 @@
         
         <!-- Footer -->
         <footer class="footer no-print">
-            <p class="lang-ar">© 2026 شركة فالنسيا لتجارة الرخام والحجر الطبيعي - جميع الحقوق محفوظة</p>
-            <p class="lang-en hidden">© 2026 Isenlaf Marble & Natural Stone Trading Co. - All rights reserved</p>
+            <p class="lang-ar">© 2023 شركة فالنسيا لتجارة الرخام والحجر الطبيعي - جميع الحقوق محفوظة</p>
+            <p class="lang-en hidden">© 2023 Isenlaf Marble & Natural Stone Trading Co. - All rights reserved</p>
             <p>v1.0 | نموذج إلكتروني متطور</p>
         </footer>
     </div>
@@ -668,14 +668,24 @@
             // Show loading
             document.getElementById('loadingSpinner').style.display = 'block';
             
-            // Format date
+            // Format date - التعديل هنا
             let formattedDate = "..../ ..../ ....";
             if (contractDate) {
                 const dateObj = new Date(contractDate);
                 const day = dateObj.getDate().toString().padStart(2, '0');
-                const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+                const month = dateObj.getMonth() + 1;
                 const year = dateObj.getFullYear();
-                formattedDate = `${day}/${month}/${year}`;
+                
+                // تحويل الشهر إلى اسم عربي
+                const arabicMonths = [
+                    "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+                    "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+                ];
+                
+                const monthName = arabicMonths[month - 1];
+                
+                // صيغة التاريخ العربية التقليدية: يوم شهر سنة
+                formattedDate = `${day} ${monthName} ${year}`;
             }
             
             // Get current language
@@ -736,7 +746,7 @@
                         
                         <p>يسرّني أن أتقدّم إلى حضراتكم بطلب تجديد عقد عملي لمدة سنتين، وذلك تقديراً وامتناناً لفرصة العمل القيّمة التي منحتموني إياها ضمن شركة فالنسيا لتجارة الرخام والحجر الطبيعي. لقد كانت فترة عملي السابقة تجربة مهنية غنية ومفيدة على المستويين الشخصي والعملي، وأسهمت في تطوير مهاراتي وتعزيز خبرتي في هذا المجال.</p>
                         
-                        <p>وإيماناً مني بأهمية استمرارية العمل وتحقيق الأهداف المشتركة بيني وبين الشركة، أتطلع لمواصلة المساهمة في دعم مسيرة الشركة وتحقيق تطلعاتها المستقبلية. كما يسعدني مناقشة أي تفاصيل تتعلق بالعقد الجديد من بنود وشروط، في الوقت الذي ترونه مناسباً.</p>
+                        <p>وإيماناً مني بأهمية استمرارية العمل وتحقيق الأهداف المشتركة بيني وبين الشركة، أتطلع لمواصلة المساهمة في دعم مسيرة الشركة وتحقيق تطلعاتها المستقبلية. كما أوافق على جميع البنود الواردة في العقد وأتقبل ما ترونه مناسباً من الشروط التي تساهم في تحقيق الأهداف المشتركة.</p>
                         
                         <p>راجياً منكم التكرّم بالنظر في طلبي، ولكم مني جزيل الشكر والتقدير.</p>
                         
