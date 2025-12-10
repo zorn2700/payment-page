@@ -3,156 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>طلب تجديد عقد العمل - شركة فالنسيا</title>
+    <title>طلب تجديد عقد العمل / Contract Renewal Request</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #d4af37;
+            --accent-color: #3a7ca5;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --success-color: #28a745;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
         }
         
         body {
-            margin: 0;
+            font-family: 'Cairo', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark-color);
+            min-height: 100vh;
             padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
             direction: rtl;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 30px;
         }
         
-        h1 {
+        /* Header Styles */
+        .header {
             text-align: center;
-            color: #2c3e50;
             margin-bottom: 30px;
-            border-bottom: 2px solid #3498db;
+            padding: 20px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header h1 .en {
+            display: block;
+            font-size: 22px;
+            color: var(--accent-color);
+            margin-top: 8px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .company-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .company-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .lang-btn {
+            padding: 8px 20px;
+            border: none;
+            background-color: #e9ecef;
+            color: #6c757d;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+        
+        .lang-btn:first-child {
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+        }
+        
+        .lang-btn:last-child {
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .lang-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Form Card */
+        .form-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            height: fit-content;
+        }
+        
+        .form-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
             padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .form-section, .preview-section {
-            margin-bottom: 30px;
-        }
-        
-        h2 {
-            color: #2980b9;
-            border-right: 4px solid #3498db;
-            padding-right: 15px;
-            margin-top: 30px;
+        .form-card h2 i {
+            color: var(--secondary-color);
         }
         
         .form-group {
             margin-bottom: 20px;
         }
         
-        label {
+        .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
-            color: #2c3e50;
+            font-weight: 600;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        input[type="text"],
-        input[type="tel"],
-        input[type="date"],
-        textarea {
+        .form-group label i {
+            color: var(--accent-color);
+        }
+        
+        .form-control {
             width: 100%;
-            padding: 12px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
             font-size: 16px;
-            transition: border-color 0.3s;
+            font-family: inherit;
+            transition: var(--transition);
+            background-color: #fdfdfd;
         }
         
-        input[type="text"]:focus,
-        input[type="tel"]:focus,
-        input[type="date"]:focus,
-        textarea:focus {
-            border-color: #3498db;
+        .form-control:focus {
             outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
         }
         
-        textarea {
-            height: 120px;
-            resize: vertical;
-        }
-        
+        /* Buttons */
         .button-group {
             display: flex;
-            justify-content: center;
             gap: 15px;
             margin-top: 30px;
+            flex-wrap: wrap;
         }
         
-        button {
+        .btn {
             padding: 12px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            font-weight: bold;
+            transition: var(--transition);
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 140px;
         }
         
-        .btn-generate {
-            background-color: #3498db;
+        .btn-primary {
+            background-color: var(--primary-color);
             color: white;
         }
         
-        .btn-generate:hover {
-            background-color: #2980b9;
+        .btn-primary:hover {
+            background-color: #244a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(44, 90, 160, 0.15);
         }
         
-        .btn-print {
-            background-color: #27ae60;
+        .btn-success {
+            background-color: var(--success-color);
             color: white;
         }
         
-        .btn-print:hover {
-            background-color: #219653;
+        .btn-success:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.15);
         }
         
-        .btn-reset {
-            background-color: #e74c3c;
+        .btn-secondary {
+            background-color: #6c757d;
             color: white;
         }
         
-        .btn-reset:hover {
-            background-color: #c0392b;
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
         }
         
+        /* Preview Card */
+        .preview-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .preview-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .preview-card h2 i {
+            color: var(--secondary-color);
+        }
+        
+        .preview-content {
+            flex-grow: 1;
+            overflow: auto;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            border: 1px solid #eee;
+            min-height: 400px;
+        }
+        
+        /* Contract Preview */
         .contract-preview {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 25px;
-            line-height: 1.8;
+            background-color: white;
+            padding: 40px;
             font-size: 16px;
-            white-space: pre-line;
+            line-height: 1.8;
+            min-height: 297mm; /* A4 height */
+            width: 210mm; /* A4 width */
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: none;
-            margin-top: 30px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            direction: rtl;
+            text-align: right;
+            font-family: 'Cairo', sans-serif;
         }
         
-        .contract-preview h2 {
+        .contract-header {
             text-align: center;
-            border: none;
-            padding: 0;
-            margin-top: 0;
-            color: #2c3e50;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .contract-header h3 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .contract-header .en {
+            color: var(--accent-color);
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .contract-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-right: 4px solid var(--primary-color);
+        }
+        
+        .contract-body {
+            margin-bottom: 50px;
+        }
+        
+        .contract-body p {
+            margin-bottom: 15px;
+            text-align: justify;
         }
         
         .signature-section {
-            margin-top: 50px;
             display: flex;
             justify-content: space-between;
-            padding-top: 20px;
+            margin-top: 60px;
+            padding-top: 30px;
             border-top: 1px dashed #333;
         }
         
@@ -166,6 +362,47 @@
             padding-bottom: 5px;
             margin-top: 40px;
             min-height: 30px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .header h1 .en {
+                font-size: 18px;
+            }
+            
+            .form-card, .preview-card {
+                padding: 20px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .contract-preview {
+                padding: 20px;
+                width: 100%;
+            }
         }
         
         @media print {
@@ -181,108 +418,257 @@
                 position: absolute;
                 left: 0;
                 top: 0;
-                width: 100%;
+                width: 210mm;
+                min-height: 297mm;
+                margin: 0;
+                padding: 20mm;
                 box-shadow: none;
                 border: none;
-                padding: 0;
+                font-size: 14px;
             }
             
             .no-print {
                 display: none !important;
             }
-            
-            .button-group {
-                display: none !important;
-            }
         }
         
-        .footer {
+        /* Icons */
+        .icon {
+            display: inline-block;
+            width: 20px;
             text-align: center;
-            margin-top: 30px;
-            color: #7f8c8d;
-            font-size: 14px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
+        }
+        
+        /* Helper Classes */
+        .hidden {
+            display: none;
+        }
+        
+        .visible {
+            display: block;
+        }
+        
+        /* Status Messages */
+        .status-message {
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .status-success {
+            background-color: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #155724;
+        }
+        
+        .status-error {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #721c24;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>طلب تجديد عقد العمل - شركة فالنسيا لتجارة الرخام والحجر الطبيعي</h1>
+        <!-- Header -->
+        <header class="header">
+            <div class="company-logo">
+                <div class="logo-icon">إ</div>
+                <div class="company-name">فالنسيا للرخام والحجر الطبيعي</div>
+            </div>
+            <h1>
+                طلب تجديد عقد العمل
+                <span class="en">Contract Renewal Request</span>
+            </h1>
+            <p>النموذج الإلكتروني لتقديم طلبات تجديد عقود العمل</p>
+            <p class="en">Electronic form for submitting work contract renewal requests</p>
+        </header>
         
-        <div class="form-section">
-            <h2>معلومات الموظف</h2>
-            
-            <div class="form-group">
-                <label for="employeeName">اسم الموظف:</label>
-                <input type="text" id="employeeName" placeholder="أدخل اسم الموظف الكامل">
+        <!-- Language Selector -->
+        <div class="language-selector no-print">
+            <button class="lang-btn active" data-lang="ar">العربية</button>
+            <button class="lang-btn" data-lang="en">English</button>
+        </div>
+        
+        <!-- Status Messages -->
+        <div id="statusMessage" class="status-message"></div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Form Section -->
+            <div class="form-card">
+                <h2><i class="icon">📝</i> <span class="lang-ar">معلومات الموظف</span><span class="lang-en hidden">Employee Information</span></h2>
+                
+                <div class="form-group">
+                    <label for="employeeName"><i class="icon">👤</i> <span class="lang-ar">اسم الموظف</span><span class="lang-en hidden">Employee Name</span></label>
+                    <input type="text" id="employeeName" class="form-control" placeholder="أدخل الاسم الكامل">
+                </div>
+                
+                <div class="form-group">
+                    <label for="jobTitle"><i class="icon">💼</i> <span class="lang-ar">المسمى الوظيفي</span><span class="lang-en hidden">Job Title</span></label>
+                    <input type="text" id="jobTitle" class="form-control" placeholder="أدخل المسمى الوظيفي">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phoneNumber"><i class="icon">📱</i> <span class="lang-ar">رقم الهاتف</span><span class="lang-en hidden">Phone Number</span></label>
+                    <input type="tel" id="phoneNumber" class="form-control" placeholder="أدخل رقم الهاتف">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contractDate"><i class="icon">📅</i> <span class="lang-ar">تاريخ الطلب</span><span class="lang-en hidden">Request Date</span></label>
+                    <input type="date" id="contractDate" class="form-control">
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="generateContract()">
+                        <i class="icon">✨</i>
+                        <span class="lang-ar">إنشاء الطلب</span>
+                        <span class="lang-en hidden">Generate Request</span>
+                    </button>
+                    <button class="btn btn-success" onclick="printContract()">
+                        <i class="icon">🖨️</i>
+                        <span class="lang-ar">طباعة الطلب</span>
+                        <span class="lang-en hidden">Print Request</span>
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetForm()">
+                        <i class="icon">🔄</i>
+                        <span class="lang-ar">إعادة تعيين</span>
+                        <span class="lang-en hidden">Reset Form</span>
+                    </button>
+                </div>
+                
+                <div class="spinner" id="loadingSpinner"></div>
             </div>
             
-            <div class="form-group">
-                <label for="jobTitle">المسمى الوظيفي:</label>
-                <input type="text" id="jobTitle" placeholder="أدخل المسمى الوظيفي">
-            </div>
-            
-            <div class="form-group">
-                <label for="phoneNumber">رقم الهاتف:</label>
-                <input type="tel" id="phoneNumber" placeholder="أدخل رقم الهاتف">
-            </div>
-            
-            <div class="form-group">
-                <label for="contractDate">تاريخ الطلب:</label>
-                <input type="date" id="contractDate">
-            </div>
-            
-            <div class="form-group">
-                <label for="additionalNotes">ملاحظات إضافية (اختياري):</label>
-                <textarea id="additionalNotes" placeholder="يمكنك إضافة أي ملاحظات أو طلبات إضافية هنا..."></textarea>
+            <!-- Preview Section -->
+            <div class="preview-card">
+                <h2><i class="icon">👁️</i> <span class="lang-ar">معاينة الطلب</span><span class="lang-en hidden">Request Preview</span></h2>
+                <div class="preview-content" id="previewContent">
+                    <p class="lang-ar" style="text-align: center; color: #6c757d; margin-top: 50px;">
+                        سيظهر هنا معاينة طلب تجديد العقد بعد تعبئة النموذج
+                    </p>
+                    <p class="lang-en hidden" style="text-align: center; color: #6c757d; margin-top: 50px;">
+                        The contract renewal request preview will appear here after filling out the form
+                    </p>
+                </div>
             </div>
         </div>
         
-        <div class="button-group no-print">
-            <button class="btn-generate" onclick="generateContract()">إنشاء الطلب</button>
-            <button class="btn-print" onclick="printContract()">طباعة الطلب</button>
-            <button class="btn-reset" onclick="resetForm()">إعادة تعيين</button>
-        </div>
+        <!-- Contract Preview for Printing -->
+        <div id="contractPreview" class="contract-preview"></div>
         
-        <div class="preview-section">
-            <div id="contractPreview" class="contract-preview"></div>
-        </div>
-        
-        <div class="footer no-print">
-            <p>شركة فالنسيا لتجارة الرخام والحجر الطبيعي</p>
-            <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span></p>
-        </div>
+        <!-- Footer -->
+        <footer class="footer no-print">
+            <p class="lang-ar">© 2026 شركة فالنسيا لتجارة الرخام والحجر الطبيعي - جميع الحقوق محفوظة</p>
+            <p class="lang-en hidden">© 2026 Isenlaf Marble & Natural Stone Trading Co. - All rights reserved</p>
+            <p>v1.0 | نموذج إلكتروني متطور</p>
+        </footer>
     </div>
 
     <script>
-        // تعيين التاريخ الحالي كتاريخ افتراضي
+        // Set current date as default
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('contractDate').value = today;
             
-            // تعيين السنة الحالية في التذييل
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // تحميل البيانات المخزنة محلياً إذا وجدت
+            // Load saved data if exists
             loadSavedData();
+            
+            // Initialize language
+            initializeLanguage();
         });
         
-        // دالة لإنشاء عقد العمل
-        function generateContract() {
-            const employeeName = document.getElementById('employeeName').value;
-            const jobTitle = document.getElementById('jobTitle').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            const contractDate = document.getElementById('contractDate').value;
-            const additionalNotes = document.getElementById('additionalNotes').value;
+        // Language Management
+        function initializeLanguage() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const arElements = document.querySelectorAll('.lang-ar');
+            const enElements = document.querySelectorAll('.lang-en');
             
-            // التحقق من الحقول المطلوبة
+            langButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    
+                    // Update active button
+                    langButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide language elements
+                    if (lang === 'ar') {
+                        arElements.forEach(el => el.classList.remove('hidden'));
+                        enElements.forEach(el => el.classList.add('hidden'));
+                        document.body.setAttribute('dir', 'rtl');
+                    } else {
+                        arElements.forEach(el => el.classList.add('hidden'));
+                        enElements.forEach(el => el.classList.remove('hidden'));
+                        document.body.setAttribute('dir', 'ltr');
+                    }
+                    
+                    // Update form placeholders
+                    updateFormPlaceholders(lang);
+                    
+                    // Save language preference
+                    localStorage.setItem('preferredLang', lang);
+                });
+            });
+            
+            // Load saved language preference
+            const savedLang = localStorage.getItem('preferredLang') || 'ar';
+            if (savedLang === 'en') {
+                document.querySelector('[data-lang="en"]').click();
+            }
+        }
+        
+        function updateFormPlaceholders(lang) {
+            const employeeName = document.getElementById('employeeName');
+            const jobTitle = document.getElementById('jobTitle');
+            const phoneNumber = document.getElementById('phoneNumber');
+            
+            if (lang === 'ar') {
+                employeeName.placeholder = 'أدخل الاسم الكامل';
+                jobTitle.placeholder = 'أدخل المسمى الوظيفي';
+                phoneNumber.placeholder = 'أدخل رقم الهاتف';
+            } else {
+                employeeName.placeholder = 'Enter full name';
+                jobTitle.placeholder = 'Enter job title';
+                phoneNumber.placeholder = 'Enter phone number';
+            }
+        }
+        
+        // Generate Contract
+        function generateContract() {
+            const employeeName = document.getElementById('employeeName').value.trim();
+            const jobTitle = document.getElementById('jobTitle').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const contractDate = document.getElementById('contractDate').value;
+            
+            // Validation
             if (!employeeName || !jobTitle || !phoneNumber) {
-                alert('يرجى ملء جميع الحقول المطلوبة (الاسم، المسمى الوظيفي، رقم الهاتف)');
+                showStatus('error', 'يرجى ملء جميع الحقول المطلوبة', 'Please fill all required fields');
                 return;
             }
             
-            // تنسيق التاريخ
+            // Show loading
+            document.getElementById('loadingSpinner').style.display = 'block';
+            
+            // Format date
             let formattedDate = "..../ ..../ ....";
             if (contractDate) {
                 const dateObj = new Date(contractDate);
@@ -292,111 +678,190 @@
                 formattedDate = `${day}/${month}/${year}`;
             }
             
-            // إنشاء نص العقد
-            let contractText = `
-إلى / قسم الموارد البشرية
-شركة فالنسيا لتجارة الرخام والحجر الطبيعي المحترمين
-
-السلام عليكم ورحمة الله وبركاته،،،
-تحية طيبة وبعد،،،
-
-الموضوع: طلب تجديد عقد العمل لمدة سنتين
-
-يسرّني أن أتقدّم إلى حضراتكم بطلب تجديد عقد عملي لمدة سنتين، وذلك تقديراً وامتناناً لفرصة العمل القيّمة التي منحتموني إياها ضمن شركة فالنسيا لتجارة الرخام والحجر الطبيعي. لقد كانت فترة عملي السابقة تجربة مهنية غنية ومفيدة على المستويين الشخصي والعملي، وأسهمت في تطوير مهاراتي وتعزيز خبرتي في هذا المجال.
-
-وإيماناً مني بأهمية استمرارية العمل وتحقيق الأهداف المشتركة بيني وبين الشركة، أتطلع لمواصلة المساهمة في دعم مسيرة الشركة وتحقيق تطلعاتها المستقبلية. كما يسعدني مناقشة أي تفاصيل تتعلق بالعقد الجديد من بنود وشروط، في الوقت الذي ترونه مناسباً.
-
-راجياً منكم التكرّم بالنظر في طلبي، ولكم مني جزيل الشكر والتقدير.
-
-وتفضلوا بقبول فائق الاحترام،،،
-`;
+            // Get current language
+            const currentLang = document.querySelector('.lang-btn.active').getAttribute('data-lang');
             
-            // إضافة الملاحظات الإضافية إذا وجدت
-            if (additionalNotes.trim() !== '') {
-                contractText += `\n\nملاحظات إضافية:\n${additionalNotes}\n`;
-            }
-            
-            // عرض المعاينة
-            const previewDiv = document.getElementById('contractPreview');
-            previewDiv.innerHTML = `
-                <div style="text-align: left; margin-bottom: 30px;">
-                    <div><strong>التاريخ:</strong> ${formattedDate}</div>
-                    <div><strong>اسم الموظف:</strong> ${employeeName}</div>
-                    <div><strong>المسمى الوظيفي:</strong> ${jobTitle}</div>
-                    <div><strong>رقم الهاتف:</strong> ${phoneNumber}</div>
-                </div>
+            // Generate contract HTML
+            setTimeout(() => {
+                const contractHTML = createContractHTML(employeeName, jobTitle, phoneNumber, formattedDate, currentLang);
                 
-                <div style="text-align: right;">
-                    ${contractText}
-                </div>
+                // Update preview
+                document.getElementById('previewContent').innerHTML = contractHTML;
                 
-                <div class="signature-section">
-                    <div class="signature-box">
-                        <div>الاسم: ${employeeName}</div>
-                        <div class="signature-line"></div>
-                        <div>التوقيع:</div>
+                // Update print preview
+                document.getElementById('contractPreview').innerHTML = contractHTML;
+                document.getElementById('contractPreview').style.display = 'block';
+                
+                // Hide loading
+                document.getElementById('loadingSpinner').style.display = 'none';
+                
+                // Show success message
+                showStatus('success', 'تم إنشاء الطلب بنجاح', 'Request generated successfully');
+                
+                // Save data
+                saveDataLocally();
+                
+                // Scroll to preview
+                document.getElementById('previewContent').scrollIntoView({ behavior: 'smooth' });
+            }, 800);
+        }
+        
+        function createContractHTML(employeeName, jobTitle, phoneNumber, formattedDate, lang) {
+            if (lang === 'ar') {
+                return `
+                    <div class="contract-header">
+                        <h3>طلب تجديد عقد العمل</h3>
+                        <div class="en">Contract Renewal Request</div>
                     </div>
                     
-                    <div class="signature-box">
-                        <div>الاسم: .............................</div>
-                        <div class="signature-line"></div>
-                        <div>توقيع مدير الموارد البشرية:</div>
+                    <div class="contract-info">
+                        <div style="text-align: right;">
+                            <div><strong>التاريخ:</strong> ${formattedDate}</div>
+                            <div><strong>اسم الموظف:</strong> ${employeeName}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div><strong>المسمى الوظيفي:</strong> ${jobTitle}</div>
+                            <div><strong>رقم الهاتف:</strong> ${phoneNumber}</div>
+                        </div>
                     </div>
-                </div>
-            `;
-            
-            previewDiv.style.display = 'block';
-            
-            // حفظ البيانات محلياً
-            saveDataLocally();
-            
-            // التمرير إلى قسم المعاينة
-            previewDiv.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // دالة للطباعة
-        function printContract() {
-            const previewDiv = document.getElementById('contractPreview');
-            
-            if (previewDiv.style.display === 'block') {
-                window.print();
+                    
+                    <div class="contract-body">
+                        <p>إلى / قسم الموارد البشرية</p>
+                        <p>شركة فالنسيا لتجارة الرخام والحجر الطبيعي المحترمين</p>
+                        
+                        <p><strong>السلام عليكم ورحمة الله وبركاته،،،</strong></p>
+                        <p><strong>تحية طيبة وبعد،،،</strong></p>
+                        
+                        <p><strong>الموضوع: طلب تجديد عقد العمل لمدة سنتين</strong></p>
+                        
+                        <p>يسرّني أن أتقدّم إلى حضراتكم بطلب تجديد عقد عملي لمدة سنتين، وذلك تقديراً وامتناناً لفرصة العمل القيّمة التي منحتموني إياها ضمن شركة فالنسيا لتجارة الرخام والحجر الطبيعي. لقد كانت فترة عملي السابقة تجربة مهنية غنية ومفيدة على المستويين الشخصي والعملي، وأسهمت في تطوير مهاراتي وتعزيز خبرتي في هذا المجال.</p>
+                        
+                        <p>وإيماناً مني بأهمية استمرارية العمل وتحقيق الأهداف المشتركة بيني وبين الشركة، أتطلع لمواصلة المساهمة في دعم مسيرة الشركة وتحقيق تطلعاتها المستقبلية. كما يسعدني مناقشة أي تفاصيل تتعلق بالعقد الجديد من بنود وشروط، في الوقت الذي ترونه مناسباً.</p>
+                        
+                        <p>راجياً منكم التكرّم بالنظر في طلبي، ولكم مني جزيل الشكر والتقدير.</p>
+                        
+                        <p><strong>وتفضلوا بقبول فائق الاحترام،،،</strong></p>
+                    </div>
+                    
+                    <div class="signature-section">
+                        <div class="signature-box">
+                            <div>الاسم: ${employeeName}</div>
+                            <div class="signature-line"></div>
+                            <div>التوقيع:</div>
+                        </div>
+                        
+                        <div class="signature-box">
+                            <div>الاسم: .............................</div>
+                            <div class="signature-line"></div>
+                            <div>توقيع مدير الموارد البشرية:</div>
+                        </div>
+                    </div>
+                `;
             } else {
-                alert('يرجى إنشاء الطلب أولاً باستخدام زر "إنشاء الطلب" قبل الطباعة');
+                return `
+                    <div class="contract-header">
+                        <h3>Contract Renewal Request</h3>
+                        <div class="en">طلب تجديد عقد العمل</div>
+                    </div>
+                    
+                    <div class="contract-info" style="direction: ltr; text-align: left;">
+                        <div>
+                            <div><strong>Date:</strong> ${formattedDate}</div>
+                            <div><strong>Employee Name:</strong> ${employeeName}</div>
+                        </div>
+                        <div>
+                            <div><strong>Job Title:</strong> ${jobTitle}</div>
+                            <div><strong>Phone Number:</strong> ${phoneNumber}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contract-body" style="direction: ltr; text-align: left;">
+                        <p>To / Human Resources Department</p>
+                        <p>Isenlaf Marble & Natural Stone Trading Company</p>
+                        
+                        <p><strong>Dear Sir/Madam,</strong></p>
+                        
+                        <p><strong>Subject: Request for renewal of work contract for two years</strong></p>
+                        
+                        <p>I am pleased to submit to you a request to renew my work contract for a period of two years, in appreciation and gratitude for the valuable work opportunity you have given me within Isenlaf Marble & Natural Stone Trading Company. My previous work period was a rich and useful professional experience on both personal and professional levels, and contributed to developing my skills and enhancing my experience in this field.</p>
+                        
+                        <p>Believing in the importance of work continuity and achieving common goals between me and the company, I look forward to continuing to contribute to supporting the company's journey and achieving its future aspirations. I am also pleased to discuss any details related to the new contract terms and conditions, at a time that suits you.</p>
+                        
+                        <p>Hoping that you will kindly consider my request, and thank you very much for your appreciation.</p>
+                        
+                        <p><strong>Yours respectfully,</strong></p>
+                    </div>
+                    
+                    <div class="signature-section" style="direction: ltr;">
+                        <div class="signature-box">
+                            <div>Name: ${employeeName}</div>
+                            <div class="signature-line"></div>
+                            <div>Signature:</div>
+                        </div>
+                        
+                        <div class="signature-box">
+                            <div>Name: .............................</div>
+                            <div class="signature-line"></div>
+                            <div>HR Manager Signature:</div>
+                        </div>
+                    </div>
+                `;
             }
         }
         
-        // دالة لإعادة تعيين النموذج
+        // Print Contract
+        function printContract() {
+            const contractPreview = document.getElementById('contractPreview');
+            
+            if (contractPreview.style.display === 'block') {
+                window.print();
+            } else {
+                showStatus('error', 'يرجى إنشاء الطلب أولاً', 'Please generate the request first');
+            }
+        }
+        
+        // Reset Form
         function resetForm() {
-            if (confirm('هل تريد بالتأكيد إعادة تعيين جميع الحقول؟')) {
+            const currentLang = document.querySelector('.lang-btn.active').getAttribute('data-lang');
+            const confirmMsg = currentLang === 'ar' 
+                ? 'هل تريد بالتأكيد إعادة تعيين جميع الحقول؟' 
+                : 'Are you sure you want to reset all fields?';
+            
+            if (confirm(confirmMsg)) {
                 document.getElementById('employeeName').value = '';
                 document.getElementById('jobTitle').value = '';
                 document.getElementById('phoneNumber').value = '';
-                document.getElementById('additionalNotes').value = '';
                 
                 const today = new Date().toISOString().split('T')[0];
                 document.getElementById('contractDate').value = today;
                 
                 document.getElementById('contractPreview').style.display = 'none';
+                document.getElementById('previewContent').innerHTML = `
+                    <p style="text-align: center; color: #6c757d; margin-top: 50px;">
+                        ${currentLang === 'ar' ? 'سيظهر هنا معاينة طلب تجديد العقد بعد تعبئة النموذج' : 'The contract renewal request preview will appear here after filling out the form'}
+                    </p>
+                `;
                 
-                // مسح البيانات المخزنة محلياً
+                // Clear saved data
                 localStorage.removeItem('contractFormData');
+                
+                showStatus('success', 'تم إعادة تعيين النموذج', 'Form has been reset');
             }
         }
         
-        // دالة لحفظ البيانات محلياً
+        // Save data locally
         function saveDataLocally() {
             const formData = {
                 employeeName: document.getElementById('employeeName').value,
                 jobTitle: document.getElementById('jobTitle').value,
                 phoneNumber: document.getElementById('phoneNumber').value,
-                contractDate: document.getElementById('contractDate').value,
-                additionalNotes: document.getElementById('additionalNotes').value
+                contractDate: document.getElementById('contractDate').value
             };
             
             localStorage.setItem('contractFormData', JSON.stringify(formData));
         }
         
-        // دالة لتحميل البيانات المخزنة محلياً
+        // Load saved data
         function loadSavedData() {
             const savedData = localStorage.getItem('contractFormData');
             
@@ -407,21 +872,34 @@
                 document.getElementById('jobTitle').value = formData.jobTitle || '';
                 document.getElementById('phoneNumber').value = formData.phoneNumber || '';
                 document.getElementById('contractDate').value = formData.contractDate || new Date().toISOString().split('T')[0];
-                document.getElementById('additionalNotes').value = formData.additionalNotes || '';
                 
-                // إذا كانت جميع الحول الأساسية مملوءة، نقوم بإنشاء العقد تلقائياً
+                // Auto-generate if all fields are filled
                 if (formData.employeeName && formData.jobTitle && formData.phoneNumber) {
-                    setTimeout(generateContract, 500);
+                    setTimeout(generateContract, 1000);
                 }
             }
         }
         
-        // حفظ البيانات عند إدخالها
+        // Show status message
+        function showStatus(type, arMessage, enMessage) {
+            const statusElement = document.getElementById('statusMessage');
+            const currentLang = document.querySelector('.lang-btn.active').getAttribute('data-lang');
+            
+            statusElement.className = `status-message status-${type}`;
+            statusElement.innerHTML = currentLang === 'ar' ? arMessage : enMessage;
+            statusElement.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Auto-save on input
         document.getElementById('employeeName').addEventListener('input', saveDataLocally);
         document.getElementById('jobTitle').addEventListener('input', saveDataLocally);
         document.getElementById('phoneNumber').addEventListener('input', saveDataLocally);
         document.getElementById('contractDate').addEventListener('change', saveDataLocally);
-        document.getElementById('additionalNotes').addEventListener('input', saveDataLocally);
     </script>
 </body>
 </html>
