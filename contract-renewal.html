@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلب تجديد عقد العمل - شركة فالنسيا</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+            direction: rtl;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        .form-section, .preview-section {
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #2980b9;
+            border-right: 4px solid #3498db;
+            padding-right: 15px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .btn-generate {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-generate:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-print {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .btn-print:hover {
+            background-color: #219653;
+        }
+        
+        .btn-reset {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-reset:hover {
+            background-color: #c0392b;
+        }
+        
+        .contract-preview {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 25px;
+            line-height: 1.8;
+            font-size: 16px;
+            white-space: pre-line;
+            display: none;
+            margin-top: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contract-preview h2 {
+            text-align: center;
+            border: none;
+            padding: 0;
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .signature-section {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px dashed #333;
+        }
+        
+        .signature-box {
+            width: 45%;
+            text-align: center;
+        }
+        
+        .signature-line {
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+            margin-top: 40px;
+            min-height: 30px;
+        }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            
+            .contract-preview, .contract-preview * {
+                visibility: visible;
+            }
+            
+            .contract-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+            
+            .button-group {
+                display: none !important;
+            }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>طلب تجديد عقد العمل - شركة فالنسيا لتجارة الرخام والحجر الطبيعي</h1>
+        
+        <div class="form-section">
+            <h2>معلومات الموظف</h2>
+            
+            <div class="form-group">
+                <label for="employeeName">اسم الموظف:</label>
+                <input type="text" id="employeeName" placeholder="أدخل اسم الموظف الكامل">
+            </div>
+            
+            <div class="form-group">
+                <label for="jobTitle">المسمى الوظيفي:</label>
+                <input type="text" id="jobTitle" placeholder="أدخل المسمى الوظيفي">
+            </div>
+            
+            <div class="form-group">
+                <label for="phoneNumber">رقم الهاتف:</label>
+                <input type="tel" id="phoneNumber" placeholder="أدخل رقم الهاتف">
+            </div>
+            
+            <div class="form-group">
+                <label for="contractDate">تاريخ الطلب:</label>
+                <input type="date" id="contractDate">
+            </div>
+            
+            <div class="form-group">
+                <label for="additionalNotes">ملاحظات إضافية (اختياري):</label>
+                <textarea id="additionalNotes" placeholder="يمكنك إضافة أي ملاحظات أو طلبات إضافية هنا..."></textarea>
+            </div>
+        </div>
+        
+        <div class="button-group no-print">
+            <button class="btn-generate" onclick="generateContract()">إنشاء الطلب</button>
+            <button class="btn-print" onclick="printContract()">طباعة الطلب</button>
+            <button class="btn-reset" onclick="resetForm()">إعادة تعيين</button>
+        </div>
+        
+        <div class="preview-section">
+            <div id="contractPreview" class="contract-preview"></div>
+        </div>
+        
+        <div class="footer no-print">
+            <p>شركة فالنسيا لتجارة الرخام والحجر الطبيعي</p>
+            <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // تعيين التاريخ الحالي كتاريخ افتراضي
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('contractDate').value = today;
+            
+            // تعيين السنة الحالية في التذييل
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // تحميل البيانات المخزنة محلياً إذا وجدت
+            loadSavedData();
+        });
+        
+        // دالة لإنشاء عقد العمل
+        function generateContract() {
+            const employeeName = document.getElementById('employeeName').value;
+            const jobTitle = document.getElementById('jobTitle').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const contractDate = document.getElementById('contractDate').value;
+            const additionalNotes = document.getElementById('additionalNotes').value;
+            
+            // التحقق من الحقول المطلوبة
+            if (!employeeName || !jobTitle || !phoneNumber) {
+                alert('يرجى ملء جميع الحقول المطلوبة (الاسم، المسمى الوظيفي، رقم الهاتف)');
+                return;
+            }
+            
+            // تنسيق التاريخ
+            let formattedDate = "..../ ..../ ....";
+            if (contractDate) {
+                const dateObj = new Date(contractDate);
+                const day = dateObj.getDate().toString().padStart(2, '0');
+                const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+                const year = dateObj.getFullYear();
+                formattedDate = `${day}/${month}/${year}`;
+            }
+            
+            // إنشاء نص العقد
+            let contractText = `
+إلى / قسم الموارد البشرية
+شركة فالنسيا لتجارة الرخام والحجر الطبيعي المحترمين
+
+السلام عليكم ورحمة الله وبركاته،،،
+تحية طيبة وبعد،،،
+
+الموضوع: طلب تجديد عقد العمل لمدة سنتين
+
+يسرّني أن أتقدّم إلى حضراتكم بطلب تجديد عقد عملي لمدة سنتين، وذلك تقديراً وامتناناً لفرصة العمل القيّمة التي منحتموني إياها ضمن شركة فالنسيا لتجارة الرخام والحجر الطبيعي. لقد كانت فترة عملي السابقة تجربة مهنية غنية ومفيدة على المستويين الشخصي والعملي، وأسهمت في تطوير مهاراتي وتعزيز خبرتي في هذا المجال.
+
+وإيماناً مني بأهمية استمرارية العمل وتحقيق الأهداف المشتركة بيني وبين الشركة، أتطلع لمواصلة المساهمة في دعم مسيرة الشركة وتحقيق تطلعاتها المستقبلية. كما يسعدني مناقشة أي تفاصيل تتعلق بالعقد الجديد من بنود وشروط، في الوقت الذي ترونه مناسباً.
+
+راجياً منكم التكرّم بالنظر في طلبي، ولكم مني جزيل الشكر والتقدير.
+
+وتفضلوا بقبول فائق الاحترام،،،
+`;
+            
+            // إضافة الملاحظات الإضافية إذا وجدت
+            if (additionalNotes.trim() !== '') {
+                contractText += `\n\nملاحظات إضافية:\n${additionalNotes}\n`;
+            }
+            
+            // عرض المعاينة
+            const previewDiv = document.getElementById('contractPreview');
+            previewDiv.innerHTML = `
+                <div style="text-align: left; margin-bottom: 30px;">
+                    <div><strong>التاريخ:</strong> ${formattedDate}</div>
+                    <div><strong>اسم الموظف:</strong> ${employeeName}</div>
+                    <div><strong>المسمى الوظيفي:</strong> ${jobTitle}</div>
+                    <div><strong>رقم الهاتف:</strong> ${phoneNumber}</div>
+                </div>
+                
+                <div style="text-align: right;">
+                    ${contractText}
+                </div>
+                
+                <div class="signature-section">
+                    <div class="signature-box">
+                        <div>الاسم: ${employeeName}</div>
+                        <div class="signature-line"></div>
+                        <div>التوقيع:</div>
+                    </div>
+                    
+                    <div class="signature-box">
+                        <div>الاسم: .............................</div>
+                        <div class="signature-line"></div>
+                        <div>توقيع مدير الموارد البشرية:</div>
+                    </div>
+                </div>
+            `;
+            
+            previewDiv.style.display = 'block';
+            
+            // حفظ البيانات محلياً
+            saveDataLocally();
+            
+            // التمرير إلى قسم المعاينة
+            previewDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // دالة للطباعة
+        function printContract() {
+            const previewDiv = document.getElementById('contractPreview');
+            
+            if (previewDiv.style.display === 'block') {
+                window.print();
+            } else {
+                alert('يرجى إنشاء الطلب أولاً باستخدام زر "إنشاء الطلب" قبل الطباعة');
+            }
+        }
+        
+        // دالة لإعادة تعيين النموذج
+        function resetForm() {
+            if (confirm('هل تريد بالتأكيد إعادة تعيين جميع الحقول؟')) {
+                document.getElementById('employeeName').value = '';
+                document.getElementById('jobTitle').value = '';
+                document.getElementById('phoneNumber').value = '';
+                document.getElementById('additionalNotes').value = '';
+                
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('contractDate').value = today;
+                
+                document.getElementById('contractPreview').style.display = 'none';
+                
+                // مسح البيانات المخزنة محلياً
+                localStorage.removeItem('contractFormData');
+            }
+        }
+        
+        // دالة لحفظ البيانات محلياً
+        function saveDataLocally() {
+            const formData = {
+                employeeName: document.getElementById('employeeName').value,
+                jobTitle: document.getElementById('jobTitle').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                contractDate: document.getElementById('contractDate').value,
+                additionalNotes: document.getElementById('additionalNotes').value
+            };
+            
+            localStorage.setItem('contractFormData', JSON.stringify(formData));
+        }
+        
+        // دالة لتحميل البيانات المخزنة محلياً
+        function loadSavedData() {
+            const savedData = localStorage.getItem('contractFormData');
+            
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                
+                document.getElementById('employeeName').value = formData.employeeName || '';
+                document.getElementById('jobTitle').value = formData.jobTitle || '';
+                document.getElementById('phoneNumber').value = formData.phoneNumber || '';
+                document.getElementById('contractDate').value = formData.contractDate || new Date().toISOString().split('T')[0];
+                document.getElementById('additionalNotes').value = formData.additionalNotes || '';
+                
+                // إذا كانت جميع الحول الأساسية مملوءة، نقوم بإنشاء العقد تلقائياً
+                if (formData.employeeName && formData.jobTitle && formData.phoneNumber) {
+                    setTimeout(generateContract, 500);
+                }
+            }
+        }
+        
+        // حفظ البيانات عند إدخالها
+        document.getElementById('employeeName').addEventListener('input', saveDataLocally);
+        document.getElementById('jobTitle').addEventListener('input', saveDataLocally);
+        document.getElementById('phoneNumber').addEventListener('input', saveDataLocally);
+        document.getElementById('contractDate').addEventListener('change', saveDataLocally);
+        document.getElementById('additionalNotes').addEventListener('input', saveDataLocally);
+    </script>
+</body>
+</html>
