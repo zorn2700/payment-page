@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إنشاء عروض العمل الرسمية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+            --text-dark: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+
+        body { background-color: var(--bg-light); color: var(--text-dark); padding-bottom: 50px; }
+
+        /* --- الهيدر (واجهة التطبيق) --- */
+        .app-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 12px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-brand { display: flex; align-items: center; gap: 12px; }
+        .header-brand i { font-size: 1.5rem; background: rgba(255,255,255,0.2); padding: 8px; border-radius: 8px; }
+        .header-brand h1 { font-size: 1.1rem; font-weight: 700; }
+
+        /* --- حاوية العمل --- */
+        .main-container {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 30px;
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* --- قسم المدخلات --- */
+        .editor-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            height: fit-content;
+        }
+
+        .panel-title { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: #64748b; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; transition: 0.2s;
+        }
+        .form-group input:focus { border-color: var(--secondary); outline: none; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+
+        .logo-upload-btn {
+            width: 100%; border: 2px dashed var(--border); padding: 10px; border-radius: 8px; text-align: center;
+            cursor: pointer; margin-bottom: 15px; font-size: 0.8rem; color: #64748b; transition: 0.2s;
+        }
+        .logo-upload-btn:hover { background: #f1f5f9; border-color: var(--secondary); }
+
+        /* --- قسم معاينة الورقة A4 --- */
+        .preview-panel { display: flex; flex-direction: column; align-items: center; }
+
+        .a4-paper {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            padding: 20mm; /* هامش الطباعة الرسمي */
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* تنسيق الورقة الداخلي */
+        .letter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .paper-logo { max-width: 100px; max-height: 60px; object-fit: contain; }
+        .company-info-text { text-align: left; font-size: 0.8rem; color: #444; }
+
+        .letter-title { text-align: center; margin-bottom: 30px; }
+        .letter-title h2 { color: var(--primary); font-size: 1.6rem; text-decoration: underline; }
+
+        .letter-content { line-height: 1.8; font-size: 1.05rem; flex-grow: 1; }
+        .letter-content p { margin-bottom: 15px; }
+
+        .details-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .details-table td { padding: 8px; border-bottom: 1px solid #eee; }
+        .details-table td:first-child { font-weight: 700; color: var(--primary); width: 160px; }
+
+        .signature-area {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            text-align: center;
+        }
+        .sig-box { border-top: 1px solid #333; padding-top: 10px; }
+
+        /* --- أزرار التحكم --- */
+        .floating-actions {
+            margin-top: 20px; display: flex; gap: 10px;
+        }
+        .btn {
+            padding: 10px 25px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700;
+            display: flex; align-items: center; gap: 8px; transition: 0.2s;
+        }
+        .btn-print { background: #1e293b; color: white; }
+        .btn-pdf { background: var(--secondary); color: white; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* --- الطباعة --- */
+        @media print {
+            @page { size: A4; margin: 0; }
+            body { background: white; padding: 0; }
+            .app-header, .editor-panel, .floating-actions { display: none !important; }
+            .main-container { display: block; margin: 0; padding: 0; }
+            .preview-panel { margin: 0; }
+            .a4-paper { box-shadow: none; border: none; width: 210mm; height: 297mm; padding: 20mm; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-brand">
+            <i class="fas fa-file-contract"></i>
+            <div>
+                <h1>مُنشئ العروض الوظيفية</h1>
+            </div>
+        </div>
+        <div style="font-size: 0.8rem; opacity: 0.9;">إعداد وتنسيق A4 احترافي</div>
+    </header>
+
+    <div class="main-container">
+        <aside class="editor-panel">
+            <div class="panel-title"><i class="fas fa-edit"></i> بيانات العرض</div>
+            
+            <div class="logo-upload-btn" onclick="document.getElementById('fileInput').click()">
+                <i class="fas fa-image"></i> رفع شعار الشركة
+                <input type="file" id="fileInput" hidden accept="image/*" onchange="handleLogo(event)">
+            </div>
+
+            <div class="form-group">
+                <label>اسم الشركة</label>
+                <input type="text" id="inCompany" placeholder="أدخل اسم الشركة" oninput="sync()">
+            </div>
+            <div class="form-group">
+                <label>اسم المرشح</label>
+                <input type="text" id="inName" placeholder="اسم الموظف المستقبلي" oninput="sync()">
+            </div>
+            <div class="form-group">
+                <label>المسمى الوظيفي</label>
+                <input type="text" id="inJob" placeholder="مثال: مبرمج واجهات" oninput="sync()">
+            </div>
+            <div class="form-group">
+                <label>الراتب الإجمالي</label>
+                <input type="text" id="inSalary" placeholder="مثال: 12,000 ريال" oninput="sync()">
+            </div>
+            <div class="form-group">
+                <label>تاريخ المباشرة</label>
+                <input type="date" id="inStartDate" oninput="sync()">
+            </div>
+            <div class="form-group">
+                <label>ملاحظات إضافية</label>
+                <textarea id="inNotes" rows="3" placeholder="بدلات، شروط، إضافات..." oninput="sync()"></textarea>
+            </div>
+        </aside>
+
+        <main class="preview-panel">
+            <div class="a4-paper" id="paper">
+                <div class="letter-header">
+                    <img id="logoPreview" src="" style="display:none;" class="paper-logo">
+                    <div id="logoPlaceholder" style="font-weight: bold; color: #ccc;">LOGO</div>
+                    <div class="company-info-text">
+                        <p id="outCompanyNameTop">COMPANY NAME</p>
+                        <p>خطاب عرض وظيفي رسمي</p>
+                    </div>
+                </div>
+
+                <div class="letter-title">
+                    <h2>عرض عمل</h2>
+                </div>
+
+                <div class="letter-content">
+                    <p>التاريخ: <span id="outToday">--/--/----</span></p>
+                    <p>عناية السيد/ <strong id="outName">................................</strong> المحترم،</p>
+                    <p>تحية طيبة وبعد،،</p>
+                    <p>يسر شركة <strong id="outCompany">............</strong> أن تتقدم لكم بهذا العرض الوظيفي الرسمي، وذلك بعد إعجابنا بمهاراتكم ومؤهلاتكم المهنية، وحسب الشروط والبيانات التالية:</p>
+                    
+                    <table class="details-table">
+                        <tr>
+                            <td>المسمى الوظيفي</td>
+                            <td id="outJob">--</td>
+                        </tr>
+                        <tr>
+                            <td>الراتب الإجمالي</td>
+                            <td id="outSalary">--</td>
+                        </tr>
+                        <tr>
+                            <td>تاريخ المباشرة</td>
+                            <td id="outStartDate">--</td>
+                        </tr>
+                        <tr>
+                            <td>فترة التجربة</td>
+                            <td>90 يوماً من تاريخ المباشرة</td>
+                        </tr>
+                    </table>
+
+                    <p><strong>بنود إضافية:</strong></p>
+                    <p id="outNotes">لا توجد ملاحظات إضافية.</p>
+
+                    <p style="margin-top: 30px;">نأمل أن ينال هذا العرض قبولكم، ونحن بانتظار ردكم الرسمي بالتوقيع خلال 3 أيام عمل من تاريخه.</p>
+                </div>
+
+                <div class="signature-area">
+                    <div>
+                        <p>اعتماد الشركة</p>
+                        <br>
+                        <div class="sig-box">الختم والتوقيع</div>
+                    </div>
+                    <div>
+                        <p>قبول الموظف</p>
+                        <br>
+                        <div class="sig-box">توقيع مقدم الطلب</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="floating-actions">
+                <button class="btn btn-pdf" onclick="exportPDF()"><i class="fas fa-file-pdf"></i> حفظ كـ PDF</button>
+                <button class="btn btn-print" onclick="window.print()"><i class="fas fa-print"></i> طباعة فورية (A4)</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ضبط تاريخ اليوم تلقائياً
+        const now = new Date();
+        document.getElementById('outToday').innerText = now.toLocaleDateString('ar-SA');
+
+        function handleLogo(event) {
+            const output = document.getElementById('logoPreview');
+            const placeholder = document.getElementById('logoPlaceholder');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.style.display = 'block';
+            placeholder.style.display = 'none';
+        }
+
+        function sync() {
+            document.getElementById('outCompany').innerText = document.getElementById('inCompany').value || '............';
+            document.getElementById('outCompanyNameTop').innerText = document.getElementById('inCompany').value || 'COMPANY NAME';
+            document.getElementById('outName').innerText = document.getElementById('inName').value || '................................';
+            document.getElementById('outJob').innerText = document.getElementById('inJob').value || '--';
+            document.getElementById('outSalary').innerText = document.getElementById('inSalary').value || '--';
+            document.getElementById('outStartDate').innerText = document.getElementById('inStartDate').value || '--';
+            document.getElementById('outNotes').innerText = document.getElementById('inNotes').value || 'لا توجد ملاحظات إضافية.';
+        }
+
+        async function exportPDF() {
+            const { jsPDF } = window.jspdf;
+            const paper = document.getElementById('paper');
+            
+            const canvas = await html2canvas(paper, {
+                scale: 3, // دقة عالية
+                useCORS: true
+            });
+            
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const width = pdf.internal.pageSize.getWidth();
+            const height = pdf.internal.pageSize.getHeight();
+            
+            pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+            pdf.save('Job_Offer.pdf');
+        }
+    </script>
+</body>
+</html>
