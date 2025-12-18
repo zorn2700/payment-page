@@ -3,246 +3,625 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valencia Marble - Official Job Offer</title>
+    <title>Valencia Marble – عرض وظيفي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
         :root {
-            --valencia-gold: #b88a44; /* لون اللوجو الذهبي */
-            --valencia-black: #1a1a1a; /* الأسود من اللوجو */
-            --valencia-gray: #f4f4f4; /* الخلفية الرمادية الفاتحة */
-            --text-main: #333333;
+            --valencia-gold: #b88a44;
+            --valencia-black: #1a1a1a;
+            --bg-ui: #f1f5f9;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
 
-        body { background-color: #cbd5e1; padding: 20px; color: var(--text-main); }
+        body {
+            background: var(--bg-ui);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
 
-        /* حاوية الواجهة */
-        .app-wrapper {
-            display: grid;
-            grid-template-columns: 350px 1fr;
+        .main-layout {
+            display: flex;
             gap: 20px;
             max-width: 1300px;
-            margin: auto;
+            width: 100%;
+            align-items: flex-start;
         }
 
-        /* لوحة التحكم */
-        .side-editor {
+        .editor-panel {
+            width: 320px;
             background: white;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 8px;
             height: fit-content;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            position: sticky; top: 20px;
-        }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 5px; color: var(--valencia-gold); }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.85rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 20px;
+            flex-shrink: 0;
         }
 
-        /* ورقة A4 - ضبط القياسات بدقة لصفحة واحدة */
-        .preview-area { display: flex; flex-direction: column; align-items: center; }
-        .a4-paper {
-            width: 210mm;
-            height: 297mm;
-            background: white;
-            padding: 12mm 15mm; /* تقليل الهوامش لضمان بقاء التوقيع في صفحة واحدة */
+        .editor-panel h3 {
+            color: var(--valencia-gold);
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--valencia-black);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--valencia-gold);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(184, 138, 68, 0.1);
+        }
+
+        .preview-container {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            align-items: center;
+            min-width: 0;
+        }
+
+        .a4-paper {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            padding: 12mm 15mm;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
+            contain: paint;
         }
 
-        /* الترويسة */
-        .header-content {
+        .header {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             border-bottom: 2px solid var(--valencia-gold);
-            padding-bottom: 10px;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .header-info {
+            text-align: left;
+            font-size: 0.75rem;
+            color: var(--valencia-black);
+            line-height: 1.3;
+        }
+
+        .header-info p {
+            margin-bottom: 2px;
+        }
+
+        .doc-title {
+            text-align: center;
             margin-bottom: 15px;
         }
-        .logo-img { height: 80px; width: auto; }
-        .company-header-info { text-align: left; font-size: 0.75rem; color: var(--valencia-black); line-height: 1.4; }
 
-        .doc-title { text-align: center; margin-bottom: 15px; }
-        .doc-title h2 { 
-            color: var(--valencia-gold); 
-            font-size: 1.5rem; 
-            border-bottom: 1px solid var(--valencia-gold); 
+        .doc-title h2 {
+            color: var(--valencia-gold);
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--valencia-gold);
             display: inline-block;
-            padding: 0 30px 5px;
+            padding: 0 25px 5px;
+            margin-bottom: 0;
         }
 
-        /* محتوى الخطاب */
-        .letter-text { font-size: 1.05rem; line-height: 1.5; text-align: justify; }
-        .meta-data { margin-bottom: 10px; display: flex; justify-content: space-between; font-weight: bold; }
+        .doc-body {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #1a1a1a;
+            flex: 1;
+            text-align: justify;
+        }
 
-        /* الجدول المطور */
-        .data-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 1rem; }
-        .data-table th { background: var(--valencia-gold); color: white; padding: 10px; border: 1px solid #ddd; }
-        .data-table td { padding: 8px 12px; border: 1px solid #ddd; }
-        .data-table td:first-child { background: #fdfaf5; font-weight: 700; width: 30%; color: var(--valencia-black); }
+        .meta-line {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            padding: 4px 0;
+        }
 
-        /* قائمة المزايا */
-        .benefits { margin: 10px 20px 10px 0; font-size: 0.95rem; }
-        .benefits li { margin-bottom: 5px; }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.85rem;
+        }
 
-        /* قسم التوقيع - تم رفعه للأعلى */
-        .signature-section {
-            margin-top: auto; /* يلتصق بالأسفل لكن داخل حدود الصفحة */
+        .info-table td {
+            border: 1px solid #eee;
+            padding: 8px 10px;
+            line-height: 1.4;
+        }
+
+        .info-table td:first-child {
+            background: #fcf9f4;
+            font-weight: 700;
+            width: 32%;
+            color: var(--valencia-black);
+        }
+
+        .extra-list {
+            margin: 10px 18px 0 0;
+            font-size: 0.85rem;
+            padding: 0;
+        }
+
+        .extra-list li {
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .signature-area {
+            margin-top: 20px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            padding-bottom: 10px;
+            gap: 40px;
+            text-align: center;
+            padding-top: 15px;
         }
-        .sig-box { text-align: center; }
-        .sig-line { border-top: 1.5px solid var(--valencia-black); margin-top: 35px; padding-top: 5px; font-weight: 700; font-size: 0.9rem; }
 
-        /* أزرار الإجراءات */
-        .actions { margin-top: 15px; display: flex; gap: 10px; }
-        .btn { 
-            padding: 10px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; 
-            display: flex; align-items: center; gap: 8px; transition: 0.3s;
+        .sig-box p {
+            font-weight: 700;
+            color: var(--valencia-gold);
+            margin-bottom: 25px;
+            font-size: 0.9rem;
         }
-        .btn-pdf { background: var(--valencia-gold); color: white; }
-        .btn-print { background: var(--valencia-black); color: white; }
 
+        .sig-line {
+            border-top: 1px solid var(--valencia-black);
+            padding-top: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .action-area {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+            color: white;
+        }
+
+        .btn-pdf {
+            background: var(--valencia-gold);
+        }
+
+        .btn-print {
+            background: var(--valencia-black);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* الطباعة - تصميم مضغوط ومتوازن */
         @media print {
-            body { background: white; padding: 0; }
-            .side-editor, .actions { display: none !important; }
-            .app-wrapper { display: block; }
-            .a4-paper { box-shadow: none; margin: 0; }
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                display: block !important;
+                font-size: 11px !important;
+            }
+
+            .editor-panel, .action-area {
+                display: none !important;
+            }
+
+            .main-layout {
+                display: block !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .preview-container {
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+            }
+
+            .a4-paper {
+                box-shadow: none !important;
+                margin: 0 auto !important;
+                padding: 5mm 10mm !important;
+                width: 100% !important;
+                min-height: 287mm !important;
+                page-break-inside: avoid !important;
+                border: none !important;
+                overflow: visible !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+            }
+
+            /* تصميم رأس مضغوط */
+            .header {
+                padding-bottom: 4px !important;
+                margin-bottom: 6px !important;
+                border-bottom: 1px solid var(--valencia-gold) !important;
+            }
+
+            .header-info {
+                font-size: 0.6rem !important;
+                line-height: 1.2 !important;
+            }
+
+            .header-info p {
+                margin-bottom: 1px !important;
+            }
+
+            /* عنوان الوثيقة */
+            .doc-title {
+                margin-bottom: 8px !important;
+            }
+
+            .doc-title h2 {
+                font-size: 1rem !important;
+                padding: 0 15px 3px !important;
+                margin-bottom: 0 !important;
+                border-bottom: 1px solid var(--valencia-gold) !important;
+            }
+
+            /* محتوى الوثيقة */
+            .doc-body {
+                font-size: 0.75rem !important;
+                line-height: 1.35 !important;
+                text-align: justify !important;
+                flex: 1 !important;
+            }
+
+            .doc-body p {
+                margin-bottom: 4px !important;
+                text-align: justify !important;
+            }
+
+            /* سطر المعلومات */
+            .meta-line {
+                font-size: 0.7rem !important;
+                margin-bottom: 6px !important;
+                padding: 2px 0 !important;
+            }
+
+            /* الجدول - مضغوط */
+            .info-table {
+                font-size: 0.7rem !important;
+                margin: 6px 0 !important;
+                border-collapse: collapse !important;
+            }
+
+            .info-table td {
+                padding: 3px 5px !important;
+                border: 1px solid #ccc !important;
+                line-height: 1.2 !important;
+            }
+
+            .info-table td:first-child {
+                width: 30% !important;
+                padding: 3px !important;
+            }
+
+            /* القائمة */
+            .extra-list {
+                font-size: 0.7rem !important;
+                margin: 5px 12px 0 0 !important;
+                padding: 0 !important;
+            }
+
+            .extra-list li {
+                margin-bottom: 2px !important;
+                line-height: 1.2 !important;
+            }
+
+            /* منطقة التوقيع - مضغوطة */
+            .signature-area {
+                gap: 15px !important;
+                padding-top: 8px !important;
+                margin-top: 10px !important;
+                grid-template-columns: 1fr 1fr !important;
+                border-top: 1px dashed #ddd !important;
+            }
+
+            .sig-box p {
+                margin-bottom: 15px !important;
+                font-size: 0.7rem !important;
+            }
+
+            .sig-line {
+                font-size: 0.65rem !important;
+                padding-top: 2px !important;
+                border-top: 0.5px solid var(--valencia-black) !important;
+            }
+
+            /* إزالة جميع المسافات الزائدة */
+            * {
+                max-height: none !important;
+                min-height: auto !important;
+            }
+
+            /* منع التقسيم غير المرغوب */
+            .info-table, .extra-list {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            /* هوامش الصفحة الدقيقة */
+            @page {
+                margin: 4mm 3mm !important;
+                size: A4 portrait !important;
+            }
+
+            /* تحسين توزيع المساحات داخل الصفحة */
+            .a4-paper > * {
+                margin-bottom: 4px !important;
+            }
+
+            .a4-paper > *:last-child {
+                margin-bottom: 0 !important;
+            }
+
+            /* ضبط المسافات الداخلية للنصوص */
+            p, li, td {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+            }
+
+            /* محاذاة دقيقة للمحتوى */
+            .doc-body {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+            }
+
+            /* ضغط إضافي للعناصر الطويلة */
+            .doc-body > p:nth-child(n+4) {
+                margin-bottom: 3px !important;
+            }
+
+            /* جعل التوقيعات في أسفل الصفحة تماماً */
+            .signature-area {
+                align-self: flex-end !important;
+                margin-top: auto !important;
+                padding-bottom: 0 !important;
+            }
+        }
+
+        /* عرض المعاينة - مضغوط */
+        @media screen and (max-width: 1200px) {
+            .main-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .editor-panel {
+                width: 100%;
+                max-width: 500px;
+                position: static;
+            }
+            
+            .a4-paper {
+                width: 100%;
+                max-width: 210mm;
+                padding: 10mm 15mm;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="app-wrapper">
-        <aside class="side-editor">
-            <h3 style="margin-bottom:15px; color:var(--valencia-gold)">تخصيص العرض</h3>
-            <div class="form-group">
-                <label>اسم المرشح</label>
-                <input type="text" id="inName" placeholder="فلان بن فلان" oninput="sync()">
-            </div>
-            <div class="form-group">
-                <label>الرقم المرجعي</label>
-                <input type="text" id="inRef" placeholder="VAL-2025-001" oninput="sync()">
-            </div>
-            <div class="form-group">
-                <label>المسمى الوظيفي</label>
-                <input type="text" id="inJob" placeholder="مدير مشاريع" oninput="sync()">
-            </div>
-            <div class="form-group">
-                <label>الراتب الإجمالي</label>
-                <input type="text" id="inSalary" placeholder="15,000" oninput="sync()">
-            </div>
-            <div class="form-group">
-                <label>تاريخ المباشرة</label>
-                <input type="text" id="inDateStart" placeholder="1 فبراير 2026" oninput="sync()">
-            </div>
-            <div class="form-group">
-                <label>تاريخ انتهاء العرض</label>
-                <input type="text" id="inDeadline" placeholder="21 ديسمبر 2025" oninput="sync()">
-            </div>
-        </aside>
+<div class="main-layout">
+    <!-- لوحة الإدخال -->
+    <aside class="editor-panel">
+        <h3><i class="fas fa-edit"></i> تجهيز العرض الوظيفي</h3>
+        <div class="form-group">
+            <label><i class="fas fa-user"></i> اسم المرشح</label>
+            <input id="inName" placeholder="أدخل اسم الموظف" oninput="updateView()">
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-briefcase"></i> المسمى الوظيفي</label>
+            <input id="inJob" placeholder="مثلاً: مبرمج، مدير..." oninput="updateView()">
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-money-bill-wave"></i> الراتب الإجمالي (درهم)</label>
+            <input id="inSalary" placeholder="مثلاً: 12,000" oninput="updateView()">
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-calendar-alt"></i> تاريخ المباشرة</label>
+            <input id="inStart" placeholder="مثلاً: 1 يناير 2026" oninput="updateView()">
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-clock"></i> تاريخ صلاحية العرض</label>
+            <input id="inExpiry" placeholder="مثلاً: 25 ديسمبر 2025" oninput="updateView()">
+        </div>
 
-        <main class="preview-area">
-            <div class="a4-paper" id="paper">
-                <div class="header-content">
-                    <img src="logo2.png" class="logo-img" onerror="this.src='https://via.placeholder.com/150x80?text=Valencia+Logo'">
-                    <div class="company-header-info">
-                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--valencia-gold);">Valencia Marble & Natural Stones</p>
-                        <p>Trading L.L.C</p>
-                        <p>Dubai, United Arab Emirates</p>
-                        <p>www.valenciamarble.com</p>
-                    </div>
-                </div>
+        <div class="action-area">
+            <button class="btn btn-pdf" id="btnExport" onclick="exportToPDF()">
+                <i class="fas fa-file-pdf"></i> حفظ PDF
+            </button>
+            <button class="btn btn-print" onclick="window.print()">
+                <i class="fas fa-print"></i> طباعة
+            </button>
+        </div>
+    </aside>
 
-                <div class="doc-title">
-                    <h2>خطاب عرض وظيفي رسمي</h2>
-                </div>
-
-                <div class="letter-text">
-                    <div class="meta-data">
-                        <span>التاريخ: ١٨ ديسمبر ٢٠٢٥</span>
-                        <span>الرقم المرجعي: <span id="outRef">VAL-2025-XXX</span></span>
-                    </div>
-
-                    <p>عناية السيد/ <strong id="outName">............................................................</strong> المحترم،</p>
-                    <p>تحية طيبة وبعد،،</p>
-                    <p>بناءً على سجلكم المهني المتميز والمقابلة الشخصية التي أجريت معكم، يسعدنا في شركة <strong>فالنسيا للرخام والأحجار الطبيعية (Valencia Marble & Natural Stones)</strong> أن نتقدم لكم بهذا العرض الوظيفي الرسمي للانضمام إلى فريق عملنا. نحن على ثقة بأن مهاراتكم ستشكل إضافة نوعية لمسيرة نجاحنا.</p>
-
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>البيان</th>
-                                <th>تفاصيل العرض</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>المسمى الوظيفي</td><td id="outJob">[اسم الوظيفة هنا]</td></tr>
-                            <tr><td>الراتب الإجمالي</td><td><span id="outSalary">[المبلغ]</span> درهم إماراتي شهرياً</td></tr>
-                            <tr><td>تاريخ مباشرة العمل</td><td id="outDateStart">[التاريخ] أو حسب الاتفاق</td></tr>
-                            <tr><td>ساعات العمل</td><td>٨ ساعات يومياً (حسب نظام الشركة المعتمد)</td></tr>
-                            <tr><td>فترة التجربة</td><td>٣ أشهر (خاضعة للتقييم)</td></tr>
-                        </tbody>
-                    </table>
-
-                    <p><strong>البنود والمزايا الإضافية:</strong></p>
-                    <ul class="benefits">
-                        <li><strong>الإجازة السنوية:</strong> إجازة مدفوعة الأجر وفقاً لقانون العمل الإماراتي.</li>
-                        <li><strong>التأمين الصحي:</strong> توفر الشركة تأميناً صحياً شاملاً للموظف.</li>
-                        <li><strong>علاقة العمل:</strong> تخضع كافة حقوق وواجبات الطرفين للقوانين واللوائح المعمول بها في وزارة الموارد البشرية والتوطين بدولة الإمارات العربية المتحدة.</li>
-                    </ul>
-
-                    <p style="margin-top: 10px;">يرجى التوقيع أدناه وإعادة نسخة ممسوحة ضوئياً من هذا الخطاب في موعد أقصاه <strong id="outDeadline">[التاريخ]</strong> لتأكيد الموافقة البدئية وبدء إجراءات التعاقد.</p>
-                </div>
-
-                <div class="signature-section">
-                    <div class="sig-box">
-                        <p style="color: var(--valencia-gold)">إدارة شركة فالنسيا</p>
-                        <div class="sig-line">الختم والتوقيع الرسمي</div>
-                    </div>
-                    <div class="sig-box">
-                        <p style="color: var(--valencia-gold)">موافقة المرشح</p>
-                        <div class="sig-line">توقيع مقدم الطلب</div>
-                    </div>
+    <!-- المعاينة -->
+    <main class="preview-container">
+        <div class="a4-paper" id="printDocument">
+            <div class="header">
+                <div class="header-info">
+                    <p style="font-weight:700;color:var(--valencia-gold);">Valencia Marble & Natural Stones</p>
+                    <p>Trading L.L.C | دبي، الإمارات</p>
+                    <p>هاتف: 04XXXXXXX</p>
                 </div>
             </div>
 
-            <div class="actions">
-                <button class="btn btn-pdf" onclick="generatePDF()"><i class="fas fa-file-pdf"></i> حفظ كـ PDF</button>
-                <button class="btn btn-print" onclick="window.print()"><i class="fas fa-print"></i> طباعة فورية</button>
+            <div class="doc-title">
+                <h2>خطاب عرض وظيفي رسمي</h2>
             </div>
-        </main>
-    </div>
 
-    <script>
-        function sync() {
-            document.getElementById('outName').innerText = document.getElementById('inName').value || '................................';
-            document.getElementById('outRef').innerText = document.getElementById('inRef').value || 'VAL-2025-XXX';
-            document.getElementById('outJob').innerText = document.getElementById('inJob').value || '[اسم الوظيفة]';
-            document.getElementById('outSalary').innerText = document.getElementById('inSalary').value || '[المبلغ]';
-            document.getElementById('outDateStart').innerText = document.getElementById('inDateStart').value || '[التاريخ]';
-            document.getElementById('outDeadline').innerText = document.getElementById('inDeadline').value || '[التاريخ]';
-        }
+            <div class="doc-body">
+                <div class="meta-line">
+                    <span>التاريخ: ١٨ ديسمبر ٢٠٢٥</span>
+                    <span>الرقم المرجعي: VAL-2025-HR</span>
+                </div>
 
-        async function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const element = document.getElementById('paper');
-            const canvas = await html2canvas(element, { scale: 3 });
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
-            pdf.save('Valencia_Job_Offer.pdf');
-        }
-    </script>
+                <p>عناية السيد/ <strong id="outName">............................................................</strong> المحترم،</p>
+                <p>تحية طيبة وبعد،،</p>
+                <p>بناءً على سجلكم المهني المتميز والمقابلة الشخصية التي أجريت معكم، يسعدنا في شركة <strong>فالنسيا للرخام والأحجار الطبيعية (Valencia Marble & Natural Stones)</strong> أن نتقدم لكم بهذا العرض الوظيفي الرسمي. نحن على ثقة بأن مهاراتكم ستشكل إضافة نوعية لمسيرة نجاحنا.</p>
+
+                <table class="info-table">
+                    <tr><td>المسمى الوظيفي</td><td id="outJob">[المسمى الوظيفي]</td></tr>
+                    <tr><td>الراتب الإجمالي</td><td><span id="outSalary">[المبلغ]</span> درهم إماراتي شهرياً</td></tr>
+                    <tr><td>تاريخ مباشرة العمل</td><td id="outStart">[التاريخ] أو حسب الاتفاق</td></tr>
+                    <tr><td>ساعات العمل</td><td>٨ ساعات يومياً (حسب نظام الشركة)</td></tr>
+                    <tr><td>فترة التجربة</td><td>٣ أشهر (خاضعة للتقييم)</td></tr>
+                </table>
+
+                <p><strong>البنود والمزايا الإضافية:</strong></p>
+                <ul class="extra-list">
+                    <li><strong>الإجازة السنوية:</strong> إجازة مدفوعة الأجر وفقاً لقانون العمل الإماراتي.</li>
+                    <li><strong>التأمين الصحي:</strong> توفر الشركة تأميناً صحياً شاملاً للموظف.</li>
+                    <li><strong>علاقة العمل:</strong> تخضع كافة الحقوق والواجبات للقوانين المعمول بها في وزارة الموارد البشرية والتوطين بدولة الإمارات.</li>
+                </ul>
+
+                <p style="margin-top:5px;">يرجى التوقيع وإعادة نسخة ممسوحة ضوئياً في موعد أقصاه <strong id="outExpiry">[التاريخ]</strong> لتأكيد الموافقة وبدء الإجراءات.</p>
+            </div>
+
+            <!-- توقيعات -->
+            <div class="signature-area">
+                <div class="sig-box">
+                    <p>إدارة شركة فالنسيا</p>
+                    <div class="sig-line">الختم والتوقيع الرسمي</div>
+                </div>
+                <div class="sig-box">
+                    <p>قبول المرشح</p>
+                    <div class="sig-line">توقيع الموظف والتاريخ</div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+function updateView() {
+    document.getElementById('outName').innerText = document.getElementById('inName').value || '............................................................';
+    document.getElementById('outJob').innerText = document.getElementById('inJob').value || '[المسمى الوظيفي]';
+    document.getElementById('outSalary').innerText = document.getElementById('inSalary').value || '[المبلغ]';
+    document.getElementById('outStart').innerText = document.getElementById('inStart').value || '[التاريخ] أو حسب الاتفاق';
+    document.getElementById('outExpiry').innerText = document.getElementById('inExpiry').value || '[التاريخ]';
+}
+
+async function exportToPDF() {
+    const btn = document.getElementById('btnExport');
+    const originalContent = document.getElementById('printDocument').innerHTML;
+    
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+
+    const { jsPDF } = window.jspdf;
+    const element = document.getElementById('printDocument');
+
+    try {
+        // تطبيق نمط الطباعة قبل التصدير
+        element.style.padding = '5mm 10mm';
+        element.style.fontSize = '0.75rem';
+        
+        const canvas = await html2canvas(element, { 
+            scale: 2, 
+            useCORS: true,
+            logging: false,
+            backgroundColor: '#ffffff',
+            removeContainer: true
+        });
+
+        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+        
+        const fileName = `Valencia_Offer_${document.getElementById('inName').value || 'Official'}.pdf`;
+        pdf.save(fileName);
+        
+    } catch (error) {
+        console.error("PDF Error:", error);
+        alert("حدث خطأ أثناء تصدير الملف.");
+    } finally {
+        // استعادة التنسيق الأصلي
+        element.style.padding = '';
+        element.style.fontSize = '';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-file-pdf"></i> حفظ PDF';
+    }
+}
+
+// تنشيط نمط الطباعة عند الطباعة الفعلية
+window.addEventListener('beforeprint', () => {
+    document.querySelectorAll('*').forEach(el => {
+        el.style.maxHeight = 'none !important';
+        el.style.minHeight = 'auto !important';
+    });
+});
+</script>
 </body>
 </html>
