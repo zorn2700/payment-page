@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valencia Marble - Professional Job Offer System</title>
+    <title>Valencia Marble - Official Job Offer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -11,317 +11,237 @@
 
     <style>
         :root {
-            --primary: #1e3a8a; /* الأزرق العميق الاحترافي */
-            --gold: #C5A059;    /* الذهبي الملكي (هوية فالنسيا) */
-            --secondary: #3b82f6;
-            --bg-app: #f1f5f9;
-            --white: #ffffff;
-            --text-dark: #1e293b;
+            --valencia-gold: #b88a44; /* لون اللوجو الذهبي */
+            --valencia-black: #1a1a1a; /* الأسود من اللوجو */
+            --valencia-gray: #f4f4f4; /* الخلفية الرمادية الفاتحة */
+            --text-main: #333333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
 
-        body { background-color: var(--bg-app); color: var(--text-dark); }
+        body { background-color: #cbd5e1; padding: 20px; color: var(--text-main); }
 
-        /* --- Header --- */
-        .app-header {
-            background: linear-gradient(135deg, var(--primary) 0%, #0f172a 100%);
-            color: white;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-brand { display: flex; align-items: center; gap: 12px; }
-        .header-brand i { font-size: 1.8rem; color: var(--gold); }
-
-        /* --- Layout --- */
-        .main-wrapper {
+        /* حاوية الواجهة */
+        .app-wrapper {
             display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 30px;
-            max-width: 1400px;
-            margin: 30px auto;
-            padding: 0 20px;
+            grid-template-columns: 350px 1fr;
+            gap: 20px;
+            max-width: 1300px;
+            margin: auto;
         }
 
-        /* --- Sidebar Control --- */
-        .control-panel {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            height: fit-content;
-            border: 1px solid #e2e8f0;
-        }
-
-        .logo-upload-area {
-            width: 100%;
-            border: 2px dashed #cbd5e1;
-            padding: 15px;
+        /* لوحة التحكم */
+        .side-editor {
+            background: white;
+            padding: 20px;
             border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: 0.3s;
+            height: fit-content;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky; top: 20px;
         }
-        .logo-upload-area:hover { border-color: var(--secondary); background: #f8fafc; }
-
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: var(--primary); }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 5px; color: var(--valencia-gold); }
         .form-group input, .form-group textarea {
-            width: 100%; padding: 10px 12px; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 0.9rem;
+            width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.85rem;
         }
-        .form-group input:focus { border-color: var(--secondary); outline: none; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
 
-        /* --- Preview Paper --- */
-        .preview-container { display: flex; flex-direction: column; align-items: center; }
-
+        /* ورقة A4 - ضبط القياسات بدقة لصفحة واحدة */
+        .preview-area { display: flex; flex-direction: column; align-items: center; }
         .a4-paper {
             width: 210mm;
-            min-height: 297mm;
-            background: var(--white);
-            padding: 20mm 25mm;
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
-            position: relative;
+            height: 297mm;
+            background: white;
+            padding: 12mm 15mm; /* تقليل الهوامش لضمان بقاء التوقيع في صفحة واحدة */
             display: flex;
             flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
         }
 
-        .letter-header {
+        /* الترويسة */
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--gold);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            border-bottom: 2px solid var(--valencia-gold);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
-        .paper-logo { max-height: 70px; width: auto; object-fit: contain; }
-        .company-meta { text-align: left; font-size: 0.85rem; line-height: 1.5; color: #444; }
+        .logo-img { height: 80px; width: auto; }
+        .company-header-info { text-align: left; font-size: 0.75rem; color: var(--valencia-black); line-height: 1.4; }
 
-        .letter-title { text-align: center; margin-bottom: 30px; }
-        .letter-title h2 { color: var(--primary); font-size: 1.8rem; border-bottom: 2px solid var(--gold); display: inline-block; padding-bottom: 5px; }
+        .doc-title { text-align: center; margin-bottom: 15px; }
+        .doc-title h2 { 
+            color: var(--valencia-gold); 
+            font-size: 1.5rem; 
+            border-bottom: 1px solid var(--valencia-gold); 
+            display: inline-block;
+            padding: 0 30px 5px;
+        }
 
-        .letter-body { font-size: 1.1rem; line-height: 1.8; color: #1a1a1a; flex-grow: 1; }
-        
-        .details-table { width: 100%; border-collapse: collapse; margin: 25px 0; background: #fafafa; }
-        .details-table td { padding: 12px 15px; border: 1px solid #eee; }
-        .details-table td:first-child { font-weight: 700; color: var(--primary); width: 180px; background: #f1f5f9; }
+        /* محتوى الخطاب */
+        .letter-text { font-size: 1.05rem; line-height: 1.5; text-align: justify; }
+        .meta-data { margin-bottom: 10px; display: flex; justify-content: space-between; font-weight: bold; }
 
+        /* الجدول المطور */
+        .data-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 1rem; }
+        .data-table th { background: var(--valencia-gold); color: white; padding: 10px; border: 1px solid #ddd; }
+        .data-table td { padding: 8px 12px; border: 1px solid #ddd; }
+        .data-table td:first-child { background: #fdfaf5; font-weight: 700; width: 30%; color: var(--valencia-black); }
+
+        /* قائمة المزايا */
+        .benefits { margin: 10px 20px 10px 0; font-size: 0.95rem; }
+        .benefits li { margin-bottom: 5px; }
+
+        /* قسم التوقيع - تم رفعه للأعلى */
         .signature-section {
-            margin-top: 50px;
+            margin-top: auto; /* يلتصق بالأسفل لكن داخل حدود الصفحة */
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            text-align: center;
+            gap: 50px;
+            padding-bottom: 10px;
         }
-        .sig-line { margin-top: 40px; border-top: 1.5px solid #333; padding-top: 10px; font-weight: bold; font-size: 0.9rem; }
+        .sig-box { text-align: center; }
+        .sig-line { border-top: 1.5px solid var(--valencia-black); margin-top: 35px; padding-top: 5px; font-weight: 700; font-size: 0.9rem; }
 
-        /* --- Actions --- */
-        .action-btns { margin-top: 25px; display: flex; gap: 15px; }
-        .btn {
-            padding: 12px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: 700;
-            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+        /* أزرار الإجراءات */
+        .actions { margin-top: 15px; display: flex; gap: 10px; }
+        .btn { 
+            padding: 10px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; 
+            display: flex; align-items: center; gap: 8px; transition: 0.3s;
         }
-        .btn-pdf { background: var(--primary); color: white; }
-        .btn-print { background: var(--gold); color: white; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn-pdf { background: var(--valencia-gold); color: white; }
+        .btn-print { background: var(--valencia-black); color: white; }
 
         @media print {
-            body { background: white; }
-            .app-header, .control-panel, .action-btns { display: none !important; }
-            .main-wrapper { display: block; margin: 0; padding: 0; }
-            .a4-paper { box-shadow: none; border: none; width: 210mm; height: 297mm; padding: 15mm; }
+            body { background: white; padding: 0; }
+            .side-editor, .actions { display: none !important; }
+            .app-wrapper { display: block; }
+            .a4-paper { box-shadow: none; margin: 0; }
         }
     </style>
 </head>
 <body>
 
-    <header class="app-header">
-        <div class="header-brand">
-            <i class="fas fa-file-signature"></i>
-            <h1>Valencia Marble | نظام عروض العمل الذكي</h1>
-        </div>
-        <div id="liveClock" style="font-size: 0.9rem; opacity: 0.8;"></div>
-    </header>
-
-    <div class="main-wrapper">
-        <aside class="control-panel">
-            <div class="logo-upload-area" onclick="document.getElementById('fileIn').click()">
-                <i class="fas fa-cloud-upload-alt fa-2x" style="color: var(--secondary); margin-bottom: 10px;"></i>
-                <p style="font-size: 0.8rem;">اسحب أو ارفع شعار الشركة</p>
-                <input type="file" id="fileIn" hidden accept="image/*" onchange="loadLogo(event)">
-            </div>
-
+    <div class="app-wrapper">
+        <aside class="side-editor">
+            <h3 style="margin-bottom:15px; color:var(--valencia-gold)">تخصيص العرض</h3>
             <div class="form-group">
-                <label>اسم الشركة</label>
-                <input type="text" id="inCompany" placeholder="مثلاً: Valencia Marble" oninput="sync()">
+                <label>اسم المرشح</label>
+                <input type="text" id="inName" placeholder="فلان بن فلان" oninput="sync()">
             </div>
             <div class="form-group">
-                <label>اسم الموظف المرشح</label>
-                <input type="text" id="inName" placeholder="الاسم الكامل" oninput="sync()">
+                <label>الرقم المرجعي</label>
+                <input type="text" id="inRef" placeholder="VAL-2025-001" oninput="sync()">
             </div>
             <div class="form-group">
                 <label>المسمى الوظيفي</label>
-                <input type="text" id="inJob" placeholder="مثال: مدير مبيعات" oninput="sync()">
+                <input type="text" id="inJob" placeholder="مدير مشاريع" oninput="sync()">
             </div>
             <div class="form-group">
-                <label>الراتب الإجمالي (AED)</label>
-                <input type="text" id="inSalary" placeholder="مثال: 15,000" oninput="sync()">
+                <label>الراتب الإجمالي</label>
+                <input type="text" id="inSalary" placeholder="15,000" oninput="sync()">
             </div>
             <div class="form-group">
                 <label>تاريخ المباشرة</label>
-                <input type="date" id="inStartDate" oninput="sync()">
+                <input type="text" id="inDateStart" placeholder="1 فبراير 2026" oninput="sync()">
             </div>
             <div class="form-group">
-                <label>ملاحظات وبدلات</label>
-                <textarea id="inNotes" rows="3" placeholder="سكن، مواصلات، عمولات..." oninput="sync()"></textarea>
+                <label>تاريخ انتهاء العرض</label>
+                <input type="text" id="inDeadline" placeholder="21 ديسمبر 2025" oninput="sync()">
             </div>
         </aside>
 
-        <main class="preview-container">
+        <main class="preview-area">
             <div class="a4-paper" id="paper">
-                <div class="letter-header">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <img id="outLogo" src="" style="display:none;" class="paper-logo">
-                        <div id="logoHint" style="font-weight: bold; color: #ddd; font-size: 2rem;">LOGO</div>
-                    </div>
-                    <div class="company-meta">
-                        <p style="font-weight: 700; color: var(--primary); font-size: 1.1rem;" id="outCompanyNameTop">VALENCIA MARBLE</p>
-                        <p>خطاب عرض وظيفي رسمي</p>
-                        <p>دولة الإمارات العربية المتحدة</p>
+                <div class="header-content">
+                    <img src="logo2.png" class="logo-img" onerror="this.src='https://via.placeholder.com/150x80?text=Valencia+Logo'">
+                    <div class="company-header-info">
+                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--valencia-gold);">Valencia Marble & Natural Stones</p>
+                        <p>Trading L.L.C</p>
+                        <p>Dubai, United Arab Emirates</p>
+                        <p>www.valenciamarble.com</p>
                     </div>
                 </div>
 
-                <div class="letter-title">
-                    <h2>عــــرض وظـيـفـي</h2>
+                <div class="doc-title">
+                    <h2>خطاب عرض وظيفي رسمي</h2>
                 </div>
 
-                <div class="letter-body">
-                    <p>التاريخ: <span id="outDate">--/--/----</span></p>
-                    <p>عناية السيد/ <strong id="outName">................................</strong> المحترم،</p>
+                <div class="letter-text">
+                    <div class="meta-data">
+                        <span>التاريخ: ١٨ ديسمبر ٢٠٢٥</span>
+                        <span>الرقم المرجعي: <span id="outRef">VAL-2025-XXX</span></span>
+                    </div>
+
+                    <p>عناية السيد/ <strong id="outName">............................................................</strong> المحترم،</p>
                     <p>تحية طيبة وبعد،،</p>
-                    <p>يسر شركة <strong id="outCompany">Valencia Marble</strong> أن تتقدم لكم بهذا العرض الوظيفي، نظراً لما نعهده فيكم من كفاءة وخبرة، وفقاً للشروط الموضحة أدناه:</p>
+                    <p>بناءً على سجلكم المهني المتميز والمقابلة الشخصية التي أجريت معكم، يسعدنا في شركة <strong>فالنسيا للرخام والأحجار الطبيعية (Valencia Marble & Natural Stones)</strong> أن نتقدم لكم بهذا العرض الوظيفي الرسمي للانضمام إلى فريق عملنا. نحن على ثقة بأن مهاراتكم ستشكل إضافة نوعية لمسيرة نجاحنا.</p>
 
-                    <table class="details-table">
-                        <tr><td>المسمى الوظيفي</td><td id="outJob">--</td></tr>
-                        <tr><td>الراتب الشهري الإجمالي</td><td id="outSalary">--</td></tr>
-                        <tr><td>تاريخ المباشرة المتوقع</td><td id="outStartDate">--</td></tr>
-                        <tr><td>فترة التجربة</td><td>90 يوماً (خاضعة للتقييم)</td></tr>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>البيان</th>
+                                <th>تفاصيل العرض</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>المسمى الوظيفي</td><td id="outJob">[اسم الوظيفة هنا]</td></tr>
+                            <tr><td>الراتب الإجمالي</td><td><span id="outSalary">[المبلغ]</span> درهم إماراتي شهرياً</td></tr>
+                            <tr><td>تاريخ مباشرة العمل</td><td id="outDateStart">[التاريخ] أو حسب الاتفاق</td></tr>
+                            <tr><td>ساعات العمل</td><td>٨ ساعات يومياً (حسب نظام الشركة المعتمد)</td></tr>
+                            <tr><td>فترة التجربة</td><td>٣ أشهر (خاضعة للتقييم)</td></tr>
+                        </tbody>
                     </table>
 
-                    <p><strong style="color: var(--primary);">المزايا والإضافات:</strong></p>
-                    <p id="outNotes" style="padding-right: 15px; border-right: 3px solid var(--gold);">تطبق قوانين وزارة الموارد البشرية والتوطين في دولة الإمارات.</p>
+                    <p><strong>البنود والمزايا الإضافية:</strong></p>
+                    <ul class="benefits">
+                        <li><strong>الإجازة السنوية:</strong> إجازة مدفوعة الأجر وفقاً لقانون العمل الإماراتي.</li>
+                        <li><strong>التأمين الصحي:</strong> توفر الشركة تأميناً صحياً شاملاً للموظف.</li>
+                        <li><strong>علاقة العمل:</strong> تخضع كافة حقوق وواجبات الطرفين للقوانين واللوائح المعمول بها في وزارة الموارد البشرية والتوطين بدولة الإمارات العربية المتحدة.</li>
+                    </ul>
 
-                    <p style="margin-top: 25px; font-size: 1rem;">نحن نتطلع لانضمامكم لفريقنا. يرجى التوقيع أدناه في حال القبول خلال 3 أيام عمل.</p>
+                    <p style="margin-top: 10px;">يرجى التوقيع أدناه وإعادة نسخة ممسوحة ضوئياً من هذا الخطاب في موعد أقصاه <strong id="outDeadline">[التاريخ]</strong> لتأكيد الموافقة البدئية وبدء إجراءات التعاقد.</p>
                 </div>
 
                 <div class="signature-section">
-                    <div>
-                        <p style="color: var(--primary); font-weight: 700;">إدارة الموارد البشرية</p>
+                    <div class="sig-box">
+                        <p style="color: var(--valencia-gold)">إدارة شركة فالنسيا</p>
                         <div class="sig-line">الختم والتوقيع الرسمي</div>
                     </div>
-                    <div>
-                        <p style="color: var(--primary); font-weight: 700;">قبول المرشح</p>
-                        <div class="sig-line">توقيع الموظف والتاريخ</div>
+                    <div class="sig-box">
+                        <p style="color: var(--valencia-gold)">موافقة المرشح</p>
+                        <div class="sig-line">توقيع مقدم الطلب</div>
                     </div>
                 </div>
             </div>
 
-            <div class="action-btns">
-                <button class="btn btn-pdf" onclick="exportPDF()"><i class="fas fa-file-pdf"></i> حفظ كـ PDF فاخر</button>
-                <button class="btn btn-print" onclick="window.print()"><i class="fas fa-print"></i> طباعة A4</button>
+            <div class="actions">
+                <button class="btn btn-pdf" onclick="generatePDF()"><i class="fas fa-file-pdf"></i> حفظ كـ PDF</button>
+                <button class="btn btn-print" onclick="window.print()"><i class="fas fa-print"></i> طباعة فورية</button>
             </div>
         </main>
     </div>
 
     <script>
-        // ضبط التاريخ والوقت
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('outDate').innerText = new Date().toLocaleDateString('ar-AE', options);
-        
-        function updateClock() {
-            document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('ar-AE');
-        }
-        setInterval(updateClock, 1000);
-
-        // رفع ومعالجة الشعار
-        function loadLogo(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const out = document.getElementById('outLogo');
-                out.src = reader.result;
-                out.style.display = 'block';
-                document.getElementById('logoHint').style.display = 'none';
-                localStorage.setItem('saved_logo', reader.result); // حفظ الشعار في المتصفح
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        }
-
-        // مزامنة البيانات
         function sync() {
-            const data = {
-                company: document.getElementById('inCompany').value,
-                name: document.getElementById('inName').value,
-                job: document.getElementById('inJob').value,
-                salary: document.getElementById('inSalary').value,
-                start: document.getElementById('inStartDate').value,
-                notes: document.getElementById('inNotes').value
-            };
-
-            document.getElementById('outCompany').innerText = data.company || 'Valencia Marble';
-            document.getElementById('outCompanyNameTop').innerText = data.company || 'VALENCIA MARBLE';
-            document.getElementById('outName').innerText = data.name || '................................';
-            document.getElementById('outJob').innerText = data.job || '--';
-            document.getElementById('outSalary').innerText = data.salary ? data.salary + ' درهم إماراتي' : '--';
-            document.getElementById('outStartDate').innerText = data.start || '--';
-            document.getElementById('outNotes').innerText = data.notes || 'تطبق قوانين وزارة الموارد البشرية والتوطين في دولة الإمارات.';
-
-            localStorage.setItem('valencia_offer_draft', JSON.stringify(data));
+            document.getElementById('outName').innerText = document.getElementById('inName').value || '................................';
+            document.getElementById('outRef').innerText = document.getElementById('inRef').value || 'VAL-2025-XXX';
+            document.getElementById('outJob').innerText = document.getElementById('inJob').value || '[اسم الوظيفة]';
+            document.getElementById('outSalary').innerText = document.getElementById('inSalary').value || '[المبلغ]';
+            document.getElementById('outDateStart').innerText = document.getElementById('inDateStart').value || '[التاريخ]';
+            document.getElementById('outDeadline').innerText = document.getElementById('inDeadline').value || '[التاريخ]';
         }
 
-        // استعادة البيانات عند التحميل
-        window.onload = () => {
-            updateClock();
-            const savedData = JSON.parse(localStorage.getItem('valencia_offer_draft'));
-            const savedLogo = localStorage.getItem('saved_logo');
-
-            if (savedData) {
-                document.getElementById('inCompany').value = savedData.company || '';
-                document.getElementById('inName').value = savedData.name || '';
-                document.getElementById('inJob').value = savedData.job || '';
-                document.getElementById('inSalary').value = savedData.salary || '';
-                document.getElementById('inNotes').value = savedData.notes || '';
-                sync();
-            }
-            if (savedLogo) {
-                const out = document.getElementById('outLogo');
-                out.src = savedLogo;
-                out.style.display = 'block';
-                document.getElementById('logoHint').style.display = 'none';
-            }
-        };
-
-        // تصدير PDF احترافي
-        async function exportPDF() {
+        async function generatePDF() {
             const { jsPDF } = window.jspdf;
-            const paper = document.getElementById('paper');
-            
-            const canvas = await html2canvas(paper, {
-                scale: 3, // دقة طباعة فائقة
-                useCORS: true,
-                backgroundColor: "#ffffff"
-            });
-            
-            const imgData = canvas.toDataURL('image/jpeg', 1.0);
+            const element = document.getElementById('paper');
+            const canvas = await html2canvas(element, { scale: 3 });
+            const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF('p', 'mm', 'a4');
-            pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
-            pdf.save(`Job_Offer_${document.getElementById('inName').value || 'Valencia'}.pdf`);
+            pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+            pdf.save('Valencia_Job_Offer.pdf');
         }
     </script>
 </body>
