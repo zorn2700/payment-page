@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 30px; line-height: 1.6; }
+        .header { text-align: center; border-bottom: 3px solid #333; padding-bottom: 15px; margin-bottom: 25px; }
+        .header h1 { margin: 0; color: #2c3e50; }
+        .header h3 { margin: 5px 0; color: #7f8c8d; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 12px 8px; text-align: center; }
+        th { background-color: #f8f9fa; color: #2c3e50; font-weight: bold; }
+        .section { margin-bottom: 25px; }
+        .section-title { background-color: #ecf0f1; padding: 10px; font-weight: bold; margin-bottom: 10px; border-right: 5px solid #3498db; }
+        .signatures { display: flex; justify-content: space-around; margin-top: 40px; }
+        .signature-box { width: 30%; text-align: center; }
+        .signature-line { border-top: 1px solid #000; margin-top: 40px; padding-top: 5px; }
+        .notes-box { border: 1px dashed #ccc; padding: 15px; min-height: 80px; margin-top: 10px; }
+        @media print {
+            body { margin: 15px; font-size: 13px; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>نموذج تقييم أداء العمال</h1>
+    <h3>الشركة: فالنسيا للرخام والحجر الطبيعي</h3>
+    <h3>القسم: إدارة الموارد البشرية</h3>
+</div>
+
+<div class="section">
+    <div class="section-title">البيانات الأساسية</div>
+    <table>
+        <tr>
+            <td width="25%"><strong>اسم العامل:</strong></td>
+            <td width="25%">________________________</td>
+            <td width="25%"><strong>الوظيفة:</strong></td>
+            <td width="25%">________________________</td>
+        </tr>
+        <tr>
+            <td><strong>تاريخ التقييم:</strong></td>
+            <td>____/____/____</td>
+            <td><strong>فترة التقييم:</strong></td>
+            <td>من ____/____/____ إلى ____/____/____</td>
+        </tr>
+        <tr>
+            <td><strong>المشرف المباشر:</strong></td>
+            <td>________________________</td>
+            <td><strong>القسم:</strong></td>
+            <td>________________________</td>
+        </tr>
+    </table>
+</div>
+
+<div class="section">
+    <div class="section-title">محاور التقييم (الوزن النسبي 100%)</div>
+    <table>
+        <thead>
+            <tr>
+                <th width="5%">#</th>
+                <th width="55%">المحور</th>
+                <th width="20%">الوزن النسبي</th>
+                <th width="20%">النسبة المتحصل عليها</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>الانتظام في الدوام والحضور</td><td>10.0%</td><td>______ %</td></tr>
+            <tr><td>2</td><td>الالتزام بتعليمات السلامة والوقاية</td><td>15.0%</td><td>______ %</td></tr>
+            <tr><td>3</td><td>جودة العمل والدقة في التنفيذ</td><td>20.0%</td><td>______ %</td></tr>
+            <tr><td>4</td><td>سرعة إنجاز المهام</td><td>10.0%</td><td>______ %</td></tr>
+            <tr><td>5</td><td>التعاون والعمل الجماعي</td><td>10.0%</td><td>______ %</td></tr>
+            <tr><td>6</td><td>القدرة على العمل تحت الضغط</td><td>5.0%</td><td>______ %</td></tr>
+            <tr><td>7</td><td>الاستعداد للعمل الإضافي عند الحاجة</td><td>5.0%</td><td>______ %</td></tr>
+            <tr><td>8</td><td>النظافة الشخصية والمظهر العام</td><td>5.0%</td><td>______ %</td></tr>
+            <tr><td>9</td><td>الحفاظ على الأدوات والمعدات</td><td>5.0%</td><td>______ %</td></tr>
+            <tr><td>10</td><td>القدرة على حل المشكلات البسيطة</td><td>5.0%</td><td>______ %</td></tr>
+            <tr><td>11</td><td>الخبرة والمهارات التقنية</td><td>10.0%</td><td>______ %</td></tr>
+            <tr style="background-color: #f8f9fa; font-weight: bold;">
+                <td colspan="2">المجموع الكلي</td>
+                <td>100.0%</td>
+                <td>______ %</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section">
+    <div class="section-title">التقييم النهائي</div>
+    <table>
+        <tr>
+            <td width="40%"><strong>النسبة المئوية النهائية:</strong></td>
+            <td width="60%">________________________ %</td>
+        </tr>
+        <tr>
+            <td><strong>التقدير النهائي:</strong></td>
+            <td>
+                <input type="checkbox"> ممتاز (95% - 100%) &nbsp;&nbsp;
+                <input type="checkbox"> جيد جداً (85% - 94%) &nbsp;&nbsp;
+                <input type="checkbox"> جيد (75% - 84%) &nbsp;&nbsp;
+                <input type="checkbox"> مقبول (60% - 74%) &nbsp;&nbsp;
+                <input type="checkbox"> ضعيف (أقل من 60%)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="section">
+    <div class="section-title">ملاحظات التقييم</div>
+    <div class="notes-box">
+        <strong>نقاط القوة:</strong><br>
+        ________________________________________________<br>
+        ________________________________________________<br><br>
+        <strong>نقاط تحتاج تحسين:</strong><br>
+        ________________________________________________<br>
+        ________________________________________________<br><br>
+        <strong>توصيات للتطوير:</strong><br>
+        ________________________________________________<br>
+        ________________________________________________
+    </div>
+</div>
+
+<div class="signatures">
+    <div class="signature-box">
+        <strong>المشرف المباشر</strong><br>
+        <div class="signature-line">التوقيع: ________________________</div>
+        الاسم: ________________________<br>
+        التاريخ: ____/____/____
+    </div>
+    <div class="signature-box">
+        <strong>مدير القسم</strong><br>
+        <div class="signature-line">التوقيع: ________________________</div>
+        الاسم: ________________________<br>
+        التاريخ: ____/____/____
+    </div>
+    <div class="signature-box">
+        <strong>الموارد البشرية</strong><br>
+        <div class="signature-line">التوقيع: ________________________</div>
+        الاسم: ________________________<br>
+        التاريخ: ____/____/____
+    </div>
+</div>
+
+<div class="no-print" style="text-align: center; margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+    <strong>تعليمات:</strong> 
+    <p>1. قم بطباعة هذه الصفحة مباشرة من المتصفح (Ctrl+P).<br>
+    2. املأ جميع الحقول بدقة.<br>
+    3. احتفظ بصورة من النموذج في ملف الموظف.</p>
+</div>
+
+</body>
+</html>
