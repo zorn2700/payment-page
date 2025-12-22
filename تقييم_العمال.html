@@ -1,153 +1,806 @@
 <!DOCTYPE html>
-<html dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج تقييم أداء العمال - فالنسيا للرخام</title>
     <style>
-        body { font-family: 'Arial', sans-serif; margin: 30px; line-height: 1.6; }
-        .header { text-align: center; border-bottom: 3px solid #333; padding-bottom: 15px; margin-bottom: 25px; }
-        .header h1 { margin: 0; color: #2c3e50; }
-        .header h3 { margin: 5px 0; color: #7f8c8d; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
-        th, td { border: 1px solid #ddd; padding: 12px 8px; text-align: center; }
-        th { background-color: #f8f9fa; color: #2c3e50; font-weight: bold; }
-        .section { margin-bottom: 25px; }
-        .section-title { background-color: #ecf0f1; padding: 10px; font-weight: bold; margin-bottom: 10px; border-right: 5px solid #3498db; }
-        .signatures { display: flex; justify-content: space-around; margin-top: 40px; }
-        .signature-box { width: 30%; text-align: center; }
-        .signature-line { border-top: 1px solid #000; margin-top: 40px; padding-top: 5px; }
-        .notes-box { border: 1px dashed #ccc; padding: 15px; min-height: 80px; margin-top: 10px; }
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+        
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h3 {
+            margin: 5px 0;
+            font-weight: 400;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .company-logo {
+            position: absolute;
+            left: 25px;
+            top: 25px;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Form Container */
+        .form-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            background: linear-gradient(90deg, #ecf0f1 0%, #f8f9fa 100%);
+            padding: 15px 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-right: 6px solid #3498db;
+            border-radius: 6px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title i {
+            font-size: 18px;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            font-size: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 16px 12px;
+            font-weight: 600;
+            text-align: center;
+            border: none;
+        }
+        
+        td {
+            padding: 14px 12px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            transition: background 0.2s;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tr:hover td {
+            background-color: #f1f8ff;
+        }
+        
+        /* Input Fields */
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            background: white;
+        }
+        
+        /* Rating Inputs */
+        .rating-input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            background: #f8f9fa;
+        }
+        
+        /* Checkboxes */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 8px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        
+        .checkbox-item:hover {
+            background: #f0f7ff;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #3498db;
+            cursor: pointer;
+        }
+        
+        /* Notes Box */
+        .notes-box {
+            border: 2px dashed #3498db;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f8fafc;
+            margin-top: 15px;
+        }
+        
+        .notes-box textarea {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            background: white;
+        }
+        
+        /* Signature Section */
+        .signatures {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+        
+        .signature-box {
+            text-align: center;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .signature-line {
+            border-top: 2px solid #333;
+            margin: 40px 20px 10px;
+            padding-top: 15px;
+        }
+        
+        /* Total Calculation */
+        .total-row {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .total-row td {
+            border: none;
+            padding: 18px 12px;
+        }
+        
+        /* Print Styles */
         @media print {
-            body { margin: 15px; font-size: 13px; }
-            .no-print { display: none; }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                font-size: 12px;
+            }
+            
+            .form-container {
+                box-shadow: none;
+                padding: 10px;
+            }
+            
+            .header {
+                box-shadow: none;
+                border-radius: 0;
+                margin-bottom: 15px;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+            
+            .checkbox-item {
+                page-break-inside: avoid;
+            }
+            
+            table {
+                page-break-inside: auto;
+            }
+            
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+        
+        .btn-secondary:hover {
+            background: #dfe6e9;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .company-logo {
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-bottom: 15px;
+            }
+            
+            .signatures {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 10px 6px;
+            }
+        }
+        
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+        
+        .status-excellent { background-color: #27ae60; }
+        .status-very-good { background-color: #2ecc71; }
+        .status-good { background-color: #3498db; }
+        .status-acceptable { background-color: #f39c12; }
+        .status-poor { background-color: #e74c3c; }
+        
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2ecc71, #3498db);
+            border-radius: 4px;
+            transition: width 0.5s ease;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-<div class="header">
-    <h1>نموذج تقييم أداء العمال</h1>
-    <h3>الشركة: فالنسيا للرخام والحجر الطبيعي</h3>
-    <h3>القسم: إدارة الموارد البشرية</h3>
-</div>
-
-<div class="section">
-    <div class="section-title">البيانات الأساسية</div>
-    <table>
-        <tr>
-            <td width="25%"><strong>اسم العامل:</strong></td>
-            <td width="25%">________________________</td>
-            <td width="25%"><strong>الوظيفة:</strong></td>
-            <td width="25%">________________________</td>
-        </tr>
-        <tr>
-            <td><strong>تاريخ التقييم:</strong></td>
-            <td>____/____/____</td>
-            <td><strong>فترة التقييم:</strong></td>
-            <td>من ____/____/____ إلى ____/____/____</td>
-        </tr>
-        <tr>
-            <td><strong>المشرف المباشر:</strong></td>
-            <td>________________________</td>
-            <td><strong>القسم:</strong></td>
-            <td>________________________</td>
-        </tr>
-    </table>
-</div>
-
-<div class="section">
-    <div class="section-title">محاور التقييم (الوزن النسبي 100%)</div>
-    <table>
-        <thead>
-            <tr>
-                <th width="5%">#</th>
-                <th width="55%">المحور</th>
-                <th width="20%">الوزن النسبي</th>
-                <th width="20%">النسبة المتحصل عليها</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>1</td><td>الانتظام في الدوام والحضور</td><td>10.0%</td><td>______ %</td></tr>
-            <tr><td>2</td><td>الالتزام بتعليمات السلامة والوقاية</td><td>15.0%</td><td>______ %</td></tr>
-            <tr><td>3</td><td>جودة العمل والدقة في التنفيذ</td><td>20.0%</td><td>______ %</td></tr>
-            <tr><td>4</td><td>سرعة إنجاز المهام</td><td>10.0%</td><td>______ %</td></tr>
-            <tr><td>5</td><td>التعاون والعمل الجماعي</td><td>10.0%</td><td>______ %</td></tr>
-            <tr><td>6</td><td>القدرة على العمل تحت الضغط</td><td>5.0%</td><td>______ %</td></tr>
-            <tr><td>7</td><td>الاستعداد للعمل الإضافي عند الحاجة</td><td>5.0%</td><td>______ %</td></tr>
-            <tr><td>8</td><td>النظافة الشخصية والمظهر العام</td><td>5.0%</td><td>______ %</td></tr>
-            <tr><td>9</td><td>الحفاظ على الأدوات والمعدات</td><td>5.0%</td><td>______ %</td></tr>
-            <tr><td>10</td><td>القدرة على حل المشكلات البسيطة</td><td>5.0%</td><td>______ %</td></tr>
-            <tr><td>11</td><td>الخبرة والمهارات التقنية</td><td>10.0%</td><td>______ %</td></tr>
-            <tr style="background-color: #f8f9fa; font-weight: bold;">
-                <td colspan="2">المجموع الكلي</td>
-                <td>100.0%</td>
-                <td>______ %</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="section">
-    <div class="section-title">التقييم النهائي</div>
-    <table>
-        <tr>
-            <td width="40%"><strong>النسبة المئوية النهائية:</strong></td>
-            <td width="60%">________________________ %</td>
-        </tr>
-        <tr>
-            <td><strong>التقدير النهائي:</strong></td>
-            <td>
-                <input type="checkbox"> ممتاز (95% - 100%) &nbsp;&nbsp;
-                <input type="checkbox"> جيد جداً (85% - 94%) &nbsp;&nbsp;
-                <input type="checkbox"> جيد (75% - 84%) &nbsp;&nbsp;
-                <input type="checkbox"> مقبول (60% - 74%) &nbsp;&nbsp;
-                <input type="checkbox"> ضعيف (أقل من 60%)
-            </td>
-        </tr>
-    </table>
-</div>
-
-<div class="section">
-    <div class="section-title">ملاحظات التقييم</div>
-    <div class="notes-box">
-        <strong>نقاط القوة:</strong><br>
-        ________________________________________________<br>
-        ________________________________________________<br><br>
-        <strong>نقاط تحتاج تحسين:</strong><br>
-        ________________________________________________<br>
-        ________________________________________________<br><br>
-        <strong>توصيات للتطوير:</strong><br>
-        ________________________________________________<br>
-        ________________________________________________
+    <div class="header">
+        <div class="company-logo">VMS</div>
+        <h1><i class="fas fa-clipboard-check"></i> نموذج تقييم أداء العمال</h1>
+        <h3>الشركة: فالنسيا للرخام والحجر الطبيعي</h3>
+        <h3>القسم: إدارة الموارد البشرية</h3>
+        <h3>رمز النموذج: HR-PERF-002</h3>
     </div>
-</div>
-
-<div class="signatures">
-    <div class="signature-box">
-        <strong>المشرف المباشر</strong><br>
-        <div class="signature-line">التوقيع: ________________________</div>
-        الاسم: ________________________<br>
-        التاريخ: ____/____/____
+    
+    <div class="form-container">
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-user-circle"></i>
+                <span>البيانات الأساسية</span>
+            </div>
+            <table>
+                <tr>
+                    <td width="25%"><strong>اسم العامل:</strong></td>
+                    <td width="25%"><input type="text" class="input-field" placeholder="الاسم ثلاثي"></td>
+                    <td width="25%"><strong>الوظيفة:</strong></td>
+                    <td width="25%"><input type="text" class="input-field" placeholder="المسمى الوظيفي"></td>
+                </tr>
+                <tr>
+                    <td><strong>تاريخ التقييم:</strong></td>
+                    <td><input type="date" class="input-field"></td>
+                    <td><strong>فترة التقييم:</strong></td>
+                    <td>
+                        من <input type="date" class="input-field" style="width: 48%;">
+                        إلى <input type="date" class="input-field" style="width: 48%;">
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>المشرف المباشر:</strong></td>
+                    <td>
+                        <select class="input-field">
+                            <option value="">اختر المشرف</option>
+                            <option value="abu-tariq">أبو طارق (المحاسبة)</option>
+                            <option value="rakan">ركان (النقل والتوزيع)</option>
+                            <option value="abu-yazan">أبو يزن (المشاريع)</option>
+                            <option value="omar">عمر الرفاعي (التخطيط)</option>
+                        </select>
+                    </td>
+                    <td><strong>القسم:</strong></td>
+                    <td>
+                        <select class="input-field">
+                            <option value="">اختر القسم</option>
+                            <option value="accounting">المحاسبة</option>
+                            <option value="transport">النقل والتوزيع</option>
+                            <option value="projects">المشاريع</option>
+                            <option value="planning">التخطيط والمتابعة</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-chart-line"></i>
+                <span>محاور التقييم (الوزن النسبي 100%)</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="5%">#</th>
+                        <th width="50%">المحور</th>
+                        <th width="15%">الوزن النسبي</th>
+                        <th width="15%">النسبة المتحصل عليها</th>
+                        <th width="15%">الدرجة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>الانتظام في الدوام والحضور</td>
+                        <td><strong>10.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="10" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/10</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>الالتزام بتعليمات السلامة والوقاية</td>
+                        <td><strong>15.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="15" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/15</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>جودة العمل والدقة في التنفيذ</td>
+                        <td><strong>20.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="20" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/20</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>سرعة إنجاز المهام</td>
+                        <td><strong>10.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="10" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/10</span></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>التعاون والعمل الجماعي</td>
+                        <td><strong>10.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="10" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/10</span></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>القدرة على العمل تحت الضغط</td>
+                        <td><strong>5.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="5" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/5</span></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>الاستعداد للعمل الإضافي</td>
+                        <td><strong>5.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="5" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/5</span></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>النظافة الشخصية والمظهر العام</td>
+                        <td><strong>5.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="5" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/5</span></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>الحفاظ على الأدوات والمعدات</td>
+                        <td><strong>5.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="5" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/5</span></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>القدرة على حل المشكلات</td>
+                        <td><strong>5.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="5" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/5</span></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>الخبرة والمهارات التقنية</td>
+                        <td><strong>10.0%</strong></td>
+                        <td><input type="number" class="rating-input" min="0" max="10" step="0.1" value="0"> %</td>
+                        <td><span class="score-display">0/10</span></td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2"><i class="fas fa-calculator"></i> المجموع الكلي</td>
+                        <td><strong id="total-weight">100.0%</strong></td>
+                        <td><strong id="total-score">0.0%</strong></td>
+                        <td><strong id="total-grade">0/100</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overall-progress" style="width: 0%"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-star"></i>
+                <span>التقييم النهائي</span>
+            </div>
+            <table>
+                <tr>
+                    <td width="40%"><strong>النسبة المئوية النهائية:</strong></td>
+                    <td width="60%">
+                        <input type="text" id="final-percentage" class="input-field" style="width: 150px; font-weight: bold; text-align: center;" readonly>
+                        <span id="final-rating" style="margin-right: 15px; font-weight: bold;"></span>
+                        <span id="status-indicator" class="status-indicator"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>التقدير النهائي:</strong></td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="radio" name="final-grade" value="excellent">
+                                <span>ممتاز (95% - 100%)</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="radio" name="final-grade" value="very-good">
+                                <span>جيد جداً (85% - 94%)</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="radio" name="final-grade" value="good">
+                                <span>جيد (75% - 84%)</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="radio" name="final-grade" value="acceptable">
+                                <span>مقبول (60% - 74%)</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="radio" name="final-grade" value="poor">
+                                <span>ضعيف (أقل من 60%)</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-edit"></i>
+                <span>ملاحظات التقييم</span>
+            </div>
+            <div class="notes-box">
+                <div style="margin-bottom: 15px;">
+                    <strong><i class="fas fa-check-circle"></i> نقاط القوة:</strong><br>
+                    <textarea placeholder="اكتب نقاط القوة والتميز..."></textarea>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <strong><i class="fas fa-exclamation-triangle"></i> نقاط تحتاج تحسين:</strong><br>
+                    <textarea placeholder="اكتب نقاط الضعف والتحسين..."></textarea>
+                </div>
+                <div>
+                    <strong><i class="fas fa-bullseye"></i> توصيات للتطوير:</strong><br>
+                    <textarea placeholder="اكتب التوصيات وخطط التطوير..."></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="signatures">
+            <div class="signature-box">
+                <strong><i class="fas fa-user-tie"></i> المشرف المباشر</strong><br>
+                <div class="signature-line">
+                    <input type="text" class="input-field" placeholder="التوقيع" style="border: none; text-align: center; background: transparent;">
+                </div>
+                <div style="margin-top: 10px;">
+                    <input type="text" class="input-field" placeholder="الاسم" style="width: 80%; margin: 5px auto;">
+                </div>
+                <div>
+                    <input type="date" class="input-field" style="width: 80%; margin: 5px auto;">
+                </div>
+            </div>
+            
+            <div class="signature-box">
+                <strong><i class="fas fa-user-cog"></i> مدير القسم</strong><br>
+                <div class="signature-line">
+                    <input type="text" class="input-field" placeholder="التوقيع" style="border: none; text-align: center; background: transparent;">
+                </div>
+                <div style="margin-top: 10px;">
+                    <input type="text" class="input-field" placeholder="الاسم" style="width: 80%; margin: 5px auto;">
+                </div>
+                <div>
+                    <input type="date" class="input-field" style="width: 80%; margin: 5px auto;">
+                </div>
+            </div>
+            
+            <div class="signature-box">
+                <strong><i class="fas fa-users-cog"></i> الموارد البشرية</strong><br>
+                <div class="signature-line">
+                    <input type="text" class="input-field" placeholder="التوقيع" style="border: none; text-align: center; background: transparent;">
+                </div>
+                <div style="margin-top: 10px;">
+                    <input type="text" class="input-field" placeholder="الاسم" style="width: 80%; margin: 5px auto;">
+                </div>
+                <div>
+                    <input type="date" class="input-field" style="width: 80%; margin: 5px auto;">
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons no-print">
+            <button class="btn btn-primary" onclick="calculateTotal()">
+                <i class="fas fa-calculator"></i> احسب التقييم
+            </button>
+            <button class="btn btn-primary" onclick="window.print()">
+                <i class="fas fa-print"></i> طباعة النموذج
+            </button>
+            <button class="btn btn-secondary" onclick="resetForm()">
+                <i class="fas fa-redo"></i> إعادة تعيين
+            </button>
+            <button class="btn btn-secondary" onclick="saveAsPDF()">
+                <i class="fas fa-download"></i> حفظ كـ PDF
+            </button>
+        </div>
     </div>
-    <div class="signature-box">
-        <strong>مدير القسم</strong><br>
-        <div class="signature-line">التوقيع: ________________________</div>
-        الاسم: ________________________<br>
-        التاريخ: ____/____/____
-    </div>
-    <div class="signature-box">
-        <strong>الموارد البشرية</strong><br>
-        <div class="signature-line">التوقيع: ________________________</div>
-        الاسم: ________________________<br>
-        التاريخ: ____/____/____
-    </div>
-</div>
 
-<div class="no-print" style="text-align: center; margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
-    <strong>تعليمات:</strong> 
-    <p>1. قم بطباعة هذه الصفحة مباشرة من المتصفح (Ctrl+P).<br>
-    2. املأ جميع الحقول بدقة.<br>
-    3. احتفظ بصورة من النموذج في ملف الموظف.</p>
-</div>
-
+    <script>
+        // تحديث الدرجات عند تغيير القيم
+        document.querySelectorAll('.rating-input').forEach(input => {
+            input.addEventListener('input', calculateTotal);
+        });
+        
+        // تحديث الراديو عند تغيير النسبة
+        document.querySelectorAll('input[name="final-grade"]').forEach(radio => {
+            radio.addEventListener('change', updateFinalPercentage);
+        });
+        
+        function calculateTotal() {
+            let total = 0;
+            const inputs = document.querySelectorAll('.rating-input');
+            
+            inputs.forEach((input, index) => {
+                const value = parseFloat(input.value) || 0;
+                const max = parseFloat(input.max);
+                
+                // تحديث عرض الدرجة
+                const scoreDisplay = input.closest('tr').querySelector('.score-display');
+                if (scoreDisplay) {
+                    scoreDisplay.textContent = value.toFixed(1) + '/' + max;
+                }
+                
+                total += value;
+            });
+            
+            // تحديث المجاميع
+            document.getElementById('total-score').textContent = total.toFixed(1) + '%';
+            document.getElementById('total-grade').textContent = total.toFixed(1) + '/100';
+            
+            // تحديث شريط التقدم
+            const progressBar = document.getElementById('overall-progress');
+            progressBar.style.width = total + '%';
+            
+            // تحديث النسبة النهائية والتقدير
+            updateFinalPercentage();
+        }
+        
+        function updateFinalPercentage() {
+            const total = parseFloat(document.getElementById('total-score').textContent) || 0;
+            const finalPercentage = document.getElementById('final-percentage');
+            finalPercentage.value = total.toFixed(1) + '%';
+            
+            // تحديث التقدير النهائي تلقائياً
+            let rating = '';
+            let statusClass = '';
+            
+            if (total >= 95) {
+                rating = 'ممتاز';
+                statusClass = 'status-excellent';
+                document.querySelector('input[value="excellent"]').checked = true;
+            } else if (total >= 85) {
+                rating = 'جيد جداً';
+                statusClass = 'status-very-good';
+                document.querySelector('input[value="very-good"]').checked = true;
+            } else if (total >= 75) {
+                rating = 'جيد';
+                statusClass = 'status-good';
+                document.querySelector('input[value="good"]').checked = true;
+            } else if (total >= 60) {
+                rating = 'مقبول';
+                statusClass = 'status-acceptable';
+                document.querySelector('input[value="acceptable"]').checked = true;
+            } else {
+                rating = 'ضعيف';
+                statusClass = 'status-poor';
+                document.querySelector('input[value="poor"]').checked = true;
+            }
+            
+            document.getElementById('final-rating').textContent = rating;
+            const statusIndicator = document.getElementById('status-indicator');
+            statusIndicator.className = 'status-indicator ' + statusClass;
+        }
+        
+        function resetForm() {
+            if (confirm('هل تريد إعادة تعيين جميع الحقول؟')) {
+                document.querySelectorAll('input, textarea, select').forEach(element => {
+                    if (element.type === 'radio' || element.type === 'checkbox') {
+                        element.checked = false;
+                    } else if (element.type !== 'button' && element.type !== 'submit') {
+                        element.value = '';
+                    }
+                });
+                
+                document.querySelectorAll('.rating-input').forEach(input => {
+                    input.value = '0';
+                });
+                
+                calculateTotal();
+                
+                // إعادة تعيين شريط التقدم
+                document.getElementById('overall-progress').style.width = '0%';
+            }
+        }
+        
+        function saveAsPDF() {
+            alert('سيتم حفظ النموذج كملف PDF.\n\nملاحظة: تحتاج إلى استخدام خدمة تحويل HTML إلى PDF أو الطباعة إلى PDF.');
+            window.print();
+        }
+        
+        // تهيئة الحقول التاريخية بتاريخ اليوم
+        const today = new Date().toISOString().split('T')[0];
+        document.querySelectorAll('input[type="date"]').forEach(input => {
+            if (!input.id) {
+                input.value = today;
+            }
+        });
+    </script>
 </body>
 </html>
