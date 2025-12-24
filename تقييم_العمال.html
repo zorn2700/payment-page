@@ -5,83 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام تقييم العمال - فالنسيا للرخام</title>
     <style>
-        /* أنماط احترافية للطباعة */
+        /* أنماط كلاسيكية احترافية */
         @page {
             size: A4;
             margin: 1cm;
         }
         
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #c19a53;
+            --accent-color: #2c5282;
+            --light-color: #f8f9fa;
+            --dark-color: #2d3748;
+            --success-color: #38a169;
+            --warning-color: #d69e2e;
+            --danger-color: #e53e3e;
+        }
+        
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Arial', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: white;
-            color: black;
+            background: #f5f7fa;
+            color: #2d3748;
             font-size: 11pt;
-            line-height: 1.4;
+            line-height: 1.5;
         }
         
         .header {
-            border-bottom: 3px double #000;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+            border-bottom: 3px double #c19a53;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
             position: relative;
+            background: linear-gradient(135deg, #1a365d, #2c5282);
+            color: white;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .header h1 {
             margin: 5px 0;
-            font-size: 18pt;
+            font-size: 22pt;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
         }
         
         .header h3 {
-            margin: 3px 0;
-            font-size: 11pt;
+            margin: 5px 0;
+            font-size: 12pt;
             font-weight: normal;
+            opacity: 0.9;
+        }
+        
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 20%;
+            right: 20%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #c19a53, transparent);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 8px 0;
-            font-size: 9pt;
+            margin: 12px 0;
+            font-size: 10pt;
             page-break-inside: avoid;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
         }
         
         th {
-            background: #f0f0f0;
-            padding: 6px 4px;
-            border: 1px solid #000;
+            background: linear-gradient(135deg, #1a365d, #2c5282);
+            color: white;
+            padding: 8px 6px;
+            border: 1px solid #2c5282;
             font-weight: bold;
             text-align: center;
+            font-family: 'Times New Roman', serif;
         }
         
         td {
-            padding: 5px 4px;
-            border: 1px solid #000;
+            padding: 7px 6px;
+            border: 1px solid #e2e8f0;
             vertical-align: middle;
         }
         
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
         .criteria-section {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             page-break-inside: avoid;
         }
         
         .section-title {
-            background: #e0e0e0;
-            padding: 5px 10px;
+            background: linear-gradient(135deg, #2d3748, #4a5568);
+            color: white;
+            padding: 8px 15px;
             font-weight: bold;
-            margin-bottom: 5px;
-            border-right: 4px solid #000;
+            margin-bottom: 8px;
+            border-right: 5px solid #c19a53;
+            border-radius: 4px;
+            font-family: 'Times New Roman', serif;
+            font-size: 12pt;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .input-small {
-            width: 50px;
-            padding: 2px;
+            width: 60px;
+            padding: 4px;
             text-align: center;
-            border: 1px solid #999;
+            border: 1px solid #cbd5e0;
             background: white;
-            font-size: 9pt;
+            font-size: 10pt;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        .input-small:focus {
+            border-color: #2c5282;
+            box-shadow: 0 0 0 2px rgba(44, 82, 130, 0.2);
+            outline: none;
         }
         
         .score-display {
@@ -89,112 +139,177 @@
             text-align: center;
             min-width: 40px;
             display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            background: #edf2f7;
+            border: 1px solid #cbd5e0;
         }
         
         .final-score {
-            background: #000;
+            background: linear-gradient(135deg, #1a365d, #2c5282);
             color: white;
-            padding: 8px 15px;
-            font-size: 14pt;
+            padding: 12px 25px;
+            font-size: 16pt;
             font-weight: bold;
             text-align: center;
-            margin: 10px auto;
+            margin: 15px auto;
             width: fit-content;
-            border-radius: 5px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-family: 'Times New Roman', serif;
         }
         
         .grade-box {
-            border: 2px solid #000;
-            padding: 10px;
-            margin: 10px 0;
-            background: #f9f9f9;
+            border: 2px solid #c19a53;
+            padding: 15px;
+            margin: 15px 0;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
         
         /* البونص */
         .bonus-section {
-            border: 2px solid #f39c12;
+            border: 2px solid #c19a53;
             padding: 15px;
-            margin: 15px 0;
-            background: #fff9e6;
-            border-radius: 8px;
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
         }
         
         .bonus-header {
-            background: #f39c12;
+            background: linear-gradient(135deg, #c19a53, #b8860b);
             color: white;
-            padding: 8px 15px;
+            padding: 10px 20px;
             font-weight: bold;
-            border-radius: 5px;
-            margin-bottom: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-family: 'Times New Roman', serif;
         }
         
         .bonus-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         
         .bonus-item {
-            background: white;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #f39c12;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
             text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .bonus-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            border-color: #c19a53;
         }
         
         .aed {
-            color: #2c3e50;
+            color: #1a365d;
             font-weight: bold;
+            font-family: 'Times New Roman', serif;
         }
         
         /* لوحة التحكم */
         .control-panel {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
+            background: linear-gradient(135deg, #1a365d, #2c5282);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .btn {
-            padding: 10px 20px;
-            margin: 8px;
+            padding: 12px 24px;
+            margin: 10px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 10px;
             transition: all 0.3s;
             font-size: 12pt;
+            min-width: 180px;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 0.5px;
         }
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
         
-        .btn-calculate { background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; }
-        .btn-bonus { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
-        .btn-telegram { 
-            background: linear-gradient(135deg, #0088cc, #00aced);
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-calculate { 
+            background: linear-gradient(135deg, #38a169, #2f855a); 
             color: white;
-            animation: pulse 2s infinite;
+            border: 1px solid #2f855a;
         }
-        .btn-print { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
-        .btn-reset { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; }
-        .btn-quick { background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .btn-bonus { 
+            background: linear-gradient(135deg, #d69e2e, #b7791f); 
+            color: white;
+            border: 1px solid #b7791f;
+        }
+        
+        .btn-telegram { 
+            background: linear-gradient(135deg, #2c5282, #1a365d);
+            color: white;
+            border: 1px solid #1a365d;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-telegram::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        .btn-print { 
+            background: linear-gradient(135deg, #4a5568, #2d3748); 
+            color: white;
+            border: 1px solid #2d3748;
+        }
+        
+        .btn-reset { 
+            background: linear-gradient(135deg, #e53e3e, #c53030); 
+            color: white;
+            border: 1px solid #c53030;
+        }
+        
+        .btn-quick { 
+            background: linear-gradient(135deg, #805ad5, #6b46c1); 
+            color: white;
+            border: 1px solid #6b46c1;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
         /* نافذة التليجرام */
@@ -205,10 +320,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.85);
             z-index: 10000;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(5px);
         }
         
         .modal-content {
@@ -216,10 +332,12 @@
             padding: 30px;
             border-radius: 15px;
             width: 90%;
-            max-width: 600px;
+            max-width: 700px;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border: 1px solid #c19a53;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         .telegram-chats {
@@ -230,22 +348,25 @@
         }
         
         .chat-option {
-            border: 2px solid #0088cc;
-            padding: 15px;
+            border: 2px solid #2c5282;
+            padding: 20px;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
             text-align: center;
+            background: #f8fafc;
         }
         
         .chat-option:hover {
-            background: #e8f4f8;
+            background: #e6f7ff;
             transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
         
         .chat-option.selected {
-            background: #0088cc;
+            background: #2c5282;
             color: white;
+            border-color: #1a365d;
         }
         
         .telegram-status {
@@ -255,16 +376,31 @@
             display: none;
             text-align: center;
             font-weight: bold;
+            font-size: 11pt;
         }
         
-        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .sending { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .success { 
+            background: linear-gradient(135deg, #c6f6d5, #9ae6b4); 
+            color: #22543d; 
+            border: 1px solid #68d391; 
+        }
+        
+        .error { 
+            background: linear-gradient(135deg, #fed7d7, #fc8181); 
+            color: #742a2a; 
+            border: 1px solid #fc8181; 
+        }
+        
+        .sending { 
+            background: linear-gradient(135deg, #bee3f8, #90cdf4); 
+            color: #2c5282; 
+            border: 1px solid #63b3ed; 
+        }
         
         /* معاينة الرسالة */
         .message-preview {
             background: #f8f9fa;
-            border: 2px dashed #0088cc;
+            border: 2px solid #c19a53;
             padding: 20px;
             margin: 20px 0;
             border-radius: 10px;
@@ -273,42 +409,139 @@
             white-space: pre-wrap;
             max-height: 300px;
             overflow-y: auto;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
         }
         
         /* معلومات البوت الثابت */
         .bot-info {
-            background: linear-gradient(135deg, #0088cc, #0056b3);
+            background: linear-gradient(135deg, #2c5282, #1a365d);
             color: white;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
-            margin: 15px 0;
+            margin: 20px 0;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .bot-info h4 {
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            font-family: 'Times New Roman', serif;
         }
         
+        /* تحسين حقول الإدخال */
+        input[type="text"], input[type="number"], textarea, select {
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            padding: 8px 10px;
+            font-size: 11pt;
+            transition: all 0.3s;
+            background: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+            border-color: #2c5282;
+            box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
+            outline: none;
+        }
+        
+        /* تحسين شريط التمرير */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* التواقيع */
+        .signature-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 2px solid #c19a53;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .signature-box {
+            border: 1px solid #cbd5e0;
+            padding: 15px;
+            height: 120px;
+            border-radius: 6px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+        }
+        
+        .signature-line {
+            border-bottom: 1px solid #2d3748;
+            margin-top: 30px;
+            padding-bottom: 5px;
+        }
+        
+        /* الطباعة */
         @media print {
             .no-print { display: none !important; }
-            body { font-size: 10pt; }
-            .control-panel { display: none; }
+            body { 
+                font-size: 10pt; 
+                background: white;
+                color: black;
+            }
+            .header {
+                background: white !important;
+                color: black !important;
+                border-bottom: 2px solid black;
+            }
+            .control-panel, .bot-info { display: none; }
+            table { box-shadow: none; }
+            .grade-box, .bonus-section { border: 1px solid black; }
+            .bonus-header { background: #f0f0f0 !important; color: black !important; }
+            .section-title { background: #f0f0f0 !important; color: black !important; }
+            th { background: #f0f0f0 !important; color: black !important; }
+            .final-score { background: #f0f0f0 !important; color: black !important; }
+        }
+        
+        /* استجابة للهواتف */
+        @media (max-width: 768px) {
+            .btn { min-width: 150px; padding: 10px 15px; }
+            .bonus-row { grid-template-columns: 1fr; }
+            .telegram-chats { grid-template-columns: 1fr; }
+            .control-panel { padding: 15px; }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- لوحة التحكم -->
     <div class="control-panel no-print">
         <div style="text-align: center; margin-bottom: 20px;">
-            <h2 style="margin: 0 0 10px 0;">
+            <h2 style="margin: 0 0 10px 0; font-family: 'Times New Roman', serif;">
                 <i class="fas fa-chart-line"></i> نظام تقييم أداء العمال
             </h2>
-            <h4 style="margin: 0; font-weight: normal; opacity: 0.9;">
+            <h4 style="margin: 0; font-weight: normal; opacity: 0.9; font-family: 'Times New Roman', serif;">
                 شركة فالنسيا للرخام والحجر الطبيعي
             </h4>
         </div>
@@ -329,6 +562,9 @@
             <button class="btn btn-reset" onclick="resetAll()">
                 <i class="fas fa-file-alt"></i> تقرير جديد
             </button>
+            <button class="btn btn-quick" onclick="fillTestData()">
+                <i class="fas fa-bolt"></i> بيانات تجريبية
+            </button>
         </div>
         
         <!-- معلومات البوت الثابت -->
@@ -336,7 +572,7 @@
             <h4>
                 <i class="fab fa-telegram"></i> بوت التليجرام الثابت
             </h4>
-            <div style="font-size: 10pt;">
+            <div style="font-size: 11pt;">
                 📱 البوت: <strong>@ValensiaEvBot</strong>
                 <br>
                 📞 للإشعارات الفورية والتقارير الآلية
@@ -356,27 +592,27 @@
         <table>
             <tr>
                 <td width="15%"><strong>اسم العامل:</strong></td>
-                <td width="30%"><input type="text" style="width:100%; border:none; border-bottom:1px solid #000;" id="emp-name" placeholder="الاسم الكامل"></td>
+                <td width="30%"><input type="text" style="width:100%;" id="emp-name" placeholder="الاسم الكامل"></td>
                 <td width="15%"><strong>رقم الهوية:</strong></td>
-                <td width="20%"><input type="text" style="width:100%; border:none; border-bottom:1px solid #000;" id="emp-id" placeholder="رقم الهوية"></td>
+                <td width="20%"><input type="text" style="width:100%;" id="emp-id" placeholder="رقم الهوية"></td>
                 <td width="10%"><strong>الراتب:</strong></td>
                 <td width="10%">
-                    <input type="text" style="width:100%; border:none; border-bottom:1px solid #000;" id="emp-salary" placeholder="0000">
+                    <input type="text" style="width:100%;" id="emp-salary" placeholder="0000">
                     <span class="aed"> AED</span>
                 </td>
             </tr>
             <tr>
                 <td><strong>الوظيفة:</strong></td>
-                <td><input type="text" style="width:100%; border:none; border-bottom:1px solid #000;" id="emp-job" placeholder="المسمى الوظيفي"></td>
+                <td><input type="text" style="width:100%;" id="emp-job" placeholder="المسمى الوظيفي"></td>
                 <td><strong>رقم الهاتف:</strong></td>
-                <td><input type="text" style="width:100%; border:none; border-bottom:1px solid #000;" id="emp-phone" placeholder="05XXXXXXXX"></td>
+                <td><input type="text" style="width:100%;" id="emp-phone" placeholder="05XXXXXXXX"></td>
                 <td><strong>التليجرام:</strong></td>
-                <td><input type="text" style="width:100%; border:none; border-bottom:1px solid #000;" id="emp-telegram" placeholder="@username"></td>
+                <td><input type="text" style="width:100%;" id="emp-telegram" placeholder="@username"></td>
             </tr>
             <tr>
                 <td><strong>المشرف المباشر:</strong></td>
                 <td>
-                    <select style="width:100%; border:none; border-bottom:1px solid #000;" id="supervisor" onchange="updateTelegramChats()">
+                    <select style="width:100%;" id="supervisor" onchange="updateTelegramChats()">
                         <option value="">اختر المشرف</option>
                         <option value="ابو طارق">أبو طارق - المحاسبة</option>
                         <option value="ركان">ركان - النقل والتوزيع</option>
@@ -386,7 +622,7 @@
                 </td>
                 <td><strong>القسم:</strong></td>
                 <td>
-                    <select style="width:100%; border:none; border-bottom:1px solid #000;" id="department">
+                    <select style="width:100%;" id="department">
                         <option value="">اختر القسم</option>
                         <option value="المحاسبة">المحاسبة</option>
                         <option value="النقل والتوزيع">النقل والتوزيع</option>
@@ -396,7 +632,7 @@
                 </td>
                 <td><strong>نوع التقييم:</strong></td>
                 <td>
-                    <select style="width:100%; border:none; border-bottom:1px solid #000;" id="eval-type">
+                    <select style="width:100%;" id="eval-type">
                         <option value="شهري">شهري</option>
                         <option value="ربع سنوي">ربع سنوي</option>
                         <option value="نصف سنوي">نصف سنوي</option>
@@ -416,21 +652,21 @@
             <div class="bonus-row">
                 <div class="bonus-item">
                     <strong>الراتب الأساسي:</strong><br>
-                    <input type="number" id="base-salary" style="width: 100px; text-align: center; font-size: 14pt;" value="4000" onchange="calculateBonus()">
+                    <input type="number" id="base-salary" style="width: 120px; text-align: center; font-size: 14pt; padding: 8px;" value="4000" onchange="calculateBonus()">
                     <span class="aed"> AED</span>
                 </div>
                 <div class="bonus-item">
                     <strong>نسبة البونص:</strong><br>
-                    <span id="bonus-percentage" style="font-size: 16pt; color: #27ae60;">0%</span>
+                    <span id="bonus-percentage" style="font-size: 18pt; color: #2f855a; font-weight: bold;">0%</span>
                 </div>
                 <div class="bonus-item">
                     <strong>قيمة البونص:</strong><br>
-                    <span id="bonus-amount" style="font-size: 16pt; color: #e67e22;">0</span>
+                    <span id="bonus-amount" style="font-size: 18pt; color: #b7791f; font-weight: bold;">0</span>
                     <span class="aed"> AED</span>
                 </div>
                 <div class="bonus-item">
                     <strong>الإجمالي النهائي:</strong><br>
-                    <span id="total-with-bonus" style="font-size: 16pt; color: #2c3e50;">0</span>
+                    <span id="total-with-bonus" style="font-size: 18pt; color: #1a365d; font-weight: bold;">0</span>
                     <span class="aed"> AED</span>
                 </div>
             </div>
@@ -516,21 +752,21 @@
                     </td>
                     <td style="border:none; width:25%; text-align:center;">
                         <strong>التقدير:</strong><br>
-                        <div id="final-grade" style="font-size:14pt; font-weight:bold; color:#2c3e50;">غير محدد</div>
+                        <div id="final-grade" style="font-size:14pt; font-weight:bold; color:#2c5282;">غير محدد</div>
                     </td>
                     <td style="border:none; width:25%; text-align:center;">
                         <strong>البونص المستحق:</strong><br>
-                        <div id="final-bonus" style="font-size:14pt; font-weight:bold; color:#27ae60;">0 AED</div>
+                        <div id="final-bonus" style="font-size:14pt; font-weight:bold; color:#b7791f;">0 AED</div>
                     </td>
                     <td style="border:none; width:25%; text-align:center;">
                         <strong>حالة التقرير:</strong><br>
-                        <div id="report-status" style="font-size:12pt; color:#3498db;">جاري الإعداد</div>
+                        <div id="report-status" style="font-size:12pt; color:#2c5282;">جاري الإعداد</div>
                     </td>
                 </tr>
             </table>
             
-            <div style="text-align:center; margin-top:15px; padding:10px; background:#f8f9fa; border-radius:5px;">
-                <div id="grade-description" style="font-size:10pt; color:#666;">لم يتم إكمال التقييم بعد</div>
+            <div style="text-align:center; margin-top:15px; padding:10px; background:#f8f9fa; border-radius:5px; border: 1px solid #e2e8f0;">
+                <div id="grade-description" style="font-size:10pt; color:#4a5568;">لم يتم إكمال التقييم بعد</div>
             </div>
         </div>
         
@@ -540,46 +776,52 @@
             <table>
                 <tr>
                     <td width="20%"><strong>نقاط القوة:</strong></td>
-                    <td><textarea style="width:100%; height:40px; border:none; font-size:9pt;" id="strengths" placeholder="أبرز الإنجازات ونقاط التميز..."></textarea></td>
+                    <td><textarea style="width:100%; height:50px; font-size:10pt;" id="strengths" placeholder="أبرز الإنجازات ونقاط التميز..."></textarea></td>
                 </tr>
                 <tr>
                     <td><strong>مجالات التحسين:</strong></td>
-                    <td><textarea style="width:100%; height:40px; border:none; font-size:9pt;" id="improvements" placeholder="المجالات التي تحتاج إلى تطوير..."></textarea></td>
+                    <td><textarea style="width:100%; height:50px; font-size:10pt;" id="improvements" placeholder="المجالات التي تحتاج إلى تطوير..."></textarea></td>
                 </tr>
                 <tr>
                     <td><strong>خطة التطوير:</strong></td>
-                    <td><textarea style="width:100%; height:40px; border:none; font-size:9pt;" id="development-plan" placeholder="الخطوات المقترحة للتطوير..."></textarea></td>
+                    <td><textarea style="width:100%; height:50px; font-size:10pt;" id="development-plan" placeholder="الخطوات المقترحة للتطوير..."></textarea></td>
                 </tr>
                 <tr>
                     <td><strong>توصيات المشرف:</strong></td>
-                    <td><textarea style="width:100%; height:40px; border:none; font-size:9pt;" id="supervisor-notes" placeholder="ملاحظات وتوصيات المشرف..."></textarea></td>
+                    <td><textarea style="width:100%; height:50px; font-size:10pt;" id="supervisor-notes" placeholder="ملاحظات وتوصيات المشرف..."></textarea></td>
                 </tr>
             </table>
         </div>
         
         <!-- التواقيع -->
-        <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #000;">
+        <div class="signature-section">
             <table style="border: none;">
                 <tr>
                     <td style="border: none; text-align: center; width: 33%;">
-                        <strong>توقيع المشرف المباشر</strong><br><br>
-                        <div style="border-bottom: 1px solid #000; width: 80%; margin: 0 auto; height: 40px;"></div>
-                        <div style="margin-top: 5px;">الاسم: ________________</div>
-                        <div>التاريخ: ________________</div>
-                    </td>
-                    <td style="border: none; text-align: center; width: 33%;">
-                        <strong>توقيع مدير القسم</strong><br><br>
-                        <div style="border-bottom: 1px solid #000; width: 80%; margin: 0 auto; height: 40px;"></div>
-                        <div style="margin-top: 5px;">الاسم: ________________</div>
-                        <div>التاريخ: ________________</div>
-                    </td>
-                    <td style="border: none; text-align: center; width: 33%;">
-                        <strong>ختم الموارد البشرية</strong><br><br>
-                        <div style="border: 2px dashed #000; width: 80%; margin: 0 auto; height: 40px; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-stamp" style="font-size: 20pt; color: #666;"></i>
+                        <div class="signature-box">
+                            <strong>توقيع المشرف المباشر</strong>
+                            <div class="signature-line"></div>
+                            <div style="margin-top: 5px;">الاسم: ________________</div>
+                            <div>التاريخ: ________________</div>
                         </div>
-                        <div style="margin-top: 5px;">الاسم: ________________</div>
-                        <div>التاريخ: ________________</div>
+                    </td>
+                    <td style="border: none; text-align: center; width: 33%;">
+                        <div class="signature-box">
+                            <strong>توقيع مدير القسم</strong>
+                            <div class="signature-line"></div>
+                            <div style="margin-top: 5px;">الاسم: ________________</div>
+                            <div>التاريخ: ________________</div>
+                        </div>
+                    </td>
+                    <td style="border: none; text-align: center; width: 33%;">
+                        <div class="signature-box">
+                            <strong>ختم الموارد البشرية</strong>
+                            <div style="margin-top: 15px; font-size: 24pt; color: #c19a53;">
+                                <i class="fas fa-stamp"></i>
+                            </div>
+                            <div style="margin-top: 10px;">الاسم: ________________</div>
+                            <div>التاريخ: ________________</div>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -589,50 +831,50 @@
     <!-- نافذة التليجرام -->
     <div class="telegram-modal" id="telegramModal">
         <div class="modal-content">
-            <h2 style="text-align: center; color: #0088cc; margin-bottom: 20px;">
+            <h2 style="text-align: center; color: #2c5282; margin-bottom: 20px; font-family: 'Times New Roman', serif;">
                 <i class="fab fa-telegram"></i> إرسال التقرير عبر التليجرام
             </h2>
             
             <!-- معلومات البوت -->
-            <div style="background: #f0f8ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
-                <h4 style="margin: 0 0 10px 0; color: #0088cc;">
+            <div style="background: #f0f8ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; border: 1px solid #bee3f8;">
+                <h4 style="margin: 0 0 10px 0; color: #2c5282; font-family: 'Times New Roman', serif;">
                     <i class="fas fa-robot"></i> البوت الثابت: @ValenciaEvBot
                 </h4>
-                <div style="font-size: 10pt; color: #555;">
+                <div style="font-size: 11pt; color: #4a5568;">
                     تم ضبط إعدادات البوت مسبقاً للإرسال التلقائي
                 </div>
             </div>
             
             <!-- اختيار الدردشات -->
-            <h4><i class="fas fa-users"></i> اختر الجهات المراد الإرسال لها:</h4>
+            <h4 style="font-family: 'Times New Roman', serif;"><i class="fas fa-users"></i> اختر الجهات المراد الإرسال لها:</h4>
             <div class="telegram-chats" id="telegramChats">
                 <div class="chat-option" onclick="toggleChatSelection(this)" data-chat="hr">
-                    <i class="fas fa-user-tie" style="font-size: 24pt; margin-bottom: 10px;"></i><br>
+                    <i class="fas fa-user-tie" style="font-size: 28pt; margin-bottom: 10px; color: #2c5282;"></i><br>
                     <strong>الموارد البشرية</strong><br>
-                    <small style="color: #666;">@Valencia_HR</small>
+                    <small style="color: #718096;">@Valencia_HR</small>
                 </div>
                 
                 <div class="chat-option" onclick="toggleChatSelection(this)" data-chat="supervisor">
-                    <i class="fas fa-user-hard-hat" style="font-size: 24pt; margin-bottom: 10px;"></i><br>
+                    <i class="fas fa-user-hard-hat" style="font-size: 28pt; margin-bottom: 10px; color: #2c5282;"></i><br>
                     <strong>المشرف المباشر</strong><br>
-                    <small style="color: #666;">سيتم الإرسال تلقائياً</small>
+                    <small style="color: #718096;">سيتم الإرسال تلقائياً</small>
                 </div>
                 
                 <div class="chat-option" onclick="toggleChatSelection(this)" data-chat="employee">
-                    <i class="fas fa-user" style="font-size: 24pt; margin-bottom: 10px;"></i><br>
+                    <i class="fas fa-user" style="font-size: 28pt; margin-bottom: 10px; color: #2c5282;"></i><br>
                     <strong>العامل نفسه</strong><br>
-                    <small style="color: #666;">(إذا كان لديه تليجرام)</small>
+                    <small style="color: #718096;">(إذا كان لديه تليجرام)</small>
                 </div>
                 
                 <div class="chat-option" onclick="toggleChatSelection(this)" data-chat="management">
-                    <i class="fas fa-chart-line" style="font-size: 24pt; margin-bottom: 10px;"></i><br>
+                    <i class="fas fa-chart-line" style="font-size: 28pt; margin-bottom: 10px; color: #2c5282;"></i><br>
                     <strong>الإدارة العليا</strong><br>
-                    <small style="color: #666;">@Valencia_Management</small>
+                    <small style="color: #718096;">@Valencia_Management</small>
                 </div>
             </div>
             
             <!-- معاينة الرسالة -->
-            <h4 style="margin-top: 25px;">
+            <h4 style="margin-top: 25px; font-family: 'Times New Roman', serif;">
                 <i class="fas fa-eye"></i> معاينة الرسالة قبل الإرسال:
             </h4>
             <div class="message-preview" id="messagePreview">
@@ -647,13 +889,13 @@
                 <button class="btn btn-telegram" onclick="sendToTelegram()" style="padding: 12px 30px; font-size: 14pt;">
                     <i class="fab fa-telegram"></i> تأكيد الإرسال
                 </button>
-                <button class="btn" onclick="closeTelegramModal()" style="background: #95a5a6; color: white; padding: 12px 30px; font-size: 14pt;">
+                <button class="btn" onclick="closeTelegramModal()" style="background: #a0aec0; color: white; padding: 12px 30px; font-size: 14pt; border: 1px solid #718096;">
                     <i class="fas fa-times"></i> إلغاء
                 </button>
             </div>
             
             <!-- معلومات إضافية -->
-            <div style="text-align: center; margin-top: 20px; font-size: 9pt; color: #777;">
+            <div style="text-align: center; margin-top: 20px; font-size: 10pt; color: #718096;">
                 <i class="fas fa-info-circle"></i> سيتم إرسال الرسائل باسم الشخص المحدد في النموذج
             </div>
         </div>
