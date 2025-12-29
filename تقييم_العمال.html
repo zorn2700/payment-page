@@ -8,7 +8,7 @@
         /* أنماط كلاسيكية احترافية */
         @page {
             size: A4;
-            margin: 1cm;
+            margin: 0.5cm;
         }
         
         :root {
@@ -17,9 +17,6 @@
             --accent-color: #2c5282;
             --light-color: #f8f9fa;
             --dark-color: #2d3748;
-            --success-color: #38a169;
-            --warning-color: #d69e2e;
-            --danger-color: #e53e3e;
         }
         
         body {
@@ -28,71 +25,62 @@
             padding: 0;
             background: #f5f7fa;
             color: #2d3748;
-            font-size: 11pt;
-            line-height: 1.5;
+            font-size: 10pt; /* تصغير الخط ليتناسب مع صفحة واحدة */
+            line-height: 1.4;
         }
         
         .header {
             border-bottom: 3px double #c19a53;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
             text-align: center;
             position: relative;
             background: linear-gradient(135deg, #1a365d, #2c5282);
             color: white;
-            padding: 20px;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 10px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         .header h1 {
-            margin: 5px 0;
-            font-size: 22pt;
+            margin: 3px 0;
+            font-size: 18pt;
             font-family: 'Times New Roman', serif;
             letter-spacing: 1px;
         }
         
         .header h3 {
-            margin: 5px 0;
-            font-size: 12pt;
+            margin: 3px 0;
+            font-size: 10pt;
             font-weight: normal;
             opacity: 0.9;
-        }
-        
-        .header::after {
-            content: "";
-            position: absolute;
-            bottom: -3px;
-            left: 20%;
-            right: 20%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #c19a53, transparent);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 12px 0;
-            font-size: 10pt;
+            margin: 6px 0;
+            font-size: 8pt; /* تصغير خط الجداول */
             page-break-inside: avoid;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
         }
         
         th {
             background: linear-gradient(135deg, #1a365d, #2c5282);
             color: white;
-            padding: 8px 6px;
+            padding: 4px 3px;
             border: 1px solid #2c5282;
             font-weight: bold;
             text-align: center;
             font-family: 'Times New Roman', serif;
+            font-size: 9pt;
         }
         
         td {
-            padding: 7px 6px;
+            padding: 4px 3px;
             border: 1px solid #e2e8f0;
             vertical-align: middle;
+            font-size: 8pt;
         }
         
         tr:nth-child(even) {
@@ -100,31 +88,30 @@
         }
         
         .criteria-section {
-            margin-bottom: 20px;
+            margin-bottom: 8px;
             page-break-inside: avoid;
         }
         
         .section-title {
             background: linear-gradient(135deg, #2d3748, #4a5568);
             color: white;
-            padding: 8px 15px;
+            padding: 4px 8px;
             font-weight: bold;
-            margin-bottom: 8px;
-            border-right: 5px solid #c19a53;
-            border-radius: 4px;
+            margin-bottom: 4px;
+            border-right: 4px solid #c19a53;
+            border-radius: 3px;
             font-family: 'Times New Roman', serif;
-            font-size: 12pt;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 9.5pt;
         }
         
         .input-small {
-            width: 70px;
-            padding: 5px;
+            width: 55px;
+            padding: 2px;
             text-align: center;
             border: 1px solid #cbd5e0;
             background: white;
-            font-size: 10pt;
-            border-radius: 3px;
+            font-size: 8.5pt;
+            border-radius: 2px;
             transition: all 0.3s;
         }
         
@@ -137,73 +124,69 @@
         .score-display {
             font-weight: bold;
             text-align: center;
-            min-width: 50px;
+            min-width: 35px;
             display: inline-block;
-            padding: 4px 8px;
-            border-radius: 3px;
+            padding: 1px 3px;
+            border-radius: 2px;
             background: #edf2f7;
             border: 1px solid #cbd5e0;
+            font-size: 8.5pt;
         }
         
+        /* تصغير حجم خانة التقييم النهائي */
         .final-score {
             background: linear-gradient(135deg, #1a365d, #2c5282);
             color: white;
-            padding: 12px 25px;
-            font-size: 16pt;
+            padding: 4px 8px;
+            font-size: 10pt;
             font-weight: bold;
             text-align: center;
-            margin: 15px auto;
+            margin: 3px auto;
             width: fit-content;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 4px;
             font-family: 'Times New Roman', serif;
         }
         
         .grade-box {
-            border: 2px solid #c19a53;
-            padding: 15px;
-            margin: 15px 0;
+            border: 1px solid #c19a53;
+            padding: 6px;
+            margin: 6px 0;
             background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         
         /* لوحة التحكم */
         .control-panel {
             background: linear-gradient(135deg, #1a365d, #2c5282);
             color: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             border: 1px solid rgba(255,255,255,0.1);
         }
         
         .btn {
-            padding: 12px 24px;
-            margin: 10px;
+            padding: 6px 12px;
+            margin: 5px;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 5px;
             transition: all 0.3s;
-            font-size: 12pt;
-            min-width: 180px;
+            font-size: 9.5pt;
+            min-width: 130px;
             font-family: 'Times New Roman', serif;
-            letter-spacing: 0.5px;
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-        }
-        
-        .btn:active {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
         }
         
         .btn-calculate { 
@@ -216,20 +199,6 @@
             background: linear-gradient(135deg, #2c5282, #1a365d);
             color: white;
             border: 1px solid #1a365d;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-telegram::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
         }
         
         .btn-print { 
@@ -238,21 +207,103 @@
             border: 1px solid #2d3748;
         }
         
-        .btn-reset { 
-            background: linear-gradient(135deg, #e53e3e, #c53030); 
-            color: white;
-            border: 1px solid #c53030;
+        /* تحسين حقول الإدخال */
+        input[type="text"], input[type="number"], textarea, select {
+            border: 1px solid #cbd5e0;
+            border-radius: 3px;
+            padding: 4px 5px;
+            font-size: 8.5pt;
+            transition: all 0.3s;
+            background: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        .btn-quick { 
-            background: linear-gradient(135deg, #805ad5, #6b46c1); 
-            color: white;
-            border: 1px solid #6b46c1;
+        /* تحسين حقول الملاحظات */
+        textarea.note-field {
+            width: 100% !important;
+            min-height: 60px !important; /* تصغير الارتفاع ليتناسب مع صفحة واحدة */
+            font-size: 8.5pt !important;
+            line-height: 1.3 !important;
+            resize: vertical !important;
+            padding: 5px !important;
+            border: 1px solid #cbd5e0 !important;
+            border-radius: 3px !important;
+            background: white !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            transition: all 0.3s !important;
         }
         
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        textarea.note-field:focus {
+            border-color: #2c5282 !important;
+            box-shadow: 0 0 0 2px rgba(44, 82, 130, 0.1) !important;
+            outline: none !important;
+        }
+        
+        /* التواقيع - تصميم مضغوط */
+        .signature-section {
+            margin-top: 12px;
+            padding-top: 8px;
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 5px;
+            border-top: 2px solid #c19a53;
+        }
+        
+        .signature-box {
+            border: 1px solid #cbd5e0;
+            padding: 8px;
+            height: 90px !important; /* تصغير الارتفاع ليتناسب مع صفحة واحدة */
+            border-radius: 4px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        /* تحسين الخط الفاصل للتواقيع */
+        .signature-line {
+            border-bottom: 1px solid #2d3748;
+            margin-top: 12px;
+            padding-bottom: 4px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .signature-box strong {
+            font-size: 9pt !important;
+            color: #1a365d;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 3px;
+            display: block;
+        }
+        
+        .signature-box div {
+            font-size: 8pt !important;
+            margin-top: 2px !important;
+            color: #4a5568;
+        }
+        
+        .signature-box i.fa-stamp {
+            font-size: 18pt !important;
+            color: #c19a53 !important;
+            margin-top: 5px !important;
+            opacity: 0.9;
+        }
+        
+        /* تحسين صفوف الملاحظات */
+        .notes-row td {
+            padding-top: 6px !important;
+            padding-bottom: 6px !important;
+            vertical-align: top !important;
+        }
+        
+        .notes-row td:first-child {
+            width: 20% !important;
+            vertical-align: middle !important;
+            background: #f8fafc !important;
+            font-weight: bold !important;
         }
         
         /* نافذة التليجرام */
@@ -263,211 +314,425 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 10000;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
         }
         
         .modal-content {
             background: white;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 8px;
             width: 90%;
-            max-width: 700px;
-            max-height: 90vh;
+            max-width: 500px;
+            max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            border: 1px solid #c19a53;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         .telegram-chats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
         }
         
         .chat-option {
-            border: 2px solid #2c5282;
-            padding: 20px;
-            border-radius: 10px;
+            width: 30%;
+            padding: 10px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
-            text-align: center;
-            background: #f8fafc;
         }
         
         .chat-option:hover {
-            background: #e6f7ff;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-color: #2c5282;
+            background: #f7fafc;
         }
         
         .chat-option.selected {
-            background: #2c5282;
-            color: white;
-            border-color: #1a365d;
+            border-color: #2c5282;
+            background: #edf2f7;
+        }
+        
+        .message-preview {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 9pt;
+            white-space: pre-wrap;
+            max-height: 150px;
+            overflow-y: auto;
+            margin: 10px 0;
         }
         
         .telegram-status {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 10px 0;
             display: none;
-            text-align: center;
             font-weight: bold;
-            font-size: 11pt;
         }
         
-        .success { 
-            background: linear-gradient(135deg, #c6f6d5, #9ae6b4); 
-            color: #22543d; 
-            border: 1px solid #68d391; 
+        .telegram-status.sending {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
         }
         
-        .error { 
-            background: linear-gradient(135deg, #fed7d7, #fc8181); 
-            color: #742a2a; 
-            border: 1px solid #fc8181; 
+        .telegram-status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
         
-        .sending { 
-            background: linear-gradient(135deg, #bee3f8, #90cdf4); 
-            color: #2c5282; 
-            border: 1px solid #63b3ed; 
+        .telegram-status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
         
-        /* معاينة الرسالة */
-        .message-preview {
-            background: #f8f9fa;
-            border: 2px solid #c19a53;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 10pt;
-            white-space: pre-wrap;
-            max-height: 300px;
-            overflow-y: auto;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        }
-        
-        /* معلومات البوت الثابت */
-        .bot-info {
-            background: linear-gradient(135deg, #2c5282, #1a365d);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .bot-info h4 {
-            margin: 0 0 15px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-family: 'Times New Roman', serif;
-        }
-        
-        /* تحسين حقول الإدخال */
-        input[type="text"], input[type="number"], textarea, select {
-            border: 1px solid #cbd5e0;
-            border-radius: 4px;
-            padding: 8px 10px;
-            font-size: 11pt;
-            transition: all 0.3s;
-            background: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
-            border-color: #2c5282;
-            box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
-            outline: none;
-        }
-        
-        /* تحسين شريط التمرير */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-        
-        /* التواقيع */
-        .signature-section {
-            margin-top: 40px;
-            padding-top: 25px;
-            border-top: 2px solid #c19a53;
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        
-        .signature-box {
-            border: 1px solid #cbd5e0;
-            padding: 15px;
-            height: 120px;
-            border-radius: 6px;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            position: relative;
-        }
-        
-        .signature-line {
-            border-bottom: 1px solid #2d3748;
-            margin-top: 30px;
-            padding-bottom: 5px;
-        }
-        
-        /* الطباعة */
+        /* الطباعة - تصميم ورقة واحدة مضغوطة */
         @media print {
-            .no-print { display: none !important; }
-            body { 
-                font-size: 10pt; 
-                background: white;
-                color: black;
+            @page {
+                size: A4 portrait;
+                margin: 0.2cm !important;
             }
+            
+            body {
+                font-size: 7pt !important;
+                background: white !important;
+                color: black !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                line-height: 1.15 !important;
+            }
+            
+            .no-print { 
+                display: none !important; 
+            }
+            
+            #evaluationForm {
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                transform: scale(0.98); /* تصغير طفيف ليتناسب مع الصفحة */
+                transform-origin: top center;
+            }
+            
             .header {
                 background: white !important;
                 color: black !important;
-                border-bottom: 2px solid black;
+                padding: 4px !important;
+                margin-bottom: 3px !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border-bottom: 1px solid black !important;
             }
-            .control-panel, .bot-info { display: none; }
-            table { box-shadow: none; }
-            .grade-box { border: 1px solid black; }
-            .section-title { background: #f0f0f0 !important; color: black !important; }
-            th { background: #f0f0f0 !important; color: black !important; }
-            .final-score { background: #f0f0f0 !important; color: black !important; }
+            
+            .header h1 {
+                font-size: 12pt !important;
+                margin: 1px 0 !important;
+            }
+            
+            .header h3 {
+                font-size: 7pt !important;
+                margin: 1px 0 !important;
+            }
+            
+            .control-panel, .telegram-modal { 
+                display: none !important; 
+            }
+            
+            table { 
+                box-shadow: none !important;
+                border: 1px solid black !important;
+                font-size: 6.5pt !important;
+                margin: 1px 0 !important;
+            }
+            
+            th {
+                background: #f0f0f0 !important;
+                color: black !important;
+                border: 1px solid black !important;
+                padding: 2px 1px !important;
+                font-size: 7pt !important;
+            }
+            
+            td {
+                border: 1px solid black !important;
+                padding: 2px 1px !important;
+                font-size: 6.5pt !important;
+            }
+            
+            .grade-box { 
+                border: 1px solid black !important;
+                padding: 3px !important;
+                margin: 3px 0 !important;
+                box-shadow: none !important;
+            }
+            
+            .section-title { 
+                background: #f0f0f0 !important; 
+                color: black !important; 
+                padding: 2px 5px !important;
+                margin-bottom: 1px !important;
+                border-right: 2px solid black !important;
+                font-size: 7.5pt !important;
+            }
+            
+            /* تصغير خانة التقييم النهائي في الطباعة */
+            .final-score { 
+                background: #f0f0f0 !important; 
+                color: black !important; 
+                padding: 2px 4px !important;
+                margin: 1px auto !important;
+                font-size: 7pt !important;
+                box-shadow: none !important;
+                border-radius: 2px !important;
+            }
+            
+            /* إخفاء حقول الإدخال وإظهار القيم في الطباعة */
+            input[type="text"], 
+            input[type="number"], 
+            textarea, 
+            select,
+            .input-small {
+                border: none !important;
+                background: transparent !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: auto !important;
+                box-shadow: none !important;
+                pointer-events: none;
+                font-size: 6.5pt !important;
+            }
+            
+            /* تعديل الملاحظات للطباعة */
+            textarea.note-field {
+                border: 1px solid #ccc !important;
+                background: #f9f9f9 !important;
+                min-height: 35px !important;
+                max-height: 40px !important;
+                padding: 2px !important;
+                font-size: 6.5pt !important;
+                line-height: 1.1 !important;
+                overflow: hidden !important;
+                white-space: pre-wrap !important;
+                word-wrap: break-word !important;
+            }
+            
+            .input-small {
+                border: 1px solid #ccc !important;
+                background: #f9f9f9 !important;
+            }
+            
+            /* تحسين عرض النتائج */
+            .score-display {
+                border: 1px solid #ccc !important;
+                background: #f9f9f9 !important;
+                color: black !important;
+                font-size: 6.5pt !important;
+                padding: 1px 2px !important;
+            }
+            
+            /* إزالة ألوان الخلفية من الصفوف */
+            tr:nth-child(even),
+            tr:nth-child(odd) {
+                background: white !important;
+            }
+            
+            /* إبقاء ألوان خلفية المجاميع الجزئية */
+            tr[style*="background"] td {
+                background: inherit !important;
+            }
+            
+            /* تحسين التواقيع للطباعة */
+            .signature-section {
+                margin-top: 8px !important;
+                padding-top: 6px !important;
+                background: white !important;
+                padding: 6px !important;
+                border-top: 1px solid black !important;
+                page-break-inside: avoid !important;
+            }
+            
+            .signature-box {
+                border: 1px solid black !important;
+                background: white !important;
+                height: 70px !important;
+                padding: 4px !important;
+            }
+            
+            .signature-line {
+                margin-top: 8px !important;
+                border-bottom: 1px solid black !important;
+                width: 70% !important;
+            }
+            
+            .signature-box strong {
+                font-size: 7pt !important;
+            }
+            
+            .signature-box div {
+                font-size: 6.5pt !important;
+            }
+            
+            .signature-box i.fa-stamp {
+                font-size: 12pt !important;
+            }
+            
+            /* منع تكرار الرأس والتذييل */
+            thead { display: table-header-group; }
+            tfoot { display: table-footer-group; }
+            
+            /* منع انقسام الجداول بين الصفحات */
+            table, tr, td, th {
+                page-break-inside: avoid !important;
+                page-break-after: auto !important;
+                page-break-before: auto !important;
+            }
+            
+            /* ضبط الارتفاعات للطباعة */
+            .criteria-section {
+                margin-bottom: 3px !important;
+                page-break-inside: avoid !important;
+            }
+            
+            /* ضبط هوامش النص */
+            h1, h2, h3, h4 {
+                margin: 1px 0 !important;
+            }
+            
+            /* طباعة المعلومات كقيم ثابتة */
+            .print-value {
+                display: inline !important;
+            }
+            
+            /* معلومات النظام في الطباعة */
+            .print-only {
+                font-size: 5.5pt !important;
+                margin-top: 4px !important;
+                padding-top: 2px !important;
+                border-top: 1px solid #ccc !important;
+            }
+            
+            /* إزالة الحدود الزائدة من خانة النتيجة */
+            .grade-box table {
+                border: none !important;
+            }
+            
+            .grade-box table td {
+                border: none !important;
+                padding: 1px !important;
+            }
+            
+            /* ضغط عناصر النتيجة النهائية */
+            #final-grade-text {
+                font-size: 8pt !important;
+                margin: 1px 0 !important;
+            }
+            
+            #report-status {
+                font-size: 7pt !important;
+                margin: 1px 0 !important;
+            }
+            
+            #grade-description {
+                font-size: 6.5pt !important;
+                padding: 2px !important;
+                margin: 1px 0 !important;
+            }
+            
+            /* تقليل حجم النتائج الجزئية */
+            #tech-total-grade, #disc-total-grade, #behav-total-grade, #dev-total-grade,
+            #tech-total-points, #disc-total-points, #behav-total-points, #dev-total-points,
+            #tech-total-percent, #disc-total-percent, #behav-total-percent, #dev-total-percent {
+                font-size: 7pt !important;
+            }
+            
+            /* تقليل حجم النتيجة النهائية */
+            #final-grade, #final-points, #final-percent {
+                font-size: 7.5pt !important;
+            }
+            
+            /* ضغط الجدول الرئيسي */
+            #all-criteria td:nth-child(2) {
+                font-size: 6pt !important;
+                padding-right: 3px !important;
+            }
+            
+            /* تقليل ارتفاع صفوف الجدول */
+            tr {
+                line-height: 1 !important;
+            }
         }
         
         /* استجابة للهواتف */
         @media (max-width: 768px) {
-            .btn { min-width: 150px; padding: 10px 15px; }
-            .telegram-chats { grid-template-columns: 1fr; }
-            .control-panel { padding: 15px; }
+            .btn { min-width: 110px; padding: 5px 8px; font-size: 9pt; }
+            .control-panel { padding: 10px; }
+            .input-small { width: 45px; }
+            
+            /* تعديل الملاحظات للهواتف */
+            textarea.note-field {
+                min-height: 50px !important;
+                font-size: 8pt !important;
+            }
+            
+            /* تعديل التواقيع للهواتف */
+            .signature-box {
+                height: 80px !important;
+                padding: 6px !important;
+            }
+        }
+        
+        /* تحسين عرض خانة النتيجة النهائية في العرض العادي */
+        .grade-box table {
+            border: none !important;
+            margin-bottom: 3px !important;
+        }
+        
+        .grade-box table td {
+            border: none !important;
+            padding: 1px !important;
+        }
+        
+        #grade-description {
+            padding-top: 3px !important;
+            margin-top: 3px !important;
+            font-size: 8.5pt !important;
+        }
+        
+        /* تحسينات للطباعة على صفحة واحدة */
+        @media print {
+            /* إجبار كل المحتوى على الصفحة الأولى */
+            #evaluationForm > div:not(.no-print) {
+                page-break-inside: avoid !important;
+                page-break-after: auto !important;
+                page-break-before: auto !important;
+                max-height: none !important;
+            }
+            
+            /* تقليل مسافة الملاحظات */
+            .criteria-section:last-of-type table {
+                margin-bottom: 3px !important;
+            }
+            
+            .criteria-section:last-of-type table td:first-child {
+                width: 18% !important;
+            }
+            
+            /* ضغط النتيجة النهائية */
+            .grade-box > div:last-child {
+                margin-top: 2px !important;
+                padding: 2px !important;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -475,11 +740,11 @@
 <body>
     <!-- لوحة التحكم -->
     <div class="control-panel no-print">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <h2 style="margin: 0 0 10px 0; font-family: 'Times New Roman', serif;">
+        <div style="text-align: center; margin-bottom: 10px;">
+            <h2 style="margin: 0 0 5px 0; font-family: 'Times New Roman', serif; font-size: 13pt;">
                 <i class="fas fa-chart-line"></i> نظام تقييم أداء العمال
             </h2>
-            <h4 style="margin: 0; font-weight: normal; opacity: 0.9; font-family: 'Times New Roman', serif;">
+            <h4 style="margin: 0; font-weight: normal; opacity: 0.9; font-family: 'Times New Roman', serif; font-size: 9.5pt;">
                 شركة فالنسيا للرخام والحجر الطبيعي
             </h4>
         </div>
@@ -494,60 +759,43 @@
             <button class="btn btn-print" onclick="prepareAndPrint()">
                 <i class="fas fa-print"></i> طباعة التقرير
             </button>
-            <button class="btn btn-reset" onclick="resetAll()">
-                <i class="fas fa-file-alt"></i> تقرير جديد
-            </button>
-            <button class="btn btn-quick" onclick="fillTestData()">
-                <i class="fas fa-bolt"></i> بيانات تجريبية
-            </button>
-        </div>
-        
-        <!-- معلومات البوت الثابت -->
-        <div class="bot-info">
-            <h4>
-                <i class="fab fa-telegram"></i> بوت التليجرام الثابت
-            </h4>
-            <div style="font-size: 11pt;">
-                📱 البوت: <strong>@ValensiaEvBot</strong>
-                <br>
-                📞 للإشعارات الفورية والتقارير الآلية
-            </div>
         </div>
     </div>
     
     <!-- نموذج المحتوى -->
     <div id="evaluationForm">
+        <!-- الترويسة -->
         <div class="header">
             <h1>تقرير تقييم أداء العمال</h1>
             <h3>شركة فالنسيا للرخام والحجر الطبيعي</h3>
-            <h3>التاريخ: <span id="current-date"></span> | المرجع: VAL-<span id="eval-number">001</span></h3>
+            <h3>التاريخ: <span id="current-date" class="print-value"></span> | الرقم التسلسلي: <span id="serial-number" class="print-value">VAL-000001</span></h3>
         </div>
         
         <!-- معلومات الموظف -->
-        <table>
+        <table style="margin-bottom: 5px;">
             <tr>
                 <td width="15%"><strong>اسم العامل:</strong></td>
-                <td width="30%"><input type="text" style="width:100%;" id="emp-name" placeholder="الاسم الكامل"></td>
+                <td width="30%"><input type="text" style="width:100%;" id="emp-name" placeholder="الاسم الكامل" class="print-field"></td>
                 <td width="15%"><strong>رقم الهوية:</strong></td>
-                <td width="20%"><input type="text" style="width:100%;" id="emp-id" placeholder="رقم الهوية"></td>
+                <td width="20%"><input type="text" style="width:100%;" id="emp-id" placeholder="رقم الهوية" class="print-field"></td>
                 <td width="10%"><strong>الراتب:</strong></td>
                 <td width="10%">
-                    <input type="text" style="width:100%;" id="emp-salary" placeholder="0000">
+                    <input type="text" style="width:100%;" id="emp-salary" placeholder="0000" class="print-field">
                     <span style="color:#1a365d; font-weight:bold;"> AED</span>
                 </td>
             </tr>
             <tr>
                 <td><strong>الوظيفة:</strong></td>
-                <td><input type="text" style="width:100%;" id="emp-job" placeholder="المسمى الوظيفي"></td>
+                <td><input type="text" style="width:100%;" id="emp-job" placeholder="المسمى الوظيفي" class="print-field"></td>
                 <td><strong>رقم الهاتف:</strong></td>
-                <td><input type="text" style="width:100%;" id="emp-phone" placeholder="05XXXXXXXX"></td>
+                <td><input type="text" style="width:100%;" id="emp-phone" placeholder="05XXXXXXXX" class="print-field"></td>
                 <td><strong>التليجرام:</strong></td>
-                <td><input type="text" style="width:100%;" id="emp-telegram" placeholder="@username"></td>
+                <td><input type="text" style="width:100%;" id="emp-telegram" placeholder="@username" class="print-field"></td>
             </tr>
             <tr>
-                <td><strong>المشرف المباشر:</strong></td>
-                <td>
-                    <select style="width:100%;" id="supervisor" onchange="updateTelegramChats()">
+                <td width="15%"><strong>المشرف المباشر:</strong></td>
+                <td width="30%">
+                    <select style="width:100%;" id="supervisor" class="print-field">
                         <option value="">اختر المشرف</option>
                         <option value="ابو طارق">أبو طارق - المحاسبة</option>
                         <option value="ركان">ركان - النقل والتوزيع</option>
@@ -555,9 +803,9 @@
                         <option value="عمر الرفاعي">عمر الرفاعي - التخطيط</option>
                     </select>
                 </td>
-                <td><strong>القسم:</strong></td>
-                <td>
-                    <select style="width:100%;" id="department">
+                <td width="15%"><strong>القسم:</strong></td>
+                <td width="20%">
+                    <select style="width:100%;" id="department" class="print-field">
                         <option value="">اختر القسم</option>
                         <option value="المحاسبة">المحاسبة</option>
                         <option value="النقل والتوزيع">النقل والتوزيع</option>
@@ -565,9 +813,9 @@
                         <option value="التخطيط والمتابعة">التخطيط والمتابعة</option>
                     </select>
                 </td>
-                <td><strong>نوع التقييم:</strong></td>
-                <td>
-                    <select style="width:100%;" id="eval-type">
+                <td width="10%"><strong>نوع التقييم:</strong></td>
+                <td width="10%">
+                    <select style="width:100%;" id="eval-type" class="print-field">
                         <option value="شهري">شهري</option>
                         <option value="ربع سنوي">ربع سنوي</option>
                         <option value="نصف سنوي">نصف سنوي</option>
@@ -579,51 +827,53 @@
         
         <!-- ورقة النتائج الموحدة -->
         <div class="criteria-section">
-            <div class="section-title">ورقة النتائج - التقييم الشامل</div>
+            <div class="section-title">النتائج التفصيلية للتقييم</div>
             <table>
                 <thead>
                     <tr>
                         <th width="5%">#</th>
-                        <th width="35%">المعيار</th>
+                        <th width="25%">المعيار</th>
                         <th width="10%">المحور</th>
-                        <th width="10%">الوزن</th>
-                        <th width="15%">الدرجة (من 100)</th>
+                        <th width="8%">الوزن</th>
+                        <th width="12%">الدرجة (من 100)</th>
                         <th width="12%">النقاط</th>
-                        <th width="13%">النسبة</th>
+                        <th width="10%">النسبة</th>
                     </tr>
                 </thead>
                 <tbody id="all-criteria"></tbody>
-                <!-- صفوف المحاور -->
-                <tr style="background:#e8f4fd; font-weight:bold;">
+                
+                <!-- المجاميع الجزئية -->
+                <tr style="background:#e8f4fd; font-weight:bold; font-size:8.5pt;">
                     <td colspan="3"><strong>المجموع الجزئي - الأداء المهني والكفاءة:</strong></td>
                     <td><strong>40%</strong></td>
                     <td id="tech-total-grade">0.0</td>
                     <td id="tech-total-points">0.0</td>
                     <td id="tech-total-percent">0%</td>
                 </tr>
-                <tr style="background:#f0f9f0; font-weight:bold;">
+                <tr style="background:#f0f9f0; font-weight:bold; font-size:8.5pt;">
                     <td colspan="3"><strong>المجموع الجزئي - الانضباط والالتزام:</strong></td>
                     <td><strong>30%</strong></td>
                     <td id="disc-total-grade">0.0</td>
                     <td id="disc-total-points">0.0</td>
                     <td id="disc-total-percent">0%</td>
                 </tr>
-                <tr style="background:#fff8e6; font-weight:bold;">
+                <tr style="background:#fff8e6; font-weight:bold; font-size:8.5pt;">
                     <td colspan="3"><strong>المجموع الجزئي - السلوك والتعاون:</strong></td>
                     <td><strong>20%</strong></td>
                     <td id="behav-total-grade">0.0</td>
                     <td id="behav-total-points">0.0</td>
                     <td id="behav-total-percent">0%</td>
                 </tr>
-                <tr style="background:#f9f0ff; font-weight:bold;">
+                <tr style="background:#f9f0ff; font-weight:bold; font-size:8.5pt;">
                     <td colspan="3"><strong>المجموع الجزئي - التطوير والتحسين:</strong></td>
                     <td><strong>10%</strong></td>
                     <td id="dev-total-grade">0.0</td>
                     <td id="dev-total-points">0.0</td>
                     <td id="dev-total-percent">0%</td>
                 </tr>
+                
                 <!-- النتيجة النهائية -->
-                <tr style="background:#1a365d; color:white; font-weight:bold; font-size:11pt;">
+                <tr style="background:#1a365d; color:white; font-weight:bold; font-size:9pt;">
                     <td colspan="3"><strong>النتيجة النهائية للتقييم:</strong></td>
                     <td><strong>100%</strong></td>
                     <td id="final-grade">0.0</td>
@@ -635,133 +885,128 @@
         
         <!-- النتيجة النهائية -->
         <div class="grade-box">
-            <table style="border:none; width:100%;">
+            <table style="border:none; width:100%; margin-bottom:2px;">
                 <tr>
-                    <td style="border:none; width:33%; text-align:center;">
+                    <td style="border:none; width:33%; text-align:center; padding:1px;">
                         <strong>التقييم النهائي:</strong><br>
                         <div class="final-score" id="final-score">0%</div>
                     </td>
-                    <td style="border:none; width:33%; text-align:center;">
+                    <td style="border:none; width:33%; text-align:center; padding:1px;">
                         <strong>التقدير:</strong><br>
-                        <div id="final-grade-text" style="font-size:14pt; font-weight:bold; color:#2c5282;">غير محدد</div>
+                        <div id="final-grade-text" style="font-size:10pt; font-weight:bold; color:#2c5282;">غير محدد</div>
                     </td>
-                    <td style="border:none; width:33%; text-align:center;">
+                    <td style="border:none; width:33%; text-align:center; padding:1px;">
                         <strong>حالة التقرير:</strong><br>
-                        <div id="report-status" style="font-size:12pt; color:#2c5282;">جاري الإعداد</div>
+                        <div id="report-status" style="font-size:9pt; color:#2c5282;">جاري الإعداد</div>
                     </td>
                 </tr>
             </table>
             
-            <div style="text-align:center; margin-top:15px; padding:10px; background:#f8f9fa; border-radius:5px; border: 1px solid #e2e8f0;">
-                <div id="grade-description" style="font-size:10pt; color:#4a5568;">لم يتم إكمال التقييم بعد</div>
+            <div style="text-align:center; margin-top:3px; padding:3px; background:#f8f9fa; border-radius:3px; border: 1px solid #e2e8f0;">
+                <div id="grade-description" style="font-size:8.5pt; color:#4a5568;">لم يتم إكمال التقييم بعد</div>
             </div>
         </div>
         
         <!-- الملاحظات والتوصيات -->
         <div class="criteria-section">
             <div class="section-title">الملاحظات والتوصيات</div>
-            <table>
-                <tr>
-                    <td width="20%"><strong>نقاط القوة:</strong></td>
-                    <td><textarea style="width:100%; height:50px; font-size:10pt;" id="strengths" placeholder="أبرز الإنجازات ونقاط التميز..."></textarea></td>
+            <table style="margin-bottom:5px;">
+                <tr class="notes-row">
+                    <td><strong>نقاط القوة:</strong></td>
+                    <td><textarea class="note-field" id="strengths" placeholder="أبرز الإنجازات ونقاط التميز..." class="print-field"></textarea></td>
                 </tr>
-                <tr>
+                <tr class="notes-row">
                     <td><strong>مجالات التحسين:</strong></td>
-                    <td><textarea style="width:100%; height:50px; font-size:10pt;" id="improvements" placeholder="المجالات التي تحتاج إلى تطوير..."></textarea></td>
+                    <td><textarea class="note-field" id="improvements" placeholder="المجالات التي تحتاج إلى تطوير..." class="print-field"></textarea></td>
                 </tr>
-                <tr>
+                <tr class="notes-row">
                     <td><strong>خطة التطوير:</strong></td>
-                    <td><textarea style="width:100%; height:50px; font-size:10pt;" id="development-plan" placeholder="الخطوات المقترحة للتطوير..."></textarea></td>
+                    <td><textarea class="note-field" id="development-plan" placeholder="الخطوات المقترحة للتطوير..." class="print-field"></textarea></td>
                 </tr>
-                <tr>
+                <tr class="notes-row">
                     <td><strong>توصيات المشرف:</strong></td>
-                    <td><textarea style="width:100%; height:50px; font-size:10pt;" id="supervisor-notes" placeholder="ملاحظات وتوصيات المشرف..."></textarea></td>
+                    <td><textarea class="note-field" id="supervisor-notes" placeholder="ملاحظات وتوصيات المشرف..." class="print-field"></textarea></td>
                 </tr>
             </table>
         </div>
         
         <!-- التواقيع -->
         <div class="signature-section">
+            <div style="text-align: center; margin-bottom: 8px; font-weight: bold; font-size: 10pt; color: #1a365d;">
+                تواقيع المسؤولين
+            </div>
             <table style="border: none;">
                 <tr>
                     <td style="border: none; text-align: center; width: 33%;">
                         <div class="signature-box">
                             <strong>توقيع المشرف المباشر</strong>
                             <div class="signature-line"></div>
-                            <div style="margin-top: 5px;">الاسم: ________________</div>
-                            <div>التاريخ: ________________</div>
+                            <div style="margin-top: 4px; font-size:8pt;">الاسم: ________________</div>
+                            <div style="font-size:8pt;">التاريخ: ________________</div>
                         </div>
                     </td>
                     <td style="border: none; text-align: center; width: 33%;">
                         <div class="signature-box">
                             <strong>توقيع مدير القسم</strong>
                             <div class="signature-line"></div>
-                            <div style="margin-top: 5px;">الاسم: ________________</div>
-                            <div>التاريخ: ________________</div>
+                            <div style="margin-top: 4px; font-size:8pt;">الاسم: ________________</div>
+                            <div style="font-size:8pt;">التاريخ: ________________</div>
                         </div>
                     </td>
                     <td style="border: none; text-align: center; width: 33%;">
                         <div class="signature-box">
                             <strong>ختم الموارد البشرية</strong>
-                            <div style="margin-top: 15px; font-size: 24pt; color: #c19a53;">
+                            <div style="margin-top: 5px; font-size: 18pt; color: #c19a53;">
                                 <i class="fas fa-stamp"></i>
                             </div>
-                            <div style="margin-top: 10px;">الاسم: ________________</div>
-                            <div>التاريخ: ________________</div>
+                            <div style="margin-top: 5px; font-size:8pt;">الاسم: ________________</div>
+                            <div style="font-size:8pt;">التاريخ: ________________</div>
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
+        
+        <!-- معلومات النظام في الطباعة -->
+        <div style="text-align: center; margin-top: 8px; font-size: 6.5pt; color: #718096; padding-top: 3px; display: none;" class="print-only">
+            <div>تم إنشاء هذا التقرير آلياً عبر نظام التقييم الإلكتروني لشركة فالنسيا للرخام</div>
+            <div>الرقم التسلسلي: <span id="print-serial-number">VAL-000001</span> | تاريخ الإنشاء: <span id="print-current-date"></span> | الصفحة: 1/1</div>
+        </div>
     </div>
-    
+
     <!-- نافذة التليجرام -->
     <div class="telegram-modal" id="telegramModal">
         <div class="modal-content">
-            <h2 style="text-align: center; color: #2c5282; margin-bottom: 20px; font-family: 'Times New Roman', serif;">
+            <h2 style="text-align: center; color: #2c5282; margin-bottom: 12px; font-family: 'Times New Roman', serif; font-size: 11pt;">
                 <i class="fab fa-telegram"></i> إرسال التقرير عبر التليجرام
             </h2>
             
-            <!-- معلومات البوت -->
-            <div style="background: #f0f8ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; border: 1px solid #bee3f8;">
-                <h4 style="margin: 0 0 10px 0; color: #2c5282; font-family: 'Times New Roman', serif;">
-                    <i class="fas fa-robot"></i> البوت الثابت: @ValenciaEvBot
-                </h4>
-                <div style="font-size: 11pt; color: #4a5568;">
-                    تم ضبط إعدادات البوت مسبقاً للإرسال التلقائي
-                </div>
-            </div>
-            
             <!-- اختيار الدردشات -->
-            <h4 style="font-family: 'Times New Roman', serif;"><i class="fas fa-users"></i> اختر الجهات المراد الإرسال لها:</h4>
+            <h4 style="font-family: 'Times New Roman', serif; font-size: 10pt; margin-bottom: 8px;">
+                <i class="fas fa-users"></i> اختر الجهات المراد الإرسال لها:
+            </h4>
             <div class="telegram-chats" id="telegramChats">
                 <div class="chat-option" onclick="toggleChatSelection(this)" data-chat="hr">
-                    <i class="fas fa-user-tie" style="font-size: 28pt; margin-bottom: 10px; color: #2c5282;"></i><br>
+                    <i class="fas fa-user-tie" style="font-size: 18pt; margin-bottom: 6px; color: #2c5282;"></i><br>
                     <strong>الموارد البشرية</strong><br>
-                    <small style="color: #718096;">@Valencia_HR</small>
+                    <small style="color: #718096; font-size: 7pt;">@Valencia_HR</small>
                 </div>
                 
                 <div class="chat-option" onclick="toggleChatSelection(this)" data-chat="supervisor">
-                    <i class="fas fa-user-hard-hat" style="font-size: 28pt; margin-bottom: 10px; color: #2c5282;"></i><br>
+                    <i class="fas fa-user-hard-hat" style="font-size: 18pt; margin-bottom: 6px; color: #2c5282;"></i><br>
                     <strong>المشرف المباشر</strong><br>
-                    <small style="color: #718096;">سيتم الإرسال تلقائياً</small>
+                    <small style="color: #718096; font-size: 7pt;">سيتم الإرسال تلقائياً</small>
                 </div>
                 
                 <div class="chat-option" onclick="toggleChatSelection(this)" data-chat="employee">
-                    <i class="fas fa-user" style="font-size: 28pt; margin-bottom: 10px; color: #2c5282;"></i><br>
+                    <i class="fas fa-user" style="font-size: 18pt; margin-bottom: 6px; color: #2c5282;"></i><br>
                     <strong>العامل نفسه</strong><br>
-                    <small style="color: #718096;">(إذا كان لديه تليجرام)</small>
-                </div>
-                
-                <div class="chat-option" onclick="toggleChatSelection(this)" data-chat="management">
-                    <i class="fas fa-chart-line" style="font-size: 28pt; margin-bottom: 10px; color: #2c5282;"></i><br>
-                    <strong>الإدارة العليا</strong><br>
-                    <small style="color: #718096;">@Valencia_Management</small>
+                    <small style="color: #718096; font-size: 7pt;">(إذا كان لديه تليجرام)</small>
                 </div>
             </div>
             
             <!-- معاينة الرسالة -->
-            <h4 style="margin-top: 25px; font-family: 'Times New Roman', serif;">
+            <h4 style="margin-top: 12px; font-family: 'Times New Roman', serif; font-size: 10pt;">
                 <i class="fas fa-eye"></i> معاينة الرسالة قبل الإرسال:
             </h4>
             <div class="message-preview" id="messagePreview">
@@ -772,11 +1017,11 @@
             <div id="telegramStatus" class="telegram-status"></div>
             
             <!-- أزرار التحكم -->
-            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 25px;">
-                <button class="btn btn-telegram" onclick="sendToTelegram()" style="padding: 12px 30px; font-size: 14pt;">
+            <div style="display: flex; justify-content: center; gap: 8px; margin-top: 12px;">
+                <button class="btn btn-telegram" onclick="sendToTelegram()" style="padding: 6px 15px; font-size: 9pt; min-width: 130px;">
                     <i class="fab fa-telegram"></i> تأكيد الإرسال
                 </button>
-                <button class="btn" onclick="closeTelegramModal()" style="background: #a0aec0; color: white; padding: 12px 30px; font-size: 14pt; border: 1px solid #718096;">
+                <button class="btn" onclick="closeTelegramModal()" style="background: #a0aec0; color: white; padding: 6px 15px; font-size: 9pt; min-width: 80px; border: 1px solid #718096;">
                     <i class="fas fa-times"></i> إلغاء
                 </button>
             </div>
@@ -789,17 +1034,19 @@
         // =============================================
         
         const TELEGRAM_CONFIG = {
+            // البوت الثابت المخصص للشركة
             BOT_TOKEN: "8211546767:AAHzI71x7Tj06MaJ2I8N1DI92zFmn_ZIHeg",
             
+            // قنوات التليجرام الثابتة للشركة
             CHANNELS: {
-                HR: "-1003528917325",
-                MANAGEMENT: "-1002123378579",
-                ACCOUNTING: "-1002123378579",
-                TRANSPORT: "-1002123378579",
-                PROJECTS: "-1002123378579",
-                PLANNING: "-1002123378579"
+                HR: "-1003528917325",           // قناة الموارد البشرية
+                ACCOUNTING: "-1002123378579",   // المحاسبة (أبو طارق)
+                TRANSPORT: "-1002123378579",    // النقل (ركان)
+                PROJECTS: "-1002123378579",     // المشاريع (أبو يزن)
+                PLANNING: "-1002123378579"      // التخطيط (عمر الرفاعي)
             },
             
+            // رسائل البوت المحددة
             MESSAGES: {
                 SUCCESS: "✅ تم إرسال التقرير بنجاح",
                 ERROR: "❌ فشل في الإرسال، يرجى المحاولة لاحقاً",
@@ -813,10 +1060,10 @@
         
         const criteriaData = [
             // المحور الأول: الأداء المهني والكفاءة (40%)
-            { id: 1, name: "إتقان المهارات الأساسية", weight: 15, section: "tech", sectionName: "الأداء المهني" },
-            { id: 2, name: "جودة العمل والدقة في التنفيذ", weight: 10, section: "tech", sectionName: "الأداء المهني" },
-            { id: 3, name: "سرعة الإنجاز وتنفيذ المهام", weight: 10, section: "tech", sectionName: "الأداء المهني" },
-            { id: 4, name: "معرفة المواد والأدوات المستخدمة", weight: 5, section: "tech", sectionName: "الأداء المهني" },
+            { id: 1, name: "إتقان المهارات الأساسية", weight: 15, section: "tech", sectionName: "المهني" },
+            { id: 2, name: "جودة العمل والدقة في التنفيذ", weight: 10, section: "tech", sectionName: "المهني" },
+            { id: 3, name: "سرعة الإنجاز وتنفيذ المهام", weight: 10, section: "tech", sectionName: "المهني" },
+            { id: 4, name: "معرفة المواد والأدوات المستخدمة", weight: 5, section: "tech", sectionName: "المهني" },
             
             // المحور الثاني: الانضباط والالتزام (30%)
             { id: 5, name: "الانتظام في الدوام والمواعيد", weight: 10, section: "disc", sectionName: "الانضباط" },
@@ -838,7 +1085,8 @@
         // متغيرات النظام
         // =============================================
         
-        let selectedChats = new Set(['hr', 'supervisor']);
+        let selectedChats = new Set(['hr', 'supervisor']); // القنوات المختارة افتراضياً
+        let serialNumberCounter = localStorage.getItem('valenciaSerialCounter') || 1;
         
         // =============================================
         // تهيئة الصفحة
@@ -847,8 +1095,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeAllCriteria();
             setCurrentDate();
-            generateEvalNumber();
-            updateTelegramChats();
+            generateSerialNumber();
         });
         
         function setCurrentDate() {
@@ -856,20 +1103,28 @@
             const options = { 
                 year: 'numeric', 
                 month: 'long', 
-                day: 'numeric',
-                weekday: 'long'
+                day: 'numeric'
             };
-            document.getElementById('current-date').textContent = 
-                now.toLocaleDateString('ar-SA', options);
+            const dateStr = now.toLocaleDateString('ar-SA', options);
+            document.getElementById('current-date').textContent = dateStr;
+            document.getElementById('print-current-date').textContent = dateStr;
         }
         
-        function generateEvalNumber() {
+        function generateSerialNumber() {
+            // توليد رقم تسلسلي فريد
             const now = new Date();
             const year = now.getFullYear();
             const month = (now.getMonth() + 1).toString().padStart(2, '0');
-            const day = now.getDate().toString().padStart(2, '0');
-            const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-            document.getElementById('eval-number').textContent = `${year}${month}${day}-${random}`;
+            
+            // زيادة العداد
+            serialNumberCounter = parseInt(serialNumberCounter) + 1;
+            localStorage.setItem('valenciaSerialCounter', serialNumberCounter);
+            
+            // تنسيق الرقم التسلسلي: VAL-سنة-شهر-رقم مسلسل
+            const serialNum = `VAL-${year}${month}-${serialNumberCounter.toString().padStart(4, '0')}`;
+            
+            document.getElementById('serial-number').textContent = serialNum;
+            document.getElementById('print-serial-number').textContent = serialNum;
         }
         
         // =============================================
@@ -884,12 +1139,12 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${item.id}</td>
-                    <td style="text-align:right; padding-right:10px;">${item.name}</td>
+                    <td style="text-align:right; padding-right:4px;">${item.name}</td>
                     <td>${item.sectionName}</td>
                     <td>${item.weight}%</td>
                     <td>
                         <input type="number" 
-                               class="input-small grade-input" 
+                               class="input-small grade-input print-field" 
                                data-id="${item.id}"
                                data-weight="${item.weight}"
                                data-section="${item.section}"
@@ -912,9 +1167,8 @@
             const id = input.dataset.id;
             const section = input.dataset.section;
             
-            // حساب النقاط من 100 بدلاً من 10
             const points = (grade * weight) / 100;
-            const percent = grade; // النسبة هي الدرجة نفسها لأنها من 100
+            const percent = grade;
             
             document.getElementById(`points-${id}`).textContent = points.toFixed(2);
             document.getElementById(`percent-${id}`).textContent = percent.toFixed(1) + '%';
@@ -1013,11 +1267,11 @@
             if (percent > 0) {
                 status = 'تم الانتهاء من التقييم';
                 if (percent >= 75) {
-                    status = '✅ تقييم ناجح - جاهز للإرسال';
+                    status = '✅ تقييم ناجح';
                 } else if (percent >= 50) {
-                    status = '⚠️ يحتاج مراجعة وتطوير';
+                    status = '⚠️ يحتاج تطوير';
                 } else {
-                    status = '❌ يحتاج متابعة عاجلة';
+                    status = '❌ يحتاج متابعة';
                 }
             }
             
@@ -1030,31 +1284,38 @@
             });
         }
         
-        function resetAll() {
-            if (confirm('هل تريد إنشاء تقرير جديد؟ سيتم مسح جميع البيانات.')) {
-                document.querySelectorAll('input[type="text"], input[type="number"], textarea, select').forEach(element => {
-                    element.value = '';
-                });
-                
-                document.querySelectorAll('.grade-input').forEach(input => {
-                    input.value = '0';
-                    calculateCriteria(input);
-                });
-                
-                selectedChats.clear();
-                selectedChats.add('hr');
-                selectedChats.add('supervisor');
-                updateTelegramChats();
-                setCurrentDate();
-                generateEvalNumber();
-            }
-        }
-        
         function prepareAndPrint() {
             calculateAll();
             setTimeout(() => {
+                // إعداد القيم للطباعة
+                document.querySelectorAll('.print-field').forEach(field => {
+                    if (field.tagName === 'SELECT') {
+                        const selectedOption = field.options[field.selectedIndex];
+                        field.setAttribute('data-print-value', selectedOption ? selectedOption.text : '');
+                    } else if (field.tagName === 'TEXTAREA') {
+                        field.setAttribute('data-print-value', field.value);
+                    } else {
+                        field.setAttribute('data-print-value', field.value);
+                    }
+                });
+                
+                // إظهار عناصر الطباعة
+                document.querySelectorAll('.print-only').forEach(el => {
+                    el.style.display = 'block';
+                });
+                
+                // توليد رقم تسلسلي جديد لكل طباعة
+                generateSerialNumber();
+                
                 window.print();
-            }, 500);
+                
+                // إخفاء عناصر الطباعة بعد الانتهاء
+                setTimeout(() => {
+                    document.querySelectorAll('.print-only').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                }, 500);
+            }, 300);
         }
         
         // =============================================
@@ -1094,7 +1355,6 @@
         }
         
         function updateTelegramChats() {
-            const supervisor = document.getElementById('supervisor').value;
             const chatOptions = document.querySelectorAll('.chat-option');
             
             chatOptions.forEach(option => {
@@ -1119,7 +1379,7 @@
             const finalGrade = document.getElementById('final-grade-text').textContent;
             const evalType = document.getElementById('eval-type').value;
             const supervisor = document.getElementById('supervisor').value || 'غير محدد';
-            const evalNumber = document.getElementById('eval-number').textContent;
+            const serialNumber = document.getElementById('serial-number').textContent;
             const currentDate = document.getElementById('current-date').textContent;
             
             // نتائج المحاور
@@ -1135,7 +1395,7 @@
 ━━━━━━━━━━━━━━━━━━━━━━
 📋 *معلومات التقرير:*
 • نوع التقييم: ${evalType}
-• رقم التقرير: VAL-${evalNumber}
+• الرقم التسلسلي: ${serialNumber}
 • تاريخ الإصدار: ${currentDate}
 • المشرف المباشر: ${supervisor}
 
@@ -1168,6 +1428,7 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
         }
         
         async function sendToTelegram() {
+            // التحقق من البيانات
             const employeeName = document.getElementById('emp-name').value;
             if (!employeeName.trim()) {
                 showTelegramStatus('⚠️ يرجى إدخال اسم العامل أولاً', 'error');
@@ -1182,12 +1443,14 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
             const message = generateTelegramMessage();
             const statusDiv = document.getElementById('telegramStatus');
             
+            // عرض حالة الإرسال
             showTelegramStatus('🔄 جاري إرسال الرسائل عبر بوت التليجرام...', 'sending');
             
             try {
                 let successCount = 0;
                 const failedChats = [];
                 
+                // إرسال للقنوات المختارة
                 for (const chat of selectedChats) {
                     let chatId = '';
                     
@@ -1209,9 +1472,6 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
                                 chatId = telegramId.startsWith('@') ? telegramId.substring(1) : telegramId;
                             }
                             break;
-                        case 'management':
-                            chatId = TELEGRAM_CONFIG.CHANNELS.MANAGEMENT;
-                            break;
                     }
                     
                     if (chatId) {
@@ -1221,7 +1481,7 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
                         } else {
                             failedChats.push(chat);
                         }
-                        await delay(500);
+                        await delay(500); // تأخير بين الرسائل
                     }
                 }
                 
@@ -1231,6 +1491,7 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
                         'success'
                     );
                     
+                    // إذا كان هناك فشل في بعض الرسائل
                     if (failedChats.length > 0) {
                         setTimeout(() => {
                             showTelegramStatus(
@@ -1240,6 +1501,7 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
                         }, 3000);
                     }
                     
+                    // إغلاق النافذة بعد النجاح
                     setTimeout(() => {
                         closeTelegramModal();
                     }, 5000);
@@ -1276,7 +1538,7 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
                 
             } catch (error) {
                 console.error('Telegram API Error:', error);
-                return Math.random() > 0.2;
+                return Math.random() > 0.2; // محاكاة النجاح لأغراض العرض
             }
         }
         
@@ -1290,36 +1552,6 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
         function delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
-        
-        // =============================================
-        // وظائف مساعدة
-        // =============================================
-        
-        window.fillTestData = function() {
-            document.getElementById('emp-name').value = 'محمد أحمد علي';
-            document.getElementById('emp-job').value = 'فني تركيب رخام متقدم';
-            document.getElementById('emp-id').value = 'EMP-' + Math.floor(Math.random() * 10000);
-            document.getElementById('emp-salary').value = '4500';
-            document.getElementById('emp-phone').value = '05' + Math.floor(Math.random() * 10000000);
-            document.getElementById('emp-telegram').value = '@mohammed_ahmed';
-            document.getElementById('supervisor').value = 'ابو يزن';
-            document.getElementById('department').value = 'المشاريع';
-            document.getElementById('eval-type').value = 'شهري';
-            
-            document.getElementById('strengths').value = '1. التزام عالي بمواعيد العمل\n2. إتقان في تشطيب الأعمال\n3. معرفة جيدة بأنواع الرخام';
-            document.getElementById('improvements').value = '1. تحسين سرعة الإنجاز\n2. الاهتمام بتفاصيل السلامة';
-            document.getElementById('development-plan').value = '1. حضور دورة في السلامة المهنية\n2. تدريب على المعدات الحديثة';
-            document.getElementById('supervisor-notes').value = 'عامل متميز ويظهر حماساً للعمل. ينصح بترقيته بعد 6 أشهر.';
-            
-            // درجات عشوائية واقعية (من 100)
-            document.querySelectorAll('.grade-input').forEach(input => {
-                const randomGrade = 70 + Math.random() * 30; // بين 70 و 100
-                input.value = Math.round(randomGrade);
-                calculateCriteria(input);
-            });
-            
-            calculateAll();
-        };
     </script>
 </body>
 </html>
