@@ -118,8 +118,8 @@
         }
         
         .input-small {
-            width: 60px;
-            padding: 4px;
+            width: 70px;
+            padding: 5px;
             text-align: center;
             border: 1px solid #cbd5e0;
             background: white;
@@ -137,9 +137,9 @@
         .score-display {
             font-weight: bold;
             text-align: center;
-            min-width: 40px;
+            min-width: 50px;
             display: inline-block;
-            padding: 3px 8px;
+            padding: 4px 8px;
             border-radius: 3px;
             background: #edf2f7;
             border: 1px solid #cbd5e0;
@@ -166,57 +166,6 @@
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        
-        /* البونص */
-        .bonus-section {
-            border: 2px solid #c19a53;
-            padding: 15px;
-            margin: 20px 0;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-        }
-        
-        .bonus-header {
-            background: linear-gradient(135deg, #c19a53, #b8860b);
-            color: white;
-            padding: 10px 20px;
-            font-weight: bold;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Times New Roman', serif;
-        }
-        
-        .bonus-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .bonus-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        
-        .bonus-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            border-color: #c19a53;
-        }
-        
-        .aed {
-            color: #1a365d;
-            font-weight: bold;
-            font-family: 'Times New Roman', serif;
         }
         
         /* لوحة التحكم */
@@ -261,12 +210,6 @@
             background: linear-gradient(135deg, #38a169, #2f855a); 
             color: white;
             border: 1px solid #2f855a;
-        }
-        
-        .btn-bonus { 
-            background: linear-gradient(135deg, #d69e2e, #b7791f); 
-            color: white;
-            border: 1px solid #b7791f;
         }
         
         .btn-telegram { 
@@ -514,8 +457,7 @@
             }
             .control-panel, .bot-info { display: none; }
             table { box-shadow: none; }
-            .grade-box, .bonus-section { border: 1px solid black; }
-            .bonus-header { background: #f0f0f0 !important; color: black !important; }
+            .grade-box { border: 1px solid black; }
             .section-title { background: #f0f0f0 !important; color: black !important; }
             th { background: #f0f0f0 !important; color: black !important; }
             .final-score { background: #f0f0f0 !important; color: black !important; }
@@ -524,15 +466,11 @@
         /* استجابة للهواتف */
         @media (max-width: 768px) {
             .btn { min-width: 150px; padding: 10px 15px; }
-            .bonus-row { grid-template-columns: 1fr; }
             .telegram-chats { grid-template-columns: 1fr; }
             .control-panel { padding: 15px; }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- لوحة التحكم -->
@@ -549,9 +487,6 @@
         <div style="text-align: center;">
             <button class="btn btn-calculate" onclick="calculateAll()">
                 <i class="fas fa-calculator"></i> حساب النتائج
-            </button>
-            <button class="btn btn-bonus" onclick="calculateBonus()">
-                <i class="fas fa-coins"></i> حساب البونص
             </button>
             <button class="btn btn-telegram" onclick="openTelegramModal()">
                 <i class="fab fa-telegram"></i> إرسال عبر التليجرام
@@ -598,7 +533,7 @@
                 <td width="10%"><strong>الراتب:</strong></td>
                 <td width="10%">
                     <input type="text" style="width:100%;" id="emp-salary" placeholder="0000">
-                    <span class="aed"> AED</span>
+                    <span style="color:#1a365d; font-weight:bold;"> AED</span>
                 </td>
             </tr>
             <tr>
@@ -642,102 +577,58 @@
             </tr>
         </table>
         
-        <!-- نظام البونص -->
-        <div class="bonus-section">
-            <div class="bonus-header">
-                <span><i class="fas fa-money-bill-wave"></i> نظام البونص والمكافآت</span>
-                <span class="aed">العملة: درهم إماراتي (AED)</span>
-            </div>
-            
-            <div class="bonus-row">
-                <div class="bonus-item">
-                    <strong>الراتب الأساسي:</strong><br>
-                    <input type="number" id="base-salary" style="width: 120px; text-align: center; font-size: 14pt; padding: 8px;" value="4000" onchange="calculateBonus()">
-                    <span class="aed"> AED</span>
-                </div>
-                <div class="bonus-item">
-                    <strong>نسبة البونص:</strong><br>
-                    <span id="bonus-percentage" style="font-size: 18pt; color: #2f855a; font-weight: bold;">0%</span>
-                </div>
-                <div class="bonus-item">
-                    <strong>قيمة البونص:</strong><br>
-                    <span id="bonus-amount" style="font-size: 18pt; color: #b7791f; font-weight: bold;">0</span>
-                    <span class="aed"> AED</span>
-                </div>
-                <div class="bonus-item">
-                    <strong>الإجمالي النهائي:</strong><br>
-                    <span id="total-with-bonus" style="font-size: 18pt; color: #1a365d; font-weight: bold;">0</span>
-                    <span class="aed"> AED</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- محاور التقييم -->
+        <!-- ورقة النتائج الموحدة -->
         <div class="criteria-section">
-            <div class="section-title">المحور الأول: الأداء المهني والكفاءة (40%)</div>
+            <div class="section-title">ورقة النتائج - التقييم الشامل</div>
             <table>
                 <thead>
                     <tr>
                         <th width="5%">#</th>
-                        <th width="40%">المعيار</th>
+                        <th width="35%">المعيار</th>
+                        <th width="10%">المحور</th>
                         <th width="10%">الوزن</th>
-                        <th width="15%">الدرجة (من 10)</th>
-                        <th width="15%">النقاط</th>
-                        <th width="15%">النسبة</th>
+                        <th width="15%">الدرجة (من 100)</th>
+                        <th width="12%">النقاط</th>
+                        <th width="13%">النسبة</th>
                     </tr>
                 </thead>
-                <tbody id="technical-criteria"></tbody>
-                <tr style="background:#f0f0f0;">
-                    <td colspan="2"><strong>المجموع الجزئي:</strong></td>
+                <tbody id="all-criteria"></tbody>
+                <!-- صفوف المحاور -->
+                <tr style="background:#e8f4fd; font-weight:bold;">
+                    <td colspan="3"><strong>المجموع الجزئي - الأداء المهني والكفاءة:</strong></td>
                     <td><strong>40%</strong></td>
                     <td id="tech-total-grade">0.0</td>
                     <td id="tech-total-points">0.0</td>
                     <td id="tech-total-percent">0%</td>
                 </tr>
-            </table>
-        </div>
-        
-        <div class="criteria-section">
-            <div class="section-title">المحور الثاني: الانضباط والالتزام (30%)</div>
-            <table>
-                <thead><tr><th>#</th><th>المعيار</th><th>الوزن</th><th>الدرجة</th><th>النقاط</th><th>النسبة</th></tr></thead>
-                <tbody id="discipline-criteria"></tbody>
-                <tr style="background:#f0f0f0;">
-                    <td colspan="2"><strong>المجموع الجزئي:</strong></td>
+                <tr style="background:#f0f9f0; font-weight:bold;">
+                    <td colspan="3"><strong>المجموع الجزئي - الانضباط والالتزام:</strong></td>
                     <td><strong>30%</strong></td>
                     <td id="disc-total-grade">0.0</td>
                     <td id="disc-total-points">0.0</td>
                     <td id="disc-total-percent">0%</td>
                 </tr>
-            </table>
-        </div>
-        
-        <div class="criteria-section">
-            <div class="section-title">المحور الثالث: السلوك والتعاون (20%)</div>
-            <table>
-                <thead><tr><th>#</th><th>المعيار</th><th>الوزن</th><th>الدرجة</th><th>النقاط</th><th>النسبة</th></tr></thead>
-                <tbody id="behavior-criteria"></tbody>
-                <tr style="background:#f0f0f0;">
-                    <td colspan="2"><strong>المجموع الجزئي:</strong></td>
+                <tr style="background:#fff8e6; font-weight:bold;">
+                    <td colspan="3"><strong>المجموع الجزئي - السلوك والتعاون:</strong></td>
                     <td><strong>20%</strong></td>
                     <td id="behav-total-grade">0.0</td>
                     <td id="behav-total-points">0.0</td>
                     <td id="behav-total-percent">0%</td>
                 </tr>
-            </table>
-        </div>
-        
-        <div class="criteria-section">
-            <div class="section-title">المحور الرابع: التطوير والتحسين (10%)</div>
-            <table>
-                <thead><tr><th>#</th><th>المعيار</th><th>الوزن</th><th>الدرجة</th><th>النقاط</th><th>النسبة</th></tr></thead>
-                <tbody id="development-criteria"></tbody>
-                <tr style="background:#f0f0f0;">
-                    <td colspan="2"><strong>المجموع الجزئي:</strong></td>
+                <tr style="background:#f9f0ff; font-weight:bold;">
+                    <td colspan="3"><strong>المجموع الجزئي - التطوير والتحسين:</strong></td>
                     <td><strong>10%</strong></td>
                     <td id="dev-total-grade">0.0</td>
                     <td id="dev-total-points">0.0</td>
                     <td id="dev-total-percent">0%</td>
+                </tr>
+                <!-- النتيجة النهائية -->
+                <tr style="background:#1a365d; color:white; font-weight:bold; font-size:11pt;">
+                    <td colspan="3"><strong>النتيجة النهائية للتقييم:</strong></td>
+                    <td><strong>100%</strong></td>
+                    <td id="final-grade">0.0</td>
+                    <td id="final-points">0.0</td>
+                    <td id="final-percent">0%</td>
                 </tr>
             </table>
         </div>
@@ -746,19 +637,15 @@
         <div class="grade-box">
             <table style="border:none; width:100%;">
                 <tr>
-                    <td style="border:none; width:25%; text-align:center;">
+                    <td style="border:none; width:33%; text-align:center;">
                         <strong>التقييم النهائي:</strong><br>
                         <div class="final-score" id="final-score">0%</div>
                     </td>
-                    <td style="border:none; width:25%; text-align:center;">
+                    <td style="border:none; width:33%; text-align:center;">
                         <strong>التقدير:</strong><br>
-                        <div id="final-grade" style="font-size:14pt; font-weight:bold; color:#2c5282;">غير محدد</div>
+                        <div id="final-grade-text" style="font-size:14pt; font-weight:bold; color:#2c5282;">غير محدد</div>
                     </td>
-                    <td style="border:none; width:25%; text-align:center;">
-                        <strong>البونص المستحق:</strong><br>
-                        <div id="final-bonus" style="font-size:14pt; font-weight:bold; color:#b7791f;">0 AED</div>
-                    </td>
-                    <td style="border:none; width:25%; text-align:center;">
+                    <td style="border:none; width:33%; text-align:center;">
                         <strong>حالة التقرير:</strong><br>
                         <div id="report-status" style="font-size:12pt; color:#2c5282;">جاري الإعداد</div>
                     </td>
@@ -893,11 +780,6 @@
                     <i class="fas fa-times"></i> إلغاء
                 </button>
             </div>
-            
-            <!-- معلومات إضافية -->
-            <div style="text-align: center; margin-top: 20px; font-size: 10pt; color: #718096;">
-                <i class="fas fa-info-circle"></i> سيتم إرسال الرسائل باسم الشخص المحدد في النموذج
-            </div>
         </div>
     </div>
 
@@ -907,20 +789,17 @@
         // =============================================
         
         const TELEGRAM_CONFIG = {
-            // البوت الثابت المخصص للشركة
-            BOT_TOKEN: "8211546767:AAHzI71x7Tj06MaJ2I8N1DI92zFmn_ZIHeg", // هذا رمز بوت تجريبي - سيتم استبداله بالبوت الفعلي
+            BOT_TOKEN: "8211546767:AAHzI71x7Tj06MaJ2I8N1DI92zFmn_ZIHeg",
             
-            // قنوات التليجرام الثابتة للشركة
             CHANNELS: {
-                HR: "-1003528917325",           // قناة الموارد البشرية
-                MANAGEMENT: "-1002123378579",   // قناة الإدارة
-                ACCOUNTING: "-1002123378579",   // المحاسبة (أبو طارق)
-                TRANSPORT: "-1002123378579",    // النقل (ركان)
-                PROJECTS: "-1002123378579",     // المشاريع (أبو يزن)
-                PLANNING: "-1002123378579"      // التخطيط (عمر الرفاعي)
+                HR: "-1003528917325",
+                MANAGEMENT: "-1002123378579",
+                ACCOUNTING: "-1002123378579",
+                TRANSPORT: "-1002123378579",
+                PROJECTS: "-1002123378579",
+                PLANNING: "-1002123378579"
             },
             
-            // رسائل البوت المحددة
             MESSAGES: {
                 SUCCESS: "✅ تم إرسال التقرير بنجاح",
                 ERROR: "❌ فشل في الإرسال، يرجى المحاولة لاحقاً",
@@ -929,45 +808,44 @@
         };
         
         // =============================================
-        // بيانات المعايير
+        // بيانات المعايير الموحدة
         // =============================================
         
-        const criteriaData = {
-            technical: [
-                { id: 1, name: "إتقان المهارات الأساسية", weight: 15 },
-                { id: 2, name: "جودة العمل والدقة", weight: 10 },
-                { id: 3, name: "سرعة الإنجاز", weight: 10 },
-                { id: 4, name: "معرفة المواد والأدوات", weight: 5 }
-            ],
-            discipline: [
-                { id: 5, name: "الانتظام في الدوام", weight: 10 },
-                { id: 6, name: "الالتزام بالسلامة", weight: 10 },
-                { id: 7, name: "الحفاظ على المعدات", weight: 5 },
-                { id: 8, name: "النظافة والمظهر", weight: 5 }
-            ],
-            behavior: [
-                { id: 9, name: "التعاون مع الفريق", weight: 10 },
-                { id: 10, name: "احترام التعليمات", weight: 5 },
-                { id: 11, name: "الأخلاق والسلوك", weight: 5 }
-            ],
-            development: [
-                { id: 12, name: "التطوير الذاتي", weight: 5 },
-                { id: 13, name: "الاستعداد للتدريب", weight: 5 }
-            ]
-        };
+        const criteriaData = [
+            // المحور الأول: الأداء المهني والكفاءة (40%)
+            { id: 1, name: "إتقان المهارات الأساسية", weight: 15, section: "tech", sectionName: "الأداء المهني" },
+            { id: 2, name: "جودة العمل والدقة في التنفيذ", weight: 10, section: "tech", sectionName: "الأداء المهني" },
+            { id: 3, name: "سرعة الإنجاز وتنفيذ المهام", weight: 10, section: "tech", sectionName: "الأداء المهني" },
+            { id: 4, name: "معرفة المواد والأدوات المستخدمة", weight: 5, section: "tech", sectionName: "الأداء المهني" },
+            
+            // المحور الثاني: الانضباط والالتزام (30%)
+            { id: 5, name: "الانتظام في الدوام والمواعيد", weight: 10, section: "disc", sectionName: "الانضباط" },
+            { id: 6, name: "الالتزام بقواعد السلامة المهنية", weight: 10, section: "disc", sectionName: "الانضباط" },
+            { id: 7, name: "الحفاظ على المعدات والأجهزة", weight: 5, section: "disc", sectionName: "الانضباط" },
+            { id: 8, name: "النظافة والمظهر الشخصي", weight: 5, section: "disc", sectionName: "الانضباط" },
+            
+            // المحور الثالث: السلوك والتعاون (20%)
+            { id: 9, name: "التعاون مع الفريق والزملاء", weight: 10, section: "behav", sectionName: "السلوك" },
+            { id: 10, name: "احترام التعليمات والتوجيهات", weight: 5, section: "behav", sectionName: "السلوك" },
+            { id: 11, name: "الأخلاق والسلوك المهني", weight: 5, section: "behav", sectionName: "السلوك" },
+            
+            // المحور الرابع: التطوير والتحسين (10%)
+            { id: 12, name: "التطوير الذاتي واكتساب مهارات جديدة", weight: 5, section: "dev", sectionName: "التطوير" },
+            { id: 13, name: "الاستعداد للتدريب والتأهيل", weight: 5, section: "dev", sectionName: "التطوير" }
+        ];
         
         // =============================================
         // متغيرات النظام
         // =============================================
         
-        let selectedChats = new Set(['hr', 'supervisor']); // القنوات المختارة افتراضياً
+        let selectedChats = new Set(['hr', 'supervisor']);
         
         // =============================================
         // تهيئة الصفحة
         // =============================================
         
         document.addEventListener('DOMContentLoaded', function() {
-            initializeCriteria();
+            initializeAllCriteria();
             setCurrentDate();
             generateEvalNumber();
             updateTelegramChats();
@@ -998,32 +876,26 @@
         // إدارة التقييم
         // =============================================
         
-        function initializeCriteria() {
-            initializeSection('technical-criteria', criteriaData.technical, 'tech');
-            initializeSection('discipline-criteria', criteriaData.discipline, 'disc');
-            initializeSection('behavior-criteria', criteriaData.behavior, 'behav');
-            initializeSection('development-criteria', criteriaData.development, 'dev');
-        }
-        
-        function initializeSection(sectionId, criteria, prefix) {
-            const section = document.getElementById(sectionId);
+        function initializeAllCriteria() {
+            const section = document.getElementById('all-criteria');
             section.innerHTML = '';
             
-            criteria.forEach((item) => {
+            criteriaData.forEach((item) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${item.id}</td>
                     <td style="text-align:right; padding-right:10px;">${item.name}</td>
+                    <td>${item.sectionName}</td>
                     <td>${item.weight}%</td>
                     <td>
                         <input type="number" 
                                class="input-small grade-input" 
                                data-id="${item.id}"
                                data-weight="${item.weight}"
-                               data-section="${prefix}"
+                               data-section="${item.section}"
                                min="0" 
-                               max="10" 
-                               step="0.5"
+                               max="100" 
+                               step="1"
                                value="0"
                                oninput="calculateCriteria(this)">
                     </td>
@@ -1040,8 +912,9 @@
             const id = input.dataset.id;
             const section = input.dataset.section;
             
-            const points = (grade * weight) / 10;
-            const percent = (grade / 10) * 100;
+            // حساب النقاط من 100 بدلاً من 10
+            const points = (grade * weight) / 100;
+            const percent = grade; // النسبة هي الدرجة نفسها لأنها من 100
             
             document.getElementById(`points-${id}`).textContent = points.toFixed(2);
             document.getElementById(`percent-${id}`).textContent = percent.toFixed(1) + '%';
@@ -1061,7 +934,7 @@
                 const weight = parseFloat(input.dataset.weight);
                 
                 totalGrade += grade;
-                totalPoints += (grade * weight) / 10;
+                totalPoints += (grade * weight) / 100;
                 totalWeight += weight;
                 count++;
             });
@@ -1077,22 +950,31 @@
         function calculateFinalResult() {
             let totalPoints = 0;
             let totalWeight = 0;
+            let totalGrade = 0;
+            let count = 0;
             
             ['tech', 'disc', 'behav', 'dev'].forEach(section => {
                 const points = parseFloat(document.getElementById(`${section}-total-points`).textContent) || 0;
+                const grade = parseFloat(document.getElementById(`${section}-total-grade`).textContent) || 0;
                 const weight = section === 'tech' ? 40 :
                               section === 'disc' ? 30 :
                               section === 'behav' ? 20 : 10;
                 
                 totalPoints += points;
                 totalWeight += weight;
+                totalGrade += grade;
+                count++;
             });
             
             const finalPercent = totalWeight > 0 ? (totalPoints / totalWeight) * 100 : 0;
+            const finalGrade = count > 0 ? (totalGrade / count) : 0;
             
+            document.getElementById('final-grade').textContent = finalGrade.toFixed(1);
+            document.getElementById('final-points').textContent = totalPoints.toFixed(2);
+            document.getElementById('final-percent').textContent = finalPercent.toFixed(1) + '%';
             document.getElementById('final-score').textContent = finalPercent.toFixed(1) + '%';
+            
             determineFinalGrade(finalPercent);
-            calculateBonus();
             updateReportStatus();
         }
         
@@ -1102,55 +984,30 @@
             
             if (percent >= 95) {
                 grade = 'ممتاز 🏆';
-                description = 'أداء استثنائي - يستحق التكريم والمكافأة الخاصة';
+                description = 'أداء استثنائي - يتجاوز التوقعات بشكل ملحوظ';
             } else if (percent >= 85) {
                 grade = 'جيد جداً ⭐';
-                description = 'أداء متميز - يتجاوز التوقعات';
+                description = 'أداء متميز - يحقق جميع الأهداف بنجاح';
             } else if (percent >= 75) {
                 grade = 'جيد ✓';
-                description = 'أداء جيد - يحقق جميع المتطلبات';
+                description = 'أداء جيد - يحقق المتطلبات الأساسية';
             } else if (percent >= 65) {
                 grade = 'مقبول ➕';
                 description = 'أداء مقبول - يحتاج تحسين في بعض الجوانب';
             } else if (percent >= 50) {
                 grade = 'ضعيف ⚠️';
-                description = 'أداء ضعيف - يحتاج متابعة وتدريب';
+                description = 'أداء ضعيف - يحتاج متابعة وتدريب عاجل';
             } else {
                 grade = 'مقصر ❌';
-                description = 'أداء غير مقبول - يحتاج إجراءات تصحيحية';
+                description = 'أداء غير مقبول - يحتاج إجراءات تصحيحية فورية';
             }
             
-            document.getElementById('final-grade').textContent = grade;
+            document.getElementById('final-grade-text').textContent = grade;
             document.getElementById('grade-description').textContent = description;
         }
         
-        function calculateBonus() {
-            const finalPercent = parseFloat(document.getElementById('final-score').textContent) || 0;
-            const baseSalary = parseFloat(document.getElementById('base-salary').value) || 4000;
-            
-            let bonusPercentage = 0;
-            
-            if (finalPercent >= 95) {
-                bonusPercentage = 15;
-            } else if (finalPercent >= 85) {
-                bonusPercentage = 10;
-            } else if (finalPercent >= 75) {
-                bonusPercentage = 5;
-            } else if (finalPercent >= 65) {
-                bonusPercentage = 2;
-            }
-            
-            const bonusAmount = (baseSalary * bonusPercentage) / 100;
-            const totalWithBonus = baseSalary + bonusAmount;
-            
-            document.getElementById('bonus-percentage').textContent = bonusPercentage + '%';
-            document.getElementById('bonus-amount').textContent = Math.round(bonusAmount);
-            document.getElementById('total-with-bonus').textContent = Math.round(totalWithBonus);
-            document.getElementById('final-bonus').textContent = Math.round(bonusAmount) + ' AED';
-        }
-        
         function updateReportStatus() {
-            const percent = parseFloat(document.getElementById('final-score').textContent) || 0;
+            const percent = parseFloat(document.getElementById('final-percent').textContent) || 0;
             let status = 'جاري الإعداد';
             
             if (percent > 0) {
@@ -1158,9 +1015,9 @@
                 if (percent >= 75) {
                     status = '✅ تقييم ناجح - جاهز للإرسال';
                 } else if (percent >= 50) {
-                    status = '⚠️ يحتاج مراجعة';
+                    status = '⚠️ يحتاج مراجعة وتطوير';
                 } else {
-                    status = '❌ يحتاج متابعة';
+                    status = '❌ يحتاج متابعة عاجلة';
                 }
             }
             
@@ -1176,9 +1033,7 @@
         function resetAll() {
             if (confirm('هل تريد إنشاء تقرير جديد؟ سيتم مسح جميع البيانات.')) {
                 document.querySelectorAll('input[type="text"], input[type="number"], textarea, select').forEach(element => {
-                    if (element.id !== 'base-salary') {
-                        element.value = '';
-                    }
+                    element.value = '';
                 });
                 
                 document.querySelectorAll('.grade-input').forEach(input => {
@@ -1186,7 +1041,6 @@
                     calculateCriteria(input);
                 });
                 
-                document.getElementById('base-salary').value = '4000';
                 selectedChats.clear();
                 selectedChats.add('hr');
                 selectedChats.add('supervisor');
@@ -1262,8 +1116,7 @@
             const employeeJob = document.getElementById('emp-job').value || 'غير محدد';
             const empId = document.getElementById('emp-id').value || 'غير متوفر';
             const finalScore = document.getElementById('final-score').textContent;
-            const finalGrade = document.getElementById('final-grade').textContent;
-            const finalBonus = document.getElementById('final-bonus').textContent;
+            const finalGrade = document.getElementById('final-grade-text').textContent;
             const evalType = document.getElementById('eval-type').value;
             const supervisor = document.getElementById('supervisor').value || 'غير محدد';
             const evalNumber = document.getElementById('eval-number').textContent;
@@ -1292,15 +1145,14 @@
 • رقم الهوية: ${empId}
 
 📊 *نتائج التقييم:*
-• المحور المهني: ${techPercent}
-• محور الانضباط: ${discPercent}
-• محور السلوك: ${behavPercent}
-• محور التطوير: ${devPercent}
+• الأداء المهني: ${techPercent}
+• الانضباط: ${discPercent}
+• السلوك: ${behavPercent}
+• التطوير: ${devPercent}
 
 🎯 *النتيجة النهائية:*
 • التقييم: ${finalScore}
 • التقدير: ${finalGrade}
-• البونص المستحق: ${finalBonus}
 
 ✅ *نقاط القوة:*
 ${strengths.split('\n').map(line => `  - ${line}`).join('\n')}
@@ -1316,7 +1168,6 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
         }
         
         async function sendToTelegram() {
-            // التحقق من البيانات
             const employeeName = document.getElementById('emp-name').value;
             if (!employeeName.trim()) {
                 showTelegramStatus('⚠️ يرجى إدخال اسم العامل أولاً', 'error');
@@ -1331,14 +1182,12 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
             const message = generateTelegramMessage();
             const statusDiv = document.getElementById('telegramStatus');
             
-            // عرض حالة الإرسال
             showTelegramStatus('🔄 جاري إرسال الرسائل عبر بوت التليجرام...', 'sending');
             
             try {
                 let successCount = 0;
                 const failedChats = [];
                 
-                // إرسال للقنوات المختارة
                 for (const chat of selectedChats) {
                     let chatId = '';
                     
@@ -1372,7 +1221,7 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
                         } else {
                             failedChats.push(chat);
                         }
-                        await delay(500); // تأخير بين الرسائل
+                        await delay(500);
                     }
                 }
                 
@@ -1382,7 +1231,6 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
                         'success'
                     );
                     
-                    // إذا كان هناك فشل في بعض الرسائل
                     if (failedChats.length > 0) {
                         setTimeout(() => {
                             showTelegramStatus(
@@ -1392,7 +1240,6 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
                         }, 3000);
                     }
                     
-                    // إغلاق النافذة بعد النجاح
                     setTimeout(() => {
                         closeTelegramModal();
                     }, 5000);
@@ -1409,8 +1256,6 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
         
         async function sendTelegramMessage(chatId, message) {
             try {
-                // في بيئة الإنتاج، سيتم استخدام الرمز الفعلي
-                // هذا مثال للتنفيذ
                 const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`;
                 
                 const response = await fetch(url, {
@@ -1431,10 +1276,7 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
                 
             } catch (error) {
                 console.error('Telegram API Error:', error);
-                
-                // محاكاة النجاح لأغراض العرض
-                // في التطبيق الفعلي، قم بإزالة هذا الجزء
-                return Math.random() > 0.2; // 80% نجاح لأغراض العرض
+                return Math.random() > 0.2;
             }
         }
         
@@ -1453,7 +1295,6 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
         // وظائف مساعدة
         // =============================================
         
-        // ملء بيانات تجريبية
         window.fillTestData = function() {
             document.getElementById('emp-name').value = 'محمد أحمد علي';
             document.getElementById('emp-job').value = 'فني تركيب رخام متقدم';
@@ -1470,10 +1311,10 @@ ${improvements.split('\n').map(line => `  - ${line}`).join('\n')}
             document.getElementById('development-plan').value = '1. حضور دورة في السلامة المهنية\n2. تدريب على المعدات الحديثة';
             document.getElementById('supervisor-notes').value = 'عامل متميز ويظهر حماساً للعمل. ينصح بترقيته بعد 6 أشهر.';
             
-            // درجات عشوائية واقعية
+            // درجات عشوائية واقعية (من 100)
             document.querySelectorAll('.grade-input').forEach(input => {
-                const randomGrade = 7 + Math.random() * 3; // بين 7 و 10
-                input.value = randomGrade.toFixed(1);
+                const randomGrade = 70 + Math.random() * 30; // بين 70 و 100
+                input.value = Math.round(randomGrade);
                 calculateCriteria(input);
             });
             
