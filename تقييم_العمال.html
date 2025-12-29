@@ -193,6 +193,12 @@
             border: 1px solid #2d3748;
         }
         
+        .btn-reset {
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+            color: white;
+            border: 1px solid #c53030;
+        }
+        
         input[type="text"], input[type="number"], textarea, select {
             border: 1px solid #cbd5e0;
             border-radius: 4px;
@@ -230,7 +236,6 @@
             padding: 15px;
             border-radius: 6px;
             border-top: 2px solid #c19a53;
-            /* جعل التوقيع يظهر في نهاية الصفحة */
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: avoid;
@@ -321,6 +326,12 @@
             border-color: #f5c6cb;
         }
         
+        #auto-send-notification.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-color: #bee5eb;
+        }
+        
         #auto-send-notification i {
             font-size: 16pt;
         }
@@ -343,6 +354,62 @@
             to {
                 opacity: 0;
             }
+        }
+        
+        /* نافذة التأكيد */
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .confirmation-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .confirmation-content h3 {
+            color: #1a365d;
+            margin-bottom: 15px;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .confirmation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-confirm {
+            background: linear-gradient(135deg, #38a169, #2f855a);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .btn-cancel {
+            background: linear-gradient(135deg, #a0aec0, #718096);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
         }
         
         /* الطباعة - مع التوقيع في نهاية الصفحة الأولى */
@@ -402,7 +469,7 @@
                 margin: 2px 0 !important;
             }
             
-            .control-panel, #auto-send-notification { 
+            .control-panel, #auto-send-notification, .confirmation-modal { 
                 display: none !important; 
             }
             
@@ -699,6 +766,11 @@
                 max-width: none;
                 font-size: 10pt;
             }
+            
+            .confirmation-content {
+                width: 95%;
+                padding: 15px;
+            }
         }
         
         .grade-box table {
@@ -748,10 +820,44 @@
         .signature-wrapper {
             margin-top: auto;
         }
+        
+        /* عرض الرقم التسلسلي الحالي */
+        .serial-display {
+            background: rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-top: 8px;
+            font-size: 10pt;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .serial-display span {
+            font-weight: bold;
+            color: #c19a53;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- نافذة تأكيد تصفير الرقم التسلسلي -->
+    <div class="confirmation-modal" id="resetConfirmationModal">
+        <div class="confirmation-content">
+            <h3><i class="fas fa-exclamation-triangle"></i> تأكيد تصفير الرقم التسلسلي</h3>
+            <p>هل أنت متأكد من أنك تريد تصفير الرقم التسلسلي؟</p>
+            <p>سيتم إعادة ضبط العداد إلى الرقم: <strong>VAL-000001</strong></p>
+            <div class="confirmation-buttons">
+                <button class="btn-confirm" onclick="confirmResetSerial()">
+                    <i class="fas fa-check"></i> نعم، تصفير
+                </button>
+                <button class="btn-cancel" onclick="closeResetConfirmation()">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
+            </div>
+        </div>
+    </div>
+    
     <!-- لوحة التحكم -->
     <div class="control-panel no-print">
         <div style="text-align: center; margin-bottom: 10px;">
@@ -767,7 +873,16 @@
             <button class="btn btn-print" onclick="prepareAndPrint()">
                 <i class="fas fa-paper-plane"></i> طباعة وإرسال تلقائي
             </button>
+            <button class="btn btn-reset" onclick="showResetConfirmation()">
+                <i class="fas fa-redo"></i> تصفير الرقم التسلسلي
+            </button>
         </div>
+        
+        <div class="serial-display">
+            <div>الرقم التسلسلي الحالي:</div>
+            <div><span id="current-serial-display">VAL-000001</span></div>
+        </div>
+        
         <div class="auto-calculation-note">
             <i class="fas fa-info-circle"></i> يتم حساب النتائج تلقائياً عند إدخال الدرجات
         </div>
@@ -1083,7 +1198,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeAllCriteria();
             setCurrentDate();
-            generateSerialNumber();
+            updateSerialNumberDisplay();
             
             // إضافة مستمع للأحداث للتحديث التلقائي
             document.querySelectorAll('.grade-input').forEach(input => {
@@ -1097,6 +1212,9 @@
             document.querySelectorAll('#emp-name, #emp-job, #emp-id').forEach(field => {
                 field.addEventListener('input', updateSummary);
             });
+            
+            // تحميل الرقم التسلسلي من التخزين المحلي
+            loadSerialNumber();
         });
         
         function setCurrentDate() {
@@ -1111,7 +1229,32 @@
             document.getElementById('print-current-date').textContent = dateStr;
         }
         
-        function generateSerialNumber() {
+        function loadSerialNumber() {
+            // تحميل الرقم التسلسلي من التخزين المحلي
+            const savedCounter = localStorage.getItem('valenciaSerialCounter');
+            if (savedCounter) {
+                serialNumberCounter = parseInt(savedCounter);
+            } else {
+                serialNumberCounter = 1;
+                localStorage.setItem('valenciaSerialCounter', serialNumberCounter);
+            }
+            updateSerialNumberDisplay();
+        }
+        
+        function updateSerialNumberDisplay() {
+            // تحديث عرض الرقم التسلسلي في جميع الأماكن
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            
+            const serialNum = `VAL-${year}${month}-${serialNumberCounter.toString().padStart(4, '0')}`;
+            
+            document.getElementById('serial-number').textContent = serialNum;
+            document.getElementById('print-serial-number').textContent = serialNum;
+            document.getElementById('current-serial-display').textContent = serialNum;
+        }
+        
+        function generateNewSerialNumber() {
             const now = new Date();
             const year = now.getFullYear();
             const month = (now.getMonth() + 1).toString().padStart(2, '0');
@@ -1119,10 +1262,40 @@
             serialNumberCounter = parseInt(serialNumberCounter) + 1;
             localStorage.setItem('valenciaSerialCounter', serialNumberCounter);
             
-            const serialNum = `VAL-${year}${month}-${serialNumberCounter.toString().padStart(4, '0')}`;
+            updateSerialNumberDisplay();
+        }
+        
+        // =============================================
+        // دالة تصفير الرقم التسلسلي
+        // =============================================
+        function resetSerialNumber() {
+            // إعادة ضبط العداد إلى 1
+            serialNumberCounter = 1;
+            localStorage.setItem('valenciaSerialCounter', serialNumberCounter);
             
-            document.getElementById('serial-number').textContent = serialNum;
-            document.getElementById('print-serial-number').textContent = serialNum;
+            // تحديث العرض
+            updateSerialNumberDisplay();
+            
+            // عرض إشعار النجاح
+            showAutoSendNotification('✅ تم تصفير الرقم التسلسلي بنجاح', 'success');
+            
+            // إغلاق نافذة التأكيد
+            closeResetConfirmation();
+        }
+        
+        function showResetConfirmation() {
+            // عرض نافذة تأكيد تصفير الرقم التسلسلي
+            document.getElementById('resetConfirmationModal').style.display = 'flex';
+        }
+        
+        function closeResetConfirmation() {
+            // إخفاء نافذة تأكيد تصفير الرقم التسلسلي
+            document.getElementById('resetConfirmationModal').style.display = 'none';
+        }
+        
+        function confirmResetSerial() {
+            // تأكيد تصفير الرقم التسلسلي
+            resetSerialNumber();
         }
         
         // =============================================
@@ -1380,6 +1553,7 @@
             let icon = '';
             if (type === 'success') icon = '<i class="fas fa-check-circle"></i>';
             else if (type === 'error') icon = '<i class="fas fa-exclamation-triangle"></i>';
+            else if (type === 'info') icon = '<i class="fas fa-info-circle"></i>';
             else icon = '<i class="fas fa-sync-alt fa-spin"></i>';
             
             notification.innerHTML = icon + message;
@@ -1427,6 +1601,9 @@
                 return;
             }
             
+            // إنشاء رقم تسلسلي جديد
+            generateNewSerialNumber();
+            
             // إرسال تلقائي إلى التليجرام (الموارد البشرية فقط)
             const sendResult = await sendToTelegramAuto();
             
@@ -1448,9 +1625,6 @@
                 document.querySelectorAll('.print-only').forEach(el => {
                     el.style.display = 'block';
                 });
-                
-                // توليد رقم تسلسلي جديد لكل طباعة
-                generateSerialNumber();
                 
                 // فتح نافذة الطباعة
                 window.print();
