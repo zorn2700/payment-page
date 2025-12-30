@@ -8,7 +8,7 @@
         /* أنماط كلاسيكية احترافية */
         @page {
             size: A4;
-            margin: 0.5cm;
+            margin: 0.3cm !important;
         }
         
         :root {
@@ -25,110 +25,112 @@
             padding: 0;
             background: #f5f7fa;
             color: #2d3748;
-            font-size: 11pt;
-            line-height: 1.6;
+            font-size: 10pt;
+            line-height: 1.5;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 25px;
-            padding: 20px 0;
-            border-bottom: 3px solid #c19a53;
+            margin-bottom: 8px;
+            padding: 5px 0 3px 0;
+            border-bottom: 2px solid #c19a53;
             position: relative;
         }
         
         .company-name {
-            font-size: 28pt;
+            font-size: 20pt;
             font-weight: bold;
             color: #1a365d;
             font-family: 'Times New Roman', serif;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 1px;
         }
         
         .company-subtitle {
-            font-size: 20pt;
+            font-size: 14pt;
             color: #2c5282;
             font-family: 'Times New Roman', serif;
-            margin-bottom: 15px;
-            padding-top: 5px;
+            margin-bottom: 3px;
+            padding-top: 1px;
             border-top: 1px solid #c19a53;
         }
         
         .department {
-            font-size: 18pt;
+            font-size: 12pt;
             color: #c19a53;
             font-weight: bold;
-            margin: 15px 0;
+            margin: 3px 0 2px 0;
             font-family: 'Times New Roman', serif;
-            background: linear-gradient(90deg, transparent, #f8f0e3, transparent);
-            padding: 8px;
+            padding: 2px;
         }
         
         .document-info {
             display: flex;
             justify-content: space-between;
-            margin: 20px 0;
-            padding: 15px;
+            align-items: center;
+            margin: 6px 0;
+            padding: 5px;
             background: #f8f9fa;
-            border-radius: 8px;
+            border-radius: 4px;
             border: 1px solid #e2e8f0;
         }
         
         .document-date {
-            font-size: 12pt;
+            font-size: 9pt;
             color: #2d3748;
             font-weight: bold;
+            flex: 1;
+            text-align: right;
         }
         
         .document-title {
             text-align: center;
-            font-size: 24pt;
+            font-size: 18pt;
             color: #1a365d;
             font-weight: bold;
-            margin: 20px 0;
+            margin: 6px 0;
             font-family: 'Times New Roman', serif;
-            padding: 10px;
-            background: linear-gradient(90deg, #f8f0e3, #e8f4fd, #f8f0e3);
-            border-radius: 5px;
+            padding: 4px;
+            flex: 2;
         }
         
         .document-number {
-            font-size: 14pt;
+            font-size: 11pt;
             color: #c19a53;
             font-weight: bold;
             text-align: center;
-            padding: 5px 15px;
+            padding: 3px 6px;
             border: 2px solid #c19a53;
-            border-radius: 5px;
+            border-radius: 3px;
             background: white;
             display: inline-block;
+            flex: 1;
+            margin-left: 6px;
         }
         
         .control-panel {
             background: linear-gradient(135deg, #1a365d, #2c5282);
             color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
             border: 1px solid rgba(255,255,255,0.1);
         }
         
         .btn {
-            padding: 8px 16px;
-            margin: 8px;
+            padding: 6px 12px;
+            margin: 5px;
             border: none;
-            border-radius: 5px;
+            border-radius: 3px;
             cursor: pointer;
             font-weight: bold;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 5px;
             transition: all 0.3s;
-            font-size: 11pt;
-            min-width: 150px;
+            font-size: 10pt;
+            min-width: 130px;
             font-family: 'Times New Roman', serif;
         }
         
@@ -151,47 +153,49 @@
         
         textarea, input, select {
             border: 1px solid #cbd5e0;
-            border-radius: 4px;
-            padding: 8px 10px;
-            font-size: 11pt;
+            border-radius: 2px;
+            padding: 4px 6px;
+            font-size: 9.5pt;
             transition: all 0.3s;
             background: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             width: 100%;
             box-sizing: border-box;
+            height: 28px;
         }
         
         textarea:focus, input:focus, select:focus {
             border-color: #2c5282;
-            box-shadow: 0 0 0 2px rgba(44, 82, 130, 0.2);
+            box-shadow: 0 0 0 1px rgba(44, 82, 130, 0.2);
             outline: none;
         }
         
         .decision-text {
-            min-height: 250px;
-            font-size: 12pt;
-            line-height: 1.8;
-            padding: 15px;
+            min-height: 120px;
+            height: 120px;
+            font-size: 10.5pt;
+            line-height: 1.6;
+            padding: 6px;
             background: #f8f9fa;
             border: 1px solid #e2e8f0;
-            border-radius: 5px;
+            border-radius: 3px;
             resize: vertical;
         }
         
         .signature-section {
-            margin-top: 40px;
-            padding-top: 20px;
+            margin-top: 15px;
+            padding-top: 8px;
             border-top: 2px solid #c19a53;
             background: #f8fafc;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 4px;
         }
         
         .signature-box {
             border: 1px solid #cbd5e0;
-            padding: 15px;
-            height: 130px;
-            border-radius: 5px;
+            padding: 6px;
+            height: 85px;
+            border-radius: 3px;
             background: white;
             display: flex;
             flex-direction: column;
@@ -201,67 +205,425 @@
         
         .signature-line {
             border-bottom: 1px solid #2d3748;
-            margin-top: 20px;
-            padding-bottom: 8px;
+            margin-top: 8px;
+            padding-bottom: 2px;
             width: 80%;
             margin-left: auto;
             margin-right: auto;
         }
         
         .signature-box strong {
-            font-size: 12pt;
+            font-size: 9.5pt;
             color: #1a365d;
             font-family: 'Times New Roman', serif;
-            margin-bottom: 10px;
+            margin-bottom: 4px;
             display: block;
         }
         
         .signature-box div {
-            font-size: 10pt;
-            margin-top: 5px;
+            font-size: 7.5pt;
+            margin-top: 1px;
             color: #4a5568;
         }
         
         .signature-box i.fa-stamp {
-            font-size: 24pt;
+            font-size: 16pt;
             color: #c19a53;
-            margin-top: 10px;
+            margin-top: 2px;
             opacity: 0.9;
         }
         
         .document-content {
             background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
         }
         
-        .intro-text {
-            font-size: 12pt;
-            line-height: 1.8;
-            margin: 20px 0;
-            padding: 15px;
+        .order-intro {
+            font-size: 10.5pt;
+            text-align: justify;
+            line-height: 1.6;
+            margin: 6px 0;
+            padding: 5px;
             background: #f8f9fa;
+            border-radius: 3px;
+            border-right: 2px solid #c19a53;
+        }
+        
+        /* الطباعة - كل المحتوى في صفحة واحدة */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0.5cm !important;
+            }
+            
+            body {
+                font-size: 10pt !important;
+                line-height: 1.4 !important;
+                background: white !important;
+                color: black !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                max-height: 100vh !important;
+                overflow: hidden !important;
+            }
+            
+            .no-print { 
+                display: none !important; 
+            }
+            
+            .content-container {
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                height: 100vh;
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            
+            .header {
+                border-bottom: 1px solid black !important;
+                padding: 2px 0 !important;
+                margin-bottom: 8px !important;
+                flex-shrink: 0;
+            }
+            
+            .company-name {
+                font-size: 18pt !important;
+                color: black !important;
+                margin-bottom: 2px !important;
+            }
+            
+            .company-subtitle {
+                font-size: 12pt !important;
+                color: black !important;
+                margin-bottom: 3px !important;
+                border-top: 1px solid black !important;
+                padding-top: 0 !important;
+            }
+            
+            .department {
+                font-size: 11pt !important;
+                color: black !important;
+                background: none !important;
+                padding: 1px !important;
+                margin: 3px 0 !important;
+            }
+            
+            .document-info {
+                background: none !important;
+                border: 1px solid black !important;
+                padding: 3px !important;
+                margin: 3px 0 !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+            }
+            
+            .document-title {
+                font-size: 14pt !important;
+                color: black !important;
+                background: none !important;
+                border-bottom: 1px solid black !important;
+                border-radius: 0 !important;
+                margin: 6px 0 !important;
+                padding: 2px !important;
+                flex: 2;
+            }
+            
+            .document-number {
+                border: 1px solid black !important;
+                color: black !important;
+                background: none !important;
+                font-size: 10pt !important;
+                padding: 3px 8px !important;
+                flex: 1;
+                margin-left: 4px !important;
+            }
+            
+            .document-date {
+                font-size: 9pt !important;
+                flex: 1;
+                text-align: right !important;
+            }
+            
+            .document-content {
+                box-shadow: none !important;
+                padding: 0 !important;
+                background: none !important;
+                flex: 1 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                min-height: 0 !important;
+            }
+            
+            .order-intro {
+                background: none !important;
+                border: 1px solid #ccc !important;
+                padding: 6px !important;
+                margin: 8px 0 !important;
+                font-size: 10pt !important;
+                line-height: 1.5 !important;
+            }
+            
+            .decision-text {
+                border: 1px solid #ccc !important;
+                background: none !important;
+                min-height: 140px !important;
+                height: auto !important;
+                max-height: 180px !important;
+                font-size: 10pt !important;
+                line-height: 1.5 !important;
+                padding: 4px !important;
+                margin: 4px 0 8px 0 !important;
+                flex: 1;
+            }
+            
+            .info-row {
+                margin-bottom: 6px !important;
+                page-break-inside: avoid !important;
+            }
+            
+            .info-item {
+                min-width: 160px !important;
+                margin-bottom: 4px !important;
+            }
+            
+            .info-item label {
+                font-size: 9pt !important;
+                margin-bottom: 2px !important;
+            }
+            
+            .signature-section {
+                border-top: 2px solid black !important;
+                background: none !important;
+                padding: 6px 0 0 0 !important;
+                margin-top: 10px !important;
+                flex-shrink: 0;
+                page-break-inside: avoid !important;
+            }
+            
+            .signature-box {
+                border: 1px solid black !important;
+                background: none !important;
+                height: 75px !important;
+                padding: 4px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+            }
+            
+            .signature-line {
+                margin-top: 4px !important;
+                margin-bottom: 2px !important;
+            }
+            
+            .signature-box strong {
+                font-size: 9pt !important;
+            }
+            
+            .signature-box div {
+                font-size: 7pt !important;
+            }
+            
+            .signature-box i.fa-stamp {
+                font-size: 12pt !important;
+            }
+            
+            textarea, input, select {
+                border: none !important;
+                background: none !important;
+                padding: 0 !important;
+                pointer-events: none;
+                font-size: 9.5pt !important;
+                height: auto !important;
+                min-height: auto !important;
+            }
+            
+            select {
+                appearance: none !important;
+            }
+            
+            .print-only {
+                font-size: 7pt !important;
+                margin-top: 8px !important;
+                padding-top: 4px !important;
+                border-top: 1px solid #ccc !important;
+                display: block !important;
+                text-align: center !important;
+                flex-shrink: 0;
+            }
+            
+            .control-panel, #auto-send-notification, .confirmation-modal { 
+                display: none !important; 
+            }
+            
+            /* تحسين توزيع العناصر */
+            .document-content > * {
+                margin-bottom: 6px !important;
+            }
+            
+            .document-content > *:last-child {
+                margin-bottom: 0 !important;
+            }
+            
+            /* توزيع التواقيع بشكل متساو */
+            .signature-section > div:first-child {
+                display: flex !important;
+                gap: 8px !important;
+                justify-content: space-between !important;
+            }
+            
+            /* معلومات التنفيذ والمصدّر */
+            .no-break[style*="margin-top: 10px"] {
+                margin-top: 8px !important;
+                margin-bottom: 8px !important;
+                display: flex !important;
+                gap: 10px !important;
+                justify-content: space-between !important;
+                flex-shrink: 0;
+            }
+            
+            /* منع انقسام المحتوى بين الصفحات */
+            .avoid-break, .no-break {
+                page-break-inside: avoid !important;
+                page-break-before: avoid !important;
+                page-break-after: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* ضمان أن المحتوى لا يتجاوز صفحة واحدة */
+            .document-content > *:last-child {
+                page-break-after: avoid !important;
+            }
+            
+            /* توحيد الألوان للطباعة */
+            * {
+                color: black !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .btn { min-width: 110px; padding: 4px 6px; font-size: 9pt; }
+            .control-panel { padding: 8px; }
+            
+            .company-name {
+                font-size: 16pt;
+            }
+            
+            .company-subtitle {
+                font-size: 10pt;
+            }
+            
+            .department {
+                font-size: 9pt;
+            }
+            
+            .document-title {
+                font-size: 14pt;
+            }
+            
+            .confirmation-content {
+                width: 95%;
+                padding: 10px;
+            }
+            
+            .document-info {
+                flex-direction: column;
+                gap: 4px;
+            }
+            
+            .signature-box {
+                height: 75px;
+                padding: 5px;
+            }
+        }
+        
+        /* تنسيقات إضافية */
+        .info-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .info-item label {
+            display: block;
+            margin-bottom: 2px;
+            font-weight: bold;
+            color: #2c5282;
+            font-size: 9pt;
+        }
+        
+        .serial-display {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 8px;
+            border-radius: 2px;
+            margin-top: 6px;
+            font-size: 9pt;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .serial-display span {
+            font-weight: bold;
+            color: #c19a53;
+            font-size: 9.5pt;
+        }
+        
+        .auto-calculation-note {
+            font-size: 7.5pt;
+            color: #718096;
+            text-align: center;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 8px;
             border-radius: 5px;
-            border-right: 4px solid #c19a53;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
+        /* تصميم مضغوط */
+        .compact-field {
+            margin: 0 !important;
+            padding: 2px 4px !important;
+        }
+        
+        .no-break {
+            page-break-inside: avoid;
         }
         
         /* نافذة الإشعار التلقائي */
         #auto-send-notification {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            padding: 12px 20px;
-            border-radius: 8px;
+            bottom: 15px;
+            left: 15px;
+            padding: 8px 12px;
+            border-radius: 4px;
             z-index: 10000;
-            font-size: 11pt;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            max-width: 350px;
+            font-size: 9.5pt;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            max-width: 300px;
             animation: slideIn 0.5s ease-out;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             border: 1px solid;
         }
         
@@ -283,28 +645,14 @@
             border-color: #bee5eb;
         }
         
-        #auto-send-notification i {
-            font-size: 16pt;
-        }
-        
         @keyframes slideIn {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         
         @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-            }
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
         
         /* نافذة التأكيد */
@@ -323,289 +671,47 @@
         
         .confirmation-content {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 4px;
             width: 90%;
-            max-width: 400px;
+            max-width: 350px;
             text-align: center;
         }
         
         .confirmation-content h3 {
             color: #1a365d;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             font-family: 'Times New Roman', serif;
+            font-size: 11pt;
         }
         
         .confirmation-buttons {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 6px;
+            margin-top: 12px;
         }
         
         .btn-confirm {
             background: linear-gradient(135deg, #38a169, #2f855a);
             color: white;
-            padding: 8px 20px;
-            border-radius: 4px;
+            padding: 4px 12px;
+            border-radius: 2px;
             border: none;
             cursor: pointer;
             font-weight: bold;
+            font-size: 9pt;
         }
         
         .btn-cancel {
             background: linear-gradient(135deg, #a0aec0, #718096);
             color: white;
-            padding: 8px 20px;
-            border-radius: 4px;
+            padding: 4px 12px;
+            border-radius: 2px;
             border: none;
             cursor: pointer;
             font-weight: bold;
-        }
-        
-        /* الطباعة */
-        @media print {
-            @page {
-                size: A4 portrait;
-                margin: 0.5cm !important;
-            }
-            
-            body {
-                font-size: 11pt !important;
-                background: white !important;
-                color: black !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                line-height: 1.5 !important;
-            }
-            
-            .no-print { 
-                display: none !important; 
-            }
-            
-            .header {
-                border-bottom: 2px solid black !important;
-                padding: 15px 0 !important;
-                margin-bottom: 20px !important;
-            }
-            
-            .company-name {
-                font-size: 22pt !important;
-                color: black !important;
-                margin-bottom: 3px !important;
-            }
-            
-            .company-subtitle {
-                font-size: 16pt !important;
-                color: black !important;
-                margin-bottom: 10px !important;
-                border-top: 1px solid black !important;
-            }
-            
-            .department {
-                font-size: 14pt !important;
-                color: black !important;
-                background: none !important;
-                padding: 5px !important;
-            }
-            
-            .document-info {
-                background: none !important;
-                border: 1px solid black !important;
-                padding: 10px !important;
-            }
-            
-            .document-title {
-                font-size: 18pt !important;
-                color: black !important;
-                background: none !important;
-                border-bottom: 2px solid black !important;
-                border-radius: 0 !important;
-                margin: 15px 0 !important;
-            }
-            
-            .document-number {
-                border: 1px solid black !important;
-                color: black !important;
-                background: none !important;
-            }
-            
-            .document-content {
-                box-shadow: none !important;
-                padding: 0 !important;
-                background: none !important;
-            }
-            
-            .intro-text {
-                background: none !important;
-                border: 1px solid #ccc !important;
-                padding: 10px !important;
-                margin: 15px 0 !important;
-            }
-            
-            .decision-text {
-                border: 1px solid #ccc !important;
-                background: none !important;
-                min-height: 200px !important;
-            }
-            
-            .signature-section {
-                border-top: 1px solid black !important;
-                background: none !important;
-                padding: 15px 0 !important;
-                margin-top: 30px !important;
-            }
-            
-            .signature-box {
-                border: 1px solid black !important;
-                background: none !important;
-                height: 110px !important;
-            }
-            
-            textarea, input, select {
-                border: none !important;
-                background: none !important;
-                padding: 0 !important;
-                pointer-events: none;
-            }
-            
-            .print-only {
-                font-size: 8pt !important;
-                margin-top: 10px !important;
-                padding-top: 5px !important;
-                border-top: 1px solid #ccc !important;
-                display: block !important;
-            }
-            
-            .control-panel, #auto-send-notification, .confirmation-modal { 
-                display: none !important; 
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .btn { min-width: 130px; padding: 6px 10px; font-size: 10pt; }
-            .control-panel { padding: 12px; }
-            
-            .company-name {
-                font-size: 22pt;
-            }
-            
-            .company-subtitle {
-                font-size: 16pt;
-            }
-            
-            .department {
-                font-size: 14pt;
-            }
-            
-            .document-title {
-                font-size: 18pt;
-            }
-            
-            #auto-send-notification {
-                bottom: 10px;
-                left: 10px;
-                right: 10px;
-                max-width: none;
-                font-size: 10pt;
-            }
-            
-            .confirmation-content {
-                width: 95%;
-                padding: 15px;
-            }
-            
-            .document-info {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .signature-box {
-                height: 100px;
-                padding: 10px;
-            }
-        }
-        
-        /* تنسيقات إضافية */
-        .info-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .info-item {
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .info-item label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #2c5282;
-            font-size: 10.5pt;
-        }
-        
-        .serial-display {
-            background: rgba(255,255,255,0.1);
-            padding: 8px 15px;
-            border-radius: 4px;
-            margin-top: 10px;
-            font-size: 10.5pt;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .serial-display span {
-            font-weight: bold;
-            color: #c19a53;
-            font-size: 11pt;
-        }
-        
-        .auto-calculation-note {
             font-size: 9pt;
-            color: #718096;
-            text-align: center;
-            margin-top: 8px;
-            font-style: italic;
-        }
-        
-        .content-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        /* تنسيقات متخصصة للأوامر الإدارية */
-        .order-intro {
-            font-size: 12pt;
-            text-align: justify;
-            line-height: 1.8;
-            margin: 20px 0;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            border-right: 4px solid #c19a53;
-        }
-        
-        .order-number-container {
-            text-align: center;
-            margin: 15px 0;
-            padding: 10px;
-        }
-        
-        .order-number-label {
-            font-size: 11pt;
-            color: #4a5568;
-            margin-bottom: 5px;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -630,11 +736,11 @@
     
     <!-- لوحة التحكم -->
     <div class="control-panel no-print">
-        <div style="text-align: center; margin-bottom: 10px;">
-            <h2 style="margin: 0 0 5px 0; font-family: 'Times New Roman', serif; font-size: 14pt;">
+        <div style="text-align: center; margin-bottom: 6px;">
+            <h2 style="margin: 0 0 3px 0; font-family: 'Times New Roman', serif; font-size: 11pt;">
                 <i class="fas fa-file-contract"></i> نظام إصدار الأوامر الإدارية
             </h2>
-            <h4 style="margin: 0; font-weight: normal; opacity: 0.9; font-family: 'Times New Roman', serif; font-size: 11pt;">
+            <h4 style="margin: 0; font-weight: normal; opacity: 0.9; font-family: 'Times New Roman', serif; font-size: 9.5pt;">
                 شركة فالنسيا لتجارة الرخام والحجر الطبيعي
             </h4>
         </div>
@@ -659,7 +765,7 @@
     </div>
     
     <!-- نموذج الأمر الإداري -->
-    <div class="content-container">
+    <div class="content-container no-break">
         <!-- الترويسة -->
         <div class="header">
             <div class="company-name">شركة فالنسيا لتجارة الرخام</div>
@@ -669,151 +775,154 @@
             <div class="document-info">
                 <div class="document-date" id="current-date">--/--/----</div>
                 <div class="document-title">أمـــر اداري</div>
-                <div class="order-number-container">
-                    <div class="order-number-label">رقم</div>
+                <div style="text-align: center; flex: 1;">
+                    <div style="font-size: 8pt; color: #4a5568; margin-bottom: 1px;">رقم</div>
                     <div class="document-number" id="serial-number">ORD-000001</div>
                 </div>
             </div>
         </div>
         
-        <!-- معلومات الأمر الإداري -->
-        <div class="info-row">
-            <div class="info-item">
-                <label for="order-type">نوع الأمر:</label>
-                <select id="order-type" class="print-field">
-                    <option value="تعيين">تعيين</option>
-                    <option value="ترقية">ترقية</option>
-                    <option value="نقل">نقل</option>
-                    <option value="إنذار">إنذار</option>
-                    <option value="خصم">خصم</option>
-                    <option value="مكافأة">مكافأة</option>
-                    <option value="إجازة">إجازة</option>
-                    <option value="إنهاء خدمة">إنهاء خدمة</option>
-                    <option value="أخرى">أخرى</option>
-                </select>
+        <div class="document-content">
+            <!-- معلومات الأمر الإداري -->
+            <div class="info-row no-break">
+                <div class="info-item">
+                    <label for="order-type">نوع الأمر:</label>
+                    <select id="order-type" class="print-field compact-field">
+                        <option value="تعيين">تعيين</option>
+                        <option value="ترقية">ترقية</option>
+                        <option value="نقل">نقل</option>
+                        <option value="إنذار">إنذار</option>
+                        <option value="خصم">خصم</option>
+                        <option value="مكافأة">مكافأة</option>
+                        <option value="إجازة">إجازة</option>
+                        <option value="إنهاء خدمة">إنهاء خدمة</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+                
+                <div class="info-item">
+                    <label for="employee-name">اسم الموظف:</label>
+                    <input type="text" id="employee-name" placeholder="الاسم الكامل" class="print-field compact-field">
+                </div>
+                
+                <div class="info-item">
+                    <label for="employee-id">رقم الهوية:</label>
+                    <input type="text" id="employee-id" placeholder="رقم الهوية / الإقامة" class="print-field compact-field">
+                </div>
             </div>
             
-            <div class="info-item">
-                <label for="employee-name">اسم الموظف:</label>
-                <input type="text" id="employee-name" placeholder="الاسم الكامل" class="print-field">
+            <div class="info-row no-break">
+                <div class="info-item">
+                    <label for="job-title">المسمى الوظيفي:</label>
+                    <input type="text" id="job-title" placeholder="المسمى الوظيفي" class="print-field compact-field">
+                </div>
+                
+                <div class="info-item">
+                    <label for="department-name">القسم:</label>
+                    <select id="department-name" class="print-field compact-field">
+                        <option value="">اختر القسم</option>
+                        <option value="المحاسبة">المحاسبة</option>
+                        <option value="المبيعات">المبيعات</option>
+                        <option value="ادارة مستودعات">ادارة مستودعات</option>
+                        <option value="النقليات">النقليات</option>
+                        <option value="الاليات">الاليات</option>
+                        <option value="المشاريع">المشاريع</option>
+                        <option value="الرخام">الرخام</option>
+                        <option value="التصميم">التصميم</option>
+                        <option value="السوشيال ميديا">السوشيال ميديا</option>
+                    </select>
+                </div>
+                
+                <div class="info-item">
+                    <label for="supervisor-name">المشرف المباشر:</label>
+                    <select id="supervisor-name" class="print-field compact-field">
+                        <option value="">اختر المشرف</option>
+                        <option value="مهند نيازي السلق">أبو طارق - المحاسبة</option>
+                        <option value="ركان إياد زيعز">ركان - المبيعات</option>
+                        <option value="ماجد يوسف ابراهيم">ماجد - ادارة مستودعات</option>
+                        <option value="ركان إياد زيعز">ركان - النقليات</option>
+                        <option value="احمد ماهر عبدالرازق">احمد ماهر - الاليات</option>
+                        <option value="مأمون احمد حجازي">أبو يزن - المشاريع</option>
+                        <option value="أنس محمد السرداني">ابو وائل - الرخام</option>
+                        <option value="مكتب مصر">رمضان - التصميم</option>
+                        <option value="أمين احمد حجازي">ابو وديع - السوشيال ميديا</option>
+                    </select>
+                </div>
             </div>
             
-            <div class="info-item">
-                <label for="employee-id">رقم الهوية:</label>
-                <input type="text" id="employee-id" placeholder="رقم الهوية / الإقامة" class="print-field">
-            </div>
-        </div>
-        
-        <div class="info-row">
-            <div class="info-item">
-                <label for="job-title">المسمى الوظيفي:</label>
-                <input type="text" id="job-title" placeholder="المسمى الوظيفي" class="print-field">
+            <!-- نص الأمر الإداري -->
+            <div class="order-intro no-break">
+                قررنا نحن شركة فالنسيا للرخام والحجر الطبيعي ادارة الموارد البشــــــرية باتخاذ القرار التالي :-
             </div>
             
-            <div class="info-item">
-                <label for="department-name">القسم:</label>
-                <select id="department-name" class="print-field">
-                    <option value="">اختر القسم</option>
-                    <option value="المحاسبة">المحاسبة</option>
-                    <option value="المبيعات">المبيعات</option>
-                    <option value="ادارة مستودعات">ادارة مستودعات</option>
-                    <option value="النقليات">النقليات</option>
-                    <option value="الاليات">الاليات</option>
-                    <option value="المشاريع">المشاريع</option>
-                    <option value="الرخام">الرخام</option>
-                    <option value="التصميم">التصميم</option>
-                    <option value="السوشيال ميديا">السوشيال ميديا</option>
-                </select>
+            <div class="no-break">
+                <label for="decision-details" style="display: block; margin-bottom: 4px; font-weight: bold; color: #2c5282; font-size: 9.5pt;">
+                    تفاصيل القرار:
+                </label>
+                <textarea id="decision-details" class="decision-text print-field no-break" 
+                          placeholder="اكتب هنا تفاصيل القرار الإداري..."></textarea>
             </div>
             
-            <div class="info-item">
-                <label for="supervisor-name">المشرف المباشر:</label>
-                <select id="supervisor-name" class="print-field">
-                    <option value="">اختر المشرف</option>
-                    <option value="مهند نيازي السلق">أبو طارق - المحاسبة</option>
-                    <option value="ركان إياد زيعز">ركان - المبيعات</option>
-                    <option value="ماجد يوسف ابراهيم">ماجد - ادارة مستودعات</option>
-                    <option value="ركان إياد زيعز">ركان - النقليات</option>
-                    <option value="احمد ماهر عبدالرازق">احمد ماهر - الاليات</option>
-                    <option value="مأمون احمد حجازي">أبو يزن - المشاريع</option>
-                    <option value="أنس محمد السرداني">ابو وائل - الرخام</option>
-                    <option value="مكتب مصر">رمضان - التصميم</option>
-                    <option value="أمين احمد حجازي">ابو وديع - السوشيال ميديا</option>
-                </select>
-            </div>
-        </div>
-        
-        <!-- نص الأمر الإداري -->
-        <div class="order-intro">
-            قررنا نحن شركة فالنسيا للرخام والحجر الطبيعي ادارة الموارد البشــــــرية باتخاذ القرار التالي :-
-        </div>
-        
-        <div>
-            <label for="decision-details" style="display: block; margin-bottom: 10px; font-weight: bold; color: #2c5282;">
-                تفاصيل القرار:
-            </label>
-            <textarea id="decision-details" class="decision-text print-field" 
-                      placeholder="اكتب هنا تفاصيل القرار الإداري بشكل مفصل..."></textarea>
-        </div>
-        
-        <!-- التواقيع -->
-        <div class="signature-section">
-            <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+            <!-- تاريخ التنفيذ والمصدّر -->
+            <div class="no-break" style="margin-top: 10px; display: flex; gap: 8px;">
                 <div style="flex: 1;">
-                    <label for="effective-date" style="display: block; margin-bottom: 5px; font-weight: bold; color: #2c5282;">
+                    <label for="effective-date" style="display: block; margin-bottom: 2px; font-weight: bold; color: #2c5282; font-size: 9.5pt;">
                         تاريخ التنفيذ:
                     </label>
-                    <input type="text" id="effective-date" class="print-field" placeholder="يوم/شهر/سنة">
+                    <input type="text" id="effective-date" class="print-field compact-field" placeholder="يوم/شهر/سنة">
                 </div>
                 
                 <div style="flex: 1;">
-                    <label for="issuer-name" style="display: block; margin-bottom: 5px; font-weight: bold; color: #2c5282;">
+                    <label for="issuer-name" style="display: block; margin-bottom: 2px; font-weight: bold; color: #2c5282; font-size: 9.5pt;">
                         اسم مُصْدِر الأمر:
                     </label>
-                    <input type="text" id="issuer-name" class="print-field" placeholder="اسم مسؤول إدارة الموارد البشرية">
+                    <input type="text" id="issuer-name" class="print-field compact-field" placeholder="اسم مسؤول إدارة الموارد البشرية">
                 </div>
             </div>
             
-            <div style="text-align: center; margin-bottom: 20px; font-weight: bold; font-size: 13pt; color: #1a365d;">
-                تواقيع المسؤولين
-            </div>
-            
-            <div style="display: flex; gap: 15px;">
-                <div style="flex: 1;">
-                    <div class="signature-box">
-                        <strong>توقيع المشرف المباشر</strong>
-                        <div class="signature-line"></div>
-                        <div style="margin-top: 10px; font-size:10pt;">الاسم: ________________</div>
-                        <div style="font-size:10pt;">التاريخ: ________________</div>
-                    </div>
+            <!-- التواقيع -->
+            <div class="signature-section no-break">
+                <div style="text-align: center; margin-bottom: 6px; font-weight: bold; font-size: 9.5pt; color: #1a365d;">
+                    تواقيع المسؤولين
                 </div>
                 
-                <div style="flex: 1;">
-                    <div class="signature-box">
-                        <strong>توقيع مدير القسم</strong>
-                        <div class="signature-line"></div>
-                        <div style="margin-top: 10px; font-size:10pt;">الاسم: ________________</div>
-                        <div style="font-size:10pt;">التاريخ: ________________</div>
-                    </div>
-                </div>
-                
-                <div style="flex: 1;">
-                    <div class="signature-box">
-                        <strong>ختم الموارد البشرية</strong>
-                        <div style="margin-top: 10px; font-size: 26pt; color: #c19a53;">
-                            <i class="fas fa-stamp"></i>
+                <div style="display: flex; gap: 6px;">
+                    <div style="flex: 1;">
+                        <div class="signature-box">
+                            <strong>توقيع المشرف المباشر</strong>
+                            <div class="signature-line"></div>
+                            <div style="margin-top: 4px; font-size:7.5pt;">الاسم: ________________</div>
+                            <div style="font-size:7.5pt;">التاريخ: ________________</div>
                         </div>
-                        <div style="margin-top: 10px; font-size:10pt;">الاسم: ________________</div>
-                        <div style="font-size:10pt;">التاريخ: ________________</div>
+                    </div>
+                    
+                    <div style="flex: 1;">
+                        <div class="signature-box">
+                            <strong>توقيع مدير القسم</strong>
+                            <div class="signature-line"></div>
+                            <div style="margin-top: 4px; font-size:7.5pt;">الاسم: ________________</div>
+                            <div style="font-size:7.5pt;">التاريخ: ________________</div>
+                        </div>
+                    </div>
+                    
+                    <div style="flex: 1;">
+                        <div class="signature-box">
+                            <strong>ختم الموارد البشرية</strong>
+                            <div style="margin-top: 2px; font-size: 14pt; color: #c19a53;">
+                                <i class="fas fa-stamp"></i>
+                            </div>
+                            <div style="margin-top: 4px; font-size:7.5pt;">الاسم: ________________</div>
+                            <div style="font-size:7.5pt;">التاريخ: ________________</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- معلومات النظام في الطباعة -->
-        <div style="text-align: center; margin-top: 20px; font-size: 8pt; color: #718096; padding-top: 10px; display: none;" class="print-only">
-            <div>تم إنشاء هذا الأمر آلياً عبر نظام إصدار الأوامر الإلكتروني لشركة فالنسيا للرخام</div>
-            <div>الرقم التسلسلي: <span id="print-serial-number">ORD-000001</span> | تاريخ الإنشاء: <span id="print-current-date"></span> | الصفحة: 1/1</div>
+            
+            <!-- معلومات النظام في الطباعة -->
+            <div style="text-align: center; margin-top: 6px; font-size: 6pt; color: #718096; padding-top: 2px; display: none;" class="print-only">
+                <div>تم إنشاء هذا الأمر آلياً عبر نظام إصدار الأوامر الإلكتروني لشركة فالنسيا للرخام</div>
+                <div>الرقم التسلسلي: <span id="print-serial-number">ORD-000001</span> | تاريخ الإنشاء: <span id="print-current-date"></span></div>
+            </div>
         </div>
     </div>
 
@@ -962,6 +1071,41 @@
         }
         
         // =============================================
+        // دالة ضبط التنسيق للطباعة
+        // =============================================
+        function adjustPrintLayout() {
+            // ضبط ارتفاع حقل القرار تلقائيًا بناءً على المحتوى
+            const textarea = document.getElementById('decision-details');
+            if (textarea) {
+                // حساب الارتفاع المناسب بناءً على عدد الأسطر
+                const lines = textarea.value.split('\n').length;
+                const minHeight = 120;
+                const calculatedHeight = Math.max(minHeight, lines * 18);
+                textarea.style.height = calculatedHeight + 'px';
+            }
+            
+            // إضافة فئة الطباعة للجسم
+            document.body.classList.add('printing');
+            
+            // إعداد القيم للطباعة
+            document.querySelectorAll('.print-field').forEach(field => {
+                if (field.tagName === 'SELECT') {
+                    const selectedOption = field.options[field.selectedIndex];
+                    field.setAttribute('data-print-value', selectedOption ? selectedOption.text : '');
+                } else if (field.tagName === 'TEXTAREA') {
+                    field.setAttribute('data-print-value', field.value);
+                } else {
+                    field.setAttribute('data-print-value', field.value);
+                }
+            });
+            
+            // إظهار عناصر الطباعة
+            document.querySelectorAll('.print-only').forEach(el => {
+                el.style.display = 'block';
+            });
+        }
+        
+        // =============================================
         // دالة الإرسال التلقائي إلى التليجرام
         // =============================================
         async function sendToTelegramAuto() {
@@ -1059,33 +1203,20 @@
             // إنشاء رقم تسلسلي جديد
             generateNewSerialNumber();
             
+            // ضبط التنسيق للطباعة
+            adjustPrintLayout();
+            
             // إرسال تلقائي إلى التليجرام
             const sendResult = await sendToTelegramAuto();
             
             // الانتظار قليلاً لضمان اكتمال الإرسال قبل الطباعة
             setTimeout(() => {
-                // إعداد القيم للطباعة
-                document.querySelectorAll('.print-field').forEach(field => {
-                    if (field.tagName === 'SELECT') {
-                        const selectedOption = field.options[field.selectedIndex];
-                        field.setAttribute('data-print-value', selectedOption ? selectedOption.text : '');
-                    } else if (field.tagName === 'TEXTAREA') {
-                        field.setAttribute('data-print-value', field.value);
-                    } else {
-                        field.setAttribute('data-print-value', field.value);
-                    }
-                });
-                
-                // إظهار عناصر الطباعة
-                document.querySelectorAll('.print-only').forEach(el => {
-                    el.style.display = 'block';
-                });
-                
                 // فتح نافذة الطباعة
                 window.print();
                 
-                // إخفاء عناصر الطباعة بعد الانتهاء
+                // تنظيف بعد الطباعة
                 setTimeout(() => {
+                    document.body.classList.remove('printing');
                     document.querySelectorAll('.print-only').forEach(el => {
                         el.style.display = 'none';
                     });
@@ -1176,5 +1307,4 @@
         }
     </script>
 </body>
-
 </html>
